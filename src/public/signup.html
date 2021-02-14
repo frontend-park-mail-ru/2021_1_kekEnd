@@ -6,30 +6,64 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-   <div class="header">
-       <div class="header__section">
-           <div class="header__item header-logo">
-               КиноПоиск
-           </div>
-           <div class="header__item header-button">
-               <a href="#">Фильмы</a>
-           </div>
-           <div class="header__item header-button">
-               <a href="#">Актеры</a>
-           </div>
-           <div class="header__item header-button">
-               <a href="#">Поиск</a>
-           </div>
-       </div>
-       <div class="header__section">
-           <div class="header__item header-button">
-               <a href="#">Войти</a>
-           </div>
-           <div class="header__item header-button">
-               <a href="#">Регистрация</a>
-           </div>
-       </div>
-   </div>
+<div class="header">
+    <div class="header__section">
+        <div class="header__item header-logo">
+            КиноПоиск
+        </div>
+        <div class="header__item header-button">
+            <a href="#">Фильмы</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="#">Актеры</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="#">Поиск</a>
+        </div>
+    </div>
+    <div class="header__section">
+        <div class="header__item header-button">
+            <a href="#">Войти</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="#">Регистрация</a>
+        </div>
+    </div>
+</div>
 
+<div class="main">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" id="login-btn">Войти</button>
+            <button type="button" class="toggle-btn" id="signup-btn">Регистрация</button>
+        </div>
+
+        <div class="social-icons">
+            <img src="img/fb.png"/>
+            <img src="img/tw.png"/>
+            <img src="img/gp.png"/>
+        </div>
+
+        <form id="login" class="input-group">
+            <input type="text" class="input-field" placeholder="Имя пользователя" required>
+            <input type="password" class="input-field" placeholder="Пароль" required>
+            <input id="remember-checkbox" type="checkbox" class="checkbox">
+            <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
+            <button type="submit" class="submit-btn">Вход</button>
+        </form>
+
+        <form id="signup" class="input-group">
+            <input type="text" class="input-field" placeholder="Имя пользователя" required>
+            <input type="email" class="input-field" placeholder="Email" required>
+            <input type="password" class="input-field" placeholder="Пароль" required>
+            <input id="terms-checkbox" type="checkbox" class="checkbox">
+            <label for="terms-checkbox" class="checkbox-label">Согласен на рассылку</label>
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
