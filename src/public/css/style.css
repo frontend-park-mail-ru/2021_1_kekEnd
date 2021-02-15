@@ -4,11 +4,6 @@
     font-family: sans-serif;
 }
 
-a {
-    color: white;
-    text-decoration: none;
-}
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -41,6 +36,11 @@ a {
 
 .header-button {
     cursor: pointer;
+}
+
+.header-button a {
+    color: white;
+    text-decoration: none;
 }
 
 .main {
@@ -135,6 +135,7 @@ a {
     border: 0;
     outline: none;
     border-radius: 30px;
+    color: white;
 }
 
 .checkbox {
