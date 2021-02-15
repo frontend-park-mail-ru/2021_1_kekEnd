@@ -5,6 +5,10 @@ const switcher = document.getElementById('btn');
 const signupButton = document.getElementById('signup-btn');
 const loginButton = document.getElementById('login-btn');
 
+// switch either to 'Login' or to 'Sign Up'
+loginButton.style.color = 'white';
+
+
 signupButton.addEventListener('click', function signup() {
     loginSubmit.style.left = '-400px';
     signupSubmit.style.left = '50px';
