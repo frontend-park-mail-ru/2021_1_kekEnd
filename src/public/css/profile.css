@@ -6,7 +6,7 @@ body {
 }
 
 .profile-card {
-    padding: 50px;
+    margin-top: 50px;
 }
 
 .container {
@@ -15,6 +15,7 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
 }
 
 .avatar-container {
@@ -83,9 +84,9 @@ body {
 
 .movies-slider {
     display: flex;
+    justify-content: center;
     overflow: hidden;
     scroll-behavior: smooth;
-    padding-left: 50px;
     gap: 15px;
 }
 
@@ -93,6 +94,9 @@ body {
     width: 100px;
     height: 180px;
     margin: 10px 0;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .movie-card img {
