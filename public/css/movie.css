@@ -1,3 +1,8 @@
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .movie_navbar {
     display: flex;
     align-items: center;
@@ -50,7 +55,6 @@
 
 .movie_navbar_input input {
     display: block;
-    /* margin-top: 6px; */
     width: 100%;
     padding: 8px 0 8px 16px;
     font-size: 15px;
@@ -65,18 +69,23 @@
     border-radius: 4px;
 }
 
-.movie_main{ 
-    display: flex;
-}
-
-/* .movie_side_column{
-    float: left;
-    width: 16%;
-} */
-
 .movie_content_container{
-    width: 66%;
+    width: 70%;
+    
+    height : 2000px;
+    
     margin-left: auto;
     margin-right: auto;
     background-color: black;
+}
+
+.movie_content_left{
+    width: 27%;
+    align-content: center;
+}
+
+.movie_content_left img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
