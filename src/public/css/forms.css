@@ -100,3 +100,21 @@
 .signup-form {
     left: 450px;
 }
+
+/* classes for JS to move signup and login forms */
+
+.login-form-inactive {
+    left: -400px;
+}
+
+.signup-form-active {
+    left: 50px;
+}
+
+.switcher-on-signup {
+    left: 120px;
+}
+
+.button-white-text {
+    color: white;
+}
