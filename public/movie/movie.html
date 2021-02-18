@@ -22,107 +22,124 @@
         </div>
     </header>
     <div class="movie_content_container">
-        <div style="background-color: darkslateblue; height:270px"></div>
+        <div class="background_trailer">
+            <img class="center" src="img/background_trailer.webp">
+        </div>
 
-        <div class="kek">
+        <div class="flex_container">
             <div class="movie_content_left">
-                <img class="center" src="img/300x450.webp">
-                <img class="center" style="margin-top: 30px;" src="img/trailer.jpeg">
-                <div style="text-align:center; width: 80%; margin-left:auto; margin-right:auto">
-                    <button style=" box-shadow: 0 1px 2px rgb(0 0 0 / 4%); 
-                        border-radius: 4px; border:0;
-                        width: 80%; 
-                        height: 40px;
-                        background-color: rgb(37,37,37); 
-                        color: #9e9e9e;
-                        font-size:medium;
-                        margin-top: 50px;
-                        margin-left:auto; margin-right:auto;">
+                <div class="movie_content_left_inner">
+                    <img src="img/300x450.webp">
+                    <img src="img/trailer.jpeg">
+                    <button class="watch_later_btn">
                         Буду смотреть
                     </button>
-                    <button style="background-color: rgb(37,37,37);
-                        color: rgb(218, 98, 0);
-                        font-size: large;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 4px; border:0;
-                        margin-left: 10px; 
-                        font-weight:200;">
+                    <button class="plus_btn">
                         +
                     </button>
-                    <button style=" box-shadow: 0 1px 2px rgb(0 0 0 / 4%); 
-                        border-radius: 4px; border:0;
-                        height: 40px;
-                        width: 100%;
-                        background-color: rgb(37,37,37); 
-                        color: #9e9e9e;
-                        font-size:medium;
-                        margin-top: 30px;
-                        margin-left:auto; margin-right:auto;">
+                    <button class="other_btn">
                         Some other button
                     </button>
                 </div>
             </div>
-            <div class="movie_content_right">
+            <div class="movie_content_center">
+                <div class="movie_info_title">
+                    <h1>
+                        Чужой
+                    </h1>
+                </div>
+                <div class="meta_info">
+                    <p>Группа космонавтов высаживается на неизвестной планете и знакомится с ксеноморфом. Шедевр Ридли
+                        Скотта</p>
+                </div>
+                <div class="movie_info">
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Аудиодорожки</div>
+                        <span class="info_link">Русский, Английский</span>
+                    </div>
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Субтитры</div>
+                        <span class="info_link">Русскиe</span>
+                    </div>
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Качество</div>
+                        <span class="info_link">HD</span>
+                    </div>
+                </div>
 
-                <div class="movie_info" style="color:floralwhite;">
+                <h2 class="movie_info_title">О фильме</h2>
+
+                <div class="movie_info">
                     <div class="info_row">
                         <div class="info_title">Год производства</div>
                         <a href="" class="info_link">1979
                     </div>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Страна</div>
-                    <a href="" class="info_link">Великобритания</a> <span style="color:#fff;">,</span><a href=""
-                        class="info_link">США</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Жанр</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Слоган</div>
-                    <div class="info_value">«В космосе твой крик никто не услышит...»</div>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Режисёр</div>
-                    <a href="" class="info_link">Кек Кекович</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Сценарист</div>
-                    <a href="" class="info_link">Дольф Лунтик</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Продюсер</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Оператор</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Композитор</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Художник</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Монтаж</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Бюджет</div>
-                    <a href="" class="info_link">Кек</a>
-                </div>
-                <div class="info_row">
-                    <div class="info_title">Время</div>
-                    <div class="info_value">228:1488</div>
+                    <div class="info_row">
+                        <div class="info_title">Страна</div>
+                        <a href="" class="info_link">Великобритания</a> <span style="color:#fff;">,</span><a href=""
+                            class="info_link">США</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Жанр</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Слоган</div>
+                        <div class="info_value">«В космосе твой крик никто не услышит...»</div>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Режисёр</div>
+                        <a href="" class="info_link">Кек Кекович</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Сценарист</div>
+                        <a href="" class="info_link">Дольф Лунтик</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Продюсер</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Оператор</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Композитор</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Художник</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Монтаж</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Бюджет</div>
+                        <a href="" class="info_link">Кек</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Время</div>
+                        <div class="info_value">228:1488</div>
+                    </div>
                 </div>
             </div>
+            <div class="movie_content_right">
+                <h3>В главных ролях</h3>
+                <ul class="actors_list">
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+
+                </ul>
+            </div>
         </div>
-    </div>
     </div>
 
 </body>
