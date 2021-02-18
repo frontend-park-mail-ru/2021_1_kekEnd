@@ -1,9 +1,9 @@
 const loginSubmit = document.getElementById('login');
 const signupSubmit = document.getElementById('signup');
-const switcher = document.getElementById('btn');
+const switcher = document.getElementById('current-button');
 
-const signupButton = document.getElementById('signup-btn');
-const loginButton = document.getElementById('login-btn');
+const signupButton = document.getElementById('signup-button');
+const loginButton = document.getElementById('login-button');
 
 // TODO: add additional logic: switch either to 'Login' or to 'Sign Up'
 loginButton.style.color = 'white';

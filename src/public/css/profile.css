@@ -43,13 +43,13 @@ body {
     padding-bottom: 32px;
 }
 
-.head p {
+.user-name {
     font-size: 28px;
     color: #444;
     font-weight: 600;
 }
 
-.head span {
+.user-email {
     color: #AAABAF;
     font-size: 14px;
 }
@@ -64,12 +64,12 @@ body {
     color: #AAABAF;
 }
 
-.stats-item p {
+.stats-item-name {
     font-size: 14px;
     padding-bottom: 4px;
 }
 
-.stats-item span {
+.stats-item-value {
     font-size: 18px;
     font-weight: 400;
 }
