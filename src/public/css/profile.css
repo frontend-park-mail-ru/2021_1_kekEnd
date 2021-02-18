@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 
 body {
-    background-color: #DEDFE1;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -82,7 +81,7 @@ body {
     margin-bottom: 20px;
 }
 
-.movies-slider {
+.slider {
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -90,8 +89,8 @@ body {
     gap: 15px;
 }
 
-.movie-card {
-    width: 100px;
+.slider-card {
+    width: 110px;
     height: 180px;
     margin: 10px 0;
     border: 3px solid rgba(255, 255, 255, 0.7);
@@ -99,10 +98,9 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.movie-card img {
+.slider-card img {
     height: 100%;
     width: 100%;
     object-fit: fill;
     border-radius: 7px;
 }
-

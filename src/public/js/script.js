@@ -5,7 +5,7 @@ const switcher = document.getElementById('btn');
 const signupButton = document.getElementById('signup-btn');
 const loginButton = document.getElementById('login-btn');
 
-sma// TODO: add additional logic: switch either to 'Login' or to 'Sign Up'
+// TODO: add additional logic: switch either to 'Login' or to 'Sign Up'
 loginButton.style.color = 'white';
 
 signupButton.addEventListener('click', () => {
