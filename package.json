@@ -1,0 +1,24 @@
+{
+  "name": "kinopoisk",
+  "version": "1.0.0",
+  "description": "* [Теняев Олег](https://github.com/grillow)\r * [Афимин Илья](https://github.com/IfuryI)\r * [Бахметьев Глеб](https://github.com/polyanimal)\r * [Зотов Алексей](https://github.com/let-robots-reign)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2021_1_kekEnd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2021_1_kekEnd/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2021_1_kekEnd#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}

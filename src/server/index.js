@@ -4,8 +4,6 @@ const fs = require('fs');
 const host = '127.0.0.1';
 const port = 3000;
 const server = http.createServer((req, res) => {
-    console.log('request', req.url);
-
     // default html; will be 'index.html' when main page is ready
     let file = 'signup.html';
 
