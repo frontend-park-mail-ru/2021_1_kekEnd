@@ -8,10 +8,10 @@ class EventBus {
     }
 
     on(name, callback) {
-        if (typeof name != 'string') {
+        if (typeof name !== 'string') {
             throw new TypeError('event name must be a string');
         }
-        if (typeof callback != 'function') {
+        if (typeof callback !== 'function') {
             throw new TypeError('event callback must be a function');
         }
 
@@ -24,7 +24,7 @@ class EventBus {
     }
 
     emit(name) {
-        if (typeof name != 'string') {
+        if (typeof name !== 'string') {
             throw new TypeError('event name must be a string');
         }
         
