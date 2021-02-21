@@ -24,7 +24,7 @@ QUnit.module('EventBus test', function () {
         assert.strictEqual(b, 1337);
 	});
 
-    QUnit.test('Callbacks are independant', function (assert) {
+    QUnit.test('Callbacks are independent', function (assert) {
         const bus = new EventBus();
         let a = 0;
         bus.on('sample', () => { a = 1; });
