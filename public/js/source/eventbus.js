@@ -29,7 +29,13 @@ class EventBus {
         }
         
         if (name in this.#callbacks) {
-            this.#callbacks[name].forEach(callback => callback());
+            this.#callbacks[name].forEach(callback => {
+                try {
+                    callback();
+                } catch (error) {
+                    console.error(error);
+                }
+            });
         }
 
     }

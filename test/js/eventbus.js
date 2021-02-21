@@ -33,5 +33,16 @@ QUnit.module('EventBus test', function () {
         assert.throws(() => { bus.emit(1337); }, TypeError('event name must be a string'));
     });
 
+    QUnit.test('Callbacks are independant', function (assert) {
+        const bus = new EventBus();
+        let a = 0;
+        bus.on('sample', () => { a = 1; });
+        bus.on('sample', () => { a = 2; throw new Error('sample error'); });
+        bus.on('sample', () => { a = 3; });
+        bus.emit('sample');
+
+        assert.strictEqual(a, 3);
+    });
+
 });
 
