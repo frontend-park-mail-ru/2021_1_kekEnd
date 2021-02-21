@@ -14,7 +14,7 @@ const moveForms = () => {
     switcher.classList.toggle('switcher-on-signup');
     signupButton.classList.toggle('button-white-text');
     loginButton.classList.toggle('button-white-text');
-}
+};
 
 signupButton.addEventListener('click', moveForms);
 loginButton.addEventListener('click', moveForms);
