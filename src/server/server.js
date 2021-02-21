@@ -4,7 +4,7 @@ const fs = require('fs');
 const host = '127.0.0.1';
 const port = 3000;
 const server = http.createServer((req, res) => {
-    let file = 'signup.html';
+    let file = 'profile.html';
 
     if (req.url !== '/') {
         file = req.url.replace('/', '');
