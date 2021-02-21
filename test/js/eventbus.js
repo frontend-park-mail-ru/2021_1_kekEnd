@@ -24,15 +24,6 @@ QUnit.module('EventBus test', function () {
         assert.strictEqual(b, 1337);
 	});
 
-    QUnit.test('Correct types', function (assert) {
-        const bus = new EventBus();
-       
-        assert.throws(() => { bus.on(1337, () => {}); }, TypeError('event name must be a string'));
-        assert.throws(() => { bus.on('sample', 1337); }, TypeError('event callback must be a function'));
-        
-        assert.throws(() => { bus.emit(1337); }, TypeError('event name must be a string'));
-    });
-
     QUnit.test('Callbacks are independant', function (assert) {
         const bus = new EventBus();
         let a = 0;
