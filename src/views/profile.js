@@ -4,15 +4,15 @@ export default class ProfileView {
 	}
 
 	render() {
-		document.head.innerHTML = head
-		document.body.innerHTML = body
+		document.head.innerHTML = head // пока нет шаблонизатора
+		document.body.innerHTML = body // делаю так
 
 		this.setEventListeners()
 	}
 
 	setEventListeners() {
 		const button = document.getElementById('my_button')
-        button.addEventListener('click', (event) => {
+		button.addEventListener('click', (event) => {
 			alert("Update")
 		})
 	}
