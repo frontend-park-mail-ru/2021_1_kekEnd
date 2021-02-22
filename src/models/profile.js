@@ -1,6 +1,4 @@
-
-
-class ProfileModel() {
+export default class ProfileModel {
 	constructor(eventBus) {
 		this.eventBus = eventBus
 		// Забиндить ивент бас

@@ -1,8 +1,8 @@
-import {ProfileModel} from '../models/profile.js';
-import {ProfileView} from '../views/profile.js';
+import ProfileModel from '../models/profile.js';
+import ProfileView from '../views/profile.js';
 
 
-class ProfileController {
+export default class ProfileController {
 	constructor() {
 		// this.eventBus = new EventBus()
 		this.model = new ProfileModel() 

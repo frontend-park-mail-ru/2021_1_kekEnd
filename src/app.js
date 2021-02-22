@@ -1,8 +1,8 @@
-import {ProfileController} from '../controllers/profile.js';
+import ProfileController from './controllers/profile.js';
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const profileController = new ProfileController(router);
+    const profileController = new ProfileController();
 
     profileController.view.render();
 });
