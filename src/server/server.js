@@ -4,13 +4,13 @@ const fs = require('fs');
 const host = '127.0.0.1';
 const port = 3000;
 const server = http.createServer((req, res) => {
-    let file = 'profile.html';
+    let file = 'index.html';
 
     if (req.url !== '/') {
         file = req.url.replace('/', '');
     }
 
-    fs.readFile(`src/public/${file}`, (error, data) => {
+    fs.readFile(`src/${file}`, (error, data) => {
         if (error) {
             console.log(error);
         } else {
