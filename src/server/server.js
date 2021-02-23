@@ -12,10 +12,6 @@ const server = http.createServer((req, res) => {
         if (req.url.includes('.js')) {
             res.setHeader('Content-type', 'text/javascript'); // почему-то у меня без этого не грузило js файлы
         }
-
-        if (req.url.includes('.css')) {
-            res.setHeader('Content-type', 'text/css'); // и css тоже
-        }
     }
 
     fs.readFile(`src/${file}`, (error, data) => {

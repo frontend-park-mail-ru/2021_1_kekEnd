@@ -17,23 +17,27 @@ export default class ProfileView {
     }
 
     setEventListeners() {
-        const button = document.getElementById('btn_profile_settings');
+        const button = document.getElementById('button_profile_settings');
         button.addEventListener('click', (event) => {
-            alert("123");
+            alert('123');
         });
     }
 
+    removeEventListeners() {
+        // Очистка 
+    }
+
     setProfileData(data) {
-        const userName = document.getElementById('userFullName');
+        const userName = document.getElementById('user-full-name');
         userName.innerHTML = data.fullname;
 
-        const userEmail = document.getElementById('userEmail');
+        const userEmail = document.getElementById('user-email');
         userEmail.innerHTML = data.email;
 
-        const userMoviesCnt = document.getElementById('userWatchedMoviesCnt');
+        const userMoviesCnt = document.getElementById('user-watched-movies-cnt');
         userMoviesCnt.innerHTML = data.watchedMoviesCnt;
 
-        const userReviewsCnt = document.getElementById('userReviewsCnt');
+        const userReviewsCnt = document.getElementById('user-reviews-cnt');
         userReviewsCnt.innerHTML = data.reviewsCnt;
     }
 }
@@ -67,24 +71,24 @@ const body = `<div class="header">
     <div class="main">
         <div class="profile-card">
             <div class="container">
-                <button id="btn_profile_settings">Открыть настройки</button>
+                <button id="button_profile_settings">Открыть настройки</button>
                 <div class="avatar-container">
                     <img src="https://i.imgur.com/ZaZ7FP4.jpg" alt="">
                 </div>
 
                 <div class="content">
                     <div class="head">
-                        <p id="userFullName" class="user-name">Sample User</p>
-                        <span id="userEmail" class="user-email">cruise@mail.ru</span>
+                        <p id="user-full-name" class="user-name">Sample User</p>
+                        <span id="user-email" class="user-email">cruise@mail.ru</span>
                     </div>
                     <div class="stats">
                         <div class="stats-item">
                             <p class="stats-item-name">Посмотрел фильмов</p>
-                            <span id="userWatchedMoviesCnt" class="stats-item-value">125</span>
+                            <span id="user-watched-movies-cnt" class="stats-item-value">125</span>
                         </div>
                         <div class="stats-item">
                             <p class="stats-item-name">Рецензий</p>
-                            <span id="userReviewsCnt" class="stats-item-value">9</span>
+                            <span id="user-reviews-cnt" class="stats-item-value">9</span>
                         </div>
                     </div>
                 </div>
