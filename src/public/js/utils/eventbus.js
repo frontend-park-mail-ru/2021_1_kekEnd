@@ -27,9 +27,8 @@ class EventBus {
                 }
             });
         }
-
     }
-
 }
+
 
 export const globalEventBus = new EventBus();

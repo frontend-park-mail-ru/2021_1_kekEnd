@@ -2,26 +2,26 @@ import {globalEventBus} from '../utils/eventbus.js';
 
 
 export default class ProfileView {
-	constructor(app) {
+    constructor(app) {
         this.app = app;
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
-	}
+    }
 
-	render() {
+    render() {
         this.app.innerHTML = body;
 
         globalEventBus.emit('get profile data');
 
-		this.setEventListeners();
-	}
+        this.setEventListeners();
+    }
 
-	setEventListeners() {
-		const button = document.getElementById('btn_profile_settings');
-		button.addEventListener('click', (event) => {
+    setEventListeners() {
+        const button = document.getElementById('btn_profile_settings');
+        button.addEventListener('click', (event) => {
             alert("123");
-		});
-	}
+        });
+    }
 
     setProfileData(data) {
         const userName = document.getElementById('userFullName');

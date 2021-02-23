@@ -3,8 +3,8 @@ import ProfileView from '../views/profile.js';
 
 
 export default class ProfileController {
-	constructor(app) {
-		this.view = new ProfileView(app);
-		this.model = new ProfileModel();
-	}
+    constructor(app) {
+        this.view = new ProfileView(app);
+        this.model = new ProfileModel();
+    }
 }
