@@ -17,7 +17,7 @@ export default class ProfileView {
     }
 
     setEventListeners() {
-        const button = document.getElementById('button_profile_settings');
+        const button = document.getElementById('button-profile-settings');
         button.addEventListener('click', (event) => {
             alert('123');
         });
@@ -71,7 +71,7 @@ const body = `<div class="header">
     <div class="main">
         <div class="profile-card">
             <div class="container">
-                <button id="button_profile_settings">Открыть настройки</button>
+                <button id="button-profile-settings">Открыть настройки</button>
                 <div class="avatar-container">
                     <img src="https://i.imgur.com/ZaZ7FP4.jpg" alt="">
                 </div>
