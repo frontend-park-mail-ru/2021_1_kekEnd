@@ -16,15 +16,23 @@ export default class ProfileView {
         this.setEventListeners();
     }
 
+    hide () {
+        this.app.innerHTML = '';
+        this.removeEventListeners();
+    } 
+
+    testFunction() {
+        alert('123');
+    }
+
     setEventListeners() {
         const button = document.getElementById('button-profile-settings');
-        button.addEventListener('click', (event) => {
-            alert('123');
-        });
+        button.addEventListener('click', this.testFunction);
     }
 
     removeEventListeners() {
-        // Очистка 
+        const button = document.getElementById('button-profile-settings');
+        button.removeEventListener('click', this.testFunction);
     }
 
     setProfileData(data) {
