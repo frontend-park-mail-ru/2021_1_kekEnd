@@ -1,8 +1,9 @@
-import ProfileController from './controllers/profile.js';
+import ProfileController from './public/js/controllers/profile.js';
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const profileController = new ProfileController();
+	const application = document.getElementById('app');
+    const profileController = new ProfileController(application);
 
     profileController.view.render();
 });

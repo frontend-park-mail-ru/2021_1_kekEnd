@@ -1,5 +1,6 @@
 'use struct';
 
+
 class EventBus {
     #callbacks;
 
@@ -16,11 +17,11 @@ class EventBus {
 
     }
 
-    emit(name) {
+    emit(name, args) {
         if (name in this.#callbacks) {
             this.#callbacks[name].forEach(callback => {
                 try {
-                    callback();
+                    callback(args);
                 } catch (error) {
                     console.error(error);
                 }
@@ -31,3 +32,4 @@ class EventBus {
 
 }
 
+export const globalEventBus = new EventBus();
