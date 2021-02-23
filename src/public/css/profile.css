@@ -35,7 +35,7 @@ body {
     width: 60%;
     height: 100%;
     float: left;
-    padding: 32px 40px;
+    padding: 20px 40px;
     box-sizing: border-box;
 }
 
@@ -52,6 +52,17 @@ body {
 .user-email {
     color: #AAABAF;
     font-size: 14px;
+}
+
+.settings-button {
+    display: block;
+    border: 0;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
 .stats {

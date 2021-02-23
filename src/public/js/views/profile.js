@@ -16,10 +16,10 @@ export default class ProfileView {
         this.setEventListeners();
     }
 
-    hide () {
+    hide() {
         this.app.innerHTML = '';
         this.removeEventListeners();
-    } 
+    }
 
     testFunction() {
         alert('123');
@@ -79,7 +79,6 @@ const body = `<div class="header">
     <div class="main">
         <div class="profile-card">
             <div class="container">
-                <button id="button-profile-settings">Открыть настройки</button>
                 <div class="avatar-container">
                     <img src="https://i.imgur.com/ZaZ7FP4.jpg" alt="">
                 </div>
@@ -88,6 +87,7 @@ const body = `<div class="header">
                     <div class="head">
                         <p id="user-full-name" class="user-name">Sample User</p>
                         <span id="user-email" class="user-email">cruise@mail.ru</span>
+                        <button id="button-profile-settings" class="settings-button">Настройки</button>
                     </div>
                     <div class="stats">
                         <div class="stats-item">
