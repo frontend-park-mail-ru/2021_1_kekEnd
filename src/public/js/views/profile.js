@@ -1,13 +1,57 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Профиль</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/profile.css"/>
-</head>
-<body>
-    <div class="header">
+import {globalEventBus} from '../utils/eventbus.js';
+
+
+export default class ProfileView {
+    constructor(app) {
+        this.app = app;
+
+        globalEventBus.on('set profile data', this.setProfileData.bind(this));
+    }
+
+    render() {
+        this.app.innerHTML = body;
+
+        globalEventBus.emit('get profile data');
+
+        this.setEventListeners();
+    }
+
+    hide () {
+        this.app.innerHTML = '';
+        this.removeEventListeners();
+    } 
+
+    testFunction() {
+        alert('123');
+    }
+
+    setEventListeners() {
+        const button = document.getElementById('button-profile-settings');
+        button.addEventListener('click', this.testFunction);
+    }
+
+    removeEventListeners() {
+        const button = document.getElementById('button-profile-settings');
+        button.removeEventListener('click', this.testFunction);
+    }
+
+    setProfileData(data) {
+        const userName = document.getElementById('user-full-name');
+        userName.innerHTML = data.fullname;
+
+        const userEmail = document.getElementById('user-email');
+        userEmail.innerHTML = data.email;
+
+        const userMoviesCnt = document.getElementById('user-watched-movies-cnt');
+        userMoviesCnt.innerHTML = data.watchedMoviesCnt;
+
+        const userReviewsCnt = document.getElementById('user-reviews-cnt');
+        userReviewsCnt.innerHTML = data.reviewsCnt;
+    }
+}
+
+
+const body = `<div class="header">
         <div class="header__section">
             <div class="header__item header-logo">
                 КиноПоиск
@@ -105,6 +149,4 @@
         </div>
 
         <h3 class="section-name">Рецензии</h3>
-    </div>
-</body>
-</html>
+    </div>`;
