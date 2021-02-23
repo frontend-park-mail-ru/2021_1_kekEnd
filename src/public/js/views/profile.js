@@ -16,10 +16,10 @@ export default class ProfileView {
         this.setEventListeners();
     }
 
-    hide () {
+    hide() {
         this.app.innerHTML = '';
         this.removeEventListeners();
-    } 
+    }
 
     testFunction() {
         alert('123');

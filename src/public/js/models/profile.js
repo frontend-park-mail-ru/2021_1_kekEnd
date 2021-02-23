@@ -7,10 +7,9 @@ export default class ProfileModel {
     }
 
     getProfileData() {
-        const data = {fullname:"Tom Cruise", email:"tomcruise@mail.ru",
-                      watchedMoviesCnt:123, reviewsCnt:10};
+        const data = {fullname: 'Tom Cruise', email: 'tomcruise@mail.ru',
+            watchedMoviesCnt: 123, reviewsCnt: 10};
 
         globalEventBus.emit('set profile data', data);
     }
-
 }

@@ -28,7 +28,7 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2021_1_kekEnd#readme",
   "devDependencies": {
     "eslint": "^7.20.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",

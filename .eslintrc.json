@@ -4,13 +4,22 @@
         "es2021": true
     },
     "extends": [
-        "airbnb-base"
+      "eslint:recommended",
+      "google"
     ],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module"
     },
     "rules": {
-        "indent": ["error", 4]
+      "indent": ["error", 4],
+      "max-len": ["error", 100, 2, {
+        "ignoreUrls": true,
+        "ignoreComments": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": false
+      }],
+      "require-jsdoc": "off" // убрать после JSDoc
     }
 }
