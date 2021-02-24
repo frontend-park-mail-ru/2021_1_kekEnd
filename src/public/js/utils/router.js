@@ -1,16 +1,14 @@
 'use strict';
 
+import EventBus from '../utils/eventbus.js';
+
 class Router {
     constructor() {
-
+        this.routes = new EventBus();
     }
 
     register(path, view) {
 
-    }
-
-    start() {
-        // запустить роутер
     }
 
     go(path) {

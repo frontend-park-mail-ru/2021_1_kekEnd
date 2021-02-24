@@ -1,4 +1,4 @@
-import ProfileController from './public/js/controllers/profile.js';
+import ProfileController from './public/js/controllers/ProfileController.js';
 
 
 window.addEventListener('DOMContentLoaded', () => {

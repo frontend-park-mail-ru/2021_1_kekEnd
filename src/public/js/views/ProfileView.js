@@ -1,15 +1,16 @@
 import {globalEventBus} from '../utils/eventbus.js';
+import BaseView from './BaseView.js';
 
+export default class ProfileView extends BaseView {
+    constructor(parent) {
+        super(parent);
 
-export default class ProfileView {
-    constructor(app) {
-        this.app = app;
-
+        this.parent = parent;
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 
     render() {
-        this.app.innerHTML = body;
+        this.parent.innerHTML = body;
 
         globalEventBus.emit('get profile data');
 
@@ -17,7 +18,7 @@ export default class ProfileView {
     }
 
     hide() {
-        this.app.innerHTML = '';
+        this.parent.innerHTML = '';
         this.removeEventListeners();
     }
 
