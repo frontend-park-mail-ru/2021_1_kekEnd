@@ -12,5 +12,6 @@ export default class ProfileController extends BaseController {
 
     activate() {
         // start business logic here
+        this.view.render();
     }
 }
