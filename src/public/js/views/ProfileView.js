@@ -88,8 +88,7 @@ const body = `<div class="header">
                     <div class="head">
                         <p id="user-full-name" class="user-name">Sample User</p>
                         <span id="user-email" class="user-email">cruise@mail.ru</span>
-                        <button id="button-profile-settings" class="settings-button" 
-                                data-section="editProfile">Настройки</button>
+                        <button id="button-profile-settings" class="settings-button">Настройки</button>
                     </div>
                     <div class="stats">
                         <div class="stats-item">
