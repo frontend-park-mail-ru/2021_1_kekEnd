@@ -1,11 +1,10 @@
 'use strict';
 
-import appConfig from '../config/app_config.js';
+import {appConfig} from '../config/app_config.js';
 
 export default class Router {
     constructor() {
         this.routes = new Map();
-        this.currentController = null;
     }
 
     register(path, controller) {
@@ -28,19 +27,18 @@ export default class Router {
         });
     }
 
-    pushState(url = '/', state = {}) {
-        if (url !== location.pathname) {
-            history.pushState(state, document.title, url);
+    pushState(path = '/', state = {}) {
+        if (path !== location.pathname) {
+            history.pushState(state, document.title, path);
         } else {
-            history.replaceState(state, document.title, url);
+            history.replaceState(state, document.title, path);
         }
 
-        this.handlePath(url);
+        this.handlePath(path);
     }
 
     handlePath(path) {
-        this.currentController = this.routes.get(path);
-        this.currentController.activate();
+        this.routes.get(path).activate();
     }
 
     back() {
