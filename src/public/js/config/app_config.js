@@ -1,4 +1,4 @@
-export const appConfig = {
+export const AppConfig = {
     login: {
         href: '/login',
     },

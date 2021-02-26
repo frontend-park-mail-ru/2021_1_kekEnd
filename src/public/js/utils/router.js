@@ -1,14 +1,14 @@
 'use strict';
 
-import {appConfig} from '../config/app_config.js';
+import {AppConfig} from '../config/app_config.js';
 
 export default class Router {
     constructor() {
         this.routes = new Map();
     }
 
-    register(path, controller) {
-        this.routes.set(path, controller);
+    register(path, view) {
+        this.routes.set(path, view);
     }
 
     start() {
@@ -20,9 +20,9 @@ export default class Router {
         window.addEventListener('click', (event) => {
             const {target} = event;
             const section = target.dataset.section;
-            if (section in appConfig) {
+            if (section in AppConfig) {
                 event.preventDefault();
-                this.pushState(appConfig[section].href);
+                this.pushState(AppConfig[section].href);
             }
         });
     }
@@ -38,7 +38,7 @@ export default class Router {
     }
 
     handlePath(path) {
-        this.routes.get(path).activate();
+        this.routes.get(path).render();
     }
 
     back() {
