@@ -1,6 +1,6 @@
 import Router from './public/js/utils/router.js';
-import {AppConfig} from './public/js/config/app_config.js';
-import ProfileView from './public/js/views/ProfileView.js';
+import {AppConfig} from './public/js/config/appConfig.js';
+import ProfileView from './public/js/MVC/profile/profileView.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');

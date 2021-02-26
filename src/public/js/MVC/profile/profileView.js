@@ -1,11 +1,10 @@
-import {globalEventBus} from '../utils/eventbus.js';
-import BaseView from './BaseView.js';
+import {globalEventBus} from '../../utils/eventbus.js';
+import BaseView from '../baseView.js';
 
 export default class ProfileView extends BaseView {
     constructor(parent) {
         super(parent);
 
-        this.parent = parent;
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 

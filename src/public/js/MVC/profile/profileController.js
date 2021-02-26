@@ -1,5 +1,5 @@
-import ProfileModel from '../models/ProfileModel.js';
-import ProfileView from '../views/ProfileView.js';
+import ProfileModel from './profileModel.js';
+import ProfileView from './profileView.js';
 
 export default class ProfileController {
     constructor(parent) {

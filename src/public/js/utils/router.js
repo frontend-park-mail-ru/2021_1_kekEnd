@@ -1,6 +1,6 @@
 'use strict';
 
-import {AppConfig} from '../config/app_config.js';
+import {AppConfig} from '../config/appConfig.js';
 
 export default class Router {
     constructor() {
