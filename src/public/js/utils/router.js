@@ -1,6 +1,6 @@
 'use strict';
 
-import {AppConfig} from '../config/appConfig.js';
+import {paths} from '../config/paths.js';
 
 export default class Router {
     constructor() {
@@ -20,9 +20,9 @@ export default class Router {
         window.addEventListener('click', (event) => {
             const {target} = event;
             const section = target.dataset.section;
-            if (section in AppConfig) {
+            if (section in paths) {
                 event.preventDefault();
-                this.pushState(AppConfig[section].href);
+                this.pushState(paths[section]);
             }
         });
     }
