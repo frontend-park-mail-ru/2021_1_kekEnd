@@ -57,21 +57,21 @@ const body = `<div class="header">
                 КиноПоиск
             </div>
             <div class="header__item header-button">
-                <a href="#">Фильмы</a>
+                <a href="/">Фильмы</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Актеры</a>
+                <a href="/">Актеры</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Поиск</a>
+                <a href="/">Поиск</a>
             </div>
         </div>
         <div class="header__section">
             <div class="header__item header-button">
-                <a href="#" data-section="login">Войти</a>
+                <a href="/">Войти</a>
             </div>
             <div class="header__item header-button">
-                <a href="#" data-section="signup">Регистрация</a>
+                <a href="/">Регистрация</a>
             </div>
         </div>
     </div>

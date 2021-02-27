@@ -19,10 +19,10 @@ export default class Router {
 
         window.addEventListener('click', (event) => {
             const {target} = event;
-            const section = target.dataset.section;
-            if (section in PATHS) {
+            const path = target.href;
+            if (path in PATHS) {
                 event.preventDefault();
-                this.pushState(PATHS[section]);
+                this.pushState(PATHS.path);
             }
         });
     }
