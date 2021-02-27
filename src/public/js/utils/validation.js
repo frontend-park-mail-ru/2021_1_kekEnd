@@ -31,17 +31,8 @@ class Validator {
         if (!(password.length >= 8 && password.length <= 32)) {
             error.push('should be from 8 to 32 characters long')
         }
-        if (!(/.*\d.*/.test(password))) {
+        if (!(/\d/.test(password))) {
             error.push('should contain at least one digit');
-        }
-        if (!(/.*[A-Z].*/.test(password))) {
-            error.push('should contain at least one uppercase character');
-        }
-        if (!(/.*[a-z].*/.test(password))) {
-            error.push('should contain at least one lowercase character');
-        }
-        if (!(/.*[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~].*/.test(password))) {
-            error.push('should contain at least one special symbol');
         }
 
         return error;
