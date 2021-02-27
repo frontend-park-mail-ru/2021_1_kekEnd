@@ -2,10 +2,10 @@
 
 QUnit.module('Validation test', function () {
 
-    
+
     QUnit.test('email validation', function(assert) {
         const validator = new Validator();
-        
+
         assert.deepEqual(validator.validateEmail('@'), []);
         assert.deepEqual(validator.validateEmail('example'), [
             'incorrect email'
@@ -14,7 +14,7 @@ QUnit.module('Validation test', function () {
     });
 
     QUnit.test('login validation', function (assert) {
-	    const validator = new Validator();
+        const validator = new Validator();
 
         assert.deepEqual(validator.validateLogin('grillow!'), [
             'should contain only latin letters, numbers and underscores'
@@ -37,7 +37,7 @@ QUnit.module('Validation test', function () {
 
 
     QUnit.test('password validation', function (assert) {
-	    const validator = new Validator();
+        const validator = new Validator();
 
         assert.deepEqual(validator.validatePassword('qwerty'), [
             'should be from 8 to 32 characters long',
