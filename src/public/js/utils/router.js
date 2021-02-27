@@ -2,6 +2,16 @@
 
 import {PATHS} from './paths.js';
 
+const findAscendingTag = (element, tag) => {
+    while (element.parentNode) {
+        element = element.parentNode;
+        if (element.tagName === tag) {
+            return element;
+        }
+    }
+    return null;
+};
+
 export default class Router {
     constructor() {
         this.routes = new Map();
@@ -19,7 +29,9 @@ export default class Router {
 
         window.addEventListener('click', (event) => {
             const {target} = event;
-            const path = target.href;
+            const link = (target.tagName === 'A') ? target : findAscendingTag(target, 'A');
+            const path = (link !== null) ? link.href : null;
+
             if (path in PATHS) {
                 event.preventDefault();
                 this.pushState(PATHS.path);
