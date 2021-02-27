@@ -54,7 +54,7 @@ export default class ProfileView extends BaseView {
 const body = `<div class="header">
         <div class="header__section">
             <div class="header__item header-logo">
-                КиноПоиск
+                <a href="/">КиноПоиск</a>
             </div>
             <div class="header__item header-button">
                 <a href="/">Фильмы</a>
