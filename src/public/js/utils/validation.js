@@ -34,7 +34,7 @@ class Validator {
         if (!(/\d/.test(password))) {
             error.push('should contain at least one digit');
         }
-        if (!(/[a-zA-z]/.test(password))) {
+        if (!(/[a-zA-Z]/.test(password))) {
             error.push('should contain at least one letter');
         }
         
