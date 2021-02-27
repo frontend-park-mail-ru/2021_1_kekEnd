@@ -1,16 +1,7 @@
 'use strict';
 
 import {PATHS} from './paths.js';
-
-const findAscendingTag = (element, tag) => {
-    while (element.parentNode) {
-        element = element.parentNode;
-        if (element.tagName === tag) {
-            return element;
-        }
-    }
-    return null;
-};
+import {findAscendingTag} from './findAscendingTag.js';
 
 export default class Router {
     constructor() {
@@ -29,7 +20,7 @@ export default class Router {
 
         window.addEventListener('click', (event) => {
             const {target} = event;
-            const link = (target.tagName === 'A') ? target : findAscendingTag(target, 'A');
+            const link = findAscendingTag(target, 'A');
             const path = (link !== null) ? link.href : null;
 
             if (path in PATHS) {
