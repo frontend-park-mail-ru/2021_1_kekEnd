@@ -1,4 +1,4 @@
-import {globalEventBus} from '../utils/eventbus.js';
+import {globalEventBus} from '../../utils/eventbus.js';
 
 
 export default class ProfileModel {

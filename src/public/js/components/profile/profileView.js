@@ -1,15 +1,15 @@
-import {globalEventBus} from '../utils/eventbus.js';
+import {globalEventBus} from '../../utils/eventbus.js';
+import BaseView from '../baseView.js';
 
-
-export default class ProfileView {
-    constructor(app) {
-        this.app = app;
+export default class ProfileView extends BaseView {
+    constructor(parent) {
+        super(parent);
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 
     render() {
-        this.app.innerHTML = body;
+        this.parent.innerHTML = body;
 
         globalEventBus.emit('get profile data');
 
@@ -17,7 +17,7 @@ export default class ProfileView {
     }
 
     hide() {
-        this.app.innerHTML = '';
+        this.parent.innerHTML = '';
         this.removeEventListeners();
     }
 
@@ -54,24 +54,24 @@ export default class ProfileView {
 const body = `<div class="header">
         <div class="header__section">
             <div class="header__item header-logo">
-                КиноПоиск
+                <a href="/">КиноПоиск</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Фильмы</a>
+                <a href="/">Фильмы</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Актеры</a>
+                <a href="/">Актеры</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Поиск</a>
+                <a href="/">Поиск</a>
             </div>
         </div>
         <div class="header__section">
             <div class="header__item header-button">
-                <a href="#">Войти</a>
+                <a href="/">Войти</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Регистрация</a>
+                <a href="/">Регистрация</a>
             </div>
         </div>
     </div>
