@@ -28,7 +28,6 @@ QUnit.module('Validation test', function () {
         assert.deepEqual(validator.validateLogin('XxX_grillow1337_XxX'), []);
     });
 
-
     QUnit.test('password validation', function (assert) {
         const validator = new Validator();
 
@@ -41,6 +40,9 @@ QUnit.module('Validation test', function () {
         assert.deepEqual(validator.validatePassword('Qwerty123_'), []);
         assert.deepEqual(validator.validatePassword('Aa@4567'), [
             'should be from 8 to 32 characters long'
+        ]);
+        assert.deepEqual(validator.validatePassword('12345678'), [
+            'should contain at least one letter'
         ]);
         assert.deepEqual(validator.validatePassword('Aa@45678'), []);
     });
