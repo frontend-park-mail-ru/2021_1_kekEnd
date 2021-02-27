@@ -1,8 +1,4 @@
 'use strict';
-<<<<<<< HEAD:src/public/js/utils/eventbus.js
-
-=======
->>>>>>> c3158fbdac54b0c61e8fc56ef9f76a6f098cbff9:public/js/source/eventbus.js
 
 class EventBus {
     #callbacks;
