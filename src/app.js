@@ -1,12 +1,12 @@
-import {paths} from './public/js/config/paths.js';
+import {PATHS} from './public/js/utils/paths.js';
 import Router from './public/js/utils/router.js';
-import ProfileView from './public/js/MVC/profile/profileView.js';
+import ProfileView from './public/js/components/profile/profileView.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
 
     const router = new Router();
-    router.register(paths['profile'], new ProfileView(application));
+    router.register(PATHS.profile, new ProfileView(application));
 
     router.start();
 });

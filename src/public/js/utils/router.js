@@ -1,6 +1,6 @@
 'use strict';
 
-import {paths} from '../config/paths.js';
+import {PATHS} from './paths.js';
 
 export default class Router {
     constructor() {
@@ -20,9 +20,9 @@ export default class Router {
         window.addEventListener('click', (event) => {
             const {target} = event;
             const section = target.dataset.section;
-            if (section in paths) {
+            if (section in PATHS) {
                 event.preventDefault();
-                this.pushState(paths[section]);
+                this.pushState(PATHS[section]);
             }
         });
     }
