@@ -1,5 +1,7 @@
 'use strict';
 
+import { EventBus, globalEventBus } from '/utils/eventbus.js'
+
 QUnit.module('EventBus test', function () {
 
     QUnit.test('Add single callback and call it', function (assert) {
@@ -49,6 +51,14 @@ QUnit.module('EventBus test', function () {
 
         assert.strictEqual(a, 228);
         assert.deepEqual(b, [ 1337, 228 ]);
+    });
+
+    QUnit.test('global', function (assert) {
+        let a = 0;
+        globalEventBus.on('test', () => { a = 1337; });
+        globalEventBus.emit('test');
+
+        assert.strictEqual(a, 1337);
     });
 
 });

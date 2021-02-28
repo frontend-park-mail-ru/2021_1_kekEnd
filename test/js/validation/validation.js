@@ -1,7 +1,8 @@
 'use strict';
 
-QUnit.module('Validation test', function () {
+import Validator from '/utils/validation.js'
 
+QUnit.module('Validation test', function () {
 
     QUnit.test('email validation', function(assert) {
         const validator = new Validator();

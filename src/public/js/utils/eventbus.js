@@ -1,6 +1,6 @@
 'use strict';
 
-export default class EventBus {
+export class EventBus {
     #callbacks;
 
     constructor() {
