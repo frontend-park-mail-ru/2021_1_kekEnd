@@ -1,7 +1,6 @@
 'use strict';
 
 QUnit.module('EventBus test', function () {
-	
 
     QUnit.test('Add single callback and call it', function (assert) {
         const bus = new EventBus();
@@ -33,6 +32,23 @@ QUnit.module('EventBus test', function () {
         bus.emit('sample');
 
         assert.strictEqual(a, 3);
+    });
+
+    QUnit.test('Argsuments', function (assert) {
+        const bus = new EventBus();
+        let a = 0;
+        const b = [];
+        bus.on('sample', (value) => { a = value; });
+        bus.on('sample', (value) => { b.push(value); });
+        bus.emit('sample', 1337);
+
+        assert.strictEqual(a, 1337);
+        assert.deepEqual(b, [ 1337 ]);
+        
+        bus.emit('sample', 228);
+
+        assert.strictEqual(a, 228);
+        assert.deepEqual(b, [ 1337, 228 ]);
     });
 
 });
