@@ -1,18 +1,23 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
+import './profile.handlebars.js'
+
 
 export default class ProfileView extends BaseView {
     constructor(parent) {
-        super(parent);
+        super(parent, profileTmpl);
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
+        globalEventBus.on('set users best film', this.setUsersBestFilm.bind(this));
+
     }
 
     render() {
-        this.parent.innerHTML = body;
+        document.getElementById('app').innerHTML = Handlebars.templates.profile(data);
 
+        // super.render(document.getElementById('app'), data);
         globalEventBus.emit('get profile data');
-
+        
         this.setEventListeners();
     }
 
@@ -47,6 +52,9 @@ export default class ProfileView extends BaseView {
 
         const userReviewsCnt = document.getElementById('user-reviews-cnt');
         userReviewsCnt.innerHTML = data.reviewsCnt;
+
+
+
     }
 }
 
