@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "npm run gentmpl && node server.js",
+    "gentmpl": "handlebars src/public/js/components/profile/profile_hbs -f src/public/js/components/profile/profile.tmpl.js",
     "lint": "npx eslint ./src --fix"
   },
   "husky": {

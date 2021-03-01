@@ -1,7 +1,8 @@
 'use strict';
 
-class Validator {
 
+// eslint-disable-next-line no-unused-vars
+class Validator {
     validateEmail(email) {
         const error = [];
 
@@ -16,7 +17,7 @@ class Validator {
         const error = [];
 
         if (!(login.length >= 6 && login.length <= 20)) {
-            error.push('should be from 6 to 20 characters long')
+            error.push('should be from 6 to 20 characters long');
         }
         if (!(/^[a-zA-Z0-9_]*$/.test(login))) {
             error.push('should contain only latin letters, numbers and underscores');
@@ -27,9 +28,9 @@ class Validator {
 
     validatePassword(password) {
         const error = [];
-        
+
         if (!(password.length >= 8 && password.length <= 32)) {
-            error.push('should be from 8 to 32 characters long')
+            error.push('should be from 8 to 32 characters long');
         }
         if (!(/\d/.test(password))) {
             error.push('should contain at least one digit');
@@ -37,9 +38,8 @@ class Validator {
         if (!(/[a-zA-Z]/.test(password))) {
             error.push('should contain at least one letter');
         }
-        
+
         return error;
     }
-
 }
 
