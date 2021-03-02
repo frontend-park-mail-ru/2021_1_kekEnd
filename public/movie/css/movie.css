@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-    min-width: 1024px;
     overflow: hidden;
     background-color: #1F1F1F;
 }
@@ -71,9 +70,6 @@
 
 .movie_content_container{
     width: 70%;
-    
-    height : 2000px;
-    
     margin-left: auto;
     margin-right: auto;
     background-color: black;
@@ -128,6 +124,7 @@
     color: #9e9e9e;
     font-size:medium;
     margin-top: 30px;
+    margin-bottom: 30px;
     margin-left:auto; margin-right:auto;
 }
 
@@ -171,12 +168,6 @@
 
 .actors_list {
     list-style-type: none;
-    /* float: left; */
-    /* margin-top: 50; */
-}
-
-.actors_list li {
-    /* display: block; */
 }
 
 .actors_list a {
