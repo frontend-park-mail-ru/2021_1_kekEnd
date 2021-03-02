@@ -8,7 +8,7 @@
     align-items: center;
     width: 100%;
     overflow: hidden;
-    background-color: #1F1F1F;
+    background-color: hsl(0, 0%, 12%);
 }
 
 .movie_navbar_inner{
@@ -30,7 +30,7 @@
 
 .movie_navbar a {
     display: block;
-    color: white;
+    color: hsl(0, 0%, 100%);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -48,7 +48,7 @@
     margin-bottom: auto;
     margin-left: 4px;
     border-radius: 4px;
-    background-color:#3E3E3E;
+    background-color:hsl(0, 0%, 24%);
 }
 
 
@@ -57,14 +57,15 @@
     width: 100%;
     padding: 8px 0 8px 16px;
     font-size: 15px;
-    color: #fff;
+    color: hsl(0, 0%, 100%);
     border: 0;
     outline: 0;
     background: 0 0;
 }
+
 .movie_navbar_input input:focus {
-    background-color:#fff;
-    color: #000;
+    background-color:hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 0%);
     border-radius: 4px;
 }
 
@@ -81,7 +82,8 @@
 
 .background_trailer {
     display: block;
-    background-color: black; height:270px;
+    background-color: black; 
+    height:270px;
 
 }
 
@@ -93,35 +95,39 @@
 }
 
 .watch_later_btn {
-    box-shadow: 0 1px 2px rgb(0 0 0 / 4%); 
-    border-radius: 4px; border:0;
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.04); 
+    border-radius: 4px; 
+    border:0;
     width: 80%; 
     height: 40px;
-    background-color: rgb(37,37,37); 
-    color: #9e9e9e;
+    background-color: hsl(0, 0%, 15%); 
+    color: hsl(0, 0%, 62%);
     font-size:medium;
     margin-top: 50px;
-    margin-left:auto; margin-right:auto;
+    margin-left:auto; 
+    margin-right:auto;
 }
 
 .plus_btn {
-    background-color: rgb(37,37,37);
-    color: rgb(218, 98, 0);
+    background-color: hsl(0, 0%, 15%);
+    color: hsl(27, 100%, 43%);
     font-size: large;
     width: 40px;
     height: 40px;
-    border-radius: 4px; border:0;
+    border-radius: 4px; 
+    border:0;
     margin-left: 10px; 
     font-weight:200;
 }
 
 .other_btn {
-    box-shadow: 0 1px 2px rgb(0 0 0 / 4%); 
-    border-radius: 4px; border:0;
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.04); 
+    border-radius: 4px; 
+    border:0;
     height: 40px;
     width: 100%;
-    background-color: rgb(37,37,37); 
-    color: #9e9e9e;
+    background-color: hsl(0, 0%, 15%); 
+    color: hsl(0, 0%, 62%);
     font-size:medium;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -162,7 +168,7 @@
 }
 
 .movie_content_right h3 {
-    color: #fff;
+    color: hsl(0, 0%, 100%);
 }
 
 
@@ -171,23 +177,23 @@
 }
 
 .actors_list a {
-    color: #fff;
+    color: hsl(0, 0%, 100%);
     text-decoration: none;
     font-size: 14px;
 }
 
 .actors_list a:hover {
-    color: #f60;
+    color: hsl(24, 100%, 50%);
 }
 
 
 
 .meta_info {
     margin: 16px 0 24px;
-    font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 22px;
-    color: #fff;
+    color: hsl(0, 0%, 100%);
     margin-left: 50px;
 }
 
@@ -198,15 +204,12 @@
 
 .movie_info_title {
     margin-left: 50px;
-    color: #fff;
+    color: hsl(0, 0%, 100%);
 }
 
 
 .info_row {
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     margin-left: 50px;
     align-items: center;
     padding: 10px 0;
@@ -216,9 +219,6 @@
 
 .info_row_nounderline {
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     margin-left: 50px;
     align-items: center;
     padding: 10px 0;
@@ -237,11 +237,11 @@
 }
 
 .info_row a {
-    color: #fff;
+    color: hsl(0, 0%, 100%);
     text-decoration: none;
     font-size: 14px;
 }
 
 .info_row a:hover {
-    color: #f60;
+    color: hsl(24, 100%, 50%);
 }
