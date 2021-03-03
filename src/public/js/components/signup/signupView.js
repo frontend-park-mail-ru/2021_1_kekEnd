@@ -1,13 +1,17 @@
 import BaseView from '../baseView.js';
+import {globalEventBus} from '../../utils/eventbus.js';
 import {globalRouter} from '../../utils/router.js';
 
 export default class SignupView extends BaseView {
     constructor(parent) {
         super(parent);
+
+        globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
     }
 
     render() {
         this.parent.innerHTML = body;
+        this.signupForm = document.getElementById('signup');
         this.setEventListeners();
     }
 
@@ -20,16 +24,23 @@ export default class SignupView extends BaseView {
             const switcher = document.getElementById('current-button');
             switcher.classList.remove('switcher-on-signup');
 
-            const signupForm = document.getElementById('signup');
-            signupForm.classList.remove('signup-form-active');
+            this.signupForm.classList.remove('signup-form-active');
 
             globalRouter.pushState('/login');
         });
 
         const signupSubmit = document.getElementById('signup-submit');
         signupSubmit.addEventListener('click', () => {
-            console.log('Attempt to sign up');
+            globalEventBus.emit('signup clicked', new FormData(this.signupForm));
         });
+    }
+
+    processSignupAttempt(status) {
+        if (status) {
+            globalRouter.pushState('/');
+        } else {
+            globalRouter.pushState('/signup');
+        }
     }
 }
 
