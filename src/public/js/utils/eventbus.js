@@ -1,6 +1,6 @@
 'use strict';
 
-export default class EventBus {
+export class EventBus {
     #callbacks;
 
     constructor() {
@@ -30,3 +30,4 @@ export default class EventBus {
 }
 
 export const globalEventBus = new EventBus();
+
