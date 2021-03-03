@@ -8,13 +8,29 @@ export default class LoginView extends BaseView {
 
     render() {
         this.parent.innerHTML = body;
+
         this.loginButton = document.getElementById('login-button');
         this.loginButton.classList.add('button-white-text');
+
         this.setEventListeners();
     }
 
     setEventListeners() {
-        // go to sign up after clicking login
+        const signupButton = document.getElementById('signup-button');
+        signupButton.addEventListener('click', () => {
+            this.loginButton.classList.toggle('button-white-text');
+
+            const switcher = document.getElementById('current-button');
+            switcher.classList.toggle('switcher-on-signup');
+
+            const loginForm = document.getElementById('login');
+            loginForm.classList.toggle('login-form-inactive');
+        });
+
+        const loginSubmit = document.getElementById('login-submit');
+        loginSubmit.addEventListener('click', () => {
+            console.log('Attempt to login');
+        });
     }
 }
 
@@ -52,7 +68,6 @@ const body = `<div class="header">
             </div>
 
             <div class="social-icons">
-                <!-- TODO: подумать, как исправить эти неудобные относительные пути -->
                 <img src="public/img/fb.png" alt="Facebook"/>
                 <img src="public/img/tw.png" alt="Twitter"/>
                 <img src="public/img/gp.png" alt="Google"/>
@@ -63,16 +78,7 @@ const body = `<div class="header">
                 <input type="password" class="input-field" placeholder="Пароль" required>
                 <input id="remember-checkbox" type="checkbox" class="checkbox">
                 <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
-                <button type="submit" class="submit-button">Вход</button>
-            </form>
-
-            <form id="signup" class="signup-form input-group">
-                <input type="text" class="input-field" placeholder="Имя пользователя" required>
-                <input type="email" class="input-field" placeholder="Email" required>
-                <input type="password" class="input-field" placeholder="Пароль" required>
-                <input id="terms-checkbox" type="checkbox" class="checkbox">
-                <label for="terms-checkbox" class="checkbox-label">Согласен на рассылку</label>
-                <button type="submit" class="submit-button">Зарегистрироваться</button>
+                <button type="submit" id="login-submit" class="submit-button">Вход</button>
             </form>
         </div>
     </div>`;
