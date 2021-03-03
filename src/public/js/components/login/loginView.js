@@ -1,14 +1,17 @@
-// import {globalEventBus} from "../../utils/eventbus.js";
+import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import {globalRouter} from '../../utils/router.js';
 
 export default class LoginView extends BaseView {
     constructor(parent) {
         super(parent);
+
+        globalEventBus.on('login status', this.processLoginAttempt.bind(this));
     }
 
     render() {
         this.parent.innerHTML = body;
+        this.loginForm = document.getElementById('login');
         this.setEventListeners();
     }
 
@@ -21,8 +24,7 @@ export default class LoginView extends BaseView {
             const switcher = document.getElementById('current-button');
             switcher.classList.add('switcher-on-signup');
 
-            const loginForm = document.getElementById('login');
-            loginForm.classList.add('login-form-inactive');
+            this.loginForm.classList.add('login-form-inactive');
 
             // TODO: разобраться с анимацией
             globalRouter.pushState('/signup');
@@ -30,8 +32,16 @@ export default class LoginView extends BaseView {
 
         const loginSubmit = document.getElementById('login-submit');
         loginSubmit.addEventListener('click', () => {
-            console.log('Attempt to login');
+            globalEventBus.emit('login clicked', new FormData(this.loginForm));
         });
+    }
+
+    processLoginAttempt(status) {
+        if (status) {
+            globalRouter.pushState('/');
+        } else {
+            globalRouter.pushState('/login');
+        }
     }
 }
 
@@ -52,10 +62,10 @@ const body = `<div class="header">
         </div>
         <div class="header__section">
             <div class="header__item header-button">
-                <a href="#">Войти</a>
+                <a href="/login">Войти</a>
             </div>
             <div class="header__item header-button">
-                <a href="#">Регистрация</a>
+                <a href="/signup">Регистрация</a>
             </div>
         </div>
     </div>

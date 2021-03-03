@@ -68,10 +68,10 @@ const body = `<div class="header">
         </div>
         <div class="header__section">
             <div class="header__item header-button">
-                <a href="/">Войти</a>
+                <a href="/login">Войти</a>
             </div>
             <div class="header__item header-button">
-                <a href="/">Регистрация</a>
+                <a href="/signup">Регистрация</a>
             </div>
         </div>
     </div>
