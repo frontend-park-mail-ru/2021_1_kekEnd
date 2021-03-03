@@ -1,5 +1,6 @@
 // import {globalEventBus} from "../../utils/eventbus.js";
 import BaseView from '../baseView.js';
+import {globalRouter} from '../../utils/router.js';
 
 export default class LoginView extends BaseView {
     constructor(parent) {
@@ -8,23 +9,23 @@ export default class LoginView extends BaseView {
 
     render() {
         this.parent.innerHTML = body;
-
-        this.loginButton = document.getElementById('login-button');
-        this.loginButton.classList.add('button-white-text');
-
         this.setEventListeners();
     }
 
     setEventListeners() {
         const signupButton = document.getElementById('signup-button');
         signupButton.addEventListener('click', () => {
-            this.loginButton.classList.toggle('button-white-text');
+            const loginButton = document.getElementById('login-button');
+            loginButton.classList.remove('button-white-text');
 
             const switcher = document.getElementById('current-button');
-            switcher.classList.toggle('switcher-on-signup');
+            switcher.classList.add('switcher-on-signup');
 
             const loginForm = document.getElementById('login');
-            loginForm.classList.toggle('login-form-inactive');
+            loginForm.classList.add('login-form-inactive');
+
+            // TODO: разобраться с анимацией
+            globalRouter.pushState('/signup');
         });
 
         const loginSubmit = document.getElementById('login-submit');
@@ -63,7 +64,7 @@ const body = `<div class="header">
         <div class="form-box">
             <div class="button-box">
                 <div id="current-button" class="button-wrap"></div>
-                <button type="button" class="toggle-button" id="login-button">Войти</button>
+                <button type="button" class="toggle-button button-white-text" id="login-button">Войти</button>
                 <button type="button" class="toggle-button" id="signup-button">Регистрация</button>
             </div>
 
