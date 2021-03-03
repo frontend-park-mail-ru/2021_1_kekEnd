@@ -8,11 +8,13 @@ export default class LoginView extends BaseView {
 
     render() {
         this.parent.innerHTML = body;
+        this.loginButton = document.getElementById('login-button');
+        this.loginButton.classList.add('button-white-text');
         this.setEventListeners();
     }
 
     setEventListeners() {
-
+        // go to sign up after clicking login
     }
 }
 
