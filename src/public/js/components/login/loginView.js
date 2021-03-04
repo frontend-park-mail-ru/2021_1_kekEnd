@@ -31,6 +31,7 @@ export default class LoginView extends BaseView {
         });
 
         this.loginForm.addEventListener('submit', (e) => {
+            // TODO: получить данные формы
             const formData = new FormData(this.loginForm);
             // пусто
             for (const pair of formData.entries()) {

@@ -29,9 +29,15 @@ export default class SignupView extends BaseView {
             globalRouter.pushState('/login');
         });
 
-        const signupSubmit = document.getElementById('signup-submit');
-        signupSubmit.addEventListener('click', () => {
-            globalEventBus.emit('signup clicked', new FormData(this.signupForm));
+        this.signupForm.addEventListener('submit', () => {
+            // TODO: получить данные формы
+            const formData = new FormData(this.signupForm);
+            // пусто
+            for (const pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            // Form submission canceled because the form is not connected
+            globalEventBus.emit('signup clicked', formData);
         });
     }
 
@@ -84,9 +90,9 @@ const body = `<div class="header">
             </div>
 
             <form id="signup" class="signup-form signup-form-active input-group">
-                <input type="text" class="input-field" placeholder="Имя пользователя" required>
-                <input type="email" class="input-field" placeholder="Email" required>
-                <input type="password" class="input-field" placeholder="Пароль" required>
+                <input type="text" class="input-field" placeholder="Имя пользователя">
+                <input type="email" class="input-field" placeholder="Email">
+                <input type="password" class="input-field" placeholder="Пароль">
                 <input id="terms-checkbox" type="checkbox" class="checkbox">
                 <label for="terms-checkbox" class="checkbox-label">Согласен на рассылку</label>
                 <button type="submit" id='signup-submit' class="submit-button">Зарегистрироваться</button>
