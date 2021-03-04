@@ -30,9 +30,14 @@ export default class LoginView extends BaseView {
             globalRouter.pushState('/signup');
         });
 
-        const loginSubmit = document.getElementById('login-submit');
-        loginSubmit.addEventListener('click', () => {
-            globalEventBus.emit('login clicked', new FormData(this.loginForm));
+        this.loginForm.addEventListener('submit', (e) => {
+            const formData = new FormData(this.loginForm);
+            // пусто
+            for (const pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            // Form submission canceled because the form is not connected
+            globalEventBus.emit('login clicked', formData);
         });
     }
 
@@ -85,8 +90,8 @@ const body = `<div class="header">
             </div>
 
             <form id="login" class="login-form input-group">
-                <input type="text" class="input-field" placeholder="Имя пользователя" required>
-                <input type="password" class="input-field" placeholder="Пароль" required>
+                <input type="text" class="input-field" placeholder="Имя пользователя">
+                <input type="password" class="input-field" placeholder="Пароль">
                 <input id="remember-checkbox" type="checkbox" class="checkbox">
                 <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
                 <button type="submit" id="login-submit" class="submit-button">Вход</button>
