@@ -1,18 +1,22 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
-import './profileTmpl.js';
+import './profile.tmpl.js';
 
 
 export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
-        super(parent, Handlebars.templates.profile_hbs);
+        super(parent, Handlebars.templates['profile.hbs']);
+
+        this.data = {};
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 
     render() {
         globalEventBus.emit('get profile data');
+
+        super.render(this.data);
 
         this.setEventListeners();
     }
@@ -37,6 +41,6 @@ export default class ProfileView extends BaseView {
     }
 
     setProfileData(data) {
-        super.render(document.getElementById('app'), data);
+        this.data = data;
     }
 }

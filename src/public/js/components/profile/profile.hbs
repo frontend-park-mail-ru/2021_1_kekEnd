@@ -39,11 +39,11 @@
                 <div class="stats">
                     <div class="stats-item">
                         <p class="stats-item-name">Посмотрел фильмов</p>
-                        <span id="user-watched-movies-cnt" class="stats-item-value">{{watchedMoviesCnt}}</span>
+                        <span id="user-watched-movies-cnt" class="stats-item-value">{{watchedMoviesCount}}</span>
                     </div>
                     <div class="stats-item">
                         <p class="stats-item-name">Рецензий</p>
-                        <span id="user-reviews-cnt" class="stats-item-value">{{reviewsCnt}}</span>
+                        <span id="user-reviews-cnt" class="stats-item-value">{{reviewsCount}}</span>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
 
     <!-- TODO: решить проблему источников изображений -->
     <div class="slider">
-        {{#each film_img}}
+        {{#each filmImageList}}
             <div class="slider-card">
                 <img src="{{this}}">
             </div>
@@ -64,7 +64,7 @@
     <h3 class="section-name">Любимые актеры</h3>
 
     <div class="slider">
-        {{#each best_actor_img}}
+        {{#each bestActorImageList}}
             <div class="slider-card">
                 <img src="{{this}}">
             </div>
