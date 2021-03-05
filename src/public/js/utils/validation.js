@@ -1,7 +1,7 @@
 'use strict';
 
 
-// eslint-disable-next-line no-unused-vars
+export default class Validator {
 class Validator {
     validateEmail(email) {
         const error = [];
