@@ -2,7 +2,6 @@
 
 
 export default class Validator {
-class Validator {
     validateEmail(email) {
         const error = [];
 
