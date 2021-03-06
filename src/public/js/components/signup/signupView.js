@@ -35,8 +35,6 @@ export default class SignupView extends BaseView {
             setValidityClass(document.getElementById('email-input'), emailError);
             setValidityClass(document.getElementById('password-input'), passwordError);
 
-            console.log([loginError, emailError, passwordError]);
-
             if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
                 globalEventBus.emit('signup clicked', data);
             }
