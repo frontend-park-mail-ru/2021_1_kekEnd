@@ -1,6 +1,7 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
 
 export default class LoginView extends BaseView {
     constructor(parent) {
@@ -21,13 +22,11 @@ export default class LoginView extends BaseView {
             const loginButton = document.getElementById('login-button');
             loginButton.classList.remove('button-white-text');
 
-            const switcher = document.getElementById('current-button');
-            switcher.classList.add('switcher-on-signup');
-
-            this.loginForm.classList.add('login-form-inactive');
-
             // TODO: разобраться с анимацией
-            globalRouter.pushState('/signup');
+            // const switcher = document.getElementById('current-button');
+            // switcher.classList.add('switcher-on-signup');
+
+            // this.loginForm.classList.add('login-form-inactive');
         });
 
         this.loginForm.addEventListener('submit', (e) => {
@@ -43,11 +42,7 @@ export default class LoginView extends BaseView {
     }
 
     processLoginAttempt(status) {
-        if (status) {
-            globalRouter.pushState('/');
-        } else {
-            globalRouter.pushState('/login');
-        }
+        globalRouter.pushState((status) ? PATHS.profile : PATHS.login);
     }
 }
 
@@ -81,7 +76,9 @@ const body = `<div class="header">
             <div class="button-box">
                 <div id="current-button" class="button-wrap"></div>
                 <button type="button" class="toggle-button button-white-text" id="login-button">Войти</button>
-                <button type="button" class="toggle-button" id="signup-button">Регистрация</button>
+                <a href="/signup">
+                    <button type="button" class="toggle-button" id="signup-button">Регистрация</button>
+                </a>
             </div>
 
             <div class="social-icons">
