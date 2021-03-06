@@ -2,6 +2,7 @@ import BaseView from '../baseView.js';
 import {globalEventBus} from '../../utils/eventbus.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
+import {getFormValues} from '../../utils/formDataWork.js';
 
 export default class SignupView extends BaseView {
     constructor(parent) {
@@ -12,32 +13,18 @@ export default class SignupView extends BaseView {
 
     render() {
         this.parent.innerHTML = body;
-        this.signupForm = document.getElementById('signup');
         this.setEventListeners();
     }
 
     setEventListeners() {
-        const loginButton = document.getElementById('login-button');
-        loginButton.addEventListener('click', () => {
-            const signupButton = document.getElementById('signup-button');
-            signupButton.classList.remove('button-white-text');
+        const form = document.getElementById('signup');
 
-            // TODO: разобраться с анимацией
-            // const switcher = document.getElementById('current-button');
-            // switcher.classList.remove('switcher-on-signup');
-            //
-            // this.signupForm.classList.remove('signup-form-active');
-        });
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        this.signupForm.addEventListener('submit', () => {
-            // TODO: получить данные формы
-            const formData = new FormData(this.signupForm);
-            // пусто
-            for (const pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
-            // Form submission canceled because the form is not connected
-            globalEventBus.emit('signup clicked', formData);
+            const data = getFormValues(form);
+
+            globalEventBus.emit('signup clicked', data);
         });
     }
 
@@ -86,10 +73,10 @@ const body = `<div class="header">
             </div>
 
             <form id="signup" class="signup-form signup-form-active input-group">
-                <input type="text" class="input-field" placeholder="Имя пользователя">
-                <input type="email" class="input-field" placeholder="Email">
-                <input type="password" class="input-field" placeholder="Пароль">
-                <input id="terms-checkbox" type="checkbox" class="checkbox">
+                <input name="username" type="text" class="input-field" placeholder="Имя пользователя">
+                <input name="email" type="email" class="input-field" placeholder="Email">
+                <input name="password" type="password" class="input-field" placeholder="Пароль">
+                <input name="ads-agree" id="ads-agree" type="checkbox" class="checkbox">
                 <label for="terms-checkbox" class="checkbox-label">Согласен на рассылку</label>
                 <button type="submit" id='signup-submit' class="submit-button">Зарегистрироваться</button>
             </form>

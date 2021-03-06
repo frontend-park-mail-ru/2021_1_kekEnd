@@ -5,10 +5,10 @@ export default class Model {
         globalEventBus.on('signup clicked', this.checkIfExists.bind(this));
     }
 
-    checkIfExists() {
+    checkIfExists(data) {
         // запрос к серверу на проверку существования пользователя
         const signupSuccess = true;
-
+        console.log(data);
         globalEventBus.emit('signup status', signupSuccess);
     }
 }

@@ -2,6 +2,7 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
+import {getFormValues} from '../../utils/formDataWork.js';
 
 export default class LoginView extends BaseView {
     constructor(parent) {
@@ -21,10 +22,7 @@ export default class LoginView extends BaseView {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const formData = new FormData(form);
-            // converting FormData object to json
-            const data = {};
-            formData.forEach((value, key) => data[key] = value);
+            const data = getFormValues(form);
 
             globalEventBus.emit('login clicked', data);
         });
