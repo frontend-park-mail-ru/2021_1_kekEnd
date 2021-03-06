@@ -3,6 +3,8 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
+import Validator from '../../utils/validation.js';
+import {setValidityClass} from '../../utils/setValidityClass.js';
 
 export default class SignupView extends BaseView {
     constructor(parent) {
@@ -24,7 +26,20 @@ export default class SignupView extends BaseView {
 
             const data = getFormValues(form);
 
-            globalEventBus.emit('signup clicked', data);
+            const validator = new Validator();
+            const loginError = validator.validateLogin(data.username);
+            const emailError = validator.validateEmail(data.email);
+            const passwordError = validator.validatePassword(data.password);
+
+            setValidityClass(document.getElementById('username-input'), loginError);
+            setValidityClass(document.getElementById('email-input'), emailError);
+            setValidityClass(document.getElementById('password-input'), passwordError);
+
+            console.log([loginError, emailError, passwordError]);
+
+            if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
+                globalEventBus.emit('signup clicked', data);
+            }
         });
     }
 
@@ -72,12 +87,13 @@ const body = `<div class="header">
                 <img src="public/img/gp.png"/>
             </div>
 
-            <form id="signup" class="signup-form signup-form-active input-group">
-                <input name="username" type="text" class="input-field" placeholder="Имя пользователя">
-                <input name="email" type="email" class="input-field" placeholder="Email">
-                <input name="password" type="password" class="input-field" placeholder="Пароль">
+            <form id="signup" class="signup-form signup-form-active input-group" novalidate>
+                <input name="username" type="text" class="input-field" id="username-input" 
+                                                            placeholder="Имя пользователя">
+                <input name="email" type="email" class="input-field" id="email-input" placeholder="Email">
+                <input name="password" type="password" class="input-field" id="password-input" placeholder="Пароль">
                 <input name="ads-agree" id="ads-agree" type="checkbox" class="checkbox">
-                <label for="terms-checkbox" class="checkbox-label">Согласен на рассылку</label>
+                <label for="ads-agree" class="checkbox-label">Согласен на рассылку</label>
                 <button type="submit" id='signup-submit' class="submit-button">Зарегистрироваться</button>
             </form>
         </div>

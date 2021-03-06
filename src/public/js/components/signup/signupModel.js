@@ -8,7 +8,7 @@ export default class Model {
     checkIfExists(data) {
         // запрос к серверу на проверку существования пользователя
         const signupSuccess = true;
-        console.log(data);
+
         globalEventBus.emit('signup status', signupSuccess);
     }
 }
