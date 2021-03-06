@@ -5,7 +5,7 @@ export default class LoginModel {
         globalEventBus.on('login clicked', this.checkLogin.bind(this));
     }
 
-    checkLogin() {
+    checkLogin(data) {
         // запрос к серверу на проверку логина и пароля
         const loginSuccess = true;
 

@@ -12,32 +12,21 @@ export default class LoginView extends BaseView {
 
     render() {
         this.parent.innerHTML = body;
-        this.loginForm = document.getElementById('login');
         this.setEventListeners();
     }
 
     setEventListeners() {
-        const signupButton = document.getElementById('signup-button');
-        signupButton.addEventListener('click', () => {
-            const loginButton = document.getElementById('login-button');
-            loginButton.classList.remove('button-white-text');
+        const form = document.getElementById('login');
 
-            // TODO: разобраться с анимацией
-            // const switcher = document.getElementById('current-button');
-            // switcher.classList.add('switcher-on-signup');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-            // this.loginForm.classList.add('login-form-inactive');
-        });
+            const formData = new FormData(form);
+            // converting FormData object to json
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
 
-        this.loginForm.addEventListener('submit', (e) => {
-            // TODO: получить данные формы
-            const formData = new FormData(this.loginForm);
-            // пусто
-            for (const pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
-            // Form submission canceled because the form is not connected
-            globalEventBus.emit('login clicked', formData);
+            globalEventBus.emit('login clicked', data);
         });
     }
 
@@ -88,9 +77,9 @@ const body = `<div class="header">
             </div>
 
             <form id="login" class="login-form input-group">
-                <input type="text" class="input-field" placeholder="Имя пользователя">
-                <input type="password" class="input-field" placeholder="Пароль">
-                <input id="remember-checkbox" type="checkbox" class="checkbox">
+                <input name="username" type="text" class="input-field" placeholder="Имя пользователя">
+                <input name="password" type="password" class="input-field" placeholder="Пароль">
+                <input name="remember-me" id="remember-checkbox" type="checkbox" class="checkbox">
                 <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
                 <button type="submit" id="login-submit" class="submit-button">Вход</button>
             </form>
