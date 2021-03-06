@@ -2,6 +2,7 @@ import {PATHS} from './public/js/utils/paths.js';
 import Router from './public/js/utils/router.js';
 import ProfileController from './public/js/components/profile/profileController.js';
 
+
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
 

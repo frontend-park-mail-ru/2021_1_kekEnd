@@ -1,11 +1,13 @@
 'use strict';
 
+
 export default class BaseView {
-    constructor(parent) {
+    constructor(parent, template) {
         this.parent = parent;
+        this.template = template;
     }
 
-    render() {
-
+    render(data) {
+        this.parent.innerHTML = this.template(data);
     }
 }
