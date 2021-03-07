@@ -4,21 +4,21 @@
             КиноПоиск
         </div>
         <div class="header__item header-button">
-            <a href="#">Фильмы</a>
+            <a href="/">Фильмы</a>
         </div>
         <div class="header__item header-button">
-            <a href="#">Актеры</a>
+            <a href="/">Актеры</a>
         </div>
         <div class="header__item header-button">
-            <a href="#">Поиск</a>
+            <a href="/">Поиск</a>
         </div>
     </div>
     <div class="header__section">
         <div class="header__item header-button">
-            <a href="#">Войти</a>
+            <a href="/">Войти</a>
         </div>
         <div class="header__item header-button">
-            <a href="#">Регистрация</a>
+            <a href="/">Регистрация</a>
         </div>
     </div>
 </div>
@@ -34,13 +34,13 @@
                 <div class="movie_content_left_inner">
                     <img class="movie_content_left_img" src="public/img/300x450.webp">
                     <img class="movie_content_left_img" src="public/img/trailer.jpeg">
-                    <button class="watch_later_button">
+                    <button id="button-watch-later" class="watch_later_button">
                         Буду смотреть
                     </button>
-                    <button class="plus_button">
+                    <button id="button-plus" class="plus_button">
                         +
                     </button>
-                    <button class="other_button">
+                    <button id="button-other" class="other_button">
                         Еще какая-то кнопка
                     </button>
                 </div>
@@ -48,25 +48,24 @@
             <div class="movie_content_center">
                 <div class="movie_info_title">
                     <h1>
-                        Чужой
+                        {{name}}
                     </h1>
                 </div>
                 <div class="meta_info">
-                    <p>Группа космонавтов высаживается на неизвестной планете и знакомится с ксеноморфом. Шедевр Ридли
-                        Скотта</p>
+                    <p>{{description}}</p>
                 </div>
                 <div class="movie_info">
                     <div class="info_row_nounderline">
                         <div class="info_title">Аудиодорожки</div>
-                        <span class="info_link">Русский, Английский</span>
+                        <span class="info_link">{{#each audio}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
                     </div>
                     <div class="info_row_nounderline">
                         <div class="info_title">Субтитры</div>
-                        <span class="info_link">Русскиe</span>
+                        <span class="info_link">{{#each subtitles}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
                     </div>
                     <div class="info_row_nounderline">
                         <div class="info_title">Качество</div>
-                        <span class="info_link">HD</span>
+                        <span class="info_link">{{quality}}</span>
                     </div>
                 </div>
 
@@ -75,70 +74,70 @@
                 <div class="movie_info">
                     <div class="info_row">
                         <div class="info_title">Год производства</div>
-                        <a href="" class="info_link">1979</a>
+                        <a href="" class="info_link">{{year}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Страна</div>
-                        <a href="" class="info_link">Великобритания</a> <span>,</span><a href=""
-                                                                                         class="info_link">США</a>
+                        {{#each country}}
+                            <a href="" class="info_link">{{this}}</a>
+                            {{#unless @last}}<span>,</span>{{/unless}}
+                        {{/each}}
                     </div>
                     <div class="info_row">
                         <div class="info_title">Жанр</div>
-                        <a href="" class="info_link">Кек</a>
+                        {{#each genre}}
+                            <a href="" class="info_link">{{this}}</a>
+                            {{#unless @last}}<span>,</span>{{/unless}}
+                        {{/each}}
                     </div>
                     <div class="info_row">
                         <div class="info_title">Слоган</div>
-                        <div class="info_value">«В космосе твой крик никто не услышит...»</div>
+                        <div class="info_value">«{{tagline}}»</div>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Режиссёр</div>
-                        <a href="" class="info_link">Кек Кекович</a>
+                        <a href="" class="info_link">{{director}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Сценарист</div>
-                        <a href="" class="info_link">Дольф Лунтик</a>
+                        <a href="" class="info_link">{{scriptwriter}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Продюсер</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{producer}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Оператор</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{operator}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Композитор</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{composer}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Художник</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{artist}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Монтаж</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{editor}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Бюджет</div>
-                        <a href="" class="info_link">Кек</a>
+                        <a href="" class="info_link">{{budget.amount}} {{budget.currency}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Время</div>
-                        <div class="info_value">228:1488</div>
+                        <div class="info_value">{{duration}}</div>
                     </div>
                 </div>
             </div>
             <div class="movie_content_right">
                 <h3 class="movie_content_right_header">В главных ролях</h3>
                 <ul class="actors_list">
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
-                    <li><a class="actors_list_item">Сигурни Уивер</a></li>
+                    {{#each roles}}
+                        <li><a class="actors_list_item">{{this}}</a></li>
+                    {{/roles}}
                 </ul>
             </div>
         </div>
