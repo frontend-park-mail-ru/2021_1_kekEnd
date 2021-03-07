@@ -4,7 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
-import {setValidityClass} from '../../utils/setValidityClass.js';
+import {setValidationHint, setValidityClass} from '../../utils/setValidityClass.js';
 
 export default class SignupView extends BaseView {
     constructor(parent) {
@@ -34,6 +34,10 @@ export default class SignupView extends BaseView {
             setValidityClass(document.getElementById('username-input'), loginError);
             setValidityClass(document.getElementById('email-input'), emailError);
             setValidityClass(document.getElementById('password-input'), passwordError);
+
+            setValidationHint(document.getElementById('validation-hint-login'), loginError);
+            setValidationHint(document.getElementById('validation-hint-email'), emailError);
+            setValidationHint(document.getElementById('validation-hint-password'), passwordError);
 
             if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
                 globalEventBus.emit('signup clicked', data);
@@ -88,11 +92,11 @@ const body = `<div class="header">
             <form id="signup" class="signup-form input-group" novalidate>
                 <input name="username" type="text" class="input-field" id="username-input" 
                                                             placeholder="Имя пользователя">
-                <p class="validation-hint"><em>Логин</em></p>
+                <p class="validation-hint" id="validation-hint-login"><em>Логин</em></p>
                 <input name="email" type="email" class="input-field" id="email-input" placeholder="Email">
-                <p class="validation-hint"><em>Email</em></p>
+                <p class="validation-hint" id="validation-hint-email"><em>Email</em></p>
                 <input name="password" type="password" class="input-field" id="password-input" placeholder="Пароль">
-                <p class="validation-hint"><em>Пароль</em></p>
+                <p class="validation-hint" id="validation-hint-password"><em>Пароль</em></p>
                 <input name="ads-agree" id="ads-agree" type="checkbox" class="checkbox">
                 <label for="ads-agree" class="checkbox-label">Согласен на рассылку</label>
                 <button type="submit" id='signup-submit' class="submit-button">Зарегистрироваться</button>

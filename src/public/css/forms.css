@@ -79,12 +79,9 @@
     border-radius: 4px;
 }
 
-.invalid-text {
-    color: orangered;
-}
-
 .validation-hint {
     font-size: 12px;
+    color: orangered;
 }
 
 .submit-button {

@@ -15,3 +15,7 @@ export const setValidityClass = (element, errors) => {
         element.classList.add(newClass);
     }
 };
+
+export const setValidationHint = (element, errors) => {
+    element.innerText = (errors.length !== 0) ? errors.join('\n') : '';
+};
