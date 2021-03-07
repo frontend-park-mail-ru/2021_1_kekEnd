@@ -69,12 +69,12 @@
     background: transparent;
 }
 
-input.valid-input {
+.valid-input {
     border: 1px solid lawngreen;
     border-radius: 4px;
 }
 
-input.invalid-input {
+.invalid-input {
     border: 1px solid orangered;
     border-radius: 4px;
 }
