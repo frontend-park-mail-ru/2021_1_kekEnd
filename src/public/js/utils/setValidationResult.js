@@ -10,13 +10,16 @@ export const setValidationHint = (element, errors) => {
 };
 
 export const setValidationResult = (inputField, hintElement, errors) => {
+    setValidationHint(hintElement, errors);
+
     const validity = getValidity(errors);
     if (inputField.classList.contains(VALID_CLASS) && validity === INVALID_CLASS) {
         inputField.classList.replace(VALID_CLASS, INVALID_CLASS);
-    } else if (inputField.classList.contains(INVALID_CLASS) && validity === VALID_CLASS) {
-        inputField.classList.replace(INVALID_CLASS, VALID_CLASS);
-    } else {
-        inputField.classList.add(validity);
+        return;
     }
-    setValidationHint(hintElement, errors);
+    if (inputField.classList.contains(INVALID_CLASS) && validity === VALID_CLASS) {
+        inputField.classList.replace(INVALID_CLASS, VALID_CLASS);
+        return;
+    }
+    inputField.classList.add(validity);
 };
