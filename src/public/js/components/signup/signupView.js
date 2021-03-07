@@ -4,7 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
-import {setValidationHint, setValidityClass} from '../../utils/setValidityClass.js';
+import {setValidationResult} from '../../utils/setValidationResult.js';
 
 export default class SignupView extends BaseView {
     constructor(parent) {
@@ -31,13 +31,23 @@ export default class SignupView extends BaseView {
             const emailError = validator.validateEmail(data.email);
             const passwordError = validator.validatePassword(data.password);
 
-            setValidityClass(document.getElementById('username-input'), loginError);
-            setValidityClass(document.getElementById('email-input'), emailError);
-            setValidityClass(document.getElementById('password-input'), passwordError);
-
-            setValidationHint(document.getElementById('validation-hint-login'), loginError);
-            setValidationHint(document.getElementById('validation-hint-email'), emailError);
-            setValidationHint(document.getElementById('validation-hint-password'), passwordError);
+            [
+                [
+                    document.getElementById('username-input'),
+                    document.getElementById('validation-hint-login'),
+                    loginError,
+                ],
+                [
+                    document.getElementById('email-input'),
+                    document.getElementById('validation-hint-email'),
+                    emailError,
+                ],
+                [
+                    document.getElementById('password-input'),
+                    document.getElementById('validation-hint-password'),
+                    passwordError,
+                ],
+            ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
 
             if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
                 globalEventBus.emit('signup clicked', data);
