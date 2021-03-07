@@ -85,11 +85,14 @@ const body = `<div class="header">
                 <img src="public/img/gp.png"/>
             </div>
 
-            <form id="signup" class="signup-form signup-form-active input-group" novalidate>
+            <form id="signup" class="signup-form input-group" novalidate>
                 <input name="username" type="text" class="input-field" id="username-input" 
                                                             placeholder="Имя пользователя">
+                <p class="validation-hint"><em>Логин</em></p>
                 <input name="email" type="email" class="input-field" id="email-input" placeholder="Email">
+                <p class="validation-hint"><em>Email</em></p>
                 <input name="password" type="password" class="input-field" id="password-input" placeholder="Пароль">
+                <p class="validation-hint"><em>Пароль</em></p>
                 <input name="ads-agree" id="ads-agree" type="checkbox" class="checkbox">
                 <label for="ads-agree" class="checkbox-label">Согласен на рассылку</label>
                 <button type="submit" id='signup-submit' class="submit-button">Зарегистрироваться</button>
