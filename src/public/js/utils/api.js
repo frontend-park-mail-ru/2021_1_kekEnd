@@ -44,7 +44,7 @@ export default class Api {
      * Получить информацию пользователя
      */
     getProfileData() {
-
+        return this.get("http://localhost:8080/users/let_robots_reign")
     }
 
     /**
