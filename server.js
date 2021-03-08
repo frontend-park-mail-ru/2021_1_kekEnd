@@ -1,6 +1,5 @@
 const express = require('express');
 
-// const host = '127.0.0.1';
 const port = 3000;
 
 const app = express();
@@ -11,6 +10,6 @@ app.get('*', (req, res) => {
     res.sendFile(`${__dirname}/src/index.html`);
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Express server is listening on :${port}`);
 });
