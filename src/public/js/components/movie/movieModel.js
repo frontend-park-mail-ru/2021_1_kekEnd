@@ -1,9 +1,11 @@
 import { globalEventBus } from '../../utils/eventbus.js';
+import Api from '../../utils/api.js'
 
 
 export default class MovieModel {
     constructor() {
         globalEventBus.on('get movie data', this.getMovieData.bind(this));
+        this.api = new Api();
     }
 
     getMovieData() {
@@ -31,6 +33,14 @@ export default class MovieModel {
             img_cover: (new URL(`https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/14af6019-b2fe-4e1e-bee5-334d9e472d94/300x450`)).toJSON(),
             img_shots: [ (new URL(`https://cdn21.img.ria.ru/images/156048/39/1560483958_0:26:1157:677_1920x0_80_0_0_179ae68e142011c1b78e4b4e05f8f8b7.jpg`).toJSON()) ]
         };
+
+        let data2 = this.api.getMovieData()
+            .then((res) => {
+                res.json()
+                .then((data3) => {
+                    console.log(data3);
+                });
+            });
 
         globalEventBus.emit('set movie data', data);
     }

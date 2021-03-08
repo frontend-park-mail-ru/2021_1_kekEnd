@@ -1,3 +1,6 @@
+import {getFetch} from './fetch.js'
+
+
 /**
  * Класс с API методами
  */
@@ -97,7 +100,10 @@ export default class Api {
      * Получить информацию о фильме
      */
     getMovieData() {
-
+        return getFetch('127.0.0.1:8080/movies/1', (error) => {
+            console.log(error.toString());
+            throw new Error(error);
+        });
     }
         
     /**
