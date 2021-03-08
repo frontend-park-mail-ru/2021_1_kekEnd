@@ -3,7 +3,7 @@
 import {PATHS} from './paths.js';
 import {findAscendingTag} from './findAscendingTag.js';
 
-export default class Router {
+export class Router {
     constructor() {
         this.routes = new Map();
     }
@@ -52,3 +52,5 @@ export default class Router {
         window.history.forward();
     }
 }
+
+export const globalRouter = new Router();

@@ -5,9 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run gentmpl && node server.js",
-    "gentmpl": "handlebars src/public/js/components/profile/profile.hbs -f src/public/js/components/profile/profile.tmpl.js",
-    "tests": "node test/server.js",
-    "start": "node server.js",
+    "gentmpl": "handlebars src/public/js/components/profile/profile.hbs -f src/public/js/components/profile/profile.tmpl.js && handlebars src/public/js/components/movie/movie.hbs -f src/public/js/components/movie/movie.tmpl.js",
+    "test": "node test/server.js",
     "lint": "npx eslint ./src --fix"
   },
   "husky": {
@@ -35,9 +34,10 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "handlebars": "^4.7.7",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "prettier": "2.2.1",
-    "handlebars": "^4.7.7"
+    "prettier": "2.2.1"
   }
 }
