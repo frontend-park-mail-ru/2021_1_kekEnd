@@ -5,7 +5,8 @@ export default class Api {
     asyncRequest(url, method, data) {
         const options = {
             method: method,
-            mode: 'cors'
+            mode: 'cors',
+            credentials: 'include'
         };
 
         if (data) {
