@@ -21,15 +21,15 @@ export default class MovieView extends BaseView {
     }
 
     setEventListeners() {
-        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClicked());
-        document.getElementById('button-plus').addEventListener('click', this.plusClicked());
-        document.getElementById('button-other').addEventListener('click', this.otherClicked());
+        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClicked);
+        document.getElementById('button-plus').addEventListener('click', this.plusClicked);
+        document.getElementById('button-other').addEventListener('click', this.otherClicked);
     }
 
     removeEventListeners() {
-        document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClicked());
-        document.getElementById('button-plus').removeEventListener('click', this.plusClicked());
-        document.getElementById('button-other').removeEventListener('click', this.otherClicked());
+        document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClicked);
+        document.getElementById('button-plus').removeEventListener('click', this.plusClicked);
+        document.getElementById('button-other').removeEventListener('click', this.otherClicked);
     }
 
     setMovieData(data) {

@@ -1,4 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
 
@@ -20,7 +22,7 @@ export default class ProfileView extends BaseView {
     }
 
     testFunction() {
-        alert('123');
+        globalRouter.pushState(PATHS.settings);
     }
 
     setEventListeners() {

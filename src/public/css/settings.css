@@ -1,0 +1,46 @@
+.settings-header {
+    text-align: center;
+}
+
+.settings-box {
+    width: 440px;
+    position: relative;
+    margin: 80px auto;
+    background-color: white;
+    padding: 4px 4px 32px 4px;
+    border-radius: 16px;
+}
+
+.settings-table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0px;
+}
+
+.settings-table-inner {
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    width: 460px;
+    min-height: 50px;
+}
+
+.settings-table-inner-left {
+    width: 200px;
+    display: block;
+}
+
+.settings-table-inner-right {
+    width: 240px;
+    display: block;
+}
+
+.settings-save-button {
+    margin: 10px;
+}
+
+.settings-errors {
+    color: red;
+}
