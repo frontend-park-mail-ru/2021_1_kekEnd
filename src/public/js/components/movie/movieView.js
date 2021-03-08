@@ -5,19 +5,14 @@ import './movie.tmpl.js';
 
 export default class MovieView extends BaseView {
     constructor(parent) {
+        // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
-
-        this.data = {};
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
     }
 
     render() {
         globalEventBus.emit('get movie data');
-
-        super.render(this.data);
-
-        this.setEventListeners();
     }
 
     hide() {
@@ -38,11 +33,11 @@ export default class MovieView extends BaseView {
     }
 
     setMovieData(data) {
+        super.render(data);
 
-        this.data = data;
-
+        this.setEventListeners();
     }
-    
+
     watchLaterClicked() {
         console.log('watch later clicked');
     }
@@ -54,6 +49,5 @@ export default class MovieView extends BaseView {
     otherClicked() {
         console.log('other clicked');
     }
-
 }
 
