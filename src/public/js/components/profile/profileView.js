@@ -7,17 +7,11 @@ export default class ProfileView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
 
-        this.data = {};
-
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 
     render() {
         globalEventBus.emit('get profile data');
-
-        super.render(this.data);
-
-        this.setEventListeners();
     }
 
     hide() {
@@ -40,6 +34,9 @@ export default class ProfileView extends BaseView {
     }
 
     setProfileData(data) {
-        this.data = data;
+        super.render(data);
+
+        this.setEventListeners();
     }
 }
+

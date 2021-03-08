@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run gentmpl && node server.js",
-    "gentmpl": "handlebars src/public/js/components/profile/profile.hbs -f src/public/js/components/profile/profile.tmpl.js",
-    "tests": "node test/server.js",
+    "gentmpl": "handlebars src/public/js/components/profile/profile.hbs -f src/public/js/components/profile/profile.tmpl.js && handlebars src/public/js/components/movie/movie.hbs -f src/public/js/components/movie/movie.tmpl.js",
+    "test": "node test/server.js",
     "lint": "npx eslint ./src --fix"
   },
   "husky": {
