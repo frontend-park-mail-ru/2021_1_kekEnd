@@ -1,10 +1,30 @@
-import {getFetch} from './fetch.js'
-
-
 /**
  * Класс с API методами
  */
 export default class Api {
+    asyncRequest(url, method, data) {
+        const options = {
+            method: method,
+            mode: 'cors'
+        };
+
+        if (data) {
+            options['body'] = data;
+        }
+
+        return new Request(url, options);
+    }
+
+    async get(url) {
+        const response = await fetch(this.asyncRequest(url, 'GET', null));
+        const responseData = await response.json();
+
+        return {
+            status: response.status,
+            data: responseData
+        };
+    }
+
     /**
      * Регистрация
      */
@@ -32,49 +52,49 @@ export default class Api {
     getBestUsersMovies() {
 
     }
-    
+
     /**
      * Добавить фильм в список любимых фильмов пользователя
      */
     addMovieToBestUsersMovies() {
 
     }
-    
+
     /**
      * Получить любимых актеров пользователя
      */
     getBestUsersActors() {
 
     }
-        
+
     /**
      * Добавить актера в список любимых актеров пользователя
      */
     addActorToBestUsersActors() {
 
     }
-    
+
     /**
-     * Создать новую пользовательскую подборку фильмов 
+     * Создать новую пользовательскую подборку фильмов
      */
     createUserPlaylist() {
 
     }
-    
+
     /**
      * Удалить пользовательскую подборку фильмов
      */
     deleteUserPlaylist() {
 
     }
-    
+
     /**
      * Получить подборки фильмов пользователся
      */
     getUsersPlaylist() {
 
     }
-    
+
     /**
      * Добавить фильм в какую-либо пользовательскую подборку
      */
@@ -95,24 +115,21 @@ export default class Api {
     setProfileData() {
 
     }
-    
+
     /**
      * Получить информацию о фильме
      */
     getMovieData() {
-        return getFetch('127.0.0.1:8080/movies/1', (error) => {
-            console.log(error.toString());
-            throw new Error(error);
-        });
+        return this.get("http://localhost:8080/movies/1")
     }
-        
+
     /**
      * Добавить лайк
      */
     addLike() {
 
     }
-    
+
     /**
      * Удалить лайк
      */
@@ -126,7 +143,7 @@ export default class Api {
     uploadProfileAvatar() {
 
     }
-    
+
     /**
      * Получить рецензии к фильму
      */
