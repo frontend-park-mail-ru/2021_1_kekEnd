@@ -48,16 +48,27 @@
             <div class="movie_content_center">
                 <div class="movie_info_title">
                     <h1>
+
                         {{name}}
+
                     </h1>
                 </div>
                 <div class="meta_info">
+
                     <p>{{description}}</p>
+
                 </div>
                 <div class="movie_info">
                     <div class="info_row_nounderline">
                         <div class="info_title">Аудиодорожки</div>
-                        <span class="info_link">{{#each audio}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
+                        <span class="info_link">
+                        
+                            {{#each audio}}
+                                {{this}}
+                                {{#unless @last}},{{/unless}}
+                            {{/each}}
+                        
+                        </span>
                     </div>
                     <div class="info_row_nounderline">
                         <div class="info_title">Субтитры</div>
@@ -65,7 +76,9 @@
                     </div>
                     <div class="info_row_nounderline">
                         <div class="info_title">Качество</div>
+                    
                         <span class="info_link">{{quality}}</span>
+                    
                     </div>
                 </div>
 
@@ -74,70 +87,98 @@
                 <div class="movie_info">
                     <div class="info_row">
                         <div class="info_title">Год производства</div>
+                    
                         <a href="" class="info_link">{{year}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Страна</div>
+                    
                         {{#each country}}
                             <a href="" class="info_link">{{this}}</a>
                             {{#unless @last}}<span>,</span>{{/unless}}
                         {{/each}}
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Жанр</div>
+                    
                         {{#each genre}}
                             <a href="" class="info_link">{{this}}</a>
                             {{#unless @last}}<span>,</span>{{/unless}}
                         {{/each}}
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Слоган</div>
+                    
                         <div class="info_value">«{{tagline}}»</div>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Режиссёр</div>
+                    
                         <a href="" class="info_link">{{director}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Сценарист</div>
+                    
                         <a href="" class="info_link">{{scriptwriter}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Продюсер</div>
+                    
                         <a href="" class="info_link">{{producer}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Оператор</div>
+                    
                         <a href="" class="info_link">{{operator}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Композитор</div>
+                    
                         <a href="" class="info_link">{{composer}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Художник</div>
+                    
                         <a href="" class="info_link">{{artist}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Монтаж</div>
+                    
                         <a href="" class="info_link">{{editor}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Бюджет</div>
+                    
                         <a href="" class="info_link">{{budget.amount}} {{budget.currency}}</a>
+                    
                     </div>
                     <div class="info_row">
                         <div class="info_title">Время</div>
+                    
                         <div class="info_value">{{duration}}</div>
+                    
                     </div>
                 </div>
             </div>
             <div class="movie_content_right">
                 <h3 class="movie_content_right_header">В главных ролях</h3>
                 <ul class="actors_list">
+                    
                     {{#each roles}}
                         <li><a class="actors_list_item">{{this}}</a></li>
-                    {{/roles}}
+                    {{/each}}
+                
                 </ul>
             </div>
         </div>
