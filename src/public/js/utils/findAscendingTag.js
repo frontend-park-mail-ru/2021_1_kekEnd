@@ -1,6 +1,6 @@
 export const findAscendingTag = (element, tag) => {
-    while (element.tagName !== tag && element !== window && element !== document.body) {
+    while (element !== null && element !== window && element !== document.body && element.tagName !== tag) {
         element = element.parentNode;
     }
-    return (element.tagName === tag) ? element : null;
+    return (element && element.tagName === tag) ? element : null;
 };

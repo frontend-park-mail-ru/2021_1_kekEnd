@@ -1,6 +1,5 @@
 'use strict';
 
-
 export default class BaseView {
     constructor(parent, template) {
         this.parent = parent;

@@ -1,11 +1,9 @@
 .form-box {
     width: 380px;
-    height: 480px;
     position: relative;
     margin: 80px auto;
     background-color: white;
-    padding: 4px;
-    overflow: hidden;
+    padding: 4px 4px 32px 4px;
     border-radius: 16px;
 }
 
@@ -52,21 +50,38 @@
     border-radius: 50%;
 }
 
+.signup-form, .login-form {
+    margin: 0 auto;
+}
+
 .input-group {
-    top: 180px;
-    position: absolute;
     width: 280px;
     transition: .5s;
 }
 
 .input-field {
     width: 100%;
-    padding: 12px 0;
+    padding: 12px 2px;
     margin: 4px 0;
     border: 0;
     border-bottom: 1px solid #999;
     outline: none;
     background: transparent;
+}
+
+.valid-input {
+    border: 1px solid lawngreen;
+    border-radius: 4px;
+}
+
+.invalid-input {
+    border: 1px solid orangered;
+    border-radius: 4px;
+}
+
+.validation-hint {
+    font-size: 12px;
+    color: orangered;
 }
 
 .submit-button {
@@ -83,22 +98,12 @@
 }
 
 .checkbox {
-    margin: 32px 12px 32px 0;
+    margin: 24px 4px 32px 0;
 }
 
 .checkbox-label {
     color: #777;
     font-size: 12px;
-    bottom: 68px;
-    position: absolute;
-}
-
-.login-form {
-    left: 50px;
-}
-
-.signup-form {
-    left: 450px;
 }
 
 /* classes for JS to move signup and login forms */

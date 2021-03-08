@@ -1,6 +1,5 @@
 'use strict';
 
-
 export default class Validator {
     validateEmail(email) {
         const error = [];

@@ -2,7 +2,6 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
 
-
 export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
