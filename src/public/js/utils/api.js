@@ -2,7 +2,7 @@
  * Класс с API методами
  */
 export default class Api {
-    asyncRequest(url, method, data) {
+    createRequest(url, method, data) {
         const options = {
             method: method,
             mode: 'cors',
@@ -16,8 +16,8 @@ export default class Api {
         return new Request(url, options);
     }
 
-    async get(url) {
-        const response = await fetch(this.asyncRequest(url, 'GET', null));
+    async asyncRequest(url, method='GET', data=null) {
+        const response = await fetch(this.createRequest(url, method, data));
         const responseData = await response.json();
 
         return {
@@ -29,22 +29,22 @@ export default class Api {
     /**
      * Регистрация
      */
-    signup() {
-
+    signup(userData) {
+        // TODO: запрос на создание пользователя
     }
 
     /**
      * Логин
      */
     login() {
-
+        // TODO: запрос на авторизацию пользователя
     }
 
     /**
      * Получить информацию пользователя
      */
     getProfileData() {
-        return this.get("http://localhost:8080/users/let_robots_reign")
+        return this.asyncRequest("http://localhost:8080/users/let_robots_reign")
     }
 
     /**

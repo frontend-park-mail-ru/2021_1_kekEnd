@@ -1,14 +1,24 @@
 import {globalEventBus} from '../../utils/eventbus.js';
+import Api from "../../utils/api.js";
 
 export default class Model {
     constructor() {
-        globalEventBus.on('signup clicked', this.checkIfExists.bind(this));
+        globalEventBus.on('signup clicked', this.createUser.bind(this));
+        this.api = new Api()
     }
 
-    checkIfExists(data) {
+    userNotExists(data) {
         // запрос к серверу на проверку существования пользователя
-        const signupSuccess = true;
+        return true;
+    }
 
-        globalEventBus.emit('signup status', signupSuccess);
+    createUser(data) {
+        if (this.userNotExists(data)) {
+            this.api.signup(...data)
+                .then((res) => {
+                    console.log(res);
+                    globalEventBus.emit('signup status', signupSuccess);
+                });
+        }
     }
 }
