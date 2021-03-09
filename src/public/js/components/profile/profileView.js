@@ -21,18 +21,18 @@ export default class ProfileView extends BaseView {
         this.removeEventListeners();
     }
 
-    testFunction() {
+    redirectSettings() {
         globalRouter.pushState(PATHS.settings);
     }
 
     setEventListeners() {
         const button = document.getElementById('button-profile-settings');
-        button.addEventListener('click', this.testFunction);
+        button.addEventListener('click', this.redirectSettings);
     }
 
     removeEventListeners() {
         const button = document.getElementById('button-profile-settings');
-        button.removeEventListener('click', this.testFunction);
+        button.removeEventListener('click', this.redirectSettings);
     }
 
     setProfileData(data) {

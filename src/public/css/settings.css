@@ -1,5 +1,6 @@
 .settings-header {
     text-align: center;
+    font-size: 24px;
 }
 
 .settings-box {
@@ -7,7 +8,7 @@
     position: relative;
     margin: 80px auto;
     background-color: white;
-    padding: 4px 4px 32px 4px;
+    padding: 32px 32px 32px 32px;
     border-radius: 16px;
 }
 
@@ -23,13 +24,14 @@
     overflow: auto;
     display: flex;
     flex-direction: row;
-    width: 460px;
+    width: 440px;
     min-height: 50px;
 }
 
 .settings-table-inner-left {
     width: 200px;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .settings-table-inner-right {
@@ -38,9 +40,10 @@
 }
 
 .settings-save-button {
-    margin: 10px;
+    margin-top: 24px;
 }
 
 .settings-errors {
-    color: red;
+    text-align: right;
 }
+

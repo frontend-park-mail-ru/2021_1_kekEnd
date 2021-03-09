@@ -1,3 +1,4 @@
+import {setValidationResult} from '../../utils/setValidationResult.js';
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import Validator from '../../utils/validation.js';
@@ -9,6 +10,7 @@ export default class SettingsView extends BaseView {
         super(parent, Handlebars.templates['settings.hbs']);
 
         this.settings = {};
+        this.input = {};
 
         globalEventBus.on('set settings data', this.setSettings.bind(this));
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
@@ -16,19 +18,6 @@ export default class SettingsView extends BaseView {
 
     render() {
         globalEventBus.emit('get settings data');
-    }
-
-    hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
-    }
-
-    setEventListeners() {
-        document.getElementById('settings-save-button').addEventListener('click', this.sendSettings.bind(this));
-    }
-
-    removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.sendSettings.bind(this));
     }
 
     setSettings(data) {
@@ -39,24 +28,67 @@ export default class SettingsView extends BaseView {
         this.setEventListeners();
     }
 
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
+    }
 
-    sendSettings() {
+    setEventListeners() {
+        document.getElementById('settings-save-button').addEventListener('click', this.saveClicked.bind(this));
+    }
+
+    removeEventListeners() {
+        document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
+    }
+
+    saveClicked() {
+        this.inputSettings();
+        if (this.validateSettings()) {
+            this.sendInput(this.deltaSettings());
+        } else {
+            document.getElementById('settings-errors').innerHTML = '';
+        }
+        this.input = {};
+    }
+
+    deltaSettings() {
+        const settings = {};
+        if (this.settings.fullname !== this.input.fullname) {
+            settings.fullname = this.input.fullname;
+        }
+        if (this.settings.email !== this.input.email) {
+            settings.email = this.input.email;
+        }
+        if (this.input.password1.length !== 0) {
+            settings.password = this.input.password1;
+        }
+        return settings;
+    }
+
+    inputSettings() {
         const fullname = document.getElementById('user-fullname').value;
         const email = document.getElementById('user-email').value;
         const password1 = document.getElementById('user-password').value;
         const password2 = document.getElementById('user-password-repeat').value;
+        this.input = {
+            fullname,
+            email,
+            password1,
+            password2,
+        };
+    }
 
-
+    validateSettings() {
         const validator = new Validator();
 
-        const fullnameErrors = validator.validateFullname(fullname);
-        const passwordErrors = validator.validatePassword(password1);
-        const emailErrors = validator.validateEmail(email);
+        const fullnameErrors = validator.validateFullname(this.input.fullname);
+        const passwordErrors = validator.validatePassword(this.input.password1);
+        const emailErrors = validator.validateEmail(this.input.email);
 
-        if (password1 !== password2) {
+        if (this.input.password1 !== this.input.password2) {
             passwordErrors.push('passwords do not match');
         }
-        if (password1.length === 0 && password2.length === 0) {
+        if (this.input.password1.length === 0 && this.input.password2.length === 0) {
             passwordErrors.length = 0;
         }
 
@@ -64,19 +96,30 @@ export default class SettingsView extends BaseView {
         document.getElementById('settings-errors-email').innerHTML = emailErrors.join('<br>');
         document.getElementById('settings-errors-password').innerHTML = passwordErrors.join('<br>');
 
-        const newSettings = {};
-        if (this.settings.fullname !== fullname && fullnameErrors.length === 0) {
-            newSettings.fullname = fullname;
-        }
-        if (this.settings.email !== email && emailErrors.length === 0) {
-            newSettings.email = email;
-        }
-        if (password1.length !== 0 && passwordErrors.length === 0) {
-            newSettings.password = password1;
-        }
+        [
+            [
+                document.getElementById('user-fullname'),
+                document.getElementById('settings-errors-fullname'),
+                fullnameErrors,
+            ],
+            [
+                document.getElementById('user-email'),
+                document.getElementById('settings-errors-email'),
+                emailErrors,
+            ],
+            [
+                document.getElementById('user-password'),
+                document.getElementById('settings-errors-password'),
+                passwordErrors,
+            ],
+        ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
 
-        if (JSON.stringify(newSettings) !== '{}') {
-            globalEventBus.emit('request change settings', newSettings);
+        return ([...fullnameErrors, ...passwordErrors, ...emailErrors].length === 0);
+    }
+
+    sendInput(settings) {
+        if (JSON.stringify(settings) !== '{}') {
+            globalEventBus.emit('request change settings', settings);
         }
     }
 
