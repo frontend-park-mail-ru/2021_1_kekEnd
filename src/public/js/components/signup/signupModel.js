@@ -14,10 +14,10 @@ export default class Model {
 
     createUser(data) {
         if (this.userNotExists(data)) {
-            this.api.signup(...data)
+            this.api.signup(data)
                 .then((res) => {
                     console.log(res);
-                    globalEventBus.emit('signup status', signupSuccess);
+                    globalEventBus.emit('signup status', true);
                 });
         }
     }
