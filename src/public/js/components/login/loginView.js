@@ -32,6 +32,8 @@ export default class LoginView extends BaseView {
     }
 
     processLoginAttempt(status) {
-        globalRouter.pushState((status) ? PATHS.profile : PATHS.login);
+        if (status) {
+            globalRouter.pushState(PATHS.profile);
+        }
     }
 }

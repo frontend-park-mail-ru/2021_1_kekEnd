@@ -47,7 +47,7 @@ export default class Api {
      * Логин
      */
     login(userData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/login`, 'POST', JSON.stringify(userData));
+        return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
     }
 
     /**
