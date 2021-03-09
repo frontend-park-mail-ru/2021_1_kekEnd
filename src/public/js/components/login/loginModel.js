@@ -1,6 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from "../../utils/api.js";
-import {OK} from "../../utils/codes.js";
 
 export default class LoginModel {
     constructor() {
@@ -10,7 +9,7 @@ export default class LoginModel {
     checkLogin(userData) {
         API.login(userData)
             .then((res) => {
-                globalEventBus.emit('login status', res.status === OK);
+                globalEventBus.emit('login status', res.status);
             });
     }
 }

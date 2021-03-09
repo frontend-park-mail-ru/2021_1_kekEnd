@@ -84,6 +84,11 @@
     color: orangered;
 }
 
+.send-form-hint {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .submit-button {
     width: 85%;
     padding: 12px 32px;

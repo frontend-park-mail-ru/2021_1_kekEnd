@@ -4,6 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import './login.tmpl.js';
+import {OK} from "../../utils/codes.js";
 
 
 export default class LoginView extends BaseView {
@@ -32,8 +33,16 @@ export default class LoginView extends BaseView {
     }
 
     processLoginAttempt(status) {
-        if (status) {
+        if (status === OK) {
             globalRouter.pushState(PATHS.profile);
+        } else {
+            console.log(status);
+            const errors = {
+                400: 'Ошибка в формате ввода',
+                401: 'Неверный логин/пароль',
+                500: 'Ошибка сервера'
+            }
+            document.getElementById('send-form-hint').innerText = errors[status];
         }
     }
 }
