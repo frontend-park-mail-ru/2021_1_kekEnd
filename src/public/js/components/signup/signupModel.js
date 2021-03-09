@@ -1,5 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import {api} from "../../utils/api.js";
+import {API} from "../../utils/api.js";
 
 export default class Model {
     constructor() {
@@ -13,7 +13,7 @@ export default class Model {
 
     createUser(data) {
         if (this.userNotExists(data)) {
-            api.signup(data)
+            API.signup(data)
                 .then((res) => {
                     console.log(res);
                     globalEventBus.emit('signup status', true);

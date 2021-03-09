@@ -1,5 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import {api} from '../../utils/api.js';
+import {API} from '../../utils/api.js';
 
 
 export default class MovieModel {
@@ -8,7 +8,7 @@ export default class MovieModel {
     }
 
     getMovieData() {
-        api.getMovieData()
+        API.getMovieData()
             .then((res) => {
                 console.log(res.data);
                 globalEventBus.emit('set movie data', res.data);
