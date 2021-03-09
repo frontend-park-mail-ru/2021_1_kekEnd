@@ -8,7 +8,6 @@ export default class LoginModel {
     }
 
     checkLogin(userData) {
-        console.log("HEER")
         API.login(userData)
             .then((res) => {
                 globalEventBus.emit('login status', res.status === OK);

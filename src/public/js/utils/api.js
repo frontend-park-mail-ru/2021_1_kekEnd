@@ -7,22 +7,14 @@ export default class Api {
         this.port = '8080';
     }
 
-    createRequest(url, method, data) {
-        const options = {
+    async asyncRequest(url, method='GET', data=null) {
+        const response = await fetch(url, {
             method: method,
             mode: 'cors',
-            credentials: 'include'
-        };
+            credentials: 'include',
+            body: data
+        });
 
-        if (data) {
-            options.body = data;
-        }
-
-        return new Request(url, options);
-    }
-
-    async asyncRequest(url, method='GET', data=null) {
-        const response = await fetch(this.createRequest(url, method, data));
         let responseData;
         try {
             responseData = await response.json();
