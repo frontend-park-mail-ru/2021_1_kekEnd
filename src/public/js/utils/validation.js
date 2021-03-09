@@ -39,5 +39,15 @@ export default class Validator {
 
         return error;
     }
+
+    validateFullname(fullname) {
+        const error = [];
+
+        if (fullname.length === 0) {
+            error.push('should not be empty');
+        }
+
+        return error;
+    }
 }
 

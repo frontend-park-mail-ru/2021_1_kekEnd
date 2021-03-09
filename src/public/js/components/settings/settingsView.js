@@ -8,7 +8,10 @@ export default class SettingsView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['settings.hbs']);
 
-        globalEventBus.on('set settings data', this.setSettingsData.bind(this));
+        this.settings = {};
+
+        globalEventBus.on('set settings data', this.setSettings.bind(this));
+        globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
     }
 
     render() {
@@ -21,48 +24,64 @@ export default class SettingsView extends BaseView {
     }
 
     setEventListeners() {
-        document.getElementById('settings-save-button').addEventListener('click', this.sendData);
+        document.getElementById('settings-save-button').addEventListener('click', this.sendSettings.bind(this));
     }
 
     removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.sendData);
+        document.getElementById('settings-save-button').removeEventListener('click', this.sendSettings.bind(this));
     }
 
-    setSettingsData(data) {
-        super.render(data);
+    setSettings(data) {
+        this.settings = data;
+
+        super.render(this.settings);
 
         this.setEventListeners();
     }
 
 
-    sendData() {
+    sendSettings() {
         const fullname = document.getElementById('user-fullname').value;
-        const email  = document.getElementById('user-email').value;
-        const password1  = document.getElementById('user-password').value;
-        const password2  = document.getElementById('user-password-repeat').value;
+        const email = document.getElementById('user-email').value;
+        const password1 = document.getElementById('user-password').value;
+        const password2 = document.getElementById('user-password-repeat').value;
 
 
         const validator = new Validator();
+
+        const fullnameErrors = validator.validateFullname(fullname);
         const passwordErrors = validator.validatePassword(password1);
         const emailErrors = validator.validateEmail(email);
-        //const fullnameErrors = validator.validateFullname(fullname);
-        const fullnameErrors = [];
 
         if (password1 !== password2) {
             passwordErrors.push('passwords do not match');
         }
+        if (password1.length === 0 && password2.length === 0) {
+            passwordErrors.length = 0;
+        }
 
-        const errors = [].concat(passwordErrors, emailErrors, fullnameErrors);
+        document.getElementById('settings-errors-fullname').innerHTML = fullnameErrors.join('<br>');
+        document.getElementById('settings-errors-email').innerHTML = emailErrors.join('<br>');
+        document.getElementById('settings-errors-password').innerHTML = passwordErrors.join('<br>');
 
-        if (errors.length === 0) {
-            console.log('no errors');
-            document.getElementById('settings-errors').innerHTML = '';
-            globalEventBus.emit('send new settings');
-        } else {
-            console.log(errors.join('\n'));
-            document.getElementById('settings-errors').innerHTML = errors.join('<br>');
+        const newSettings = {};
+        if (this.settings.fullname !== fullname && fullnameErrors.length === 0) {
+            newSettings.fullname = fullname;
+        }
+        if (this.settings.email !== email && emailErrors.length === 0) {
+            newSettings.email = email;
+        }
+        if (password1.length !== 0 && passwordErrors.length === 0) {
+            newSettings.password = password1;
+        }
+
+        if (JSON.stringify(newSettings) !== '{}') {
+            globalEventBus.emit('request change settings', newSettings);
         }
     }
 
+    displayServerResponse(response) {
+        document.getElementById('settings-errors').innerHTML = response;
+    }
 }
 
