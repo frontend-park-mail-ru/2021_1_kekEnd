@@ -19,11 +19,10 @@ export default class Api {
     async asyncRequest(url, method='GET', data=null) {
         const response = await fetch(this.createRequest(url, method, data));
         console.log(response);
-        const responseData = await response.json();
 
         return {
             status: response.status,
-            data: responseData
+            data: response.data
         };
     }
 
@@ -38,15 +37,16 @@ export default class Api {
     /**
      * Логин
      */
-    login() {
-        // TODO: запрос на авторизацию пользователя
+    login(userData) {
+        console.log(userData);
+        return this.asyncRequest('http://localhost:8080/users/login', 'POST', JSON.stringify(userData));
     }
 
     /**
      * Получить информацию пользователя
      */
-    getProfileData() {
-        return this.asyncRequest("http://localhost:8080/users/let_robots_reign")
+    getProfileData(username) {
+        return this.asyncRequest("http://localhost:8080/users/${username}")
     }
 
     /**
