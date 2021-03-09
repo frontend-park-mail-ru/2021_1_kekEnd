@@ -16,7 +16,7 @@
     <div class="header__section">
         {{#if isAuthorized}}
             <div class="header__item header-button">
-                <a href="/login">Профиль</a>
+                <a href="/">Профиль</a>
             </div>
             <div class="header__item header-button">
                 <a href="/login">Выйти</a>
@@ -65,7 +65,7 @@
     <div class="slider">
         {{#each favourite_movies}}
             <div class="slider-card">
-                <img src="{{this}}">
+                <a href="/movie"><img src="{{this}}"></a>
             </div>
         {{/each}}
     </div>

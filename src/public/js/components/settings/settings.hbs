@@ -14,12 +14,21 @@
         </div>
     </div>
     <div class="header__section">
-        <div class="header__item header-button">
-            <a href="/login">Войти</a>
-        </div>
-        <div class="header__item header-button">
-            <a href="/signup">Регистрация</a>
-        </div>
+        {{#if isAuthorized}}
+            <div class="header__item header-button">
+                <a href="/">Профиль</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/login">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header-button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
     </div>
 </div>
 

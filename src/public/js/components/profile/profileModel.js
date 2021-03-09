@@ -1,5 +1,7 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from "../../utils/api.js";
+import {globalRouter} from "../../utils/router.js";
+import {PATHS} from "../../utils/paths.js";
 
 
 export default class ProfileModel {
@@ -24,6 +26,7 @@ export default class ProfileModel {
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
             ]
         };
+
         API.checkAuthentication()
             .then((res) => {
                 console.log(res.data);
@@ -33,6 +36,8 @@ export default class ProfileModel {
                             console.log(res.data);
                             globalEventBus.emit('set profile data', {...res.data, 'isAuthorized': true, ...additionalData});
                         });
+                } else {
+                    globalRouter.pushState(PATHS.login);
                 }
             });
     }

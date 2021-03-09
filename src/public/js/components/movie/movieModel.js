@@ -11,7 +11,7 @@ export default class MovieModel {
         API.getMovieData()
             .then((res) => {
                 console.log(res.data);
-                this.api.checkAuthentication()
+                API.checkAuthentication()
                     .then((authRes) => {
                         globalEventBus.emit('set movie data', {...res.data, 'isAuthorized': authRes.data !== ''});
                     });

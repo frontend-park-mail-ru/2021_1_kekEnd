@@ -8,7 +8,6 @@ export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
-
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
     }
 
