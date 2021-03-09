@@ -34,6 +34,7 @@ export class Router {
                 if (path !== null && path.includes(PATHS[i])) {
                     event.preventDefault();
                     this.pushState(PATHS[i]);
+                    break;
                 }
             }
         });
