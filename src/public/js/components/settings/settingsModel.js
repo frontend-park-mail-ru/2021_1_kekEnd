@@ -1,5 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import Api from "../../utils/api.js";
+import Api from '../../utils/api.js';
 
 
 export default class SettingsModel {
@@ -17,7 +17,7 @@ export default class SettingsModel {
                     this.api.getProfileData(res.data)
                         .then((res) => {
                             console.log(res.data);
-                            globalEventBus.emit('set settings data', res.data);
+                            globalEventBus.emit('set settings data', {...res.data, 'isAuthorized': true});
                         });
                 }
             });
