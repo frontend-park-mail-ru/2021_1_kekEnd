@@ -5,7 +5,7 @@ export default class Api {
     constructor() {
         this.host = 'localhost';
     }
-    
+
     createRequest(url, method, data) {
         const options = {
             method: method,
@@ -14,7 +14,7 @@ export default class Api {
         };
 
         if (data) {
-            options['body'] = data;
+            options.body = data;
         }
 
         return new Request(url, options);
@@ -171,3 +171,5 @@ export default class Api {
 
     }
 }
+
+export const API = new Api()
