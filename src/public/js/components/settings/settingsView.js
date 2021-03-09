@@ -41,7 +41,6 @@ export default class SettingsView extends BaseView {
 
 
     sendSettings() {
-        const fullname = document.getElementById('user-fullname').value;
         const email = document.getElementById('user-email').value;
         const password1 = document.getElementById('user-password').value;
         const password2 = document.getElementById('user-password-repeat').value;
@@ -49,7 +48,6 @@ export default class SettingsView extends BaseView {
 
         const validator = new Validator();
 
-        const fullnameErrors = validator.validateFullname(fullname);
         const passwordErrors = validator.validatePassword(password1);
         const emailErrors = validator.validateEmail(email);
 
@@ -60,14 +58,10 @@ export default class SettingsView extends BaseView {
             passwordErrors.length = 0;
         }
 
-        document.getElementById('settings-errors-fullname').innerHTML = fullnameErrors.join('<br>');
         document.getElementById('settings-errors-email').innerHTML = emailErrors.join('<br>');
         document.getElementById('settings-errors-password').innerHTML = passwordErrors.join('<br>');
 
         const newSettings = {};
-        if (this.settings.fullname !== fullname && fullnameErrors.length === 0) {
-            newSettings.fullname = fullname;
-        }
         if (this.settings.email !== email && emailErrors.length === 0) {
             newSettings.email = email;
         }

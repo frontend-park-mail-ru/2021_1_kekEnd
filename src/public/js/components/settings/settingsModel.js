@@ -10,7 +10,6 @@ export default class SettingsModel {
     getSettingsData() {
         const data = {
             username: 'SuperCruiser1337',
-            fullname: 'Tom Cruise',
             email: 'tomcruise@mail.ru',
         };
 
