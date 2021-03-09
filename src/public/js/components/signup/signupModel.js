@@ -15,7 +15,7 @@ export default class Model {
         if (this.userNotExists(data)) {
             API.signup(data)
                 .then((res) => {
-                    globalEventBus.emit('signup status', true);
+                    globalEventBus.emit('signup status', res.status);
                 });
         }
     }

@@ -36,7 +36,6 @@ export default class LoginView extends BaseView {
         if (status === OK) {
             globalRouter.pushState(PATHS.profile);
         } else {
-            console.log(status);
             const errors = {
                 400: 'Ошибка в формате ввода',
                 401: 'Неверный логин/пароль',

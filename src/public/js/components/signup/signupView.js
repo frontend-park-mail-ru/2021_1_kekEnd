@@ -6,6 +6,7 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
+import {OK} from "../../utils/codes.js";
 
 
 export default class SignupView extends BaseView {
@@ -59,6 +60,14 @@ export default class SignupView extends BaseView {
     }
 
     processSignupAttempt(status) {
-        globalRouter.pushState((status) ? PATHS.profile : PATHS.signup);
+        if (status === OK) {
+            globalRouter.pushState(PATHS.profile);
+        } else {
+            const errors = {
+                400: 'Ошибка в формате ввода',
+                500: 'Пользователь с таким имененем уже существует'
+            }
+            document.getElementById('send-form-hint').innerText = errors[status];
+        }
     }
 }
