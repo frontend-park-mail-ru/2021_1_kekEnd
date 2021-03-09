@@ -54,7 +54,7 @@ export default class Api {
     }
 
     editUser(newData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/${newData.username}`, 'PUT', JSON.stringify(newData));
+        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
     }
 
     /**
