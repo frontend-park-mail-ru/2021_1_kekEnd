@@ -42,6 +42,10 @@ export default class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
     }
 
+    logout() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
+    }
+
     /**
      * Получить информацию пользователя
      */

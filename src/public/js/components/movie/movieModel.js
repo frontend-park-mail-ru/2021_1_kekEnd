@@ -6,6 +6,7 @@ import {OK} from "../../utils/codes.js";
 export default class MovieModel {
     constructor() {
         globalEventBus.on('get movie data', this.getMovieData.bind(this));
+        globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
     getMovieData() {
@@ -16,6 +17,13 @@ export default class MovieModel {
                         globalEventBus.emit('set movie data',
                             {...res.data, 'isAuthorized': authRes.status === OK});
                     });
+            });
+    }
+
+    logout() {
+        API.logout()
+            .then((res) => {
+                globalEventBus.emit('logout status', res.status === OK)
             });
     }
 }

@@ -3,7 +3,6 @@ export const PATHS = {
     signup: '/signup',
     profile: '/', // временно, пока не готовы главная страница и остальные контроллеры
     movie: '/movie',
-    settings: '/settings',
-    logout: '/logout'
+    settings: '/settings'
 };
 

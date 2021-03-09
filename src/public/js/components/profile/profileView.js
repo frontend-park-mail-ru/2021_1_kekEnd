@@ -8,7 +8,9 @@ export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
+
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
+        globalEventBus.on('logout status', this.processLogout.bind(this));
     }
 
     render() {
@@ -27,6 +29,14 @@ export default class ProfileView extends BaseView {
     setEventListeners() {
         const button = document.getElementById('button-profile-settings');
         button.addEventListener('click', this.testFunction);
+
+        const logoutButton = document.getElementById('logout-button');
+        if (logoutButton !== null) {
+            logoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                globalEventBus.emit('logout clicked');
+            });
+        }
     }
 
     removeEventListeners() {
@@ -38,6 +48,12 @@ export default class ProfileView extends BaseView {
         super.render(data);
 
         this.setEventListeners();
+    }
+
+    processLogout(status) {
+        if (status) {
+            globalRouter.pushState(PATHS.login);
+        }
     }
 }
 

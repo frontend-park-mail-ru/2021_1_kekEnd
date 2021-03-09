@@ -14,6 +14,7 @@ export default class SettingsView extends BaseView {
 
         globalEventBus.on('set settings data', this.setSettings.bind(this));
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
+        globalEventBus.on('logout status', this.processLogout.bind(this));
     }
 
     render() {
@@ -27,6 +28,14 @@ export default class SettingsView extends BaseView {
 
     setEventListeners() {
         document.getElementById('settings-save-button').addEventListener('click', this.sendSettings.bind(this));
+
+        const logoutButton = document.getElementById('logout-button');
+        if (logoutButton !== null) {
+            logoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                globalEventBus.emit('logout clicked');
+            });
+        }
     }
 
     removeEventListeners() {
@@ -80,6 +89,12 @@ export default class SettingsView extends BaseView {
     displayServerResponse(status) {
         // document.getElementById('settings-errors').innerHTML = response;
         globalRouter.pushState((status) ? PATHS.profile : PATHS.settings);
+    }
+
+    processLogout(status) {
+        if (status) {
+            globalRouter.pushState(PATHS.login);
+        }
     }
 }
 

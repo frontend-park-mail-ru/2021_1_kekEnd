@@ -8,6 +8,7 @@ import {OK} from "../../utils/codes.js";
 export default class ProfileModel {
     constructor() {
         globalEventBus.on('get profile data', this.getProfileData.bind(this));
+        globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
     getProfileData() {
@@ -36,5 +37,12 @@ export default class ProfileModel {
                     globalRouter.pushState(PATHS.login);
                 }
             })
+    }
+
+    logout() {
+        API.logout()
+            .then((res) => {
+                globalEventBus.emit('logout status', res.status === OK)
+            });
     }
 }

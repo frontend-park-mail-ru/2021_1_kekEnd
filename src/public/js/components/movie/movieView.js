@@ -1,6 +1,8 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import './movie.tmpl.js';
+import {globalRouter} from "../../utils/router.js";
+import {PATHS} from "../../utils/paths.js";
 
 
 export default class MovieView extends BaseView {
@@ -9,6 +11,7 @@ export default class MovieView extends BaseView {
         super(parent, Handlebars.templates['movie.hbs']);
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
+        globalEventBus.on('logout status', this.processLogout.bind(this));
     }
 
     render() {
@@ -24,6 +27,14 @@ export default class MovieView extends BaseView {
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClicked);
         document.getElementById('button-plus').addEventListener('click', this.plusClicked);
         document.getElementById('button-other').addEventListener('click', this.otherClicked);
+
+        const logoutButton = document.getElementById('logout-button');
+        if (logoutButton !== null) {
+            logoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                globalEventBus.emit('logout clicked');
+            });
+        }
     }
 
     removeEventListeners() {
@@ -36,6 +47,12 @@ export default class MovieView extends BaseView {
         super.render(data);
 
         this.setEventListeners();
+    }
+
+    processLogout(status) {
+        if (status) {
+            globalRouter.pushState(PATHS.login);
+        }
     }
 
     watchLaterClicked() {
