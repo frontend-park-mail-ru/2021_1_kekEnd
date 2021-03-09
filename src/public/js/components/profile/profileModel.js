@@ -23,11 +23,18 @@ export default class ProfileModel {
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/2eb2fc4d-a8bd-43b0-83cd-35feacb8ccae/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/8faa0fd8-6780-4fc2-84ef-3fb89687bd85/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
-            ]};
-        this.api.getProfileData()
+            ]
+        };
+        this.api.checkAuthentication()
             .then((res) => {
                 console.log(res.data);
-                globalEventBus.emit('set profile data', {...res.data, ...additionalData});
+                if (res.data) {
+                    this.api.getProfileData(res.data)
+                        .then((res) => {
+                            console.log(res.data);
+                            globalEventBus.emit('set profile data', {...res.data, ...additionalData});
+                        });
+                }
             });
     }
 }

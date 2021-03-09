@@ -47,11 +47,15 @@ export default class Api {
         return this.asyncRequest('http://localhost:8080/users/login', 'POST', JSON.stringify(userData));
     }
 
+    checkAuthentication() {
+        return this.asyncRequest('http://localhost:8080/checkAuth')
+    }
+
     /**
      * Получить информацию пользователя
      */
-    getProfileData() {
-        return this.asyncRequest("http://localhost:8080/users/let_robots_reign")
+    getProfileData(username) {
+        return this.asyncRequest(`http://localhost:8080/users/${username}`)
     }
 
     /**
