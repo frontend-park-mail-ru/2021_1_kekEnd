@@ -2,6 +2,10 @@
  * Класс с API методами
  */
 export default class Api {
+    constructor() {
+        this.host = 'localhost';
+    }
+    
     createRequest(url, method, data) {
         const options = {
             method: method,
@@ -36,7 +40,7 @@ export default class Api {
      */
     signup(userData) {
         console.log(userData);
-        return this.asyncRequest("http://localhost:8080/users", 'POST', JSON.stringify(userData))
+        return this.asyncRequest(`http://${this.host}:8080/users`, 'POST', JSON.stringify(userData))
     }
 
     /**
@@ -44,22 +48,22 @@ export default class Api {
      */
     login(userData) {
         console.log(userData);
-        return this.asyncRequest('http://localhost:8080/users/login', 'POST', JSON.stringify(userData));
+        return this.asyncRequest(`http://${this.host}:8080/users/login`, 'POST', JSON.stringify(userData));
     }
 
     checkAuthentication() {
-        return this.asyncRequest('http://localhost:8080/checkAuth')
+        return this.asyncRequest(`http://${this.host}:8080/checkAuth`)
     }
 
     /**
      * Получить информацию пользователя
      */
     getProfileData(username) {
-        return this.asyncRequest(`http://localhost:8080/users/${username}`)
+        return this.asyncRequest(`http://${this.host}:8080/users/${username}`)
     }
 
     editProfileData(newData) {
-        return this.asyncRequest(`http://localhost:8080/users/${newData.username}`, 'PUT', JSON.stringify(newData));
+        return this.asyncRequest(`http://${this.host}:8080/users/${newData.username}`, 'PUT', JSON.stringify(newData));
     }
 
     /**
@@ -136,7 +140,7 @@ export default class Api {
      * Получить информацию о фильме
      */
     getMovieData() {
-        return this.asyncRequest("http://localhost:8080/movies/1")
+        return this.asyncRequest(`http://${this.host}:8080/movies/1`)
     }
 
     /**
