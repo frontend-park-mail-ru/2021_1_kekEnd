@@ -25,7 +25,6 @@ export default class ProfileModel {
             ]};
         API.getProfileData()
             .then((res) => {
-                console.log(res.data);
                 globalEventBus.emit('set profile data', {...res.data, ...additionalData});
             });
     }

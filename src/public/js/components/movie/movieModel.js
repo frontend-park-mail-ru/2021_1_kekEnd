@@ -10,7 +10,6 @@ export default class MovieModel {
     getMovieData() {
         API.getMovieData()
             .then((res) => {
-                console.log(res.data);
                 globalEventBus.emit('set movie data', res.data);
             });
     }
