@@ -1,5 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
+import {OK} from "../../utils/codes.js";
 
 
 export default class MovieModel {
@@ -10,10 +11,10 @@ export default class MovieModel {
     getMovieData() {
         API.getMovieData()
             .then((res) => {
-                console.log(res.data);
-                API.checkAuthentication()
+                API.getUser()
                     .then((authRes) => {
-                        globalEventBus.emit('set movie data', {...res.data, 'isAuthorized': authRes.data !== ''});
+                        globalEventBus.emit('set movie data',
+                            {...res.data, 'isAuthorized': authRes.status === OK});
                     });
             });
     }

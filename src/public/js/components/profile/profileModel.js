@@ -2,6 +2,7 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from "../../utils/api.js";
 import {globalRouter} from "../../utils/router.js";
 import {PATHS} from "../../utils/paths.js";
+import {OK} from "../../utils/codes.js";
 
 
 export default class ProfileModel {
@@ -27,18 +28,13 @@ export default class ProfileModel {
             ]
         };
 
-        API.checkAuthentication()
+        API.getUser()
             .then((res) => {
-                console.log(res.data);
-                if (res.data) {
-                    API.getProfileData(res.data)
-                        .then((res) => {
-                            console.log(res.data);
-                            globalEventBus.emit('set profile data', {...res.data, 'isAuthorized': true, ...additionalData});
-                        });
+                if (res.status === OK) {
+                    globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
                 } else {
                     globalRouter.pushState(PATHS.login);
                 }
-            });
+            })
     }
 }

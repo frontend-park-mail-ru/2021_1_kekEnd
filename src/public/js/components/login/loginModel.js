@@ -9,7 +9,6 @@ export default class LoginModel {
     checkLogin(userData) {
         API.login(userData)
             .then((res) => {
-                console.log(res);
                 globalEventBus.emit('login status', true);
             });
     }
