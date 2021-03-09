@@ -32,7 +32,7 @@ export default class ProfileModel {
                     this.api.getProfileData(res.data)
                         .then((res) => {
                             console.log(res.data);
-                            globalEventBus.emit('set profile data', {...res.data, ...additionalData});
+                            globalEventBus.emit('set profile data', {...res.data, 'isAuthorized': true, ...additionalData});
                         });
                 }
             });

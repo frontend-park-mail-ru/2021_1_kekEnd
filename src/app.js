@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     globalRouter.register(PATHS.signup, new SignupController(application).view);
     globalRouter.register(PATHS.movie, new MovieController(application).view);
     globalRouter.register(PATHS.settings, new SettingsController(application).view);
+    globalRouter.register(PATHS.logout, new LoginController(application).view);
 
     globalRouter.start();
 });

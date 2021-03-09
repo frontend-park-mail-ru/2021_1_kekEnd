@@ -12,7 +12,10 @@ export default class MovieModel {
         this.api.getMovieData()
             .then((res) => {
                 console.log(res.data);
-                globalEventBus.emit('set movie data', res.data);
+                this.api.checkAuthentication()
+                    .then((res) => {
+                        globalEventBus.emit('set movie data', {...res.data, 'isAuthorized': res.data !== ''});
+                    });
             });
     }
 }
