@@ -18,14 +18,23 @@ export class Router {
             this.handlePath(path);
         });
 
+        window.addEventListener('popstate', (event) => {
+            const path = event.target.location.pathname;
+            event.preventDefault();
+
+            this.pushState(path);
+        });
+
         window.addEventListener('click', (event) => {
             const {target} = event;
             const link = findAscendingTag(target, 'A');
             const path = (link !== null) ? link.href : null;
 
-            if (path in PATHS) {
-                event.preventDefault();
-                this.pushState(PATHS.path);
+            for (const i in PATHS) {
+                if (path !== null && path.includes(PATHS[i])) {
+                    event.preventDefault();
+                    this.pushState(PATHS[i]);
+                }
             }
         });
     }
