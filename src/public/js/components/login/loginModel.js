@@ -1,14 +1,17 @@
 import {globalEventBus} from '../../utils/eventbus.js';
+import Api from "../../utils/api.js";
 
 export default class LoginModel {
     constructor() {
         globalEventBus.on('login clicked', this.checkLogin.bind(this));
+        this.api = new Api();
     }
 
-    checkLogin(data) {
-        // запрос к серверу на проверку логина и пароля
-        const loginSuccess = true;
-
-        globalEventBus.emit('login status', loginSuccess);
+    checkLogin(userData) {
+        this.api.login(userData)
+            .then((res) => {
+                console.log(res);
+                globalEventBus.emit('login status', true);
+            });
     }
 }

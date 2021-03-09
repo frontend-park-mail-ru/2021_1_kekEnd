@@ -18,7 +18,12 @@ export default class Api {
 
     async asyncRequest(url, method='GET', data=null) {
         const response = await fetch(this.createRequest(url, method, data));
-        const responseData = await response.json();
+        let responseData;
+        try {
+            responseData = await response.json();
+        } catch (e) {
+            responseData = await response.data
+        }
 
         return {
             status: response.status,
@@ -30,14 +35,16 @@ export default class Api {
      * Регистрация
      */
     signup(userData) {
-        // TODO: запрос на создание пользователя
+        console.log(userData);
+        return this.asyncRequest("http://localhost:8080/users", 'POST', JSON.stringify(userData))
     }
 
     /**
      * Логин
      */
-    login() {
-        // TODO: запрос на авторизацию пользователя
+    login(userData) {
+        console.log(userData);
+        return this.asyncRequest('http://localhost:8080/users/login', 'POST', JSON.stringify(userData));
     }
 
     /**
@@ -121,7 +128,7 @@ export default class Api {
      * Получить информацию о фильме
      */
     getMovieData() {
-        return this.get("http://localhost:8080/movies/1")
+        return this.asyncRequest("http://localhost:8080/movies/1")
     }
 
     /**
