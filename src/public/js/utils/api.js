@@ -58,6 +58,10 @@ export default class Api {
         return this.asyncRequest(`http://localhost:8080/users/${username}`)
     }
 
+    editProfileData(newData) {
+        return this.asyncRequest(`http://localhost:8080/users/${newData.username}`, 'PUT', JSON.stringify(newData));
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

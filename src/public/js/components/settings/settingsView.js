@@ -2,6 +2,8 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import Validator from '../../utils/validation.js';
 import './settings.tmpl.js';
+import {globalRouter} from "../../utils/router.js";
+import {PATHS} from "../../utils/paths.js";
 
 export default class SettingsView extends BaseView {
     constructor(parent) {
@@ -41,10 +43,10 @@ export default class SettingsView extends BaseView {
 
 
     sendSettings() {
+        const username = document.getElementById('user-username').value;
         const email = document.getElementById('user-email').value;
         const password1 = document.getElementById('user-password').value;
         const password2 = document.getElementById('user-password-repeat').value;
-
 
         const validator = new Validator();
 
@@ -70,12 +72,14 @@ export default class SettingsView extends BaseView {
         }
 
         if (JSON.stringify(newSettings) !== '{}') {
+            newSettings.username = username;
             globalEventBus.emit('request change settings', newSettings);
         }
     }
 
-    displayServerResponse(response) {
-        document.getElementById('settings-errors').innerHTML = response;
+    displayServerResponse(status) {
+        // document.getElementById('settings-errors').innerHTML = response;
+        globalRouter.pushState((status) ? PATHS.profile : PATHS.settings);
     }
 }
 
