@@ -5,6 +5,8 @@ export default class SettingsModel {
     constructor() {
         globalEventBus.on('get settings data', this.getSettingsData.bind(this));
         globalEventBus.on('request change settings', this.changeSettings.bind(this));
+        globalEventBus.on('get avatar url', this.getAvatarUrl.bind(this));
+        globalEventBus.on('upload avatar', this.sendAvatar.bind(this));
     }
 
     getSettingsData() {
@@ -15,6 +17,15 @@ export default class SettingsModel {
         };
 
         globalEventBus.emit('set settings data', data);
+    }
+
+    getAvatarUrl() {
+        globalEventBus.emit('set avatar url', 'https://i.imgur.com/ZaZ7FP4.jpeg');
+    }
+
+    sendAvatar(avatar) {
+        // ...
+        globalEventBus.emit('response upload avatar', 'server response:' + avatar);
     }
 
     changeSettings(settings) {

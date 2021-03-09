@@ -14,10 +14,13 @@ export default class SettingsView extends BaseView {
 
         globalEventBus.on('set settings data', this.setSettings.bind(this));
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
+        globalEventBus.on('set avatar url', this.setAvatarUrl.bind(this));
+        globalEventBus.on('response upload avatar', this.displayServerResponseAvatar.bind(this));
     }
 
     render() {
         globalEventBus.emit('get settings data');
+        globalEventBus.emit('get avatar url');
     }
 
     setSettings(data) {
@@ -28,6 +31,10 @@ export default class SettingsView extends BaseView {
         this.setEventListeners();
     }
 
+    setAvatarUrl(url) {
+        document.getElementById('avatar-img').src = url;
+    }
+
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
@@ -35,10 +42,19 @@ export default class SettingsView extends BaseView {
 
     setEventListeners() {
         document.getElementById('settings-save-button').addEventListener('click', this.saveClicked.bind(this));
+        document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClicked.bind(this));
     }
 
     removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
+        document.getElementById('settings-save-button').removeEventListener('click', this.saveAvatarClicked);
+        document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClicked);
+    }
+
+    uploadAvatarClicked() {
+        const selectedFile = document.getElementById('avatar').files[0];
+        if (this.validateAvatar(selectedFile)) {
+            globalEventBus.emit('upload avatar', selectedFile);
+        }
     }
 
     saveClicked() {
@@ -117,6 +133,25 @@ export default class SettingsView extends BaseView {
         return ([...fullnameErrors, ...passwordErrors, ...emailErrors].length === 0);
     }
 
+    validateAvatar(avatar) {
+        const validator = new Validator();
+
+        const avatarErrors = validator.validateAvatar(avatar);
+
+        document.getElementById('settings-avatar-errors').innerHTML = avatarErrors.join('<br>');
+
+        [
+            [
+                document.getElementById('avatar'),
+                document.getElementById('settings-avatar-errors'),
+                avatarErrors,
+            ],
+        ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
+
+        return (avatarErrors.length === 0);
+    }
+
+
     sendInput(settings) {
         if (JSON.stringify(settings) !== '{}') {
             globalEventBus.emit('request change settings', settings);
@@ -125,6 +160,10 @@ export default class SettingsView extends BaseView {
 
     displayServerResponse(response) {
         document.getElementById('settings-errors').innerHTML = response;
+    }
+
+    displayServerResponseAvatar(response) {
+        document.getElementById('settings-avatar-errors').innerHTML = response;
     }
 }
 

@@ -49,5 +49,15 @@ export default class Validator {
 
         return error;
     }
+
+    validateAvatar(avatar) {
+        const error = [];
+
+        if (!avatar) {
+            error.push('should not be empty');
+        }
+
+        return error;
+    }
 }
 
