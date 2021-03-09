@@ -1,11 +1,10 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import Api from "../../utils/api.js";
+import {api} from "../../utils/api.js";
 
 
 export default class ProfileModel {
     constructor() {
         globalEventBus.on('get profile data', this.getProfileData.bind(this));
-        this.api = new Api();
     }
 
     getProfileData() {
@@ -24,7 +23,7 @@ export default class ProfileModel {
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/8faa0fd8-6780-4fc2-84ef-3fb89687bd85/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
             ]};
-        this.api.getProfileData()
+        api.getProfileData()
             .then((res) => {
                 console.log(res.data);
                 globalEventBus.emit('set profile data', {...res.data, ...additionalData});
