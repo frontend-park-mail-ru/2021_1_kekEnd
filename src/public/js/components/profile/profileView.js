@@ -45,7 +45,6 @@ export default class ProfileView extends BaseView {
     }
 
     setProfileData(data) {
-        console.log(data);
         super.render(data);
 
         this.setEventListeners();

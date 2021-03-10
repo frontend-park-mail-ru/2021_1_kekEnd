@@ -14,8 +14,8 @@ export default class MovieView extends BaseView {
         globalEventBus.on('logout status', this.processLogout.bind(this));
     }
 
-    render() {
-        globalEventBus.emit('get movie data');
+    render(id) {
+        globalEventBus.emit('get movie data', id);
     }
 
     hide() {

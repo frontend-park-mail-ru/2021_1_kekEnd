@@ -9,8 +9,8 @@ export default class MovieModel {
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
-    getMovieData() {
-        API.getMovieData()
+    getMovieData(id) {
+        API.getMovieData(id)
             .then((res) => {
                 API.getUser()
                     .then((authRes) => {
