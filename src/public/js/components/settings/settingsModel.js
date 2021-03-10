@@ -37,7 +37,7 @@ export default class SettingsModel {
         API.editUser(settings)
             .then((res) => {
                 if (res) {
-                    globalEventBus.emit('response change settings', true);
+                    globalEventBus.emit('response change settings', res.status);
                 }
             });
     }
