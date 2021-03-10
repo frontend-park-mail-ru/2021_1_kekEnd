@@ -21,7 +21,7 @@ export class Router {
         window.addEventListener('popstate', (event) => {
             const path = event.target.location.pathname;
             event.preventDefault();
-            this.searchForParams(path);
+            this.searchForParams(path, event);
         });
 
         window.addEventListener('click', (event) => {
@@ -29,14 +29,16 @@ export class Router {
             const link = findAscendingTag(target, 'A');
             const path = (link !== null) ? link.href : null;
 
-            event.preventDefault();
-            this.searchForParams(path);
+            this.searchForParams(path, event);
         });
     }
 
-    searchForParams(path) {
+    searchForParams(path, event=null) {
         for (const i in PATHS) {
             if (path !== null && path.includes(PATHS[i])) {
+                if (event !== null) {
+                    event.preventDefault();
+                }
                 const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
                 this.pushState(PATHS[i], {}, parameters);
                 break;
@@ -45,7 +47,7 @@ export class Router {
     }
 
     pushState(path = '/', state = {}, parameters = '') {
-        let newState, newPath;
+        let newState; let newPath;
         if (parameters) {
             newState = `${state}/${parameters}`;
             newPath = `${path}/${parameters}`;
