@@ -26,8 +26,14 @@ export default class SettingsModel {
     }
 
     sendAvatar(avatar) {
-        // ...
-        globalEventBus.emit('response upload avatar', 'server response:' + avatar);
+        const formData = new FormData();
+        formData.append('file', avatar);
+        API.uploadAvatar(formData)
+            .then((res) => {
+                if (res.status === OK) {
+                    globalEventBus.emit('response upload avatar', 'server response:' + avatar);
+                }
+            });
     }
 
     changeSettings(settings) {

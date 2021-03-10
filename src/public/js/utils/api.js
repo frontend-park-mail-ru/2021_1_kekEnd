@@ -7,7 +7,7 @@ export default class Api {
         this.port = '8080';
     }
 
-    async asyncRequest(url, method='GET', data=null) {
+    async asyncRequest(url, method = 'GET', data = null) {
         const response = await fetch(url, {
             method: method,
             mode: 'cors',
@@ -55,6 +55,13 @@ export default class Api {
 
     editUser(newData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
+    }
+
+    uploadAvatar(formData) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/upload`, 'POST', formData,
+            {
+                'Content-Type': 'multipart/form-data',
+            });
     }
 
     /**
