@@ -55,6 +55,15 @@ export default class Validator {
 
         if (!avatar) {
             error.push('should not be empty');
+            return error;
+        }
+
+        if (!(['image/png', 'image/jpeg'].includes(avatar.type))) {
+            error.push('wrong file type');
+        }
+
+        if (!(avatar.size <= 5242880)) {
+            error.push('file size exceeds 5MB');
         }
 
         return error;
