@@ -1,6 +1,15 @@
 'use strict';
 
+
+/**
+ * Класс для валидации данных
+ */
 export default class Validator {
+    /**
+     * Проверка email
+     * @param {string} email - адрес почты
+     * @returns {array} - код ошибки
+     */
     validateEmail(email) {
         const error = [];
 
@@ -11,6 +20,11 @@ export default class Validator {
         return error;
     }
 
+    /**
+     * Проверка login
+     * @param {string} login - логин
+     * @returns {array} - код ошибки
+     */
     validateLogin(login) {
         const error = [];
 
@@ -24,6 +38,11 @@ export default class Validator {
         return error;
     }
 
+    /**
+     * Проверка пароля
+     * @param {string} password - пароль
+     * @returns {array} - код ошибки
+     */
     validatePassword(password) {
         const error = [];
 
@@ -40,6 +59,11 @@ export default class Validator {
         return error;
     }
 
+    /**
+     * Проверка имени
+     * @param {string} fullname - имя
+     * @returns {array} - код ошибки
+     */
     validateFullname(fullname) {
         const error = [];
 
@@ -50,6 +74,11 @@ export default class Validator {
         return error;
     }
 
+    /**
+     * Проверка аватара
+     * @param {string} avatar - аватар
+     * @returns {array} - код ошибки
+     */
     validateAvatar(avatar) {
         const error = [];
 
@@ -69,4 +98,3 @@ export default class Validator {
         return error;
     }
 }
-

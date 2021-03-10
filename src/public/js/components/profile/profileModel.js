@@ -5,12 +5,21 @@ import {PATHS} from "../../utils/paths.js";
 import {OK} from "../../utils/codes.js";
 
 
+/**
+ *  Модель страницы профиля
+ */
 export default class ProfileModel {
+    /**
+     * Конструктор
+     */
     constructor() {
         globalEventBus.on('get profile data', this.getProfileData.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
+    /**
+     * Получение данных профиля
+     */
     getProfileData() {
         // this data is not yet on backend but we need to show some pictures
         const additionalData = {
@@ -39,6 +48,10 @@ export default class ProfileModel {
             })
     }
 
+
+    /**
+     * Выход со страницы
+     */
     logout() {
         API.logout()
             .then((res) => {

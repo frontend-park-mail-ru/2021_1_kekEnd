@@ -9,7 +9,14 @@ import './signup.tmpl.js';
 import {CREATED} from "../../utils/codes.js";
 
 
+/**
+ * Представление страницы регистрации
+ */
 export default class SignupView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['signup.hbs']);
@@ -17,11 +24,17 @@ export default class SignupView extends BaseView {
         globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
     }
 
+    /**
+     * Запуск рендера
+     */
     render() {
         super.render();
         this.setEventListeners();
     }
 
+    /**
+     * Установка колбеков
+     */
     setEventListeners() {
         const form = document.getElementById('signup');
 
@@ -59,6 +72,10 @@ export default class SignupView extends BaseView {
         });
     }
 
+    /**
+     * Обработка статуса после запроса регистрации
+     * @param {int} status - статус запроса
+     */
     processSignupAttempt(status) {
         if (status === CREATED) {
             globalRouter.pushState(PATHS.profile);

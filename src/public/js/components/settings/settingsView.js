@@ -7,7 +7,15 @@ import {globalRouter} from "../../utils/router.js";
 import {PATHS} from "../../utils/paths.js";
 import {OK} from "../../utils/codes.js";
 
+
+/**
+ * Представление страницы настроек профиля
+ */
 export default class SettingsView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['settings.hbs']);
@@ -21,21 +29,34 @@ export default class SettingsView extends BaseView {
         globalEventBus.on('avatar uploaded', this.displayServerResponseAvatar.bind(this));
     }
 
+    /**
+     * Запуск рендера
+     */
     render() {
         globalEventBus.emit('get settings data');
     }
 
+    /**
+     * Изменение настроек
+     * @param {Object} data - новые данные
+     */
     setSettings(data) {
         this.settings = data;
         super.render(this.settings);
         this.setEventListeners();
     }
 
+    /**
+     * Очистисть страницу
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
     }
 
+    /**
+     * Установка колбеков
+     */
     setEventListeners() {
         const logoutButton = document.getElementById('logout-button');
         if (logoutButton !== null) {
@@ -48,11 +69,17 @@ export default class SettingsView extends BaseView {
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClicked.bind(this));
     }
 
+    /**
+     * Удаление колбеков
+     */
     removeEventListeners() {
         document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClicked);
     }
 
+    /**
+     * Обработчик нажатия на кнопку загрузки аватара
+     */
     uploadAvatarClicked() {
         const selectedFile = document.getElementById('avatar').files[0];
         if (this.validateAvatar(selectedFile)) {
@@ -60,6 +87,9 @@ export default class SettingsView extends BaseView {
         }
     }
 
+    /**
+     * Обработчик нажатия на кнопку сохранения
+     */
     saveClicked() {
         this.inputSettings();
         if (this.validateSettings()) {
@@ -70,6 +100,10 @@ export default class SettingsView extends BaseView {
         this.input = {};
     }
 
+    /**
+     * Проверка изменений данных о пользователе
+     * @returns {Object} - обновленные настройки
+     */
     deltaSettings() {
         const settings = {};
         if (this.settings.fullname !== this.input.fullname) {
@@ -84,6 +118,9 @@ export default class SettingsView extends BaseView {
         return settings;
     }
 
+    /**
+     * Получение новых данных
+     */
     inputSettings() {
         const email = document.getElementById('user-email').value;
         const password1 = document.getElementById('user-password').value;
@@ -95,6 +132,10 @@ export default class SettingsView extends BaseView {
         };
     }
 
+    /**
+     * Проверка данных на валидность
+     * @returns {bool} - статус наличия ошибок
+     */
     validateSettings() {
         const validator = new Validator();
 
@@ -124,6 +165,11 @@ export default class SettingsView extends BaseView {
         return ([...passwordErrors, ...emailErrors].length === 0);
     }
 
+    /**
+     * Проверка на валидность аватара
+     * @param {string} avatar - путь к фото
+     * @returns {bool} - статус наличия ошибок
+     */
     validateAvatar(avatar) {
         const validator = new Validator();
 
@@ -142,13 +188,20 @@ export default class SettingsView extends BaseView {
         return (avatarErrors.length === 0);
     }
 
-
+    /**
+     * Отправка запроса на изменение настроек
+     * @param {Object} settings - измененные данные
+     */
     sendInput(settings) {
         if (JSON.stringify(settings) !== '{}') {
             globalEventBus.emit('request change settings', settings);
         }
     }
 
+    /**
+     * Показать изменения
+     * @param {int} status - статус запроса
+     */
     displayServerResponse(status) {
         if (status === OK) {
             globalRouter.pushState(PATHS.profile);
@@ -157,12 +210,20 @@ export default class SettingsView extends BaseView {
         }
     }
 
+    /**
+     * Выход со страницы
+     * @param {int} status - статус запроса
+     */
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
         }
     }
 
+    /**
+     * Показать изменения аватара
+     * @param {int} status - статус запроса
+     */
     displayServerResponseAvatar(status) {
         if (status === OK) {
             this.render();
