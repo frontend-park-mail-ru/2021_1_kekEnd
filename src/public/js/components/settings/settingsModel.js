@@ -5,7 +5,13 @@ import {PATHS} from "../../utils/paths.js";
 import {OK} from "../../utils/codes.js";
 
 
+/**
+ *  Модель страницы настроек профиля
+ */
 export default class SettingsModel {
+    /**
+     * Конструктор
+     */
     constructor() {
         globalEventBus.on('get settings data', this.getSettingsData.bind(this));
         globalEventBus.on('request change settings', this.changeSettings.bind(this));
@@ -13,6 +19,9 @@ export default class SettingsModel {
         globalEventBus.on('upload avatar', this.sendAvatar.bind(this));
     }
 
+    /**
+     * Получение данных для страницы настроек
+     */
     getSettingsData() {
         API.getUser()
             .then((res) => {
@@ -24,6 +33,10 @@ export default class SettingsModel {
             });
     }
 
+    /**
+     * Отправка аватара
+     * @param {string} avatar - путь к фото
+     */
     sendAvatar(avatar) {
         const formData = new FormData();
         formData.append('file', avatar);
@@ -33,6 +46,10 @@ export default class SettingsModel {
             });
     }
 
+    /**
+     * Изменение настроек
+     * @param {Object} settings - измененные данные
+     */
     changeSettings(settings) {
         API.editUser(settings)
             .then((res) => {
@@ -42,6 +59,9 @@ export default class SettingsModel {
             });
     }
 
+    /**
+     * Выход со страницы
+     */
     logout() {
         API.logout()
             .then((res) => {
@@ -49,4 +69,3 @@ export default class SettingsModel {
             });
     }
 }
-

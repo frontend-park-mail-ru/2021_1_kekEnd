@@ -2,11 +2,21 @@
  * Класс с API методами
  */
 export default class Api {
+    /**
+     * Конструктор
+     */
     constructor() {
         this.host = 'localhost';
         this.port = '8080';
     }
 
+    /**
+     * Отправка запроса
+     * @param {string} url - адрес запроса
+     * @param {string} method - метод запроса
+     * @param {Object} data - данные запроса
+     * @returns {Object} - статус запроса и данные
+     */
     async asyncRequest(url, method = 'GET', data = null) {
         const response = await fetch(url, {
             method: method,
@@ -30,6 +40,8 @@ export default class Api {
 
     /**
      * Регистрация
+     * @param {Object} userData - данные пользователя
+     * @returns {Object} - статус запроса и данные
      */
     signup(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData))
@@ -37,26 +49,43 @@ export default class Api {
 
     /**
      * Логин
+     * @param {Object} userData - данные пользователя
+     * @returns {Object} - статус запроса и данные
      */
     login(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
     }
 
+    /**
+     * Выход со страницы
+     * @returns {Object} - статус запроса и данные
+     */
     logout() {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
     }
 
     /**
      * Получить информацию пользователя
+     * @returns {Object} - статус запроса и данные
      */
     getUser() {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`)
     }
 
+    /**
+     * Изменение данных пользователя
+     * @param {Object} newData - новые данные пользователя
+     * @returns {Object} - статус запроса и данные
+     */
     editUser(newData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
     }
 
+    /**
+     * Изменение данных пользователя
+     * @param {Object} formData - данные формы (фото)
+     * @returns {Object} - статус запроса и данные
+     */
     uploadAvatar(formData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/upload`, 'POST', formData,
             {
@@ -136,6 +165,7 @@ export default class Api {
 
     /**
      * Получить информацию о фильме
+     * @returns {Object} - статус запроса и данные
      */
     getMovieData() {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies/1`)

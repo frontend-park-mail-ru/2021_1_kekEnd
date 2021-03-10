@@ -4,7 +4,15 @@ import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
 
+
+/**
+ * Представление страницы профиля
+ */
 export default class ProfileView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
@@ -13,19 +21,31 @@ export default class ProfileView extends BaseView {
         globalEventBus.on('logout status', this.processLogout.bind(this));
     }
 
+    /**
+     * Запуск рендера
+     */
     render() {
         globalEventBus.emit('get profile data');
     }
 
+    /**
+     * Очистисть страницу
+     */
     hide() {
         this.parent.innerHTML = '';
         this.removeEventListeners();
     }
 
+    /**
+     * Переход на страницу настроек
+     */
     redirectSettings() {
         globalRouter.pushState(PATHS.settings);
     }
 
+    /**
+     * Установка колбеков
+     */
     setEventListeners() {
         const button = document.getElementById('button-profile-settings');
         button.addEventListener('click', this.redirectSettings);
@@ -39,11 +59,18 @@ export default class ProfileView extends BaseView {
         }
     }
 
+    /**
+     * Удаление колбеков
+     */
     removeEventListeners() {
         const button = document.getElementById('button-profile-settings');
         button.removeEventListener('click', this.redirectSettings);
     }
 
+    /**
+     * Установка данных профиля
+     * @param {Object} data - данные профиля
+     */
     setProfileData(data) {
         console.log(data);
         super.render(data);
@@ -51,10 +78,13 @@ export default class ProfileView extends BaseView {
         this.setEventListeners();
     }
 
+    /**
+     * Выход со страницы
+     * @param {int} status - статус запроса на выход
+     */
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
         }
     }
 }
-

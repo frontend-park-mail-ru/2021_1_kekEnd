@@ -3,12 +3,21 @@ import {API} from '../../utils/api.js';
 import {OK} from "../../utils/codes.js";
 
 
+/**
+ *  Модель страницы фильма
+ */
 export default class MovieModel {
+    /**
+     * Конструктор
+     */
     constructor() {
         globalEventBus.on('get movie data', this.getMovieData.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
+    /**
+     * Получение информации о фильме
+     */
     getMovieData() {
         API.getMovieData()
             .then((res) => {
@@ -20,6 +29,9 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Выход со страницы
+     */
     logout() {
         API.logout()
             .then((res) => {
@@ -27,4 +39,3 @@ export default class MovieModel {
             });
     }
 }
-
