@@ -6,7 +6,7 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
-import {OK} from "../../utils/codes.js";
+import {CREATED} from "../../utils/codes.js";
 
 
 export default class SignupView extends BaseView {
@@ -60,7 +60,7 @@ export default class SignupView extends BaseView {
     }
 
     processSignupAttempt(status) {
-        if (status === OK) {
+        if (status === CREATED) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {

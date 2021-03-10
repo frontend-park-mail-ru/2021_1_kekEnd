@@ -24,10 +24,6 @@ export default class MovieView extends BaseView {
     }
 
     setEventListeners() {
-        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClicked);
-        document.getElementById('button-plus').addEventListener('click', this.plusClicked);
-        document.getElementById('button-other').addEventListener('click', this.otherClicked);
-
         const logoutButton = document.getElementById('logout-button');
         if (logoutButton !== null) {
             logoutButton.addEventListener('click', (e) => {
@@ -35,6 +31,10 @@ export default class MovieView extends BaseView {
                 globalEventBus.emit('logout clicked');
             });
         }
+
+        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClicked.bind(this));
+        document.getElementById('button-plus').addEventListener('click', this.plusClicked.bind(this));
+        document.getElementById('button-other').addEventListener('click', this.otherClicked.bind(this));
     }
 
     removeEventListeners() {
