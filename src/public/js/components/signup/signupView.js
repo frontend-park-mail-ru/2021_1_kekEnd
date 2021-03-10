@@ -6,7 +6,7 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
-import {CREATED} from "../../utils/codes.js";
+import {CREATED} from '../../utils/codes.js';
 
 
 /**
@@ -81,9 +81,9 @@ export default class SignupView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Ошибка в формате ввода',
-                500: 'Пользователь с таким имененем уже существует'
-            }
+                400: 'Input format error',
+                500: 'User with this nickname does not exists',
+            };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }
     }

@@ -4,7 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import './login.tmpl.js';
-import {OK} from "../../utils/codes.js";
+import {OK} from '../../utils/codes.js';
 
 
 /**
@@ -54,10 +54,10 @@ export default class LoginView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Ошибка в формате ввода',
-                401: 'Неверный логин/пароль',
-                500: 'Ошибка сервера'
-            }
+                400: 'Input format error',
+                401: 'Incorrect login/password',
+                500: 'Server Error',
+            };
             document.getElementById('validation-hint-login').innerText = errors[status];
         }
     }
