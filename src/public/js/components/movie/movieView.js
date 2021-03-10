@@ -17,7 +17,7 @@ export default class MovieView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
 
-        Handlebars.registerHelper("inc", function (value, options) {
+        Handlebars.registerHelper('inc', function (value, options) {
             return parseInt(value) + 1;
         });
 
