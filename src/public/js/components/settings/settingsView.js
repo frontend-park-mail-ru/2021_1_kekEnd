@@ -95,7 +95,7 @@ export default class SettingsView extends BaseView {
         if (this.validateSettings()) {
             this.sendInput(this.deltaSettings());
         } else {
-            document.getElementById('settings-errors').innerHTML = '';
+            document.getElementById('settings-server-response').innerHTML = '';
         }
         this.input = {};
     }
@@ -148,9 +148,6 @@ export default class SettingsView extends BaseView {
         if (this.input.password1.length === 0 && this.input.password2.length === 0) {
             passwordErrors.length = 0;
         }
-
-        document.getElementById('settings-errors-email').innerHTML = emailErrors.join('<br>');
-        document.getElementById('settings-errors-password').innerHTML = passwordErrors.join('<br>');
 
         [
             [
@@ -206,8 +203,11 @@ export default class SettingsView extends BaseView {
      * @param {int} status - статус запроса
      */
     displayServerResponse(status) {
-        // document.getElementById('settings-errors').innerHTML = response;
-        globalRouter.pushState((status) ? PATHS.profile : PATHS.settings);
+        if (status === OK) {
+            globalRouter.pushState(PATHS.profile);
+        } else {
+            document.getElementById('settings-server-response').innerHTML = status;
+        }
     }
 
     /**

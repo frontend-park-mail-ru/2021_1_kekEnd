@@ -24,8 +24,8 @@ export default class MovieView extends BaseView {
     /**
      * Запуск рендера
      */
-    render() {
-        globalEventBus.emit('get movie data');
+    render(id) {
+        globalEventBus.emit('get movie data', id);
     }
 
     /**

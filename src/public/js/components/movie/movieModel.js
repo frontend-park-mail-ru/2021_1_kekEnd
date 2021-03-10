@@ -18,8 +18,8 @@ export default class MovieModel {
     /**
      * Получение информации о фильме
      */
-    getMovieData() {
-        API.getMovieData()
+    getMovieData(id) {
+        API.getMovieData(id)
             .then((res) => {
                 API.getUser()
                     .then((authRes) => {

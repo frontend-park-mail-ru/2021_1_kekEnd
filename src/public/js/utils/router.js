@@ -29,29 +29,30 @@ export class Router {
             const {target} = event;
             const link = findAscendingTag(target, 'A');
             const path = (link !== null) ? link.href : null;
-
+            
             for (const i in PATHS) {
                 if (path !== null && path.includes(PATHS[i])) {
                     event.preventDefault();
-                    this.pushState(PATHS[i]);
+                    const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
+                    this.pushState(PATHS[i], {}, parameters);
                     break;
                 }
             }
         });
     }
 
-    pushState(path = '/', state = {}) {
+    pushState(path = '/', state = {}, parameters = '') {
         if (path !== location.pathname) {
             history.pushState(state, document.title, path);
         } else {
             history.replaceState(state, document.title, path);
         }
 
-        this.handlePath(path);
+        this.handlePath(path, parameters);
     }
 
-    handlePath(path) {
-        this.routes.get(path).render();
+    handlePath(path, parameters = '') {
+        this.routes.get(path).render(parameters);
     }
 
     back() {
@@ -64,3 +65,4 @@ export class Router {
 }
 
 export const globalRouter = new Router();
+

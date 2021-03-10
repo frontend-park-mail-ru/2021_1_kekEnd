@@ -167,8 +167,8 @@ export default class Api {
      * Получить информацию о фильме
      * @returns {Object} - статус запроса и данные
      */
-    getMovieData() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/1`)
+    getMovieData(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
     }
 
     /**

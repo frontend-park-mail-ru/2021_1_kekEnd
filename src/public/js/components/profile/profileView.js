@@ -72,7 +72,6 @@ export default class ProfileView extends BaseView {
      * @param {Object} data - данные профиля
      */
     setProfileData(data) {
-        console.log(data);
         super.render(data);
 
         this.setEventListeners();
