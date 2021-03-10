@@ -48,7 +48,7 @@ export default class SettingsView extends BaseView {
     }
 
     removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.saveAvatarClicked);
+        document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClicked);
     }
 
@@ -84,12 +84,10 @@ export default class SettingsView extends BaseView {
     }
 
     inputSettings() {
-        const fullname = document.getElementById('user-fullname').value;
         const email = document.getElementById('user-email').value;
         const password1 = document.getElementById('user-password').value;
         const password2 = document.getElementById('user-password-repeat').value;
         this.input = {
-            fullname,
             email,
             password1,
             password2,
@@ -99,7 +97,6 @@ export default class SettingsView extends BaseView {
     validateSettings() {
         const validator = new Validator();
 
-        const fullnameErrors = validator.validateFullname(this.input.fullname);
         const passwordErrors = validator.validatePassword(this.input.password1);
         const emailErrors = validator.validateEmail(this.input.email);
 
@@ -115,11 +112,6 @@ export default class SettingsView extends BaseView {
 
         [
             [
-                document.getElementById('user-fullname'),
-                document.getElementById('settings-errors-fullname'),
-                fullnameErrors,
-            ],
-            [
                 document.getElementById('user-email'),
                 document.getElementById('settings-errors-email'),
                 emailErrors,
@@ -131,7 +123,7 @@ export default class SettingsView extends BaseView {
             ],
         ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
 
-        return ([...fullnameErrors, ...passwordErrors, ...emailErrors].length === 0);
+        return ([...passwordErrors, ...emailErrors].length === 0);
     }
 
     validateAvatar(avatar) {
