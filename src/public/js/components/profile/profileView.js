@@ -1,4 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
 
@@ -19,18 +21,18 @@ export default class ProfileView extends BaseView {
         this.removeEventListeners();
     }
 
-    testFunction() {
-        alert('123');
+    redirectSettings() {
+        globalRouter.pushState(PATHS.settings);
     }
 
     setEventListeners() {
         const button = document.getElementById('button-profile-settings');
-        button.addEventListener('click', this.testFunction);
+        button.addEventListener('click', this.redirectSettings);
     }
 
     removeEventListeners() {
         const button = document.getElementById('button-profile-settings');
-        button.removeEventListener('click', this.testFunction);
+        button.removeEventListener('click', this.redirectSettings);
     }
 
     setProfileData(data) {

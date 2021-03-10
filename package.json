@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run gentmpl && node server.js",
-    "gentmpl": "handlebars src/public/js/components/profile/profile.hbs -f src/public/js/components/profile/profile.tmpl.js && handlebars src/public/js/components/movie/movie.hbs -f src/public/js/components/movie/movie.tmpl.js && handlebars src/public/js/components/signup/signup.hbs -f src/public/js/components/signup/signup.tmpl.js && handlebars src/public/js/components/login/login.hbs -f src/public/js/components/login/login.tmpl.js",
+    "gentmpl": "./gentmpl.sh",
     "test": "node test/server.js",
     "lint": "npx eslint ./src --fix"
   },

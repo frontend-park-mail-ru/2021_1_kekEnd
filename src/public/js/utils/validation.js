@@ -39,5 +39,34 @@ export default class Validator {
 
         return error;
     }
+
+    validateFullname(fullname) {
+        const error = [];
+
+        if (fullname.length === 0) {
+            error.push('should not be empty');
+        }
+
+        return error;
+    }
+
+    validateAvatar(avatar) {
+        const error = [];
+
+        if (!avatar) {
+            error.push('should not be empty');
+            return error;
+        }
+
+        if (!(['image/png', 'image/jpeg'].includes(avatar.type))) {
+            error.push('wrong file type');
+        }
+
+        if (!(avatar.size <= 5242880)) {
+            error.push('file size exceeds 5MB');
+        }
+
+        return error;
+    }
 }
 
