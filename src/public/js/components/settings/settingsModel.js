@@ -16,7 +16,7 @@ export default class SettingsModel {
     getSettingsData() {
         API.getUser()
             .then((res) => {
-                if (res.data) {
+                if (res.status === OK) {
                     globalEventBus.emit('set settings data', {'isAuthorized': true,
                         ...res.data, 'avatar': 'https://i.imgur.com/ZaZ7FP4.jpeg'});
                 } else {

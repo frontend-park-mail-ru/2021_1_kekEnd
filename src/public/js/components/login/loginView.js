@@ -41,7 +41,7 @@ export default class LoginView extends BaseView {
                 401: 'Неверный логин/пароль',
                 500: 'Ошибка сервера'
             }
-            document.getElementById('send-form-hint').innerText = errors[status];
+            document.getElementById('validation-hint-login').innerText = errors[status];
         }
     }
 }

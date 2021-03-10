@@ -67,7 +67,7 @@ export default class SignupView extends BaseView {
                 400: 'Ошибка в формате ввода',
                 500: 'Пользователь с таким имененем уже существует'
             }
-            document.getElementById('send-form-hint').innerText = errors[status];
+            document.getElementById('validation-hint-signup').innerText = errors[status];
         }
     }
 }
