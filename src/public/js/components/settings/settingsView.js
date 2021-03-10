@@ -5,6 +5,7 @@ import Validator from '../../utils/validation.js';
 import './settings.tmpl.js';
 import {globalRouter} from "../../utils/router.js";
 import {PATHS} from "../../utils/paths.js";
+import {OK} from "../../utils/codes.js";
 
 export default class SettingsView extends BaseView {
     constructor(parent) {
@@ -17,7 +18,7 @@ export default class SettingsView extends BaseView {
         globalEventBus.on('set settings data', this.setSettings.bind(this));
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
-        globalEventBus.on('response upload avatar', this.displayServerResponseAvatar.bind(this));
+        globalEventBus.on('avatar uploaded', this.displayServerResponseAvatar.bind(this));
     }
 
     render() {
@@ -162,7 +163,11 @@ export default class SettingsView extends BaseView {
         }
     }
 
-    displayServerResponseAvatar(response) {
-        document.getElementById('settings-avatar-errors').innerHTML = response;
+    displayServerResponseAvatar(status) {
+        if (status === OK) {
+            this.render();
+        } else {
+            document.getElementById('settings-avatar-errors').innerHTML = status;
+        }
     }
 }

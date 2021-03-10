@@ -17,8 +17,7 @@ export default class SettingsModel {
         API.getUser()
             .then((res) => {
                 if (res.status === OK) {
-                    globalEventBus.emit('set settings data', {'isAuthorized': true,
-                        ...res.data, 'avatar': 'https://i.imgur.com/ZaZ7FP4.jpeg'});
+                    globalEventBus.emit('set settings data', {'isAuthorized': true, ...res.data});
                 } else {
                     globalRouter.pushState(PATHS.login);
                 }
@@ -30,9 +29,7 @@ export default class SettingsModel {
         formData.append('file', avatar);
         API.uploadAvatar(formData)
             .then((res) => {
-                if (res.status === OK) {
-                    globalEventBus.emit('response upload avatar', 'server response:' + avatar);
-                }
+                globalEventBus.emit('avatar uploaded', res.status);
             });
     }
 
