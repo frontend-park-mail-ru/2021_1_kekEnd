@@ -6,10 +6,17 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
-import {CREATED} from "../../utils/codes.js";
+import {CREATED} from '../../utils/codes.js';
 
 
+/**
+ * Представление страницы регистрации
+ */
 export default class SignupView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['signup.hbs']);
@@ -17,11 +24,17 @@ export default class SignupView extends BaseView {
         globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
     }
 
+    /**
+     * Запуск рендера
+     */
     render() {
         super.render();
         this.setEventListeners();
     }
 
+    /**
+     * Установка колбеков
+     */
     setEventListeners() {
         const form = document.getElementById('signup');
 
@@ -59,14 +72,18 @@ export default class SignupView extends BaseView {
         });
     }
 
+    /**
+     * Обработка статуса после запроса регистрации
+     * @param {int} status - статус запроса
+     */
     processSignupAttempt(status) {
         if (status === CREATED) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Ошибка в формате ввода',
-                500: 'Пользователь с таким имененем уже существует'
-            }
+                400: 'Input format error',
+                500: 'User with this nickname does not exists',
+            };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }
     }

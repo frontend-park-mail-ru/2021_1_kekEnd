@@ -9,5 +9,8 @@
 * [Климова Наталия](https://github.com/Tataklim) - ментор по фронтенду
 * [Рыбаков Дмитрий](https://github.com/bulletmys) - ментор по бекенду
 
+### Деплой
+http://89.208.198.186:3000
+
 ### Ссылка на репозиторий бекенда
 https://github.com/go-park-mail-ru/2021_1_kekEnd

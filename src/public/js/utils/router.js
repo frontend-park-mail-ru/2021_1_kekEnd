@@ -15,14 +15,13 @@ export class Router {
     start() {
         window.addEventListener('load', () => {
             const path = location.pathname;
-            this.handlePath(path);
+            this.searchForParams(path);
         });
 
         window.addEventListener('popstate', (event) => {
             const path = event.target.location.pathname;
             event.preventDefault();
-
-            this.pushState(path);
+            this.searchForParams(path, event);
         });
 
         window.addEventListener('click', (event) => {
@@ -30,28 +29,43 @@ export class Router {
             const link = findAscendingTag(target, 'A');
             const path = (link !== null) ? link.href : null;
 
-            for (const i in PATHS) {
-                if (path !== null && path.includes(PATHS[i])) {
-                    event.preventDefault();
-                    this.pushState(PATHS[i]);
-                    break;
-                }
-            }
+            this.searchForParams(path, event);
         });
     }
 
-    pushState(path = '/', state = {}) {
-        if (path !== location.pathname) {
-            history.pushState(state, document.title, path);
-        } else {
-            history.replaceState(state, document.title, path);
+    searchForParams(path, event=null) {
+        for (const i in PATHS) {
+            if (path !== null && path.includes(PATHS[i])) {
+                if (event !== null) {
+                    event.preventDefault();
+                }
+                const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
+                this.pushState(PATHS[i], {}, parameters);
+                break;
+            }
         }
-
-        this.handlePath(path);
     }
 
-    handlePath(path) {
-        this.routes.get(path).render();
+    pushState(path = '/', state = {}, parameters = '') {
+        let newState; let newPath;
+        if (parameters) {
+            newState = `${state}/${parameters}`;
+            newPath = `${path}/${parameters}`;
+        } else {
+            newState = state;
+            newPath = path;
+        }
+        if (path !== location.pathname) {
+            history.pushState(newState, document.title, newPath);
+        } else {
+            history.replaceState(newState, document.title, newPath);
+        }
+
+        this.handlePath(path, parameters);
+    }
+
+    handlePath(path, parameters = '') {
+        this.routes.get(path).render(parameters);
     }
 
     back() {
@@ -64,3 +78,4 @@ export class Router {
 }
 
 export const globalRouter = new Router();
+

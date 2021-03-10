@@ -36,7 +36,7 @@
     <div class="profile-card">
         <div class="container">
             <div class="avatar-container">
-                <img src="{{avatar}}" alt="">
+                <img class="avatar" src="{{avatar}}" alt="">
             </div>
 
             <div class="content">
@@ -62,10 +62,11 @@
     <h3 class="section-name">Любимые фильмы</h3>
 
     <!-- TODO: решить проблему источников изображений -->
+
     <div class="slider">
         {{#each favourite_movies}}
             <div class="slider-card">
-                <a href="/movie"><img src="{{this}}"></a>
+                <a href="/movie/{{ inc @index}}"><img src="{{this}}"></a>
             </div>
         {{/each}}
     </div>
