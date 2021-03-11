@@ -87,7 +87,7 @@ export default class Api {
      * @returns {Object} - статус запроса и данные
      */
     uploadAvatar(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/upload`, 'POST', formData,
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
             {
                 'Content-Type': 'multipart/form-data',
             });
