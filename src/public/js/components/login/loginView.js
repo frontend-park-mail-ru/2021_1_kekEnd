@@ -43,6 +43,14 @@ export default class LoginView extends BaseView {
 
             globalEventBus.emit('login clicked', data);
         });
+
+        [...document.querySelectorAll('.input-field')].forEach(function(item) {
+            item.addEventListener('click', function() {
+                [...document.querySelectorAll('.validation-hint')].forEach(function(item) {
+                    item.innerText = '';
+                });
+            });
+        });
     }
 
     /**
@@ -54,9 +62,9 @@ export default class LoginView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Input format error',
-                401: 'Incorrect login/password',
-                500: 'Server Error',
+                400: 'Введены некорректные данные!',
+                401: 'Введен некорректный логин или пароль!',
+                500: 'Ошибка сервера',
             };
             document.getElementById('validation-hint-login').innerText = errors[status];
         }

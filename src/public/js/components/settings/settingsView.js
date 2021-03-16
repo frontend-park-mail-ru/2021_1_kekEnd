@@ -3,9 +3,9 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import Validator from '../../utils/validation.js';
 import './settings.tmpl.js';
-import {globalRouter} from "../../utils/router.js";
-import {PATHS} from "../../utils/paths.js";
-import {OK} from "../../utils/codes.js";
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
+import {OK} from '../../utils/codes.js';
 
 
 /**
@@ -65,16 +65,65 @@ export default class SettingsView extends BaseView {
                 globalEventBus.emit('logout clicked');
             });
         }
-        document.getElementById('settings-save-button').addEventListener('click', this.saveClicked.bind(this));
-        document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClicked.bind(this));
+
+        this.saveClickedCallback = this.saveClicked.bind(this);
+        document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
+
+        this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
+        document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
+
+        [...document.querySelectorAll('.input-field')].forEach(function(item) {
+            item.addEventListener('click', function() {
+                [...document.querySelectorAll('.validation-hint')].forEach(function(item) {
+                    item.innerText = '';
+                });
+            });
+        });
+
+        this.setPhotoPreviewListener();
+    }
+
+    /**
+     * Показ превью фото
+     */
+    setPhotoPreviewListener() {
+        const file = document.getElementById('avatar');
+        const preview = document.getElementById('avatar-img');
+
+        file.addEventListener('change', (e) => {
+            if (file.files.length === 0) {
+                return;
+            }
+
+            const f = file.files[0];
+            if (!this.validateAvatar(f)) {
+                return;
+            }
+
+            const fr = new FileReader();
+
+            if (f.type.indexOf('image') === -1) {
+                return;
+            }
+
+            fr.onload = (e) => {
+                if (getComputedStyle(preview, null).display === 'none') {
+                    preview.style.display = 'block';
+                }
+
+                preview.src = e.target.result;
+            };
+
+            fr.readAsDataURL(f);
+        });
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
-        document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClicked);
+        document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
+        document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
     }
 
     /**
@@ -82,9 +131,7 @@ export default class SettingsView extends BaseView {
      */
     uploadAvatarClicked() {
         const selectedFile = document.getElementById('avatar').files[0];
-        if (this.validateAvatar(selectedFile)) {
-            globalEventBus.emit('upload avatar', selectedFile);
-        }
+        globalEventBus.emit('upload avatar', selectedFile);
     }
 
     /**
@@ -143,7 +190,7 @@ export default class SettingsView extends BaseView {
         const emailErrors = validator.validateEmail(this.input.email);
 
         if (this.input.password1 !== this.input.password2) {
-            passwordErrors.push('passwords do not match');
+            passwordErrors.push('Пароли не совпадают!');
         }
         if (this.input.password1.length === 0 && this.input.password2.length === 0) {
             passwordErrors.length = 0;

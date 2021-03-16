@@ -70,6 +70,14 @@ export default class SignupView extends BaseView {
                 globalEventBus.emit('signup clicked', data);
             }
         });
+
+        [...document.querySelectorAll('.input-field')].forEach(function(item) {
+            item.addEventListener('click', function() {
+                [...document.querySelectorAll('.validation-hint')].forEach(function(item) {
+                    item.innerText = '';
+                });
+            });
+        });
     }
 
     /**
@@ -81,8 +89,8 @@ export default class SignupView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Input format error',
-                500: 'User with this nickname does not exists',
+                400: 'Введены некорректные данные!',
+                500: 'Пользователь с таким никнеймом уже существует!',
             };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }

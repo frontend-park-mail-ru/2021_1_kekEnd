@@ -1,5 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from "../../utils/api.js";
+import {API} from '../../utils/api.js';
 
 
 /**

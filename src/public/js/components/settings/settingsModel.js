@@ -1,8 +1,8 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
-import {globalRouter} from "../../utils/router.js";
-import {PATHS} from "../../utils/paths.js";
-import {OK} from "../../utils/codes.js";
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
+import {OK} from '../../utils/codes.js';
 
 
 /**
@@ -65,7 +65,7 @@ export default class SettingsModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK)
+                globalEventBus.emit('logout status', res.status === OK);
             });
     }
 }
