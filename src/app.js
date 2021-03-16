@@ -17,4 +17,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
     globalRouter.start();
 });
-

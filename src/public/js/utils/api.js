@@ -15,42 +15,42 @@ export default class Api {
      * @param {string} url - адрес запроса
      * @param {string} method - метод запроса
      * @param {Object} data - данные запроса
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     async asyncRequest(url, method = 'GET', data = null) {
         const response = await fetch(url, {
             method: method,
             mode: 'cors',
             credentials: 'include',
-            body: data
+            body: data,
         });
 
         let responseData;
         try {
             responseData = await response.json();
         } catch (e) {
-            responseData = await response.data
+            responseData = await response.data;
         }
 
         return {
             status: response.status,
-            data: responseData
+            data: responseData,
         };
     }
 
     /**
      * Регистрация
      * @param {Object} userData - данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     signup(userData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData))
+        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData));
     }
 
     /**
      * Логин
      * @param {Object} userData - данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     login(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
@@ -58,7 +58,7 @@ export default class Api {
 
     /**
      * Выход со страницы
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     logout() {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
@@ -66,16 +66,16 @@ export default class Api {
 
     /**
      * Получить информацию пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     getUser() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`)
+        return this.asyncRequest(`http://${this.host}:${this.port}/users`);
     }
 
     /**
      * Изменение данных пользователя
      * @param {Object} newData - новые данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     editUser(newData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
@@ -84,13 +84,22 @@ export default class Api {
     /**
      * Изменение данных пользователя
      * @param {Object} formData - данные формы (фото)
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     uploadAvatar(formData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
             {
                 'Content-Type': 'multipart/form-data',
             });
+    }
+
+    /**
+     * Добавление рецензии на фильм
+     * @param {Object} formData - данные формы о рецензии
+     * @return {Object} - статус запроса и данные
+     */
+    addReview(formData) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/review`, 'POST', formData);
     }
 
     /**
@@ -165,7 +174,8 @@ export default class Api {
 
     /**
      * Получить информацию о фильме
-     * @returns {Object} - статус запроса и данные
+     * @param {int} id - идентификатор фильма
+     * @return {Object} - статус запроса и данные
      */
     getMovieData(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
@@ -186,13 +196,6 @@ export default class Api {
     }
 
     /**
-     * Загрузить аватар пользователя
-     */
-    uploadProfileAvatar() {
-
-    }
-
-    /**
      * Получить рецензии к фильму
      */
     getReviewsToMovie() {
@@ -200,4 +203,4 @@ export default class Api {
     }
 }
 
-export const API = new Api()
+export const API = new Api();
