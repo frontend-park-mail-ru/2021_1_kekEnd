@@ -4,7 +4,8 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import './login.tmpl.js';
-import {OK} from '../../utils/codes.js';
+import {OK_CODE} from '../../utils/codes.js';
+import {setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 
 
 /**
@@ -44,13 +45,7 @@ export default class LoginView extends BaseView {
             globalEventBus.emit('login clicked', data);
         });
 
-        [...document.querySelectorAll('.input-field')].forEach(function(item) {
-            item.addEventListener('click', function() {
-                [...document.querySelectorAll('.validation-hint')].forEach(function(item) {
-                    item.innerText = '';
-                });
-            });
-        });
+        setListenersForHidingValidationError();
     }
 
     /**
@@ -58,7 +53,7 @@ export default class LoginView extends BaseView {
      * @param {int} status - статус запроса
      */
     processLoginAttempt(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {

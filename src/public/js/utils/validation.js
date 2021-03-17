@@ -8,7 +8,7 @@ export default class Validator {
     /**
      * Проверка email
      * @param {string} email - адрес почты
-     * @returns {array} - код ошибки
+     * @return {array} - код ошибки
      */
     validateEmail(email) {
         const error = [];
@@ -23,7 +23,7 @@ export default class Validator {
     /**
      * Проверка login
      * @param {string} login - логин
-     * @returns {array} - код ошибки
+     * @return {array} - код ошибки
      */
     validateLogin(login) {
         const error = [];
@@ -32,7 +32,7 @@ export default class Validator {
             error.push('Логин должен быть длиной от 6 до 20 символов!');
         }
         if (!(/^[a-zA-Z0-9_]*$/.test(login))) {
-            error.push('Логин должен состоять только из латинских букв чисел и нижних подчеркиваний!');
+            error.push('Логин должен состоять только из латинских букв, чисел и нижних подчеркиваний!');
         }
 
         return error;
@@ -41,7 +41,7 @@ export default class Validator {
     /**
      * Проверка пароля
      * @param {string} password - пароль
-     * @returns {array} - код ошибки
+     * @return {array} - код ошибки
      */
     validatePassword(password) {
         const error = [];
@@ -62,7 +62,7 @@ export default class Validator {
     /**
      * Проверка имени
      * @param {string} fullname - имя
-     * @returns {array} - код ошибки
+     * @return {array} - код ошибки
      */
     validateFullname(fullname) {
         const error = [];
@@ -77,7 +77,7 @@ export default class Validator {
     /**
      * Проверка аватара
      * @param {string} avatar - аватар
-     * @returns {array} - код ошибки
+     * @return {array} - код ошибки
      */
     validateAvatar(avatar) {
         const error = [];

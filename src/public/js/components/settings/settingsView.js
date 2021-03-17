@@ -1,11 +1,11 @@
-import {setValidationResult} from '../../utils/setValidationResult.js';
+import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import Validator from '../../utils/validation.js';
 import './settings.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
-import {OK} from '../../utils/codes.js';
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -27,6 +27,9 @@ export default class SettingsView extends BaseView {
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
         globalEventBus.on('avatar uploaded', this.displayServerResponseAvatar.bind(this));
+
+        this.saveClickedCallback = this.saveClicked.bind(this);
+        this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
     }
 
     /**
@@ -66,21 +69,12 @@ export default class SettingsView extends BaseView {
             });
         }
 
-        this.saveClickedCallback = this.saveClicked.bind(this);
         document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
-
-        this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
 
-        [...document.querySelectorAll('.input-field')].forEach(function(item) {
-            item.addEventListener('click', function() {
-                [...document.querySelectorAll('.validation-hint')].forEach(function(item) {
-                    item.innerText = '';
-                });
-            });
-        });
-
         this.setPhotoPreviewListener();
+
+        setListenersForHidingValidationError();
     }
 
     /**
@@ -95,18 +89,18 @@ export default class SettingsView extends BaseView {
                 return;
             }
 
-            const f = file.files[0];
-            if (!this.validateAvatar(f)) {
+            const avatar = file.files[0];
+            if (!this.validateAvatar(avatar)) {
                 return;
             }
 
-            const fr = new FileReader();
+            const fileReader = new FileReader();
 
-            if (f.type.indexOf('image') === -1) {
+            if (avatar.type.indexOf('image') === -1) {
                 return;
             }
 
-            fr.onload = (e) => {
+            fileReader.onload = (e) => {
                 if (getComputedStyle(preview, null).display === 'none') {
                     preview.style.display = 'block';
                 }
@@ -114,7 +108,7 @@ export default class SettingsView extends BaseView {
                 preview.src = e.target.result;
             };
 
-            fr.readAsDataURL(f);
+            fileReader.readAsDataURL(avatar);
         });
     }
 
@@ -149,7 +143,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Проверка изменений данных о пользователе
-     * @returns {Object} - обновленные настройки
+     * @return {Object} - обновленные настройки
      */
     deltaSettings() {
         const settings = {};
@@ -181,7 +175,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Проверка данных на валидность
-     * @returns {bool} - статус наличия ошибок
+     * @return {bool} - статус наличия ошибок
      */
     validateSettings() {
         const validator = new Validator();
@@ -215,7 +209,7 @@ export default class SettingsView extends BaseView {
     /**
      * Проверка на валидность аватара
      * @param {string} avatar - путь к фото
-     * @returns {bool} - статус наличия ошибок
+     * @return {bool} - статус наличия ошибок
      */
     validateAvatar(avatar) {
         const validator = new Validator();
@@ -250,7 +244,7 @@ export default class SettingsView extends BaseView {
      * @param {int} status - статус запроса
      */
     displayServerResponse(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
         } else {
             document.getElementById('settings-server-response').innerHTML = status;
@@ -272,7 +266,7 @@ export default class SettingsView extends BaseView {
      * @param {int} status - статус запроса
      */
     displayServerResponseAvatar(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             this.render();
         } else {
             document.getElementById('settings-avatar-errors').innerHTML = status;

@@ -2,7 +2,7 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
-import {OK} from '../../utils/codes.js';
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -40,7 +40,7 @@ export default class ProfileModel {
 
         API.getUser()
             .then((res) => {
-                if (res.status === OK) {
+                if (res.status === OK_CODE) {
                     globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
                 } else {
                     globalRouter.pushState(PATHS.login);
@@ -55,7 +55,7 @@ export default class ProfileModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK);
+                globalEventBus.emit('logout status', res.status === OK_CODE);
             });
     }
 }

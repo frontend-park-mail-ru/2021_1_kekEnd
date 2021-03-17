@@ -17,12 +17,16 @@ export default class MovieView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
         // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('inc', function(value, options) {
+        Handlebars.registerHelper('inc', (value, options) => {
             return parseInt(value) + 1;
         });
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
+
+        this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
+        this.plusClickedCallback = this.plusClicked.bind(this);
+        this.otherClickedCallback = this.otherClicked.bind(this);
     }
 
     /**
@@ -53,13 +57,8 @@ export default class MovieView extends BaseView {
             });
         }
 
-        this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
-
-        this.plusClickedCallback = this.plusClicked.bind(this);
         document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
-
-        this.otherClickedCallback = this.otherClicked.bind(this);
         document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
     }
 
