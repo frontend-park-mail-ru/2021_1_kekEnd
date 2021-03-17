@@ -4,7 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
-import {setValidationResult} from '../../utils/setValidationResult.js';
+import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
 import {CREATED} from '../../utils/codes.js';
 
@@ -70,6 +70,8 @@ export default class SignupView extends BaseView {
                 globalEventBus.emit('signup clicked', data);
             }
         });
+
+        setListenersForHidingValidationError();
     }
 
     /**
@@ -81,8 +83,8 @@ export default class SignupView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Input format error',
-                500: 'User with this nickname does not exists',
+                400: 'Введены некорректные данные!',
+                500: 'Пользователь с таким логином уже существует!',
             };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }

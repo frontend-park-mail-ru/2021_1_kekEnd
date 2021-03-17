@@ -1,11 +1,11 @@
-import {setValidationResult} from '../../utils/setValidationResult.js';
+import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import {globalEventBus} from '../../utils/eventbus.js';
 import BaseView from '../baseView.js';
 import Validator from '../../utils/validation.js';
 import './settings.tmpl.js';
-import {globalRouter} from "../../utils/router.js";
-import {PATHS} from "../../utils/paths.js";
-import {OK} from "../../utils/codes.js";
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -27,6 +27,9 @@ export default class SettingsView extends BaseView {
         globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
         globalEventBus.on('avatar uploaded', this.displayServerResponseAvatar.bind(this));
+
+        this.saveClickedCallback = this.saveClicked.bind(this);
+        this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
     }
 
     /**
@@ -65,16 +68,55 @@ export default class SettingsView extends BaseView {
                 globalEventBus.emit('logout clicked');
             });
         }
-        document.getElementById('settings-save-button').addEventListener('click', this.saveClicked.bind(this));
-        document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClicked.bind(this));
+
+        document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
+        document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
+
+        this.setPhotoPreviewListener();
+
+        setListenersForHidingValidationError();
+    }
+
+    /**
+     * Показ превью фото
+     */
+    setPhotoPreviewListener() {
+        const file = document.getElementById('avatar');
+        const preview = document.getElementById('avatar-img');
+
+        file.addEventListener('change', (event) => {
+            if (file.files.length === 0) {
+                return;
+            }
+
+            const avatar = file.files[0];
+            if (!this.validateAvatar(avatar)) {
+                return;
+            }
+
+            if (avatar.type.indexOf('image') === -1) {
+                return;
+            }
+
+            const fileReader = new FileReader();
+            fileReader.onload = (event) => {
+                if (getComputedStyle(preview, null).display === 'none') {
+                    preview.style.display = 'block';
+                }
+
+                preview.src = event.target.result;
+            };
+
+            fileReader.readAsDataURL(avatar);
+        });
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('settings-save-button').removeEventListener('click', this.saveClicked);
-        document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClicked);
+        document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
+        document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
     }
 
     /**
@@ -82,9 +124,7 @@ export default class SettingsView extends BaseView {
      */
     uploadAvatarClicked() {
         const selectedFile = document.getElementById('avatar').files[0];
-        if (this.validateAvatar(selectedFile)) {
-            globalEventBus.emit('upload avatar', selectedFile);
-        }
+        globalEventBus.emit('upload avatar', selectedFile);
     }
 
     /**
@@ -143,7 +183,7 @@ export default class SettingsView extends BaseView {
         const emailErrors = validator.validateEmail(this.input.email);
 
         if (this.input.password1 !== this.input.password2) {
-            passwordErrors.push('passwords do not match');
+            passwordErrors.push('Пароли не совпадают!');
         }
         if (this.input.password1.length === 0 && this.input.password2.length === 0) {
             passwordErrors.length = 0;
@@ -203,7 +243,7 @@ export default class SettingsView extends BaseView {
      * @param {int} status - статус запроса
      */
     displayServerResponse(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
         } else {
             document.getElementById('settings-server-response').innerHTML = status;
@@ -225,7 +265,7 @@ export default class SettingsView extends BaseView {
      * @param {int} status - статус запроса
      */
     displayServerResponseAvatar(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             this.render();
         } else {
             document.getElementById('settings-avatar-errors').innerHTML = status;
