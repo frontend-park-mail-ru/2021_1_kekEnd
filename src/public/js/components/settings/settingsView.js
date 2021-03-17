@@ -94,12 +94,11 @@ export default class SettingsView extends BaseView {
                 return;
             }
 
-            const fileReader = new FileReader();
-
             if (avatar.type.indexOf('image') === -1) {
                 return;
             }
 
+            const fileReader = new FileReader();
             fileReader.onload = (event) => {
                 if (getComputedStyle(preview, null).display === 'none') {
                     preview.style.display = 'block';
