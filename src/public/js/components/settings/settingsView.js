@@ -84,7 +84,7 @@ export default class SettingsView extends BaseView {
         const file = document.getElementById('avatar');
         const preview = document.getElementById('avatar-img');
 
-        file.addEventListener('change', (e) => {
+        file.addEventListener('change', (event) => {
             if (file.files.length === 0) {
                 return;
             }
@@ -100,12 +100,12 @@ export default class SettingsView extends BaseView {
                 return;
             }
 
-            fileReader.onload = (e) => {
+            fileReader.onload = (event) => {
                 if (getComputedStyle(preview, null).display === 'none') {
                     preview.style.display = 'block';
                 }
 
-                preview.src = e.target.result;
+                preview.src = event.target.result;
             };
 
             fileReader.readAsDataURL(avatar);
