@@ -8,7 +8,7 @@ export default class Validator {
     /**
      * Проверка email
      * @param {string} email - адрес почты
-     * @return {array} - код ошибки
+     * @returns {array} - код ошибки
      */
     validateEmail(email) {
         const error = [];
@@ -23,7 +23,7 @@ export default class Validator {
     /**
      * Проверка login
      * @param {string} login - логин
-     * @return {array} - код ошибки
+     * @returns {array} - код ошибки
      */
     validateLogin(login) {
         const error = [];
@@ -41,7 +41,7 @@ export default class Validator {
     /**
      * Проверка пароля
      * @param {string} password - пароль
-     * @return {array} - код ошибки
+     * @returns {array} - код ошибки
      */
     validatePassword(password) {
         const error = [];
@@ -62,7 +62,7 @@ export default class Validator {
     /**
      * Проверка имени
      * @param {string} fullname - имя
-     * @return {array} - код ошибки
+     * @returns {array} - код ошибки
      */
     validateFullname(fullname) {
         const error = [];
@@ -77,7 +77,7 @@ export default class Validator {
     /**
      * Проверка аватара
      * @param {string} avatar - аватар
-     * @return {array} - код ошибки
+     * @returns {array} - код ошибки
      */
     validateAvatar(avatar) {
         const error = [];

@@ -142,7 +142,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Проверка изменений данных о пользователе
-     * @return {Object} - обновленные настройки
+     * @returns {Object} - обновленные настройки
      */
     deltaSettings() {
         const settings = {};
@@ -174,7 +174,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Проверка данных на валидность
-     * @return {bool} - статус наличия ошибок
+     * @returns {bool} - статус наличия ошибок
      */
     validateSettings() {
         const validator = new Validator();
@@ -208,7 +208,7 @@ export default class SettingsView extends BaseView {
     /**
      * Проверка на валидность аватара
      * @param {string} avatar - путь к фото
-     * @return {bool} - статус наличия ошибок
+     * @returns {bool} - статус наличия ошибок
      */
     validateAvatar(avatar) {
         const validator = new Validator();
