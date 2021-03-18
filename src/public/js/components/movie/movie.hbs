@@ -35,7 +35,8 @@
 <div class="main">
     <div class="movie_content_container">
         <div class="background_trailer">
-            <div class="background_trailer_img center" style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
+            <div class="background_trailer_img center"
+                 style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
         </div>
 
         <div class="flex_container">
@@ -193,13 +194,20 @@
         </div>
     </div>
 
-    <div class="review-container">
-        <form id="review" class="review-form">
-            <input name="title" type="text" class="input-field" placeholder="Заголовок">
-            <textarea name="content" class="input-field" placeholder="Ваши впечатления о фильме"></textarea>
-            <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
-            <button type="submit" id="review-button" class="submit-button">Отправить</button>
-        </form>
-    </div>
+    {{#if isAuthorized}}
+        <div class="reviews-content-container">
+            <h3 class="your-review">Ваша рецензия</h3>
+            <div class="review-form-container">
+                <form id="review" class="review-form">
+                    <input name="title" type="text" class="input-field review-title review-input"
+                           placeholder="Заголовок">
+                    <textarea name="content" class="input-field review-content review-input"
+                              placeholder="Ваши впечатления о фильме"></textarea>
+                    <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
+                    <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                </form>
+            </div>
+        </div>
+    {{/if}}
 </div>
 
