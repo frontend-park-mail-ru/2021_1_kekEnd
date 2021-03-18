@@ -174,7 +174,7 @@ export default class Api {
 
     /**
      * Получить информацию о фильме
-     * @param {int} id - идентификатор фильма
+     * @param {int} id - id фильма
      * @return {Object} - статус запроса и данные
      */
     getMovieData(id) {

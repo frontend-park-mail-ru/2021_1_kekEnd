@@ -1,5 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from "../../utils/api.js";
+import {API} from '../../utils/api.js';
 
 
 /**
@@ -16,7 +16,7 @@ export default class Model {
     /**
      * Проверка на существование пользователя
      * @param {Object} data - данные о пользователе
-     * @returns {bool} - статус запроса
+     * @return {bool} - статус запроса
      */
     userNotExists(data) {
         // запрос к серверу на проверку существования пользователя

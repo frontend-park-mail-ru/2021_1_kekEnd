@@ -1,8 +1,8 @@
 import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from "../../utils/api.js";
-import {globalRouter} from "../../utils/router.js";
-import {PATHS} from "../../utils/paths.js";
-import {OK} from "../../utils/codes.js";
+import {API} from '../../utils/api.js';
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -35,17 +35,17 @@ export default class ProfileModel {
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/2eb2fc4d-a8bd-43b0-83cd-35feacb8ccae/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/8faa0fd8-6780-4fc2-84ef-3fb89687bd85/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
-            ]
+            ],
         };
 
         API.getUser()
             .then((res) => {
-                if (res.status === OK) {
+                if (res.status === OK_CODE) {
                     globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
                 } else {
                     globalRouter.pushState(PATHS.login);
                 }
-            })
+            });
     }
 
 
@@ -55,7 +55,7 @@ export default class ProfileModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK)
+                globalEventBus.emit('logout status', res.status === OK_CODE);
             });
     }
 }

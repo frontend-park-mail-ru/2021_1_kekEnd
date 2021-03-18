@@ -1,2 +1,2 @@
-export const OK = 200;
+export const OK_CODE = 200;
 export const CREATED = 201;

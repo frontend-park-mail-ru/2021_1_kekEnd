@@ -12,6 +12,7 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "ignorePatterns": ["*.tmpl.js"],
     "rules": {
       "indent": ["error", 4],
       "max-len": ["error", 120, 2, {
