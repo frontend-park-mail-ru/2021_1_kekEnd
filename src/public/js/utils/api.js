@@ -99,7 +99,7 @@ export default class Api {
      * @return {Object} - статус запроса и данные
      */
     addReview(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/review`, 'POST', formData);
+        return this.asyncRequest(`http://${this.host}:${this.port}/review`, 'POST', JSON.stringify(formData));
     }
 
     /**

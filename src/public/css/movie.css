@@ -22,6 +22,11 @@
     width: 600px;
 }
 
+.select-review-type {
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
 .review-input {
     color: white;
 }

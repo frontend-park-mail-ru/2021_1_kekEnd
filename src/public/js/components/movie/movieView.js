@@ -3,6 +3,7 @@ import BaseView from '../baseView.js';
 import './movie.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
+import {getFormValues} from '../../utils/formDataWork.js';
 
 
 /**
@@ -22,6 +23,7 @@ export default class MovieView extends BaseView {
         });
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
+        globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
@@ -60,6 +62,19 @@ export default class MovieView extends BaseView {
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
+
+        const reviewForm = document.getElementById('review');
+        reviewForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const data = getFormValues(reviewForm);
+            console.log(data);
+            if (data.review_type === undefined || data.title.length === 0 || data.content.length === 0) {
+                document.getElementById('validation-hint-review').innerText = 'Заполните все поля!';
+            } else {
+                globalEventBus.emit('send review', data);
+            }
+        });
     }
 
     /**
@@ -88,6 +103,14 @@ export default class MovieView extends BaseView {
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
+        }
+    }
+
+    displayNewReview(status) {
+        if (status) {
+            console.log('Review was sent');
+        } else {
+            console.log('Review was not sent');
         }
     }
 

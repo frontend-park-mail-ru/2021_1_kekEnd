@@ -1,6 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
-import {OK_CODE} from '../../utils/codes.js';
+import {CREATED, OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -12,6 +12,7 @@ export default class MovieModel {
      */
     constructor() {
         globalEventBus.on('get movie data', this.getMovieData.bind(this));
+        globalEventBus.on('send review', this.addReview.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
@@ -27,6 +28,13 @@ export default class MovieModel {
                         globalEventBus.emit('set movie data',
                             {...res.data, 'isAuthorized': authRes.status === OK_CODE});
                     });
+            });
+    }
+
+    addReview(review) {
+        API.addReview(review)
+            .then((res) => {
+                globalEventBus.emit('review uploaded', res.status === CREATED);
             });
     }
 
