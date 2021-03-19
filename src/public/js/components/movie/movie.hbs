@@ -194,6 +194,7 @@
         </div>
     </div>
 
+    <!-- TODO: && !hasReview  -->
     {{#if isAuthorized}}
         <div class="reviews-content-container">
             <h3 class="your-review">Ваша рецензия</h3>
@@ -205,9 +206,9 @@
                         <option value="neutral">Нейтральная</option>
                         <option value="negative">Отрицательная</option>
                     </select>
-                    <input name="title" type="text" class="input-field review-title review-input"
+                    <input name="title" type="text" class="input-field input-review-title review-input"
                            placeholder="Заголовок">
-                    <textarea name="content" class="input-field review-content review-input"
+                    <textarea name="content" class="input-field input-review-content review-input"
                               placeholder="Ваши впечатления о фильме"></textarea>
                     <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
                     <button type="submit" id="review-button" class="submit-button">Отправить</button>
@@ -215,5 +216,14 @@
             </div>
         </div>
     {{/if}}
-</div>
 
+    {{#each reviews}}
+        <div class="reviews-content-container {{this.review_type}}-review-border">
+            <h3 class="your-review">Рецензия {{this.author}}</h3>
+            <div class="review-body">
+                <p class="review-title">{{this.title}}</p>
+                <p class="review-content">{{this.content}}</p>
+            </div>
+        </div>
+    {{/each}}
+</div>

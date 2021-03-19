@@ -35,8 +35,32 @@
     color: grey;
 }
 
-.review-content {
+.input-review-content {
     height: 120px;
+}
+
+.review-title {
+    padding: 20px 0 20px 40px;
+    font-size: 18px;
+    color: white;
+}
+
+.review-content {
+    padding: 20px 0 20px 40px;
+    font-size: 14px;
+    color: white;
+}
+
+.positive-review-border {
+    border: 8px solid lawngreen;
+}
+
+.neutral-review-border {
+    border: 8px solid grey;
+}
+
+.negative-review-border {
+    border: 8px solid orangered;
 }
 
 .flex_container {
