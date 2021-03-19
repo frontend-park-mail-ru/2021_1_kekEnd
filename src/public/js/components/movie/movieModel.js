@@ -20,13 +20,18 @@ export default class MovieModel {
      * Получение информации о фильме
      * @param {int} id - id фильма
      */
+    // TODO: отрефакторить
     getMovieData(id) {
         API.getMovieData(id)
             .then((res) => {
                 API.getUser()
                     .then((authRes) => {
-                        globalEventBus.emit('set movie data',
-                            {...res.data, 'isAuthorized': authRes.status === OK_CODE});
+                        API.getMovieReviews(id)
+                            .then((reviewRes) => {
+                                const reviews = {'reviews': reviewRes.data};
+                                globalEventBus.emit('set movie data',
+                                    {...res.data, ...reviews, 'isAuthorized': authRes.status === OK_CODE});
+                            });
                     });
             });
     }

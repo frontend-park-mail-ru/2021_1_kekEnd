@@ -105,7 +105,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - статус запроса и список рецензий к фильму
      */
     getMovieReviews(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/reviews/${id}/all`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/reviews`);
     }
 
     /**
@@ -114,7 +114,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     addReview(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/reviews`, 'POST', JSON.stringify(formData));
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`, 'POST', JSON.stringify(formData));
     }
 
     /**
@@ -122,7 +122,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getUserReviews() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/reviews`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`);
     }
 
     /**
@@ -131,7 +131,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - статус запроса и объект рецензии
      */
     getUserReviewForMovie(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/reviews/${id}`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`);
     }
 
     /**

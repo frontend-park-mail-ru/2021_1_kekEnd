@@ -68,7 +68,8 @@ export default class MovieView extends BaseView {
             event.preventDefault();
 
             const data = getFormValues(reviewForm);
-            console.log(data);
+            data.movie_id = reviewForm.getAttribute('data-movie-id');
+
             if (data.review_type === undefined || data.title.length === 0 || data.content.length === 0) {
                 document.getElementById('validation-hint-review').innerText = 'Заполните все поля!';
             } else {
