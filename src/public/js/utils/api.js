@@ -1,7 +1,4 @@
-/**
- * Класс с API методами
- */
-export default class Api {
+class Api {
     /**
      * Конструктор
      */
@@ -15,7 +12,7 @@ export default class Api {
      * @param {string} url - адрес запроса
      * @param {string} method - метод запроса
      * @param {Object} data - данные запроса
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     async asyncRequest(url, method = 'GET', data = null) {
         const response = await fetch(url, {
@@ -41,7 +38,7 @@ export default class Api {
     /**
      * Регистрация
      * @param {Object} userData - данные пользователя
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     signup(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData));
@@ -50,7 +47,7 @@ export default class Api {
     /**
      * Логин
      * @param {Object} userData - данные пользователя
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     login(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
@@ -58,7 +55,7 @@ export default class Api {
 
     /**
      * Выход со страницы
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     logout() {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
@@ -66,7 +63,7 @@ export default class Api {
 
     /**
      * Получить информацию пользователя
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getUser() {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`);
@@ -75,7 +72,7 @@ export default class Api {
     /**
      * Изменение данных пользователя
      * @param {Object} newData - новые данные пользователя
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     editUser(newData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
@@ -84,7 +81,7 @@ export default class Api {
     /**
      * Изменение данных пользователя
      * @param {Object} formData - данные формы (фото)
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     uploadAvatar(formData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
@@ -94,12 +91,47 @@ export default class Api {
     }
 
     /**
+     * Получить информацию о фильме
+     * @param {int} id - id фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getMovieData(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
+    }
+
+    /**
+     * Получить все рецензии к фильму
+     * @param {int} id - id фильма
+     * @return {Promise<{data: *, status: number}>} - статус запроса и список рецензий к фильму
+     */
+    getMovieReviews(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/reviews/${id}/all`);
+    }
+
+    /**
      * Добавление рецензии на фильм
      * @param {Object} formData - данные формы о рецензии
-     * @return {Object} - статус запроса и данные
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     addReview(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/review`, 'POST', JSON.stringify(formData));
+        return this.asyncRequest(`http://${this.host}:${this.port}/reviews`, 'POST', JSON.stringify(formData));
+    }
+
+    /**
+     * Получение всех рецензий пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getUserReviews() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/reviews`);
+    }
+
+    /**
+     * Получить рецензию пользователя к фильму
+     * @param {int} id - id фильма
+     * @return {Promise<{data: *, status: number}>} - статус запроса и объект рецензии
+     */
+    getUserReviewForMovie(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/reviews/${id}`);
     }
 
     /**
@@ -166,22 +198,6 @@ export default class Api {
     }
 
     /**
-     * Изменить данные пользователя
-     */
-    setProfileData() {
-
-    }
-
-    /**
-     * Получить информацию о фильме
-     * @param {int} id - id фильма
-     * @return {Object} - статус запроса и данные
-     */
-    getMovieData(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
-    }
-
-    /**
      * Добавить лайк
      */
     addLike() {
@@ -192,13 +208,6 @@ export default class Api {
      * Удалить лайк
      */
     deleteLike() {
-
-    }
-
-    /**
-     * Получить рецензии к фильму
-     */
-    getReviewsToMovie() {
 
     }
 }
