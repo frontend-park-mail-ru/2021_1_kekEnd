@@ -5,13 +5,11 @@
  * Класс ивентбаса
  */
 export class EventBus {
-    #callbacks;
-
     /**
      * Конструктор
      */
     constructor() {
-        this.#callbacks = {};
+        this.callbacks = {};
     }
 
     /**
@@ -20,12 +18,11 @@ export class EventBus {
      * @param {function} callback - колбек функция
      */
     on(name, callback) {
-        if (!(name in this.#callbacks)) {
-            this.#callbacks[name] = [];
+        if (!(name in this.callbacks)) {
+            this.callbacks[name] = [];
         }
 
-        this.#callbacks[name].push(callback);
-
+        this.callbacks[name].push(callback);
     }
 
     /**
@@ -34,8 +31,8 @@ export class EventBus {
      * @param {Object} args - аргументы функции колбека
      */
     emit(name, args) {
-        if (name in this.#callbacks) {
-            this.#callbacks[name].forEach(callback => {
+        if (name in this.callbacks) {
+            this.callbacks[name].forEach((callback) => {
                 try {
                     callback(args);
                 } catch (error) {
