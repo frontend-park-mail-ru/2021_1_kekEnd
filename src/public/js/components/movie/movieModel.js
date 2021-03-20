@@ -20,7 +20,6 @@ export default class MovieModel {
      * Получение информации о фильме
      * @param {int} id - id фильма
      */
-    // TODO: отрефакторить
     getMovieData(id) {
         let result = {};
         API.getMovieData(id)

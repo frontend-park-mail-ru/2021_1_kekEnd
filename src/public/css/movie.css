@@ -57,15 +57,15 @@
 }
 
 .positive-review-border {
-    border: 8px solid lawngreen;
+    border: 4px solid lawngreen;
 }
 
 .neutral-review-border {
-    border: 8px solid grey;
+    border: 4px solid grey;
 }
 
 .negative-review-border {
-    border: 8px solid orangered;
+    border: 4px solid orangered;
 }
 
 .flex_container {
