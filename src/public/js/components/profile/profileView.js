@@ -16,6 +16,10 @@ export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
+        // eslint-disable-next-line no-undef
+        Handlebars.registerHelper('inc', (value, options) => {
+            return parseInt(value) + 1;
+        });
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));

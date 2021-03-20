@@ -194,36 +194,49 @@
         </div>
     </div>
 
-    <!-- TODO: && !hasReview  -->
     {{#if isAuthorized}}
-        <div class="reviews-content-container">
-            <h3 class="your-review">Ваша рецензия</h3>
-            <div class="review-form-container">
-                <form id="review" class="review-form" data-movie-id="{{id}}">
-                    <select name="review_type" class="select-review-type" id="select-type">
-                        <option selected disabled>Тип рецензии</option>
-                        <option value="positive">Положительная</option>
-                        <option value="neutral">Нейтральная</option>
-                        <option value="negative">Отрицательная</option>
-                    </select>
-                    <input name="title" type="text" class="input-field input-review-title review-input"
-                           placeholder="Заголовок">
-                    <textarea name="content" class="input-field input-review-content review-input"
-                              placeholder="Ваши впечатления о фильме"></textarea>
-                    <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
-                    <button type="submit" id="review-button" class="submit-button">Отправить</button>
-                </form>
+        {{#if userReview}}
+            <div class="reviews-content-container {{userReview.review_type}}-review-border">
+                <h3 class="your-review">Ваша рецензия</h3>
+                <div class="review-body">
+                    <p class="review-title">{{userReview.title}}</p>
+                    <p class="review-content">{{userReview.content}}</p>
+                </div>
             </div>
-        </div>
+        {{else}}
+            <div class="reviews-content-container">
+                <h3 class="your-review">Напишите рецензию</h3>
+                <div class="review-form-container">
+                    <form id="review" class="review-form" data-movie-id="{{id}}">
+                        <select name="review_type" class="select-review-type" id="select-type">
+                            <option selected disabled>Тип рецензии</option>
+                            <option value="positive">Положительная</option>
+                            <option value="neutral">Нейтральная</option>
+                            <option value="negative">Отрицательная</option>
+                        </select>
+                        <input name="title" type="text" class="input-field input-review-title review-input"
+                               placeholder="Заголовок">
+                        <textarea name="content" class="input-field input-review-content review-input"
+                                  placeholder="Ваши впечатления о фильме"></textarea>
+                        <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
+                        <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        {{/if}}
     {{/if}}
 
+    <hr class="reviews-separator"/>
+
     {{#each reviews}}
-        <div class="reviews-content-container {{this.review_type}}-review-border">
-            <h3 class="your-review">Рецензия {{this.author}}</h3>
-            <div class="review-body">
-                <p class="review-title">{{this.title}}</p>
-                <p class="review-content">{{this.content}}</p>
+        {{#if (notEq this.author ../userReview.author)}}
+            <div class="reviews-content-container {{this.review_type}}-review-border">
+                <h3 class="your-review">Рецензия {{this.author}}</h3>
+                <div class="review-body">
+                    <p class="review-title">{{this.title}}</p>
+                    <p class="review-content">{{this.content}}</p>
+                </div>
             </div>
-        </div>
+        {{/if}}
     {{/each}}
 </div>

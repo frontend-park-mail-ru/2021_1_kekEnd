@@ -18,8 +18,8 @@ export default class MovieView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
         // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('inc', (value, options) => {
-            return parseInt(value) + 1;
+        Handlebars.registerHelper('notEq', (arg1, arg2, options) => {
+            return arg1 !== arg2;
         });
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));

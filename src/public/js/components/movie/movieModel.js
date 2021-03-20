@@ -27,10 +27,17 @@ export default class MovieModel {
                 API.getUser()
                     .then((authRes) => {
                         API.getMovieReviews(id)
-                            .then((reviewRes) => {
-                                const reviews = {'reviews': reviewRes.data};
-                                globalEventBus.emit('set movie data',
-                                    {...res.data, ...reviews, 'isAuthorized': authRes.status === OK_CODE});
+                            .then((movieReviews) => {
+                                API.getUserReviewForMovie(id)
+                                    .then((userReviewRes) => {
+                                        const reviews = {'reviews': movieReviews.data};
+                                        globalEventBus.emit('set movie data',
+                                            {
+                                                ...res.data, ...reviews, 'isAuthorized': authRes.status === OK_CODE,
+                                                'userReview':
+                                                    (userReviewRes.status === OK_CODE) ? (userReviewRes.data) : null,
+                                            });
+                                    });
                             });
                     });
             });

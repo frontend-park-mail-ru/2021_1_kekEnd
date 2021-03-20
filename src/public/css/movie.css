@@ -39,6 +39,11 @@
     height: 120px;
 }
 
+.reviews-separator {
+    width: 80%;
+    margin: 40px auto 40px auto;
+}
+
 .review-title {
     padding: 20px 0 20px 40px;
     font-size: 18px;
