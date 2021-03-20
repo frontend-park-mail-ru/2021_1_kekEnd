@@ -38,16 +38,24 @@ export default class ProfileModel {
             ],
         };
 
+        let result = {};
         API.getUser()
             .then((res) => {
                 if (res.status === OK_CODE) {
-                    globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
+                    result = {...result, 'isAuthorized': true, ...res.data, ...additionalData};
                 } else {
-                    globalRouter.pushState(PATHS.login);
+                    throw new Error('User not authenticated');
                 }
+                return API.getUserReviews();
+            })
+            .then((reviewsRes) => {
+                result.reviews = reviewsRes.data;
+                globalEventBus.emit('set profile data', result);
+            })
+            .catch((err) => {
+                globalRouter.pushState(PATHS.login);
             });
     }
-
 
     /**
      * Выход со страницы
