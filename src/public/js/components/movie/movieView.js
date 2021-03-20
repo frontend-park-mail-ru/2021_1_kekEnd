@@ -107,11 +107,21 @@ export default class MovieView extends BaseView {
         }
     }
 
-    displayNewReview(status) {
+    displayNewReview(statusAndReview) {
+        const [status, review] = statusAndReview;
         if (status) {
-            console.log('Review was sent');
+            // TODO: избавиться от верстки в .js
+            const container = document.getElementById('user-review-container');
+            container.innerHTML = `
+                <h3 class="your-review">Ваша рецензия</h3>
+                <div class="review-body">
+                    <p class="review-title">${review.title}</p>
+                    <p class="review-content">${review.content}</p>
+                </div>
+                `;
+            container.classList.add(`${review.review_type}-review-border`);
         } else {
-            console.log('Review was not sent');
+            document.getElementById('validation-hint-review').innerText = 'Ошибка публикации рецензии';
         }
     }
 

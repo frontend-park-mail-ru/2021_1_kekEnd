@@ -46,7 +46,7 @@ export default class MovieModel {
     addReview(review) {
         API.addReview(review)
             .then((res) => {
-                globalEventBus.emit('review uploaded', res.status === CREATED);
+                globalEventBus.emit('review uploaded', [res.status === CREATED, review]);
             });
     }
 
