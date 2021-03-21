@@ -15,7 +15,7 @@ export default class Api {
      * @param {string} url - адрес запроса
      * @param {string} method - метод запроса
      * @param {Object} data - данные запроса
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     async asyncRequest(url, method = 'GET', data = null) {
         const response = await fetch(url, {
@@ -41,7 +41,7 @@ export default class Api {
     /**
      * Регистрация
      * @param {Object} userData - данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     signup(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData));
@@ -50,7 +50,7 @@ export default class Api {
     /**
      * Логин
      * @param {Object} userData - данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     login(userData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
@@ -58,7 +58,7 @@ export default class Api {
 
     /**
      * Выход со страницы
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     logout() {
         return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
@@ -66,7 +66,7 @@ export default class Api {
 
     /**
      * Получить информацию пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     getUser() {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`);
@@ -75,7 +75,7 @@ export default class Api {
     /**
      * Изменение данных пользователя
      * @param {Object} newData - новые данные пользователя
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     editUser(newData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
@@ -84,7 +84,7 @@ export default class Api {
     /**
      * Изменение данных пользователя
      * @param {Object} formData - данные формы (фото)
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     uploadAvatar(formData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
@@ -166,7 +166,7 @@ export default class Api {
     /**
      * Получить информацию о фильме
      * @param {int} id - id фильма
-     * @returns {Object} - статус запроса и данные
+     * @return {Object} - статус запроса и данные
      */
     getMovieData(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
