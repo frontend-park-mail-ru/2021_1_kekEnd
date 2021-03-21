@@ -31,6 +31,10 @@ body {
     border-bottom-left-radius: 4px;
 }
 
+.avatar {
+    object-fit: cover;
+}
+
 .content {
     width: 60%;
     height: 100%;

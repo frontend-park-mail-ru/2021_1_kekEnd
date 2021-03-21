@@ -14,12 +14,21 @@
         </div>
     </div>
     <div class="header__section">
-        <div class="header__item header-button">
-            <a href="/login">Войти</a>
-        </div>
-        <div class="header__item header-button">
-            <a href="/signup">Регистрация</a>
-        </div>
+        {{#if isAuthorized}}
+            <div class="header__item header-button">
+                <a href="/">Профиль</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/logout" id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header-button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
     </div>
 </div>
 
@@ -27,23 +36,23 @@
     <div class="profile-card">
         <div class="container">
             <div class="avatar-container">
-                <img src="https://i.imgur.com/ZaZ7FP4.jpg" alt="">
+                <img class="avatar" src="{{avatar}}" alt="">
             </div>
 
             <div class="content">
                 <div class="head">
-                    <p id="user-full-name" class="user-name">{{fullname}}</p>
+                    <p id="user-full-name" class="user-name">{{username}}</p>
                     <span id="user-email" class="user-email">{{email}}</span>
                     <button id="button-profile-settings" class="settings-button">Настройки</button>
                 </div>
                 <div class="stats">
                     <div class="stats-item">
                         <p class="stats-item-name">Посмотрел фильмов</p>
-                        <span id="user-watched-movies-cnt" class="stats-item-value">{{watchedMoviesCount}}</span>
+                        <span id="user-watched-movies-cnt" class="stats-item-value">{{movies_watched}}</span>
                     </div>
                     <div class="stats-item">
                         <p class="stats-item-name">Рецензий</p>
-                        <span id="user-reviews-cnt" class="stats-item-value">{{reviewsCount}}</span>
+                        <span id="user-reviews-cnt" class="stats-item-value">{{reviews_number}}</span>
                     </div>
                 </div>
             </div>
@@ -53,10 +62,11 @@
     <h3 class="section-name">Любимые фильмы</h3>
 
     <!-- TODO: решить проблему источников изображений -->
+
     <div class="slider">
-        {{#each filmImageList}}
+        {{#each favourite_movies}}
             <div class="slider-card">
-                <img src="{{this}}">
+                <a href="/movie/{{ inc @index}}"><img src="{{this}}"></a>
             </div>
         {{/each}}
     </div>
@@ -64,7 +74,7 @@
     <h3 class="section-name">Любимые актеры</h3>
 
     <div class="slider">
-        {{#each bestActorImageList}}
+        {{#each favourite_actors}}
             <div class="slider-card">
                 <img src="{{this}}">
             </div>
@@ -73,3 +83,4 @@
 
     <h3 class="section-name">Рецензии</h3>
 </div>
+

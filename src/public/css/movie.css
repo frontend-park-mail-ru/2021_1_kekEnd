@@ -21,7 +21,6 @@
 
 .background_trailer_img {
     height: 400px;
-    background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url("../img/background_trailer.webp");
     box-shadow: 0 0 30px 30px #1C2541 inset;
     background-repeat: no-repeat;
     background-position: center;
