@@ -1,6 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
-import {OK} from "../../utils/codes.js";
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -17,6 +17,7 @@ export default class MovieModel {
 
     /**
      * Получение информации о фильме
+     * @param {int} id - id фильма
      */
     getMovieData(id) {
         API.getMovieData(id)
@@ -24,7 +25,7 @@ export default class MovieModel {
                 API.getUser()
                     .then((authRes) => {
                         globalEventBus.emit('set movie data',
-                            {...res.data, 'isAuthorized': authRes.status === OK});
+                            {...res.data, 'isAuthorized': authRes.status === OK_CODE});
                     });
             });
     }
@@ -35,7 +36,7 @@ export default class MovieModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK)
+                globalEventBus.emit('logout status', res.status === OK_CODE);
             });
     }
 }

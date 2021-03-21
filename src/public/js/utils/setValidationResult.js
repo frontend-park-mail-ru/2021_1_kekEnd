@@ -23,3 +23,13 @@ export const setValidationResult = (inputField, hintElement, errors) => {
     }
     inputField.classList.add(validity);
 };
+
+export const setListenersForHidingValidationError = () => {
+    [...document.querySelectorAll('.input-field')].forEach((item) => {
+        item.addEventListener('click', () => {
+            [...document.querySelectorAll('.validation-hint')].forEach((item) => {
+                item.innerText = '';
+            });
+        });
+    });
+};

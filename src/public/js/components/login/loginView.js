@@ -4,7 +4,8 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import './login.tmpl.js';
-import {OK} from '../../utils/codes.js';
+import {OK_CODE} from '../../utils/codes.js';
+import {setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 
 
 /**
@@ -43,6 +44,8 @@ export default class LoginView extends BaseView {
 
             globalEventBus.emit('login clicked', data);
         });
+
+        setListenersForHidingValidationError();
     }
 
     /**
@@ -50,13 +53,13 @@ export default class LoginView extends BaseView {
      * @param {int} status - статус запроса
      */
     processLoginAttempt(status) {
-        if (status === OK) {
+        if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Input format error',
-                401: 'Incorrect login/password',
-                500: 'Server Error',
+                400: 'Введены некорректные данные!',
+                401: 'Введен некорректный логин или пароль!',
+                500: 'Ошибка сервера',
             };
             document.getElementById('validation-hint-login').innerText = errors[status];
         }

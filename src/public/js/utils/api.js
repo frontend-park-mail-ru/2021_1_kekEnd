@@ -22,19 +22,19 @@ export default class Api {
             method: method,
             mode: 'cors',
             credentials: 'include',
-            body: data
+            body: data,
         });
 
         let responseData;
         try {
             responseData = await response.json();
         } catch (e) {
-            responseData = await response.data
+            responseData = await response.data;
         }
 
         return {
             status: response.status,
-            data: responseData
+            data: responseData,
         };
     }
 
@@ -44,7 +44,7 @@ export default class Api {
      * @returns {Object} - статус запроса и данные
      */
     signup(userData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData))
+        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData));
     }
 
     /**
@@ -69,7 +69,7 @@ export default class Api {
      * @returns {Object} - статус запроса и данные
      */
     getUser() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`)
+        return this.asyncRequest(`http://${this.host}:${this.port}/users`);
     }
 
     /**
@@ -87,7 +87,7 @@ export default class Api {
      * @returns {Object} - статус запроса и данные
      */
     uploadAvatar(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/upload`, 'POST', formData,
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
             {
                 'Content-Type': 'multipart/form-data',
             });
@@ -165,6 +165,7 @@ export default class Api {
 
     /**
      * Получить информацию о фильме
+     * @param {int} id - id фильма
      * @returns {Object} - статус запроса и данные
      */
     getMovieData(id) {
@@ -200,4 +201,4 @@ export default class Api {
     }
 }
 
-export const API = new Api()
+export const API = new Api();
