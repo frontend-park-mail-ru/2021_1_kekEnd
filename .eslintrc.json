@@ -13,6 +13,7 @@
         "sourceType": "module"
     },
     "ignorePatterns": ["*.tmpl.js"],
+    "parser": "babel-eslint",
     "rules": {
       "indent": ["error", 4],
       "max-len": ["error", 120, 2, {

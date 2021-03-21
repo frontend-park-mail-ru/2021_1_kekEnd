@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2021_1_kekEnd#readme",
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.22.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
