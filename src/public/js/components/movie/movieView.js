@@ -64,18 +64,20 @@ export default class MovieView extends BaseView {
         document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
 
         const reviewForm = document.getElementById('review');
-        reviewForm.addEventListener('submit', (event) => {
-            event.preventDefault();
+        if (reviewForm !== null) {
+            reviewForm.addEventListener('submit', (event) => {
+                event.preventDefault();
 
-            const data = getFormValues(reviewForm);
-            data.movie_id = reviewForm.getAttribute('data-movie-id');
+                const data = getFormValues(reviewForm);
+                data.movie_id = reviewForm.getAttribute('data-movie-id');
 
-            if (data.review_type === undefined || data.title.length === 0 || data.content.length === 0) {
-                document.getElementById('validation-hint-review').innerText = 'Заполните все поля!';
-            } else {
-                globalEventBus.emit('send review', data);
-            }
-        });
+                if (data.review_type === undefined || data.title.length === 0 || data.content.length === 0) {
+                    document.getElementById('validation-hint-review').innerText = 'Заполните все поля!';
+                } else {
+                    globalEventBus.emit('send review', data);
+                }
+            });
+        }
     }
 
     /**
@@ -110,16 +112,7 @@ export default class MovieView extends BaseView {
     displayNewReview(statusAndReview) {
         const [status, review] = statusAndReview;
         if (status) {
-            // TODO: избавиться от верстки в .js
-            const container = document.getElementById('user-review-container');
-            container.innerHTML = `
-                <h3 class="your-review">Ваша рецензия</h3>
-                <div class="review-body">
-                    <p class="review-title">${review.title}</p>
-                    <p class="review-content">${review.content}</p>
-                </div>
-                `;
-            container.classList.add(`${review.review_type}-review-border`);
+            this.render(review.movie_id);
         } else {
             document.getElementById('validation-hint-review').innerText = 'Ошибка публикации рецензии';
         }
