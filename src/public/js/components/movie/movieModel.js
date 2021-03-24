@@ -21,23 +21,15 @@ export default class MovieModel {
      * @param {int} id - id фильма
      */
     getMovieData(id) {
-        let result = {};
-        API.getMovieData(id)
-            .then((movieData) => {
-                result = {...movieData.data};
-                return API.getUser();
-            })
-            .then((authRes) => {
-                result.isAuthorized = authRes.status === OK_CODE;
-                return API.getMovieReviews(id);
-            })
-            .then((movieReviews) => {
-                result.reviews = movieReviews.data;
-                return API.getUserReviewForMovie(id);
-            })
-            .then((userReviewRes) => {
-                result.userReview = (userReviewRes.status === OK_CODE) ? (userReviewRes.data) : null;
-                globalEventBus.emit('set movie data', result);
+        Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id), API.getUserReviewForMovie(id)])
+            .then((responses) => {
+                const [userResp, movieDataResp, movieReviewsResp, userReviewResp] = responses;
+                globalEventBus.emit('set movie data', {
+                    ...movieDataResp.data,
+                    'isAuthorized': userResp.status === OK_CODE,
+                    'reviews': movieReviewsResp.data,
+                    'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
+                });
             });
     }
 

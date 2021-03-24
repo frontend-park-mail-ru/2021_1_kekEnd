@@ -44,13 +44,12 @@ export default class ProfileModel {
                     throw new Error('Authentication error');
                 }
                 const [userData, reviews] = responses.map((resp) => resp.data);
-                const result = {
+                globalEventBus.emit('set profile data', {
                     ...userData,
                     ...additionalData,
                     'isAuthorized': true,
                     'reviews': reviews,
-                };
-                globalEventBus.emit('set profile data', result);
+                });
             })
             .catch((err) => {
                 globalRouter.pushState(PATHS.login);
