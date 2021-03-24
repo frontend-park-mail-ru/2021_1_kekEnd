@@ -38,18 +38,18 @@ export default class ProfileModel {
             ],
         };
 
-        let result = {};
-        API.getUser()
-            .then((res) => {
-                if (res.status === OK_CODE) {
-                    result = {...result, 'isAuthorized': true, ...res.data, ...additionalData};
-                } else {
-                    throw new Error('User not authenticated');
+        Promise.all([API.getUser(), API.getUserReviews()])
+            .then((responses) => {
+                if (responses.some((resp) => resp.status !== OK_CODE)) {
+                    throw new Error('Authentication error');
                 }
-                return API.getUserReviews();
-            })
-            .then((reviewsRes) => {
-                result.reviews = reviewsRes.data;
+                const [userData, reviews] = responses.map((resp) => resp.data);
+                const result = {
+                    ...userData,
+                    ...additionalData,
+                    'isAuthorized': true,
+                    'reviews': reviews,
+                };
                 globalEventBus.emit('set profile data', result);
             })
             .catch((err) => {
