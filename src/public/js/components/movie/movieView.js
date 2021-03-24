@@ -4,6 +4,8 @@ import './movie.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
+import Validator from '../../utils/validation.js';
+import {setValidationHint} from '../../utils/setValidationResult.js';
 
 
 /**
@@ -71,9 +73,11 @@ export default class MovieView extends BaseView {
                 const data = getFormValues(reviewForm);
                 data.movie_id = reviewForm.getAttribute('data-movie-id');
 
-                if (data.review_type === undefined || data.title.length === 0 || data.content.length === 0) {
-                    document.getElementById('validation-hint-review').innerText = 'Заполните все поля!';
-                } else {
+                const validator = new Validator();
+                const reviewErrors = validator.validateReview(data);
+                const validationHint = document.getElementById('validation-hint-review');
+                setValidationHint(validationHint, reviewErrors);
+                if (reviewErrors.length === 0) {
                     globalEventBus.emit('send review', data);
                 }
             });

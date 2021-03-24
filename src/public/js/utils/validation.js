@@ -60,21 +60,6 @@ export default class Validator {
     }
 
     /**
-     * Проверка имени
-     * @param {string} fullname - имя
-     * @return {array} - код ошибки
-     */
-    validateFullname(fullname) {
-        const error = [];
-
-        if (fullname.length === 0) {
-            error.push('Имя не должно быть пустым!');
-        }
-
-        return error;
-    }
-
-    /**
      * Проверка аватара
      * @param {string} avatar - аватар
      * @return {array} - код ошибки
@@ -93,6 +78,16 @@ export default class Validator {
 
         if (!(avatar.size <= 5242880)) {
             error.push('Размер файла не должен превышать 5MB!');
+        }
+
+        return error;
+    }
+
+    validateReview(review) {
+        const error = [];
+
+        if (review.review_type === undefined || review.title.length === 0 || review.content.length === 0) {
+            error.push('Заполните все поля!');
         }
 
         return error;
