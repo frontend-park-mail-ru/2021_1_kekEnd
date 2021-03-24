@@ -25,7 +25,6 @@ export class EventBus {
         }
 
         this.#callbacks[name].push(callback);
-
     }
 
     /**
@@ -35,7 +34,7 @@ export class EventBus {
      */
     emit(name, args) {
         if (name in this.#callbacks) {
-            this.#callbacks[name].forEach(callback => {
+            this.#callbacks[name].forEach((callback) => {
                 try {
                     callback(args);
                 } catch (error) {
