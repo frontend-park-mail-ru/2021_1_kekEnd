@@ -98,13 +98,14 @@ body {
 
 .slider {
     display: flex;
-    justify-content: center;
-    overflow: hidden;
+    flex-wrap: nowrap;
+    overflow: auto;
     scroll-behavior: smooth;
     gap: 16px;
 }
 
 .slider-card {
+    flex: 0 0 auto;
     width: 110px;
     height: 180px;
     margin: 12px 0;
@@ -120,7 +121,16 @@ body {
     border-radius: 8px;
 }
 
+.slider-card:first-child {
+    margin-left: auto;
+}
+
+.slider-card:last-child {
+    margin-right: auto;
+}
+
 .slider-review-card {
+    flex: 0 0 auto;
     width: 200px;
     margin: 12px 0;
     color: black;
@@ -130,10 +140,18 @@ body {
     overflow: hidden;
 }
 
+.slider-review-card:first-child {
+    margin-left: auto;
+}
+
+.slider-review-card:last-child {
+    margin-right: auto;
+}
+
 .review-card {
+    height: 100%;
     padding: 20px 16px 20px 16px;
     border-radius: 8px;
-    height: 100%;
 }
 
 .review-card-title {
