@@ -86,9 +86,11 @@
 
         <div class="slider">
             {{#each reviews}}
-                <div class="slider-review-card {{this.review_type}}-review-border rounded">
-                    <p class="review-card-title">{{this.title}}</p>
-                    <p class="review-card-content">{{this.content}}</p>
+                <div class="slider-review-card">
+                    <div class="review-card {{this.review_type}}-review-background">
+                        <p class="review-card-title">{{this.title}}</p>
+                        <p class="review-card-content">{{this.content}}</p>
+                    </div>
                 </div>
             {{/each}}
         </div>
