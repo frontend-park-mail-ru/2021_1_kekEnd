@@ -3,19 +3,31 @@
     margin-right: auto;
 }
 
-.movie_content_container, .reviews-content-container {
+.content-container {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+    background-color: white;
+}
+
+.movie-content-container, .write-review-container {
     background-color: #1C2541;
+    padding-bottom: 20px;
+}
+
+.review-content-container {
+    padding-bottom: 20px;
 }
 
 .your-review {
     padding: 40px 0 0 40px;
-    color: white;
     font-size: 24px;
     text-align: center;
+}
+
+.write-review {
+    color: white;
 }
 
 .review-form-container {
@@ -29,10 +41,6 @@
     margin-bottom: 8px;
 }
 
-.review-input {
-    color: white;
-}
-
 .review-input::placeholder {
     color: grey;
 }
@@ -40,11 +48,13 @@
 .input-review-title {
     font-size: 20px;
     font-weight: bold;
+    color: white;
 }
 
 .input-review-content {
     font-size: 16px;
     height: 120px;
+    color: white;
 }
 
 .reviews-separator {
@@ -57,26 +67,24 @@
     padding-bottom: 20px;
     font-size: 20px;
     font-weight: bold;
-    color: white;
     border-bottom: 1px solid;
 }
 
 .review-content {
     margin: 20px 0 40px 40px;
     font-size: 16px;
-    color: white;
 }
 
-.positive-review-border {
-    border: 4px solid lawngreen;
+.positive-review-background {
+    background-color: rgba(195, 233, 145, .5)
 }
 
-.neutral-review-border {
-    border: 4px solid grey;
+.neutral-review-background {
+    background-color: grey;
 }
 
-.negative-review-border {
-    border: 4px solid orangered;
+.negative-review-background {
+    background-color: orangered;
 }
 
 .flex_container {
