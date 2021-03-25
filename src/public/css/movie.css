@@ -20,6 +20,18 @@
     padding-bottom: 20px;
 }
 
+.edit-button {
+    margin-left: 12px;
+}
+
+.fa-button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: inherit;
+    vertical-align: middle;
+}
+
 .your-review {
     padding: 40px 0 0 40px;
     font-size: 24px;
