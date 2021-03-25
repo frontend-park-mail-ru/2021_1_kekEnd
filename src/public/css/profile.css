@@ -102,6 +102,11 @@ body {
     overflow: auto;
     scroll-behavior: smooth;
     gap: 16px;
+    padding: 0 50px;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
 }
 
 .slider-card {
