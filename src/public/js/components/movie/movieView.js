@@ -25,6 +25,7 @@ export default class MovieView extends BaseView {
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
+        globalEventBus.on('review edited', this.processReviewEdit.bind(this));
         globalEventBus.on('review deleted', this.processReviewDeletion.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
@@ -127,6 +128,15 @@ export default class MovieView extends BaseView {
             this.render(review.movie_id);
         } else {
             document.getElementById('validation-hint-review').innerText = 'Ошибка публикации рецензии';
+        }
+    }
+
+    processReviewEdit(statusAndReview) {
+        const [status, review] = statusAndReview;
+        if (status) {
+            this.render(review.movie_id);
+        } else {
+            document.getElementById('validation-hint-review').innerText = 'Ошибка редактирования рецензии';
         }
     }
 

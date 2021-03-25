@@ -134,7 +134,11 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`);
     }
 
-    deleteReview(id) {
+    editUserReviewForMovie(formData) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${formData.movie_id}/reviews`, 'PUT');
+    }
+
+    deleteUserReviewForMovie(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`, 'DELETE');
     }
 
