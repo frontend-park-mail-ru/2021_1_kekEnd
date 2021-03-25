@@ -134,6 +134,10 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`);
     }
 
+    deleteReview(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`, 'DELETE');
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

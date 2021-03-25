@@ -13,6 +13,7 @@ export default class MovieModel {
     constructor() {
         globalEventBus.on('get movie data', this.getMovieData.bind(this));
         globalEventBus.on('send review', this.addReview.bind(this));
+        globalEventBus.on('delete review', this.deleteReview.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
@@ -37,6 +38,13 @@ export default class MovieModel {
         API.addReview(review)
             .then((res) => {
                 globalEventBus.emit('review uploaded', [res.status === CREATED, review]);
+            });
+    }
+
+    deleteReview(id) {
+        API.deleteReview(id)
+            .then((res) => {
+                globalEventBus.emit('review deleted', [res.status === OK_CODE, id]);
             });
     }
 

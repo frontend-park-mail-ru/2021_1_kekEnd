@@ -7,7 +7,6 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
 
-
 /**
  * Представление страницы фильма
  */
@@ -26,6 +25,7 @@ export default class MovieView extends BaseView {
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
+        globalEventBus.on('review deleted', this.processReviewDeletion.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
@@ -82,6 +82,14 @@ export default class MovieView extends BaseView {
                 }
             });
         }
+
+        const deleteReviewButton = document.getElementById('delete-button');
+        if (deleteReviewButton !== null) {
+            deleteReviewButton.addEventListener('click', () => {
+                const movieID = deleteReviewButton.getAttribute('data-movie-id');
+                globalEventBus.emit('delete review', movieID);
+            });
+        }
     }
 
     /**
@@ -119,6 +127,13 @@ export default class MovieView extends BaseView {
             this.render(review.movie_id);
         } else {
             document.getElementById('validation-hint-review').innerText = 'Ошибка публикации рецензии';
+        }
+    }
+
+    processReviewDeletion(statusAndID) {
+        const [status, movieID] = statusAndID;
+        if (status) {
+            this.render(movieID);
         }
     }
 
