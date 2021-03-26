@@ -84,6 +84,15 @@ export default class MovieView extends BaseView {
             });
         }
 
+        const editReviewButton = document.getElementById('edit-button');
+        if (editReviewButton !== null) {
+            editReviewButton.addEventListener('click', () => {
+                const movieID = editReviewButton.getAttribute('data-movie-id');
+                // TODO: display form with filled fields
+                console.log(movieID);
+            });
+        }
+
         const deleteReviewButton = document.getElementById('delete-button');
         if (deleteReviewButton !== null) {
             deleteReviewButton.addEventListener('click', () => {
