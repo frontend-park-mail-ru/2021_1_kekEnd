@@ -1,6 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
-import {OK} from '../../utils/codes.js';
+import {OK_CODE} from '../../utils/codes.js';
 
 
 /**
@@ -12,7 +12,7 @@ export default class ActorModel {
      * Конструктор
      */
     constructor() {
-        this.getMovieData = this.getMovieData.bind(this);
+        this.getActorData = this.getActorData.bind(this);
         this.logout = this.logout.bind(this);
 
         globalEventBus.on('get actor data', this.getActorData);
@@ -30,7 +30,7 @@ export default class ActorModel {
                 API.getUser()
                     .then((authRes) => {
                         globalEventBus.emit('set actor data',
-                            {...res.data, 'isAuthorized': authRes.status === OK});
+                            {...res.data, 'isAuthorized': authRes.status === OK_CODE});
                     });
             });
         */
@@ -43,7 +43,7 @@ export default class ActorModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK);
+                globalEventBus.emit('logout status', res.status === OK_CODE);
             });
     }
 }
