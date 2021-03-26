@@ -34,7 +34,37 @@ export default class ActorModel {
                     });
             });
         */
-        console.log('actor data requested');
+        const data = {
+            name: 'Боб Одинкёрк',
+            biography: 'Родился, ..., снимается в фильмах и сериалах',
+            birthdate: '22 октября, 1962',
+            origin: 'Напервилль, Иллинойс, США',
+            genres: [
+                'комедия',
+                'драма',
+                'мультфильм',
+            ],
+            movies_count: 187,
+            movies_rating: 10,
+            movies: [
+                {
+                    title: 'Никто (2021)',
+                    url: '',
+                    rating: 7.5,
+                },
+                {
+                    title: 'Отмена (сериал, 2019)',
+                    url: '',
+                    rating: 7.6,
+                },
+                {
+                    title: 'Маленькие женщины (2019)',
+                    url: '',
+                    rating: 7.6,
+                },
+            ],
+        };
+        globalEventBus.emit('set actor data', data);
     }
 
     /**
