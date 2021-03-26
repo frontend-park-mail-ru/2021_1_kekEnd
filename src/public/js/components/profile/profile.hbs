@@ -76,7 +76,7 @@
     <div class="slider">
         {{#each favourite_actors}}
             <div class="slider-card">
-                <img src="{{this}}">
+                <a href="/actor/{{ inc @index}}"><img src="{{this}}"></a>
             </div>
         {{/each}}
     </div>
