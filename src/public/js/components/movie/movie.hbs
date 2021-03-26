@@ -70,25 +70,18 @@
                     <div class="movie_info">
                         <div class="info_row_nounderline">
                             <div class="info_title">Аудиодорожки</div>
-                            <span class="info_link">
-
-                                {{#each voiceover}}
-                                    {{this}}
-                                    {{#unless @last}},{{/unless}}
-                                {{/each}}
-
-                            </span>
+                            {{#each voiceover}}
+                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}
+                            {{/each}}
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Субтитры</div>
-                            <span class="info_link">{{#each subtitles}}{{this}}{{#unless @last}}
-                                ,{{/unless}}{{/each}}</span>
+                            {{#each subtitles}}<span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Качество</div>
 
                             <span class="info_link">{{quality}}</span>
-
                         </div>
                     </div>
 
@@ -105,8 +98,7 @@
                             <div class="info_title">Страна</div>
 
                             {{#each country}}
-                                <a href="" class="info_link">{{this}}</a>
-                                {{#unless @last}}<span>,</span>{{/unless}}
+                                <a href="" class="info_link">{{this}}</a>{{#unless @last}}, {{/unless}}
                             {{/each}}
 
                         </div>
@@ -115,7 +107,7 @@
 
                             {{#each genre}}
                                 <a href="" class="info_link">{{this}}</a>
-                                {{#unless @last}}<span>,</span>{{/unless}}
+                                {{#unless @last}}<span>, </span>{{/unless}}
                             {{/each}}
 
                         </div>
