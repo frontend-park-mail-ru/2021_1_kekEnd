@@ -24,6 +24,7 @@ export default class ActorModel {
      * @param {int} id - id актера
      */
     getActorData(id) {
+        /*
         API.getActorData(id)
             .then((res) => {
                 API.getUser()
@@ -32,6 +33,8 @@ export default class ActorModel {
                             {...res.data, 'isAuthorized': authRes.status === OK});
                     });
             });
+        */
+        console.log('actor data requested');
     }
 
     /**
