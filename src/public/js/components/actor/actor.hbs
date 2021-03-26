@@ -37,164 +37,76 @@
 </div>
 
 <div class="main">
-    <div class="movie_content_container">
-        <div class="background_trailer">
-            <div class="background_trailer_img center"
-                style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
-        </div>
+    <div class="actor-content-container">
 
         <div class="flex_container">
-            <div class="movie_content_left">
-                <div class="movie_content_left_inner">
-                    <img class="movie_content_left_img" src="{{poster}}">
-                    <img class="movie_content_left_img" src="{{trailer_preview}}">
-                    <button id="button-watch-later" class="watch_later_button">
-                        Буду смотреть
-                    </button>
-                    <button id="button-plus" class="plus_button">
-                        +
-                    </button>
-                    <button id="button-other" class="other_button">
-                        Еще какая-то кнопка
+
+            <div class="actor-content-left">
+                <div class="actor-content-left-inner">
+                    <img class="actor-avatar-img" src="{{avatar}}">
+                    <button id="actor-button-addtofavorites" class="actor-button-addtofavorites">
+                        В избранное
                     </button>
                 </div>
             </div>
-            <div class="movie_content_center">
-                <div class="movie_info_title">
+
+            <div class="actor-content-center">
+                <div class="actor-content-name">
                     <h1>
-
-                        {{title}}
-
+                        {{name}}
                     </h1>
                 </div>
-                <div class="meta_info">
-
-                    <p>{{description}}</p>
-
-                </div>
-                <div class="movie_info">
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Аудиодорожки</div>
-                        <span class="info_link">
-
-                            {{#each voiceover}}
-                                {{this}}
-                                {{#unless @last}},{{/unless}}
-                            {{/each}}
-
-                        </span>
-                    </div>
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Субтитры</div>
-                        <span class="info_link">{{#each subtitles}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
-                    </div>
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Качество</div>
-
-                        <span class="info_link">{{quality}}</span>
-
+                <div class="actor-biography-content">
+                    <h2 class="actor-biography-header">Биография</h2>
+                    <div class="actor-biography-text-container">
+                        <p class="actor-biography-text">{{biography}}</p>
                     </div>
                 </div>
 
-                <h2 class="movie_info_title">О фильме</h2>
-
-                <div class="movie_info">
+                <div class="actor-info">
                     <div class="info_row">
-                        <div class="info_title">Год производства</div>
-
-                        <a href="" class="info_link">{{production_year}}</a>
-
+                        <div class="info_title">Дата рождения</div>
+                        <a href="" class="info_link">{{birthdate}}</a>
                     </div>
                     <div class="info_row">
                         <div class="info_title">Страна</div>
+                        <a href="" class="info_link">{{origin}}</a>
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Жанры</div>
 
-                        {{#each country}}
+                        {{#each genres}}
                             <a href="" class="info_link">{{this}}</a>
                             {{#unless @last}}<span>,</span>{{/unless}}
                         {{/each}}
 
                     </div>
                     <div class="info_row">
-                        <div class="info_title">Жанр</div>
-
-                        {{#each genre}}
-                            <a href="" class="info_link">{{this}}</a>
-                            {{#unless @last}}<span>,</span>{{/unless}}
-                        {{/each}}
-
+                        <div class="info_title">Всего фильмов</div>
+                        <p class="info_value">{{movies_count}}</p>
                     </div>
                     <div class="info_row">
-                        <div class="info_title">Слоган</div>
-
-                        <div class="info_value">«{{slogan}}»</div>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Режиссёр</div>
-
-                        <a href="" class="info_link">{{director}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Сценарист</div>
-
-                        <a href="" class="info_link">{{scriptwriter}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Продюсер</div>
-
-                        <a href="" class="info_link">{{producer}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Оператор</div>
-
-                        <a href="" class="info_link">{{operator}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Композитор</div>
-
-                        <a href="" class="info_link">{{composer}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Художник</div>
-
-                        <a href="" class="info_link">{{artist}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Монтаж</div>
-
-                        <a href="" class="info_link">{{montage}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Бюджет</div>
-
-                        <a href="" class="info_link">{{budget}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Время</div>
-
-                        <div class="info_value">{{duration}}</div>
-
+                        <div class="info_title">Средний рейтинг фильмов</div>
+                        <p class="info_value">{{movies_rating}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="movie_content_right">
-                <h3 class="movie_content_right_header">В главных ролях</h3>
-                <ul class="actors_list">
 
-                    {{#each actors}}
-                        <li><a class="actors_list_item">{{this}}</a></li>
-                    {{/each}}
+                
+                <div class="actor-movies-content">
+                    <h3 class="actor-movies-header">Фильмы</h3>
+                    <div class="actor-movies-rating"><p>Средний рейтинг: {{movies_rating}}</p></div>
+                    <div class="actor-movies-list">
+                        {{#each movies}}
+                            <div class="actor-movies-item">
+                                <a class="actor-movie-title" href="{{this.url}}">{{this.title}}</a>
+                                <p class="actor-movie-rating">Рейтинг: {{this.rating}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
 
-                </ul>
             </div>
+
         </div>
     </div>
 </div>
