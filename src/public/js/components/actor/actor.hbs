@@ -1,0 +1,196 @@
+<div class="header">
+    <div class="header__section">
+        <div class="header__item header-logo">
+            <a href="/">КиноПоиск</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Фильмы</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Актеры</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Поиск</a>
+        </div>
+    </div>
+    <div class="header__section">
+        {{#if isAuthorized}}
+            <div class="header__item header-button">
+                <a href="/">Профиль</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/logout" id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header-button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+<div class="main">
+    <div class="movie_content_container">
+        <div class="background_trailer">
+            <div class="background_trailer_img center" style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
+        </div>
+
+        <div class="flex_container">
+            <div class="movie_content_left">
+                <div class="movie_content_left_inner">
+                    <img class="movie_content_left_img" src="{{poster}}">
+                    <img class="movie_content_left_img" src="{{trailer_preview}}">
+                    <button id="button-watch-later" class="watch_later_button">
+                        Буду смотреть
+                    </button>
+                    <button id="button-plus" class="plus_button">
+                        +
+                    </button>
+                    <button id="button-other" class="other_button">
+                        Еще какая-то кнопка
+                    </button>
+                </div>
+            </div>
+            <div class="movie_content_center">
+                <div class="movie_info_title">
+                    <h1>
+
+                        {{title}}
+
+                    </h1>
+                </div>
+                <div class="meta_info">
+
+                    <p>{{description}}</p>
+
+                </div>
+                <div class="movie_info">
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Аудиодорожки</div>
+                        <span class="info_link">
+
+                            {{#each voiceover}}
+                                {{this}}
+                                {{#unless @last}},{{/unless}}
+                            {{/each}}
+
+                        </span>
+                    </div>
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Субтитры</div>
+                        <span class="info_link">{{#each subtitles}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
+                    </div>
+                    <div class="info_row_nounderline">
+                        <div class="info_title">Качество</div>
+
+                        <span class="info_link">{{quality}}</span>
+
+                    </div>
+                </div>
+
+                <h2 class="movie_info_title">О фильме</h2>
+
+                <div class="movie_info">
+                    <div class="info_row">
+                        <div class="info_title">Год производства</div>
+
+                        <a href="" class="info_link">{{production_year}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Страна</div>
+
+                        {{#each country}}
+                            <a href="" class="info_link">{{this}}</a>
+                            {{#unless @last}}<span>,</span>{{/unless}}
+                        {{/each}}
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Жанр</div>
+
+                        {{#each genre}}
+                            <a href="" class="info_link">{{this}}</a>
+                            {{#unless @last}}<span>,</span>{{/unless}}
+                        {{/each}}
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Слоган</div>
+
+                        <div class="info_value">«{{slogan}}»</div>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Режиссёр</div>
+
+                        <a href="" class="info_link">{{director}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Сценарист</div>
+
+                        <a href="" class="info_link">{{scriptwriter}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Продюсер</div>
+
+                        <a href="" class="info_link">{{producer}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Оператор</div>
+
+                        <a href="" class="info_link">{{operator}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Композитор</div>
+
+                        <a href="" class="info_link">{{composer}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Художник</div>
+
+                        <a href="" class="info_link">{{artist}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Монтаж</div>
+
+                        <a href="" class="info_link">{{montage}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Бюджет</div>
+
+                        <a href="" class="info_link">{{budget}}</a>
+
+                    </div>
+                    <div class="info_row">
+                        <div class="info_title">Время</div>
+
+                        <div class="info_value">{{duration}}</div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="movie_content_right">
+                <h3 class="movie_content_right_header">В главных ролях</h3>
+                <ul class="actors_list">
+
+                    {{#each actors}}
+                        <li><a class="actors_list_item">{{this}}</a></li>
+                    {{/each}}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
