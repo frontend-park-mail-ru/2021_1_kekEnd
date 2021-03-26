@@ -35,6 +35,7 @@ export default class ActorModel {
             });
         */
         const data = {
+            avatar: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/0f64539d-b236-4e01-8791-f19233705c59/280x420',
             name: 'Боб Одинкёрк',
             biography: 'Родился, ..., снимается в фильмах и сериалах',
             birthdate: '22 октября, 1962',
