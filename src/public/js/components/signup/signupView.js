@@ -6,7 +6,8 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
-import {CREATED} from '../../utils/codes.js';
+import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
+import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/constant.js';
 
 
 /**
@@ -83,8 +84,8 @@ export default class SignupView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Введены некорректные данные!',
-                500: 'Пользователь с таким логином уже существует!',
+                [BAD_REQUEST]: INCORRECT_DATA,
+                [INTERNAL_SERVER_ERROR]: ALREADY_EXISTS,
             };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }

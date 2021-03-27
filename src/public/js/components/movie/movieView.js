@@ -6,6 +6,7 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
+import {UPLOAD_ERROR} from '../../utils/constant.js';
 
 /**
  * Представление страницы фильма
@@ -135,7 +136,7 @@ export default class MovieView extends BaseView {
         if (status) {
             this.render(review.movie_id);
         } else {
-            document.getElementById('validation-hint-review').innerText = 'Ошибка публикации рецензии';
+            document.getElementById('validation-hint-review').innerText = UPLOAD_ERROR;
         }
     }
 
