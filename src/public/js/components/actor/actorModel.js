@@ -71,6 +71,7 @@ export default class ActorModel {
                     rating: 7.6,
                 },
             ],
+            /* isAuthorized: true,*/
         };
         globalEventBus.emit('set actor data', data);
     }
