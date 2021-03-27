@@ -20,6 +20,7 @@ export default class ActorView extends BaseView {
         super(parent, Handlebars.templates['actor.hbs']);
 
         this.setActorData = this.setActorData.bind(this);
+        this.addToFavoritesCallback = this.addToFavoritesCallback.bind(this);
         this.processLogout = this.processLogout.bind(this);
 
         globalEventBus.on('set actor data', this.setActorData);
@@ -54,18 +55,16 @@ export default class ActorView extends BaseView {
             });
         }
 
-        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
+        document.getElementById('actor-button-addtofavorites').
+            addEventListener('click', this.addToFavoritesCallback);
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
+        document.getElementById('actor-button-addtofavorites').
+            removeEventListener('click', this.addToFavoritesCallback);
     }
 
     /**
@@ -76,6 +75,13 @@ export default class ActorView extends BaseView {
         super.render(data);
 
         this.setEventListeners();
+    }
+
+    /**
+     * Обработчик нажатия на кнопку добавления актера в избранное
+     */
+    addToFavoritesCallback() {
+        globalEventBus.emit('add actor to favorites');
     }
 
     /**
