@@ -61,29 +61,29 @@
                 <div class="actor-info">
                     <div class="actor-info-header">Основная информация</div>
                     <div class="actor-info-row">
-                        <div class="info_title">Дата рождения</div>
-                        <a href="" class="info_link">{{birthdate}}</a>
+                        <div class="actor-info-title">Дата рождения</div>
+                        <div class="actor-info-value">{{birthdate}}</div>
                     </div>
                     <div class="actor-info-row">
-                        <div class="info_title">Страна</div>
-                        <a href="" class="info_link">{{origin}}</a>
+                        <div class="actor-info-title">Страна</div>
+                        <div class="actor-info-value">{{origin}}</div>
                     </div>
                     <div class="actor-info-row">
-                        <div class="info_title">Жанры</div>
+                        <div class="actor-info-title">Жанры</div>
 
                         {{#each genres}}
-                            <a href="" class="info_link">{{this}}</a>
+                            <a href="" class="actor-info-link">{{this}}</a>
                             {{#unless @last}}<span>&nbsp;</span>{{/unless}}
                         {{/each}}
 
                     </div>
                     <div class="actor-info-row">
-                        <div class="info_title">Всего фильмов</div>
-                        <p class="info_value">{{movies_count}}</p>
+                        <div class="actor-info-title">Всего фильмов</div>
+                        <p class="actor-info-value">{{movies_count}}</p>
                     </div>
                     <div class="actor-info-row">
-                        <div class="info_title">Средний рейтинг фильмов</div>
-                        <p class="info_value">{{movies_rating}}</p>
+                        <div class="actor-info-title">Средний рейтинг фильмов</div>
+                        <p class="actor-info-value">{{movies_rating}}</p>
                     </div>
 
                     <div class="actor-biography-content">
