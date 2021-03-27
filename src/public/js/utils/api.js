@@ -135,7 +135,7 @@ class Api {
     }
 
     editUserReviewForMovie(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${formData.movie_id}/reviews`, 'PUT');
+        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${formData.movie_id}/reviews`, 'PUT', JSON.stringify(formData));
     }
 
     deleteUserReviewForMovie(id) {

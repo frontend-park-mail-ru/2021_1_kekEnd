@@ -25,8 +25,8 @@ export default class MovieView extends BaseView {
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
-        globalEventBus.on('review edited', this.processReviewEdit.bind(this));
-        globalEventBus.on('review deleted', this.processReviewDeletion.bind(this));
+        globalEventBus.on('review edited', this.processReviewChange.bind(this));
+        globalEventBus.on('review deleted', this.processReviewChange.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
@@ -79,7 +79,7 @@ export default class MovieView extends BaseView {
                 const validationHint = document.getElementById('validation-hint-review');
                 setValidationHint(validationHint, reviewErrors);
                 if (reviewErrors.length === 0) {
-                    globalEventBus.emit('send review', data);
+                    globalEventBus.emit((this.data.wantsToEditReview) ? 'edit review' : 'send review', data);
                 }
             });
         }
@@ -87,9 +87,7 @@ export default class MovieView extends BaseView {
         const editReviewButton = document.getElementById('edit-button');
         if (editReviewButton !== null) {
             editReviewButton.addEventListener('click', () => {
-                const movieID = editReviewButton.getAttribute('data-movie-id');
-                // TODO: display form with filled fields
-                console.log(movieID);
+                this.setMovieData({...this.data, 'wantsToEditReview': true});
             });
         }
 
@@ -116,7 +114,8 @@ export default class MovieView extends BaseView {
      * @param {Object} data - данные фильма
      */
     setMovieData(data) {
-        super.render(data);
+        this.data = data;
+        super.render(this.data);
 
         this.setEventListeners();
     }
@@ -140,16 +139,7 @@ export default class MovieView extends BaseView {
         }
     }
 
-    processReviewEdit(statusAndReview) {
-        const [status, review] = statusAndReview;
-        if (status) {
-            this.render(review.movie_id);
-        } else {
-            document.getElementById('validation-hint-review').innerText = 'Ошибка редактирования рецензии';
-        }
-    }
-
-    processReviewDeletion(statusAndID) {
+    processReviewChange(statusAndID) {
         const [status, movieID] = statusAndID;
         if (status) {
             this.render(movieID);

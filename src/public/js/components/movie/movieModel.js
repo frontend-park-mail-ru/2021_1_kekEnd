@@ -45,7 +45,7 @@ export default class MovieModel {
     editReview(review) {
         API.editUserReviewForMovie(review)
             .then((res) => {
-                globalEventBus.emit('review edited', [res.status === OK_CODE, review]);
+                globalEventBus.emit('review uploaded', [res.status === OK_CODE, review]);
             });
     }
 
