@@ -44,7 +44,8 @@
             <div class="actor-content-left">
                 <div class="actor-content-left-inner">
                     <img class="actor-avatar-img" src="{{avatar}}">
-                    <button id="actor-button-addtofavorites" class="actor-button-addtofavorites">
+                    <button id="actor-button-addtofavorites"
+                            class="actor-button-addtofavorites">
                         В избранное
                     </button>
                 </div>
@@ -56,45 +57,46 @@
                         {{name}}
                     </h1>
                 </div>
-                <div class="actor-biography-content">
-                    <h2 class="actor-biography-header">Биография</h2>
-                    <div class="actor-biography-text-container">
-                        <p class="actor-biography-text">{{biography}}</p>
-                    </div>
-                </div>
 
                 <div class="actor-info">
-                    <div class="info_row">
+                    <div class="actor-info-header">Информация</div>
+                    <div class="actor-info-row">
                         <div class="info_title">Дата рождения</div>
                         <a href="" class="info_link">{{birthdate}}</a>
                     </div>
-                    <div class="info_row">
+                    <div class="actor-info-row">
                         <div class="info_title">Страна</div>
                         <a href="" class="info_link">{{origin}}</a>
                     </div>
-                    <div class="info_row">
+                    <div class="actor-info-row">
                         <div class="info_title">Жанры</div>
 
                         {{#each genres}}
                             <a href="" class="info_link">{{this}}</a>
-                            {{#unless @last}}<span>,</span>{{/unless}}
+                            {{#unless @last}}<span>&nbsp;</span>{{/unless}}
                         {{/each}}
 
                     </div>
-                    <div class="info_row">
+                    <div class="actor-info-row">
                         <div class="info_title">Всего фильмов</div>
                         <p class="info_value">{{movies_count}}</p>
                     </div>
-                    <div class="info_row">
+                    <div class="actor-info-row">
                         <div class="info_title">Средний рейтинг фильмов</div>
                         <p class="info_value">{{movies_rating}}</p>
                     </div>
+
+                    <div class="actor-biography-content">
+                        <h2 class="actor-biography-header">Биография</h2>
+                        <div class="actor-biography-text-container">
+                            <p class="actor-biography-text">{{biography}}</p>
+                        </div>
+                    </div>
+
                 </div>
 
-                
                 <div class="actor-movies-content">
                     <h3 class="actor-movies-header">Фильмы</h3>
-                    <div class="actor-movies-rating"><p>Средний рейтинг: {{movies_rating}}</p></div>
                     <div class="actor-movies-list">
                         {{#each movies}}
                             <div class="actor-movies-item">

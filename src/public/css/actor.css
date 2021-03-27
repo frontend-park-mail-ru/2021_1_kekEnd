@@ -1,0 +1,107 @@
+.actor-content-container {
+    width: 80%;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.actor-content-left {
+    display: inline-block;
+    align-content: center;
+}
+
+.actor-content-left-inner {
+    text-align: center;
+    width: 100%;
+}
+
+.actor-avatar-img {
+
+}
+
+.actor-button-addtofavorites {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    border: 0;
+    width: 80%;
+    height: 40px;
+    background: linear-gradient(to right, #FF105F, #FF9900);
+    color: white;
+    font-size: medium;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.actor-content-center {
+    width: 80%;
+    display: inline-block;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
+    padding-left: 50px;
+}
+
+.actor-biography-content {
+    margin-top: 10px;
+}
+
+.actor-biography-header {
+    font-size: 24px;
+}
+
+.actor-biography-text-container {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.actor-biography-text {
+    color: #e2e2e2;
+}
+
+
+.actor-info {
+
+}
+
+.actor-info-header {
+
+}
+
+.actor-info-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.actor-movies-content {
+    margin-top: 10px;
+}
+
+.actor-movies-header {
+    font-size: 24px;
+}
+
+.actor-movies-list {
+
+}
+
+.actor-movies-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    border-bottom-color: rgb(55, 55, 55, 0.2);
+}
+
+.actor-movie-title {
+    color: #ffd8d8;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.actor-movie-rating {
+
+}
+
