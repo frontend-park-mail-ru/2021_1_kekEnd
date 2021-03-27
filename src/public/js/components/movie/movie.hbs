@@ -58,9 +58,14 @@
                 </div>
                 <div class="movie_content_center">
                     <div class="movie_info_title">
-                        <h1>
+                        <h1 class="movie-title">
                             {{title}}
                         </h1>
+
+                        <h2 class="movie-rating">
+                            <!-- TODO: replace with rating field -->
+                            7.1
+                        </h2>
                     </div>
                     <div class="meta_info">
 
@@ -76,7 +81,8 @@
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Субтитры</div>
-                            {{#each subtitles}}<span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
+                            {{#each subtitles}}
+                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Качество</div>
@@ -174,14 +180,38 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
-                    <h3 class="movie_content_right_header">В главных ролях</h3>
-                    <ul class="actors_list">
+                    <h3 class="rate-movie">Оцените фильм</h3>
+                    <div class="rating-stars-container">
+                        <input class="input-star max-star" id="star-10" type="radio" name="star"/>
+                        <label class="label-star" for="star-10"></label>
+                        <input class="input-star" id="star-9" type="radio" name="star"/>
+                        <label class="label-star" for="star-9"></label>
+                        <input class="input-star" id="star-8" type="radio" name="star"/>
+                        <label class="label-star" for="star-8"></label>
+                        <input class="input-star" id="star-7" type="radio" name="star"/>
+                        <label class="label-star" for="star-7"></label>
+                        <input class="input-star" id="star-6" type="radio" name="star"/>
+                        <label class="label-star" for="star-6"></label>
+                        <input class="input-star" id="star-5" type="radio" name="star"/>
+                        <label class="label-star" for="star-5"></label>
+                        <input class="input-star" id="star-4" type="radio" name="star"/>
+                        <label class="label-star" for="star-4"></label>
+                        <input class="input-star" id="star-3" type="radio" name="star"/>
+                        <label class="label-star" for="star-3"></label>
+                        <input class="input-star" id="star-2" type="radio" name="star"/>
+                        <label class="label-star" for="star-2"></label>
+                        <input class="input-star" id="star-1" type="radio" name="star"/>
+                        <label class="label-star" for="star-1"></label>
+                    </div>
 
-                        {{#each actors}}
-                            <li><a class="actors_list_item">{{this}}</a></li>
-                        {{/each}}
-
-                    </ul>
+                    <div class="main-roles">
+                        <h3 class="movie_content_right_header">В главных ролях</h3>
+                        <ul class="actors_list">
+                            {{#each actors}}
+                                <li><a class="actors_list_item">{{this}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
