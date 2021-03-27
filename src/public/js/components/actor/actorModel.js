@@ -13,9 +13,13 @@ export default class ActorModel {
      */
     constructor() {
         this.getActorData = this.getActorData.bind(this);
+        this.addActorToFavorites = this.addActorToFavorites.bind(this);
         this.logout = this.logout.bind(this);
 
+        this.id = {};
+
         globalEventBus.on('get actor data', this.getActorData);
+        globalEventBus.on('add actor to favorites', this.addActorToFavorites);
         globalEventBus.on('logout clicked', this.logout);
     }
 
@@ -24,6 +28,8 @@ export default class ActorModel {
      * @param {int} id - id актера
      */
     getActorData(id) {
+        this.id = id;
+
         /*
         API.getActorData(id)
             .then((res) => {
@@ -34,6 +40,7 @@ export default class ActorModel {
                     });
             });
         */
+
         const data = {
             avatar: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/0f64539d-b236-4e01-8791-f19233705c59/280x420',
             name: 'Боб Одинкёрк',
@@ -66,6 +73,21 @@ export default class ActorModel {
             ],
         };
         globalEventBus.emit('set actor data', data);
+    }
+
+    addActorToFavorites() {
+        // TODO: react to server response
+        console.log(`add to favorites: ${this.id}`);
+        /*
+        API.addActorToBestUsersActors(this.id)
+            .then((res) => {
+                API.getUser()
+                    .then((authRes) => {
+                        globalEventBus.emit('added actor to favorites',
+                            {...res.data, 'isAuthorized': authRes.status === OK_CODE});
+                    });
+            });
+        */
     }
 
     /**
