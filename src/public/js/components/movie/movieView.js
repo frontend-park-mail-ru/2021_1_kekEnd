@@ -99,6 +99,12 @@ export default class MovieView extends BaseView {
                 globalEventBus.emit('delete review', movieID);
             });
         }
+
+        Array.from(document.getElementsByClassName('label-star')).forEach((star) => {
+            star.addEventListener('click', () => {
+                globalEventBus.emit('send rating', [this.data.id, star.getAttribute('data-rating')]);
+            });
+        });
     }
 
     /**

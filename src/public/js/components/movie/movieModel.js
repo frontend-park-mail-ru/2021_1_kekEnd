@@ -15,6 +15,7 @@ export default class MovieModel {
         globalEventBus.on('send review', this.addReview.bind(this));
         globalEventBus.on('edit review', this.editReview.bind(this));
         globalEventBus.on('delete review', this.deleteReview.bind(this));
+        globalEventBus.on('send rating', this.addRating.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
@@ -54,6 +55,11 @@ export default class MovieModel {
             .then((res) => {
                 globalEventBus.emit('review deleted', [res.status === OK_CODE, id]);
             });
+    }
+
+    addRating(idAndRating) {
+        const [id, rating] = idAndRating;
+        console.log('rating', rating, 'for movie', id);
     }
 
     /**
