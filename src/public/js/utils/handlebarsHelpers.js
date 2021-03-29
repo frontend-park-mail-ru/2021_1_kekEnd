@@ -15,19 +15,31 @@ export const notEqHelper = (arg1, arg2, options) => {
 };
 
 export const paginationHelper = function(currentPage, pagesNumber, options) {
+    const [startPage, endPage] = getPaginationRange(currentPage, pagesNumber);
+    // context includes data for handlebars
+    const context = buildContext(startPage, endPage, currentPage, pagesNumber);
+
+    return options.fn(context);
+};
+
+const getPaginationRange = (currentPage, pagesNumber) => {
     // TODO: should be 5, but for testing purposes is 3
     const size = 3; // number of pages buttons in the widget
 
+    // current page should be in the middle
     let startPage = currentPage - Math.floor(size / 2);
     let endPage = currentPage + Math.floor(size / 2);
 
+    // handling underflow of start
     if (startPage <= 0) {
         endPage -= (startPage - 1);
         startPage = 1;
     }
 
+    // handling overflow of end
     if (endPage > pagesNumber) {
         endPage = pagesNumber;
+        // endPage is set, adjust start so that the range makes {size}
         if (endPage - size + 1 > 0) {
             startPage = endPage - size + 1;
         } else {
@@ -35,23 +47,28 @@ export const paginationHelper = function(currentPage, pagesNumber, options) {
         }
     }
 
+    return [startPage, endPage];
+};
+
+const buildContext = (start, end, currentPage, pagesNumber) => {
     const context = {
         startFromFirstPage: false,
         pages: [],
         endAtLastPage: false,
     };
-    if (startPage === 1) {
+    if (start === 1) {
         context.startFromFirstPage = true;
     }
-    for (let i = startPage; i <= endPage; ++i) {
+    // pushing pages and keeping flag {isCurrent} to disable that button in the template
+    for (let i = start; i <= end; ++i) {
         context.pages.push({
             page: i,
             isCurrent: i === currentPage,
         });
     }
-    if (endPage === pagesNumber) {
+    if (end === pagesNumber) {
         context.endAtLastPage = true;
     }
 
-    return options.fn(context);
+    return context;
 };
