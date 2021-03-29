@@ -76,7 +76,8 @@
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Субтитры</div>
-                            {{#each subtitles}}<span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
+                            {{#each subtitles}}
+                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
                         </div>
                         <div class="info_row_nounderline">
                             <div class="info_title">Качество</div>
@@ -255,11 +256,16 @@
         {{/if}}
     {{/if}}
 
-    <hr class="reviews-separator"/>
+    {{#if reviewsData.reviews}}
+        <hr class="reviews-separator"/>
 
-    {{#each reviews}}
-        {{#if (notEq this.author ../userReview.author)}}
-            <div class="content-container">
+        {{#each reviewsData.reviews}}
+            {{#if (notEq this.author ../userReview.author)}}
+                {{#if @first}}
+                <div class="content-container" id="first-review">
+                {{else}}
+                <div class="content-container">
+                {{/if}}
                 <div class="review-content-container {{this.review_type}}-review-background">
                     <h3 class="your-review">Рецензия {{this.author}}</h3>
                     <div class="review-body">
@@ -268,28 +274,33 @@
                     </div>
                 </div>
             </div>
+            {{/if}}
+        {{/each}}
+
+        {{#if (notEq reviewsData.pages_number 1)}}
+            {{#pagination reviewsData.current_page reviewsData.pages_number}}
+                <div class="pagination-wrapper">
+                    {{#unless startFromFirstPage}}
+                        <button class="pagination-button" data-page-index="{{dec ../reviewsData.current_page}}">&lt;
+                        </button>
+                    {{/unless}}
+
+                    {{#each pages}}
+                        {{#if isCurrent}}
+                            <button disabled class="pagination-button pagination-current-button"
+                                    data-page-index="{{page}}">{{page}}</button>
+                        {{else}}
+                            <button class="pagination-button" data-page-index="{{page}}">{{page}}</button>
+                        {{/if}}
+                    {{/each}}
+
+                    {{#unless endAtLastPage}}
+                        <button class="pagination-button" data-page-index="{{inc ../reviewsData.current_page}}">&gt;
+                        </button>
+                    {{/unless}}
+                </div>
+            {{/pagination}}
         {{/if}}
-    {{/each}}
-
-    {{#pagination current_page pages_number}}
-        <div class="pagination-wrapper">
-            {{#unless startFromFirstPage}}
-                <a href="#">&lt;</a>
-            {{/unless}}
-
-            {{#each pages}}
-                {{#if isCurrent}}
-                    [<a href="#">{{page}}</a>]
-                {{/if}}
-                {{#unless isCurrent}}
-                    <a href="#">{{page}}</a>
-                {{/unless}}
-            {{/each}}
-
-            {{#unless endAtLastPage}}
-                <a href="#">&gt;</a>
-            {{/unless}}
-        </div>
-    {{/pagination}}
+    {{/if}}
 
 </div>

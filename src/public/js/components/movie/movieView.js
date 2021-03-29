@@ -7,7 +7,8 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
 import {UPLOAD_ERROR} from '../../utils/constant.js';
-import {paginationHelper} from '../../utils/paginationHelper.js';
+import {decHelper, eqHelper, incHelper, notEqHelper, paginationHelper} from '../../utils/handlebarsHelpers.js';
+import {scrollToTargetAdjusted} from '../../utils/scrollToTarget.js';
 
 /**
  * Представление страницы фильма
@@ -21,16 +22,21 @@ export default class MovieView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
         // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('notEq', (arg1, arg2, options) => {
-            return arg1 !== arg2;
-        });
+        Handlebars.registerHelper('eq', eqHelper);
+        // eslint-disable-next-line no-undef
+        Handlebars.registerHelper('notEq', notEqHelper);
         // eslint-disable-next-line no-undef
         Handlebars.registerHelper('pagination', paginationHelper);
+        // eslint-disable-next-line no-undef
+        Handlebars.registerHelper('inc', incHelper);
+        // eslint-disable-next-line no-undef
+        Handlebars.registerHelper('dec', decHelper);
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
         globalEventBus.on('review edited', this.processReviewChange.bind(this));
         globalEventBus.on('review deleted', this.processReviewChange.bind(this));
+        globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
@@ -102,6 +108,12 @@ export default class MovieView extends BaseView {
                 globalEventBus.emit('delete review', movieID);
             });
         }
+
+        Array.from(document.getElementsByClassName('pagination-button')).forEach((button) => {
+            button.addEventListener('click', () => {
+                globalEventBus.emit('get reviews page', [this.data.id, button.getAttribute('data-page-index')]);
+            });
+        });
     }
 
     /**
@@ -122,6 +134,16 @@ export default class MovieView extends BaseView {
         super.render(this.data);
 
         this.setEventListeners();
+    }
+
+    setReviewsPage(statusAndReviewsData) {
+        const [status, reviewsData] = statusAndReviewsData;
+        if (status) {
+            this.data.reviewsData = reviewsData;
+            super.render(this.data);
+            this.setEventListeners();
+            scrollToTargetAdjusted(document.getElementById('first-review'));
+        }
     }
 
     /**

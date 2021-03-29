@@ -15,6 +15,7 @@ export default class MovieModel {
         globalEventBus.on('send review', this.addReview.bind(this));
         globalEventBus.on('edit review', this.editReview.bind(this));
         globalEventBus.on('delete review', this.deleteReview.bind(this));
+        globalEventBus.on('get reviews page', this.getReviewsPage.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
 
@@ -26,13 +27,13 @@ export default class MovieModel {
         Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id), API.getUserReviewForMovie(id)])
             .then((responses) => {
                 const [userResp, movieDataResp, movieReviewsResp, userReviewResp] = responses;
-                let movieData = {
+                const movieData = {
                     ...movieDataResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
                 };
                 if (movieReviewsResp.status === OK_CODE) {
-                    movieData = {...movieData, ...movieReviewsResp.data};
+                    movieData.reviewsData = movieReviewsResp.data;
                 }
                 globalEventBus.emit('set movie data', movieData);
             });
@@ -56,6 +57,14 @@ export default class MovieModel {
         API.deleteUserReviewForMovie(id)
             .then((res) => {
                 globalEventBus.emit('review deleted', [res.status === OK_CODE, id]);
+            });
+    }
+
+    getReviewsPage(idAndPage) {
+        const [id, page] = idAndPage;
+        API.getMovieReviews(id, page)
+            .then((res) => {
+                globalEventBus.emit('set reviews page', [res.status === OK_CODE, res.data]);
             });
     }
 

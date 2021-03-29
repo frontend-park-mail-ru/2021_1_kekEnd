@@ -1,5 +1,22 @@
+export const incHelper = (value, options) => {
+    return parseInt(value) + 1;
+};
+
+export const decHelper = (value, options) => {
+    return parseInt(value) - 1;
+};
+
+export const eqHelper = (arg1, arg2, options) => {
+    return arg1 === arg2;
+};
+
+export const notEqHelper = (arg1, arg2, options) => {
+    return arg1 !== arg2;
+};
+
 export const paginationHelper = function(currentPage, pagesNumber, options) {
-    const size = 5; // количество страниц в виджете пагинации
+    // TODO: should be 5, but for testing purposes is 3
+    const size = 3; // number of pages buttons in the widget
 
     let startPage = currentPage - Math.floor(size / 2);
     let endPage = currentPage + Math.floor(size / 2);

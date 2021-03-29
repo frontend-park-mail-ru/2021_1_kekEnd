@@ -102,12 +102,11 @@ class Api {
     /**
      * Получить все рецензии к фильму
      * @param {int} id - id фильма
-     * @param {int} from - нижняя граница
-     * @param {int} to - верхняя граница
+     * @param {int} page - страница с рецензиями
      * @return {Promise<{data: *, status: number}>} - статус запроса и список рецензий к фильму
      */
-    getMovieReviews(id, from=0, to=10) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/reviews?from=${from}&to=${to}`);
+    getMovieReviews(id, page=1) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/reviews?page=${page}`);
     }
 
     /**
