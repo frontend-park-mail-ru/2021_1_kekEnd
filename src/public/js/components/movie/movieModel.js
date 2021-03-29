@@ -42,29 +42,28 @@ export default class MovieModel {
     addReview(review) {
         API.addReview(review)
             .then((res) => {
-                globalEventBus.emit('review uploaded', [res.status === CREATED, review]);
+                globalEventBus.emit('review uploaded', res.status === CREATED, review);
             });
     }
 
     editReview(review) {
         API.editUserReviewForMovie(review)
             .then((res) => {
-                globalEventBus.emit('review uploaded', [res.status === OK_CODE, review]);
+                globalEventBus.emit('review uploaded', res.status === OK_CODE, review);
             });
     }
 
     deleteReview(id) {
         API.deleteUserReviewForMovie(id)
             .then((res) => {
-                globalEventBus.emit('review deleted', [res.status === OK_CODE, id]);
+                globalEventBus.emit('review deleted', res.status === OK_CODE, id);
             });
     }
 
-    getReviewsPage(idAndPage) {
-        const [id, page] = idAndPage;
+    getReviewsPage(id, page) {
         API.getMovieReviews(id, page)
             .then((res) => {
-                globalEventBus.emit('set reviews page', [res.status === OK_CODE, res.data]);
+                globalEventBus.emit('set reviews page', res.status === OK_CODE, res.data);
             });
     }
 

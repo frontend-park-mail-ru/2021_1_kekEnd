@@ -32,11 +32,11 @@ export class EventBus {
      * @param {string} name - имя события
      * @param {Object} args - аргументы функции колбека
      */
-    emit(name, args) {
+    emit(name, ...args) {
         if (name in this.#callbacks) {
             this.#callbacks[name].forEach((callback) => {
                 try {
-                    callback(args);
+                    callback(...args);
                 } catch (error) {
                     console.error(error);
                 }

@@ -109,9 +109,9 @@ export default class MovieView extends BaseView {
             });
         }
 
-        Array.from(document.getElementsByClassName('pagination-button')).forEach((button) => {
+        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.addEventListener('click', () => {
-                globalEventBus.emit('get reviews page', [this.data.id, button.getAttribute('data-page-index')]);
+                globalEventBus.emit('get reviews page', this.data.id, button.getAttribute('data-page-index'));
             });
         });
     }
@@ -136,8 +136,7 @@ export default class MovieView extends BaseView {
         this.setEventListeners();
     }
 
-    setReviewsPage(statusAndReviewsData) {
-        const [status, reviewsData] = statusAndReviewsData;
+    setReviewsPage(status, reviewsData) {
         if (status) {
             this.data.reviewsData = reviewsData;
             super.render(this.data);
@@ -156,17 +155,17 @@ export default class MovieView extends BaseView {
         }
     }
 
-    displayNewReview(statusAndReview) {
-        const [status, review] = statusAndReview;
+    displayNewReview(status, review) {
         if (status) {
-            this.render(review.movie_id);
+            this.data.userReview = review;
+            this.data.wantsToEditReview = false;
+            this.setMovieData(this.data);
         } else {
             document.getElementById('validation-hint-review').innerText = UPLOAD_ERROR;
         }
     }
 
-    processReviewChange(statusAndID) {
-        const [status, movieID] = statusAndID;
+    processReviewChange(status, movieID) {
         if (status) {
             this.render(movieID);
         }
