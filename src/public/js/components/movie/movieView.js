@@ -7,6 +7,7 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
 import {UPLOAD_ERROR} from '../../utils/constant.js';
+import {paginationHelper} from '../../utils/paginationHelper.js';
 
 /**
  * Представление страницы фильма
@@ -23,6 +24,8 @@ export default class MovieView extends BaseView {
         Handlebars.registerHelper('notEq', (arg1, arg2, options) => {
             return arg1 !== arg2;
         });
+        // eslint-disable-next-line no-undef
+        Handlebars.registerHelper('pagination', paginationHelper);
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));

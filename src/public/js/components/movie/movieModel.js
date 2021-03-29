@@ -26,13 +26,15 @@ export default class MovieModel {
         Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id), API.getUserReviewForMovie(id)])
             .then((responses) => {
                 const [userResp, movieDataResp, movieReviewsResp, userReviewResp] = responses;
-                globalEventBus.emit('set movie data', {
+                let movieData = {
                     ...movieDataResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
-                    'reviews_count': (movieReviewsResp.status === OK_CODE) ? movieReviewsResp.data.reviews_count : null,
-                    'reviews': (movieReviewsResp.status === OK_CODE) ? movieReviewsResp.data.reviews : null,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
-                });
+                };
+                if (movieReviewsResp.status === OK_CODE) {
+                    movieData = {...movieData, ...movieReviewsResp.data};
+                }
+                globalEventBus.emit('set movie data', movieData);
             });
     }
 

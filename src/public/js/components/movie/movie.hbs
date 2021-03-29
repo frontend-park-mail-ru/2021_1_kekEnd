@@ -257,7 +257,7 @@
 
     <hr class="reviews-separator"/>
 
-    {{#each reviews.reviews}}
+    {{#each reviews}}
         {{#if (notEq this.author ../userReview.author)}}
             <div class="content-container">
                 <div class="review-content-container {{this.review_type}}-review-background">
@@ -270,4 +270,26 @@
             </div>
         {{/if}}
     {{/each}}
+
+    {{#pagination current_page pages_number}}
+        <div class="pagination-wrapper">
+            {{#unless startFromFirstPage}}
+                <a href="#">&lt;</a>
+            {{/unless}}
+
+            {{#each pages}}
+                {{#if isCurrent}}
+                    [<a href="#">{{page}}</a>]
+                {{/if}}
+                {{#unless isCurrent}}
+                    <a href="#">{{page}}</a>
+                {{/unless}}
+            {{/each}}
+
+            {{#unless endAtLastPage}}
+                <a href="#">&gt;</a>
+            {{/unless}}
+        </div>
+    {{/pagination}}
+
 </div>
