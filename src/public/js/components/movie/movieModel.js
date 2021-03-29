@@ -29,7 +29,8 @@ export default class MovieModel {
                 globalEventBus.emit('set movie data', {
                     ...movieDataResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
-                    'reviews': (movieReviewsResp.status === OK_CODE) ? movieReviewsResp.data : null,
+                    'reviews_count': (movieReviewsResp.status === OK_CODE) ? movieReviewsResp.data.reviews_count : null,
+                    'reviews': (movieReviewsResp.status === OK_CODE) ? movieReviewsResp.data.reviews : null,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
                 });
             });
