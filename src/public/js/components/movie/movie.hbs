@@ -257,7 +257,7 @@
 
     <hr class="reviews-separator"/>
 
-    {{#each reviews}}
+    {{#each reviews.reviews}}
         {{#if (notEq this.author ../userReview.author)}}
             <div class="content-container">
                 <div class="review-content-container {{this.review_type}}-review-background">
