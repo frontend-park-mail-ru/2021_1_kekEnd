@@ -163,9 +163,9 @@ export default class MovieView extends BaseView {
             this.data.userReview = review;
             this.data.wantsToEditReview = false;
             this.setMovieData(this.data);
-        } else {
-            document.getElementById('validation-hint-review').innerText = UPLOAD_ERROR;
+            return;
         }
+        document.getElementById('validation-hint-review').innerText = UPLOAD_ERROR;
     }
 
     processReviewChange(status, movieID) {
@@ -183,10 +183,11 @@ export default class MovieView extends BaseView {
         const validator = new Validator();
         const reviewErrors = validator.validateReview(data);
         const validationHint = document.getElementById('validation-hint-review');
-        setValidationHint(validationHint, reviewErrors);
         if (reviewErrors.length === 0) {
             globalEventBus.emit((this.data.wantsToEditReview) ? 'edit review' : 'send review', data);
+            return;
         }
+        setValidationHint(validationHint, reviewErrors);
     }
 
     editReviewClicked() {
