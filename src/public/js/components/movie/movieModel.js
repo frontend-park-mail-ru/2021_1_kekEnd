@@ -21,7 +21,7 @@ export default class MovieModel {
 
     /**
      * Получение информации о фильме
-     * @param {int} id - id фильма
+     * @param {number} id - id фильма
      */
     getMovieData(id) {
         Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id), API.getUserReviewForMovie(id)])

@@ -50,7 +50,7 @@ export default class LoginView extends BaseView {
 
     /**
      * Проверка статуса логин запроса
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     processLoginAttempt(status) {
         if (status === OK_CODE) {

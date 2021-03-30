@@ -77,7 +77,7 @@ export default class SignupView extends BaseView {
 
     /**
      * Обработка статуса после запроса регистрации
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     processSignupAttempt(status) {
         if (status === CREATED) {

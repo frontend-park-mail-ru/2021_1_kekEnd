@@ -46,7 +46,7 @@ export default class MovieView extends BaseView {
 
     /**
      * Запуск рендера
-     * @param {int} id - id фильма
+     * @param {number} id - id фильма
      */
     render(id) {
         globalEventBus.emit('get movie data', id);
@@ -147,7 +147,7 @@ export default class MovieView extends BaseView {
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса на выход
+     * @param {boolean} status - статус запроса на выход
      */
     processLogout(status) {
         if (status) {

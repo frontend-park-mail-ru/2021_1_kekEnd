@@ -92,7 +92,7 @@ class Api {
 
     /**
      * Получить информацию о фильме
-     * @param {int} id - id фильма
+     * @param {number} id - id фильма
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getMovieData(id) {
@@ -101,8 +101,8 @@ class Api {
 
     /**
      * Получить все рецензии к фильму
-     * @param {int} id - id фильма
-     * @param {int} page - страница с рецензиями
+     * @param {number} id - id фильма
+     * @param {number} page - страница с рецензиями
      * @return {Promise<{data: *, status: number}>} - статус запроса и список рецензий к фильму
      */
     getMovieReviews(id, page=1) {
@@ -128,7 +128,7 @@ class Api {
 
     /**
      * Получить рецензию пользователя к фильму
-     * @param {int} id - id фильма
+     * @param {number} id - id фильма
      * @return {Promise<{data: *, status: number}>} - статус запроса и объект рецензии
      */
     getUserReviewForMovie(id) {
