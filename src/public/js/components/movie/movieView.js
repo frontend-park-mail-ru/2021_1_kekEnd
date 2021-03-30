@@ -69,31 +69,23 @@ export default class MovieView extends BaseView {
      */
     setEventListeners() {
         const logoutButton = document.getElementById('logout-button');
-        if (logoutButton !== null) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                globalEventBus.emit('logout clicked');
-            });
-        }
+        logoutButton?.addEventListener('click', (e) => {
+            e.preventDefault();
+            globalEventBus.emit('logout clicked');
+        });
 
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
 
         const reviewForm = document.getElementById('review');
-        if (reviewForm !== null) {
-            reviewForm.addEventListener('submit', this.reviewFormSubmittedCallback);
-        }
+        reviewForm?.addEventListener('submit', this.reviewFormSubmittedCallback);
 
         const editReviewButton = document.getElementById('edit-button');
-        if (editReviewButton !== null) {
-            editReviewButton.addEventListener('click', this.editReviewClickedCallback);
-        }
+        editReviewButton?.addEventListener('click', this.editReviewClickedCallback);
 
         const deleteReviewButton = document.getElementById('delete-button');
-        if (deleteReviewButton !== null) {
-            deleteReviewButton.addEventListener('click', this.deleteReviewClickedCallback);
-        }
+        deleteReviewButton?.addEventListener('click', this.deleteReviewClickedCallback);
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.addEventListener('click', this.paginationButtonClickedCallback);
@@ -109,19 +101,13 @@ export default class MovieView extends BaseView {
         document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
 
         const reviewForm = document.getElementById('review');
-        if (reviewForm !== null) {
-            reviewForm.removeEventListener('submit', this.reviewFormSubmittedCallback);
-        }
+        reviewForm?.removeEventListener('submit', this.reviewFormSubmittedCallback);
 
         const editReviewButton = document.getElementById('edit-button');
-        if (editReviewButton !== null) {
-            editReviewButton.removeEventListener('click', this.editReviewClickedCallback);
-        }
+        editReviewButton?.removeEventListener('click', this.editReviewClickedCallback);
 
         const deleteReviewButton = document.getElementById('delete-button');
-        if (deleteReviewButton !== null) {
-            deleteReviewButton.removeEventListener('click', this.deleteReviewClickedCallback);
-        }
+        deleteReviewButton?.removeEventListener('click', this.deleteReviewClickedCallback);
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
