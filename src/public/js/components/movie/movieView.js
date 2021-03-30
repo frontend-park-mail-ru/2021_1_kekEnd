@@ -7,7 +7,6 @@ import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
 import {UPLOAD_ERROR} from '../../utils/constant.js';
-import {decHelper, eqHelper, incHelper, notEqHelper, paginationHelper} from '../../utils/handlebarsHelpers.js';
 import {scrollToTargetAdjusted} from '../../utils/scrollToTarget.js';
 
 /**
@@ -21,16 +20,6 @@ export default class MovieView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('eq', eqHelper);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('notEq', notEqHelper);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('pagination', paginationHelper);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('inc', incHelper);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('dec', decHelper);
 
         globalEventBus.on('set movie data', this.setMovieData.bind(this));
         globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
@@ -69,31 +58,18 @@ export default class MovieView extends BaseView {
      */
     setEventListeners() {
         const logoutButton = document.getElementById('logout-button');
-        if (logoutButton !== null) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                globalEventBus.emit('logout clicked');
-            });
-        }
+        logoutButton?.addEventListener('click', (e) => {
+            e.preventDefault();
+            globalEventBus.emit('logout clicked');
+        });
 
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
 
-        const reviewForm = document.getElementById('review');
-        if (reviewForm !== null) {
-            reviewForm.addEventListener('submit', this.reviewFormSubmittedCallback);
-        }
-
-        const editReviewButton = document.getElementById('edit-button');
-        if (editReviewButton !== null) {
-            editReviewButton.addEventListener('click', this.editReviewClickedCallback);
-        }
-
-        const deleteReviewButton = document.getElementById('delete-button');
-        if (deleteReviewButton !== null) {
-            deleteReviewButton.addEventListener('click', this.deleteReviewClickedCallback);
-        }
+        document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
+        document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
+        document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
 
         Array.from(document.getElementsByClassName('label-star')).forEach((star) => {
             star.addEventListener('click', () => {
@@ -114,20 +90,9 @@ export default class MovieView extends BaseView {
         document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
 
-        const reviewForm = document.getElementById('review');
-        if (reviewForm !== null) {
-            reviewForm.removeEventListener('submit', this.reviewFormSubmittedCallback);
-        }
-
-        const editReviewButton = document.getElementById('edit-button');
-        if (editReviewButton !== null) {
-            editReviewButton.removeEventListener('click', this.editReviewClickedCallback);
-        }
-
-        const deleteReviewButton = document.getElementById('delete-button');
-        if (deleteReviewButton !== null) {
-            deleteReviewButton.removeEventListener('click', this.deleteReviewClickedCallback);
-        }
+        document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
+        document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
+        document.getElementById('delete-button')?.removeEventListener('click', this.deleteReviewClickedCallback);
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);

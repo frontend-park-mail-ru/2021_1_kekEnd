@@ -1,3 +1,17 @@
+export const registerHandlebarsHelpers = () => {
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('eq', eqHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('notEq', notEqHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('pagination', paginationHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('inc', incHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('dec', decHelper);
+};
+
+
 export const incHelper = (value, options) => {
     return parseInt(value) + 1;
 };
@@ -14,7 +28,7 @@ export const notEqHelper = (arg1, arg2, options) => {
     return arg1 !== arg2;
 };
 
-export const paginationHelper = function(currentPage, pagesNumber, options) {
+export const paginationHelper = (currentPage, pagesNumber, options) => {
     const [startPage, endPage] = getPaginationRange(currentPage, pagesNumber);
     // context includes data for handlebars
     const context = buildContext(startPage, endPage, currentPage, pagesNumber);
