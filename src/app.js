@@ -5,9 +5,21 @@ import LoginController from './public/js/components/login/loginController.js';
 import SignupController from './public/js/components/signup/signupController.js';
 import MovieController from './public/js/components/movie/movieController.js';
 import SettingsController from './public/js/components/settings/settingsController.js';
+import {decHelper, eqHelper, incHelper, notEqHelper, paginationHelper} from './public/js/utils/handlebarsHelpers.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
+
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('eq', eqHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('notEq', notEqHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('pagination', paginationHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('inc', incHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('dec', decHelper);
 
     globalRouter.register(PATHS.profile, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);

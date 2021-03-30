@@ -14,7 +14,7 @@ export const notEqHelper = (arg1, arg2, options) => {
     return arg1 !== arg2;
 };
 
-export const paginationHelper = function(currentPage, pagesNumber, options) {
+export const paginationHelper = (currentPage, pagesNumber, options) => {
     const [startPage, endPage] = getPaginationRange(currentPage, pagesNumber);
     // context includes data for handlebars
     const context = buildContext(startPage, endPage, currentPage, pagesNumber);

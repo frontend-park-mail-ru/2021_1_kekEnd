@@ -3,7 +3,6 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
-import {incHelper} from '../../utils/handlebarsHelpers.js';
 
 
 /**
@@ -17,8 +16,6 @@ export default class ProfileView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
-        // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('inc', incHelper);
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
