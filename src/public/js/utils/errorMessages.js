@@ -1,1 +1,1 @@
-export const AUTH_ERROR = 'Authentication error';
+export const AUTH_ERROR = 'Ошибка авторизации';

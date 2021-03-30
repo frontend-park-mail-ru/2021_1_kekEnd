@@ -241,7 +241,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Показать изменения
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     displayServerResponse(status) {
         if (status === OK_CODE) {
@@ -253,7 +253,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса
+     * @param {boolean} status - статус запроса
      */
     processLogout(status) {
         if (status) {
@@ -263,7 +263,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Показать изменения аватара
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     displayServerResponseAvatar(status) {
         if (status === OK_CODE) {

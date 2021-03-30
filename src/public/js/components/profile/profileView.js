@@ -3,6 +3,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
+import {incHelper} from '../../utils/handlebarsHelpers.js';
 
 
 /**
@@ -17,9 +18,7 @@ export default class ProfileView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
         // eslint-disable-next-line no-undef
-        Handlebars.registerHelper('inc', (value, options) => {
-            return parseInt(value) + 1;
-        });
+        Handlebars.registerHelper('inc', incHelper);
 
         globalEventBus.on('set profile data', this.setProfileData.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
@@ -83,7 +82,7 @@ export default class ProfileView extends BaseView {
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса на выход
+     * @param {boolean} status - статус запроса на выход
      */
     processLogout(status) {
         if (status) {
