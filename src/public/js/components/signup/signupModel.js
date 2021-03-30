@@ -14,25 +14,13 @@ export default class Model {
     }
 
     /**
-     * Проверка на существование пользователя
-     * @param {Object} data - данные о пользователе
-     * @return {bool} - статус запроса
-     */
-    userNotExists(data) {
-        // запрос к серверу на проверку существования пользователя
-        return true;
-    }
-
-    /**
      * Создание (регистрация) пользователя
      * @param {Object} data - данные о пользователе
      */
     createUser(data) {
-        if (this.userNotExists(data)) {
-            API.signup(data)
-                .then((res) => {
-                    globalEventBus.emit('signup status', res.status);
-                });
-        }
+        API.signup(data)
+            .then((res) => {
+                globalEventBus.emit('signup status', res.status);
+            });
     }
 }

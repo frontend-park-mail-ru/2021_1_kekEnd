@@ -5,9 +5,12 @@ import LoginController from './public/js/components/login/loginController.js';
 import SignupController from './public/js/components/signup/signupController.js';
 import MovieController from './public/js/components/movie/movieController.js';
 import SettingsController from './public/js/components/settings/settingsController.js';
+import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
+
+    registerHandlebarsHelpers();
 
     globalRouter.register(PATHS.profile, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
@@ -17,4 +20,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
     globalRouter.start();
 });
-

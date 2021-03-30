@@ -3,6 +3,7 @@ import {API} from '../../utils/api.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
+import {AUTH_ERROR} from '../../utils/errorMessages.js';
 
 
 /**
@@ -38,16 +39,25 @@ export default class ProfileModel {
             ],
         };
 
-        API.getUser()
-            .then((res) => {
-                if (res.status === OK_CODE) {
-                    globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
-                } else {
+        Promise.all([API.getUser(), API.getUserReviews()])
+            .then((responses) => {
+                if (responses.some((resp) => resp.status !== OK_CODE)) {
+                    throw new Error(AUTH_ERROR);
+                }
+                const [userData, reviews] = responses.map((resp) => resp.data);
+                globalEventBus.emit('set profile data', {
+                    ...userData,
+                    ...additionalData,
+                    'isAuthorized': true,
+                    'reviews': reviews,
+                });
+            })
+            .catch((err) => {
+                if (err.message === AUTH_ERROR) {
                     globalRouter.pushState(PATHS.login);
                 }
             });
     }
-
 
     /**
      * Выход со страницы

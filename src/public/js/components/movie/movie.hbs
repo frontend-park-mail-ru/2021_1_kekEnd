@@ -33,164 +33,276 @@
 </div>
 
 <div class="main">
-    <div class="movie_content_container">
-        <div class="background_trailer">
-            <div class="background_trailer_img center" style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
-        </div>
-
-        <div class="flex_container">
-            <div class="movie_content_left">
-                <div class="movie_content_left_inner">
-                    <img class="movie_content_left_img" src="{{poster}}">
-                    <img class="movie_content_left_img" src="{{trailer_preview}}">
-                    <button id="button-watch-later" class="watch_later_button">
-                        Буду смотреть
-                    </button>
-                    <button id="button-plus" class="plus_button">
-                        +
-                    </button>
-                    <button id="button-other" class="other_button">
-                        Еще какая-то кнопка
-                    </button>
-                </div>
+    <div class="content-container">
+        <div class="movie-content-container">
+            <div class="background_trailer">
+                <div class="background_trailer_img center"
+                     style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
             </div>
-            <div class="movie_content_center">
-                <div class="movie_info_title">
-                    <h1>
 
-                        {{title}}
-
-                    </h1>
+            <div class="flex_container">
+                <div class="movie_content_left">
+                    <div class="movie_content_left_inner">
+                        <img class="movie_content_left_img" src="{{poster}}">
+                        <img class="movie_content_left_img" src="{{trailer_preview}}">
+                        <button id="button-watch-later" class="watch_later_button">
+                            Буду смотреть
+                        </button>
+                        <button id="button-plus" class="plus_button">
+                            +
+                        </button>
+                        <button id="button-other" class="other_button">
+                            Еще какая-то кнопка
+                        </button>
+                    </div>
                 </div>
-                <div class="meta_info">
+                <div class="movie_content_center">
+                    <div class="movie_info_title">
+                        <h1>
+                            {{title}}
+                        </h1>
+                    </div>
+                    <div class="meta_info">
 
-                    <p>{{description}}</p>
+                        <p>{{description}}</p>
 
-                </div>
-                <div class="movie_info">
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Аудиодорожки</div>
-                        <span class="info_link">
-
+                    </div>
+                    <div class="movie_info">
+                        <div class="info_row_nounderline">
+                            <div class="info_title">Аудиодорожки</div>
                             {{#each voiceover}}
-                                {{this}}
-                                {{#unless @last}},{{/unless}}
+                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}
+                            {{/each}}
+                        </div>
+                        <div class="info_row_nounderline">
+                            <div class="info_title">Субтитры</div>
+                            {{#each subtitles}}
+                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
+                        </div>
+                        <div class="info_row_nounderline">
+                            <div class="info_title">Качество</div>
+
+                            <span class="info_link">{{quality}}</span>
+                        </div>
+                    </div>
+
+                    <h2 class="movie_info_title">О фильме</h2>
+
+                    <div class="movie_info">
+                        <div class="info_row">
+                            <div class="info_title">Год производства</div>
+
+                            <a href="" class="info_link">{{production_year}}</a>
+
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Страна</div>
+
+                            {{#each country}}
+                                <a href="" class="info_link">{{this}}</a>{{#unless @last}}, {{/unless}}
                             {{/each}}
 
-                        </span>
-                    </div>
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Субтитры</div>
-                        <span class="info_link">{{#each subtitles}}{{this}}{{#unless @last}},{{/unless}}{{/each}}</span>
-                    </div>
-                    <div class="info_row_nounderline">
-                        <div class="info_title">Качество</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Жанр</div>
 
-                        <span class="info_link">{{quality}}</span>
+                            {{#each genre}}
+                                <a href="" class="info_link">{{this}}</a>
+                                {{#unless @last}}<span>, </span>{{/unless}}
+                            {{/each}}
 
-                    </div>
-                </div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Слоган</div>
 
-                <h2 class="movie_info_title">О фильме</h2>
+                            <div class="info_value">«{{slogan}}»</div>
 
-                <div class="movie_info">
-                    <div class="info_row">
-                        <div class="info_title">Год производства</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Режиссёр</div>
 
-                        <a href="" class="info_link">{{production_year}}</a>
+                            <a href="" class="info_link">{{director}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Страна</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Сценарист</div>
 
-                        {{#each country}}
-                            <a href="" class="info_link">{{this}}</a>
-                            {{#unless @last}}<span>,</span>{{/unless}}
-                        {{/each}}
+                            <a href="" class="info_link">{{scriptwriter}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Жанр</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Продюсер</div>
 
-                        {{#each genre}}
-                            <a href="" class="info_link">{{this}}</a>
-                            {{#unless @last}}<span>,</span>{{/unless}}
-                        {{/each}}
+                            <a href="" class="info_link">{{producer}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Слоган</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Оператор</div>
 
-                        <div class="info_value">«{{slogan}}»</div>
+                            <a href="" class="info_link">{{operator}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Режиссёр</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Композитор</div>
 
-                        <a href="" class="info_link">{{director}}</a>
+                            <a href="" class="info_link">{{composer}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Сценарист</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Художник</div>
 
-                        <a href="" class="info_link">{{scriptwriter}}</a>
+                            <a href="" class="info_link">{{artist}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Продюсер</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Монтаж</div>
 
-                        <a href="" class="info_link">{{producer}}</a>
+                            <a href="" class="info_link">{{montage}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Оператор</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Бюджет</div>
 
-                        <a href="" class="info_link">{{operator}}</a>
+                            <a href="" class="info_link">{{budget}}</a>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Композитор</div>
+                        </div>
+                        <div class="info_row">
+                            <div class="info_title">Время</div>
 
-                        <a href="" class="info_link">{{composer}}</a>
+                            <div class="info_value">{{duration}}</div>
 
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Художник</div>
-
-                        <a href="" class="info_link">{{artist}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Монтаж</div>
-
-                        <a href="" class="info_link">{{montage}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Бюджет</div>
-
-                        <a href="" class="info_link">{{budget}}</a>
-
-                    </div>
-                    <div class="info_row">
-                        <div class="info_title">Время</div>
-
-                        <div class="info_value">{{duration}}</div>
-
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="movie_content_right">
-                <h3 class="movie_content_right_header">В главных ролях</h3>
-                <ul class="actors_list">
+                <div class="movie_content_right">
+                    <h3 class="movie_content_right_header">В главных ролях</h3>
+                    <ul class="actors_list">
 
-                    {{#each actors}}
-                        <li><a class="actors_list_item">{{this}}</a></li>
-                    {{/each}}
+                        {{#each actors}}
+                            <li><a class="actors_list_item">{{this}}</a></li>
+                        {{/each}}
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    {{#if isAuthorized}}
+        {{#if userReview}}
+            {{#if wantsToEditReview}}
+                <div class="content-container">
+                    <div class="write-review-container" id="user-review-container">
+                        <h3 class="your-review write-review">Редактирование рецензии</h3>
+                        <div class="review-form-container">
+                            <form id="review" class="review-form">
+                                <select name="review_type" class="select-review-type" id="select-type">
+                                    <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
+                                            value="positive">Положительная</option>
+                                    <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
+                                            value="neutral">Нейтральная</option>
+                                    <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
+                                            value="negative">Отрицательная</option>
+                                </select>
+                                <input name="title" type="text" class="input-field input-review-title review-input"
+                                       placeholder="Заголовок" value="{{userReview.title}}">
+                                <textarea name="content" class="input-field input-review-content review-input"
+                                          placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
+                                <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <div class="content-container">
+                    <div class="review-content-container {{userReview.review_type}}-review-background">
+                        <h3 class="your-review">
+                            Ваша рецензия
+                            <button class="fa-button edit-button" id="edit-button">
+                                <i class="far fa-edit fa-lg"></i>
+                            </button>
+                            <button class="fa-button delete-button" id="delete-button">
+                                <i class="far fa-trash-alt fa-lg"></i>
+                            </button>
+                        </h3>
+                        <div class="review-body">
+                            <p class="review-title">{{userReview.title}}</p>
+                            <p class="review-content">{{userReview.content}}</p>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{else}}
+            <div class="content-container">
+                <div class="write-review-container" id="user-review-container">
+                    <h3 class="your-review write-review">Напишите рецензию</h3>
+                    <div class="review-form-container">
+                        <form id="review" class="review-form">
+                            <select name="review_type" class="select-review-type" id="select-type">
+                                <option selected disabled>Тип рецензии</option>
+                                <option value="positive">Положительная</option>
+                                <option value="neutral">Нейтральная</option>
+                                <option value="negative">Отрицательная</option>
+                            </select>
+                            <input name="title" type="text" class="input-field input-review-title review-input"
+                                   placeholder="Заголовок">
+                            <textarea name="content" class="input-field input-review-content review-input"
+                                      placeholder="Ваши впечатления о фильме"></textarea>
+                            <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
+                            <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+
+    {{#if reviewsData.reviews}}
+        <hr class="reviews-separator"/>
+
+        {{#each reviewsData.reviews}}
+            {{#if (notEq this.author ../userReview.author)}}
+                {{#if @first}}
+                <div class="content-container" id="first-review">
+                {{else}}
+                <div class="content-container">
+                {{/if}}
+                <div class="review-content-container {{this.review_type}}-review-background">
+                    <h3 class="your-review">Рецензия {{this.author}}</h3>
+                    <div class="review-body">
+                        <p class="review-title">{{this.title}}</p>
+                        <p class="review-content">{{this.content}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        {{/each}}
+
+        {{#if (notEq reviewsData.pages_number 1)}}
+            {{#pagination reviewsData.current_page reviewsData.pages_number}}
+                <div class="pagination-wrapper">
+                    {{#unless startFromFirstPage}}
+                        <button class="pagination-button" data-page-index="{{dec ../reviewsData.current_page}}">&lt;
+                        </button>
+                    {{/unless}}
+
+                    {{#each pages}}
+                        {{#if isCurrent}}
+                            <button disabled class="pagination-button pagination-current-button"
+                                    data-page-index="{{page}}">{{page}}</button>
+                        {{else}}
+                            <button class="pagination-button" data-page-index="{{page}}">{{page}}</button>
+                        {{/if}}
+                    {{/each}}
+
+                    {{#unless endAtLastPage}}
+                        <button class="pagination-button" data-page-index="{{inc ../reviewsData.current_page}}">&gt;
+                        </button>
+                    {{/unless}}
+                </div>
+            {{/pagination}}
+        {{/if}}
+    {{/if}}
+
+</div>

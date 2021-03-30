@@ -81,6 +81,21 @@
         {{/each}}
     </div>
 
-    <h3 class="section-name">Рецензии</h3>
+    {{#if reviews}}
+        <h3 class="section-name">Рецензии</h3>
+
+        <div class="slider">
+            {{#each reviews}}
+                <div class="slider-review-card">
+                    <div class="review-card {{this.review_type}}-review-background">
+                        <p class="review-card-title">{{this.title}}</p>
+                        <p class="review-card-content">{{this.content}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+
+    {{/if}}
+
 </div>
 

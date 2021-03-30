@@ -6,6 +6,7 @@ import './settings.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
+import {PASSWORDS_MISMATCH} from '../../utils/constant.js';
 
 
 /**
@@ -174,7 +175,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Проверка данных на валидность
-     * @return {bool} - статус наличия ошибок
+     * @return {boolean} - статус наличия ошибок
      */
     validateSettings() {
         const validator = new Validator();
@@ -183,7 +184,7 @@ export default class SettingsView extends BaseView {
         const emailErrors = validator.validateEmail(this.input.email);
 
         if (this.input.password1 !== this.input.password2) {
-            passwordErrors.push('Пароли не совпадают!');
+            passwordErrors.push(PASSWORDS_MISMATCH);
         }
         if (this.input.password1.length === 0 && this.input.password2.length === 0) {
             passwordErrors.length = 0;
@@ -208,7 +209,7 @@ export default class SettingsView extends BaseView {
     /**
      * Проверка на валидность аватара
      * @param {string} avatar - путь к фото
-     * @return {bool} - статус наличия ошибок
+     * @return {boolean} - статус наличия ошибок
      */
     validateAvatar(avatar) {
         const validator = new Validator();
@@ -240,7 +241,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Показать изменения
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     displayServerResponse(status) {
         if (status === OK_CODE) {
@@ -252,7 +253,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса
+     * @param {boolean} status - статус запроса
      */
     processLogout(status) {
         if (status) {
@@ -262,7 +263,7 @@ export default class SettingsView extends BaseView {
 
     /**
      * Показать изменения аватара
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     displayServerResponseAvatar(status) {
         if (status === OK_CODE) {

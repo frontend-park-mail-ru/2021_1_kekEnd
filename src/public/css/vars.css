@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #03A9F4;
+    --light-primary-color: #B3E5FC;
+    --dark-primary-color: #0288D1;
+    --accent-color: #FF9800;
+    --white-text-color: #FFF;
+    --primary-text-color: #212121;
+    --secondary-text-color: #757575;
+    --divider-color: #BDBDBD;
+
+    --button-gradient-first: #FF105F;
+    --button-gradient-second: #FF9900;
+
+    --movie-background-color: #031D44;
+    --positive-review-color: rgba(195, 233, 145, .5);
+    --neutral-review-color: lightgrey;
+    --negative-review-background: rgba(255, 102, 0, .3);
+
+    --valid-color: lawngreen;
+    --invalid-color: orangered;
+}

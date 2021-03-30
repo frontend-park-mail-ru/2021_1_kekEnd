@@ -79,7 +79,7 @@ export default class ProfileView extends BaseView {
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса на выход
+     * @param {boolean} status - статус запроса на выход
      */
     processLogout(status) {
         if (status) {
