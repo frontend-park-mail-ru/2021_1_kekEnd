@@ -39,6 +39,10 @@ export default class MovieView extends BaseView {
         globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
+        this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
+        this.editReviewClickedCallback = this.editReviewClicked.bind(this);
+        this.deleteReviewClickedCallback = this.deleteReviewClicked.bind(this);
+        this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         this.plusClickedCallback = this.plusClicked.bind(this);
         this.otherClickedCallback = this.otherClicked.bind(this);
@@ -78,41 +82,21 @@ export default class MovieView extends BaseView {
 
         const reviewForm = document.getElementById('review');
         if (reviewForm !== null) {
-            reviewForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const data = getFormValues(reviewForm);
-                data.movie_id = reviewForm.getAttribute('data-movie-id');
-
-                const validator = new Validator();
-                const reviewErrors = validator.validateReview(data);
-                const validationHint = document.getElementById('validation-hint-review');
-                setValidationHint(validationHint, reviewErrors);
-                if (reviewErrors.length === 0) {
-                    globalEventBus.emit((this.data.wantsToEditReview) ? 'edit review' : 'send review', data);
-                }
-            });
+            reviewForm.addEventListener('submit', this.reviewFormSubmittedCallback);
         }
 
         const editReviewButton = document.getElementById('edit-button');
         if (editReviewButton !== null) {
-            editReviewButton.addEventListener('click', () => {
-                this.setMovieData({...this.data, 'wantsToEditReview': true});
-            });
+            editReviewButton.addEventListener('click', this.editReviewClickedCallback);
         }
 
         const deleteReviewButton = document.getElementById('delete-button');
         if (deleteReviewButton !== null) {
-            deleteReviewButton.addEventListener('click', () => {
-                const movieID = deleteReviewButton.getAttribute('data-movie-id');
-                globalEventBus.emit('delete review', movieID);
-            });
+            deleteReviewButton.addEventListener('click', this.deleteReviewClickedCallback);
         }
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
-            button.addEventListener('click', () => {
-                globalEventBus.emit('get reviews page', this.data.id, button.getAttribute('data-page-index'));
-            });
+            button.addEventListener('click', this.paginationButtonClickedCallback);
         });
     }
 
@@ -123,6 +107,25 @@ export default class MovieView extends BaseView {
         document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
+
+        const reviewForm = document.getElementById('review');
+        if (reviewForm !== null) {
+            reviewForm.removeEventListener('submit', this.reviewFormSubmittedCallback);
+        }
+
+        const editReviewButton = document.getElementById('edit-button');
+        if (editReviewButton !== null) {
+            editReviewButton.removeEventListener('click', this.editReviewClickedCallback);
+        }
+
+        const deleteReviewButton = document.getElementById('delete-button');
+        if (deleteReviewButton !== null) {
+            deleteReviewButton.removeEventListener('click', this.deleteReviewClickedCallback);
+        }
+
+        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
+            button.removeEventListener('click', this.paginationButtonClickedCallback);
+        });
     }
 
     /**
@@ -169,6 +172,35 @@ export default class MovieView extends BaseView {
         if (status) {
             this.render(movieID);
         }
+    }
+
+    reviewFormSubmitted(event) {
+        event.preventDefault();
+
+        const data = getFormValues(event.target);
+        data.movie_id = event.target.getAttribute('data-movie-id');
+
+        const validator = new Validator();
+        const reviewErrors = validator.validateReview(data);
+        const validationHint = document.getElementById('validation-hint-review');
+        setValidationHint(validationHint, reviewErrors);
+        if (reviewErrors.length === 0) {
+            globalEventBus.emit((this.data.wantsToEditReview) ? 'edit review' : 'send review', data);
+        }
+    }
+
+    editReviewClicked() {
+        this.setMovieData({...this.data, 'wantsToEditReview': true});
+    }
+
+    deleteReviewClicked(event) {
+        console.log(event.target);
+        const movieID = event.target.getAttribute('data-movie-id');
+        globalEventBus.emit('delete review', movieID);
+    }
+
+    paginationButtonClicked(event) {
+        globalEventBus.emit('get reviews page', this.data.id, event.target.getAttribute('data-page-index'));
     }
 
     /**
