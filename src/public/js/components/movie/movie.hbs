@@ -195,7 +195,7 @@
                     <div class="write-review-container" id="user-review-container">
                         <h3 class="your-review write-review">Редактирование рецензии</h3>
                         <div class="review-form-container">
-                            <form id="review" class="review-form" data-movie-id="{{id}}">
+                            <form id="review" class="review-form">
                                 <select name="review_type" class="select-review-type" id="select-type">
                                     <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
                                             value="positive">Положительная</option>
@@ -219,10 +219,10 @@
                     <div class="review-content-container {{userReview.review_type}}-review-background">
                         <h3 class="your-review">
                             Ваша рецензия
-                            <button class="fa-button edit-button" id="edit-button" data-movie-id="{{id}}">
+                            <button class="fa-button edit-button" id="edit-button">
                                 <i class="far fa-edit fa-lg"></i>
                             </button>
-                            <button class="fa-button delete-button" id="delete-button" data-movie-id="{{id}}">
+                            <button class="fa-button delete-button" id="delete-button">
                                 <i class="far fa-trash-alt fa-lg"></i>
                             </button>
                         </h3>
@@ -238,7 +238,7 @@
                 <div class="write-review-container" id="user-review-container">
                     <h3 class="your-review write-review">Напишите рецензию</h3>
                     <div class="review-form-container">
-                        <form id="review" class="review-form" data-movie-id="{{id}}">
+                        <form id="review" class="review-form">
                             <select name="review_type" class="select-review-type" id="select-type">
                                 <option selected disabled>Тип рецензии</option>
                                 <option value="positive">Положительная</option>

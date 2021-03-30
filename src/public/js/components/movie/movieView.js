@@ -178,7 +178,7 @@ export default class MovieView extends BaseView {
         event.preventDefault();
 
         const data = getFormValues(event.target);
-        data.movie_id = event.target.getAttribute('data-movie-id');
+        data.movie_id = this.data.id;
 
         const validator = new Validator();
         const reviewErrors = validator.validateReview(data);
@@ -193,10 +193,8 @@ export default class MovieView extends BaseView {
         this.setMovieData({...this.data, 'wantsToEditReview': true});
     }
 
-    deleteReviewClicked(event) {
-        console.log(event.target);
-        const movieID = event.target.getAttribute('data-movie-id');
-        globalEventBus.emit('delete review', movieID);
+    deleteReviewClicked() {
+        globalEventBus.emit('delete review', this.data.id);
     }
 
     paginationButtonClicked(event) {
