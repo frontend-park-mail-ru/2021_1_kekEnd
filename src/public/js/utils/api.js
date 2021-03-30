@@ -143,6 +143,17 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`, 'DELETE');
     }
 
+    addMovieRating(id, score) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'POST', JSON.stringify({
+            'movie_id': id,
+            'score': score,
+        }));
+    }
+
+    getUserRatingForMovie(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`);
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

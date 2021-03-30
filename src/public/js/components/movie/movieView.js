@@ -31,6 +31,7 @@ export default class MovieView extends BaseView {
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
         this.deleteReviewClickedCallback = this.deleteReviewClicked.bind(this);
+        this.ratingSubmittedCallback = this.ratingSubmitted.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         this.plusClickedCallback = this.plusClicked.bind(this);
@@ -71,10 +72,8 @@ export default class MovieView extends BaseView {
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
 
-        Array.from(document.getElementsByClassName('label-star')).forEach((star) => {
-            star.addEventListener('click', () => {
-                globalEventBus.emit('send rating', this.data.id, star.getAttribute('data-rating'));
-            });
+        [...document.getElementsByClassName('label-star')].forEach((star) => {
+            star.addEventListener('click', this.ratingSubmittedCallback);
         });
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
@@ -93,6 +92,10 @@ export default class MovieView extends BaseView {
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.removeEventListener('click', this.deleteReviewClickedCallback);
+
+        [...document.getElementsByClassName('label-star')].forEach((star) => {
+            star.removeEventListener('click', this.ratingSubmittedCallback);
+        });
 
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
@@ -167,6 +170,10 @@ export default class MovieView extends BaseView {
 
     deleteReviewClicked() {
         globalEventBus.emit('delete review', this.data.id);
+    }
+
+    ratingSubmitted(event) {
+        globalEventBus.emit('send rating', this.data.id, event.target.getAttribute('data-rating'));
     }
 
     paginationButtonClicked(event) {
