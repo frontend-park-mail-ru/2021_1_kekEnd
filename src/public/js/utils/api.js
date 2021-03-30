@@ -154,6 +154,13 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`);
     }
 
+    editUserRatingForMovie(id, newScore) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'PUT', JSON.stringify({
+            'movie_id': id,
+            'score': newScore,
+        }));
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

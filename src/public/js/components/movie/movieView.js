@@ -26,6 +26,7 @@ export default class MovieView extends BaseView {
         globalEventBus.on('review edited', this.processReviewChange.bind(this));
         globalEventBus.on('review deleted', this.processReviewChange.bind(this));
         globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
+        globalEventBus.on('rating uploaded', this.displayNewRating.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
@@ -110,6 +111,8 @@ export default class MovieView extends BaseView {
         this.data = data;
         super.render(this.data);
 
+        console.log(this.data);
+        this.setUserRating();
         this.setEventListeners();
     }
 
@@ -122,6 +125,13 @@ export default class MovieView extends BaseView {
         }
     }
 
+    setUserRating() {
+        if (this.data.userRating !== null) {
+            const starID = `star-${this.data.userRating.score}`;
+            document.getElementById(starID).checked = true;
+        }
+    }
+
     /**
      * Выход со страницы
      * @param {boolean} status - статус запроса на выход
@@ -129,6 +139,16 @@ export default class MovieView extends BaseView {
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
+        }
+    }
+
+    displayNewRating(status, score) {
+        if (status) {
+            this.data.userRating = {
+                'movie_id': this.data.id,
+                'score': score,
+            };
+            this.setMovieData(this.data);
         }
     }
 
@@ -173,7 +193,8 @@ export default class MovieView extends BaseView {
     }
 
     ratingSubmitted(event) {
-        globalEventBus.emit('send rating', this.data.id, event.target.getAttribute('data-rating'));
+        const action = (this.data.userRating === null) ? 'send rating' : 'edit rating';
+        globalEventBus.emit(action, this.data.id, event.target.getAttribute('data-rating'));
     }
 
     paginationButtonClicked(event) {

@@ -180,7 +180,11 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
-                    <h3 class="rate-movie">Оцените фильм</h3>
+                    {{#if userRating}}
+                        <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
+                    {{else}}
+                        <h3 class="rate-movie">Оцените фильм</h3>
+                    {{/if}}
                     <div class="rating-stars-container">
                         <input class="input-star max-star" id="star-10" type="radio" name="star"/>
                         <label class="label-star" for="star-10" data-rating="10"></label>
@@ -227,11 +231,14 @@
                             <form id="review" class="review-form">
                                 <select name="review_type" class="select-review-type" id="select-type">
                                     <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
-                                            value="positive">Положительная</option>
+                                            value="positive">Положительная
+                                    </option>
                                     <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
-                                            value="neutral">Нейтральная</option>
+                                            value="neutral">Нейтральная
+                                    </option>
                                     <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
-                                            value="negative">Отрицательная</option>
+                                            value="negative">Отрицательная
+                                    </option>
                                 </select>
                                 <input name="title" type="text" class="input-field input-review-title review-input"
                                        placeholder="Заголовок" value="{{userReview.title}}">
@@ -304,7 +311,7 @@
                         <p class="review-content">{{this.content}}</p>
                     </div>
                 </div>
-                </div>
+            </div>
             {{/if}}
         {{/each}}
 
