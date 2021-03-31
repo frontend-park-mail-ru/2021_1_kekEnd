@@ -34,25 +34,20 @@
 
 <div class="main">
     <div class="actor-content-container">
-
         <div class="flex_container">
-
             <div class="actor-content-left">
                 <div class="actor-content-left-inner">
                     <img class="actor-avatar-img" src="{{avatar}}">
-                    <button id="actor-button-addtofavorites"
-                            class="actor-button-addtofavorites">
+                    <button id="actor-button-like" class="actor-button-like">
                         В избранное
                     </button>
                 </div>
             </div>
 
             <div class="actor-content-center">
-                <div class="actor-content-name">
-                    <h1>
-                        {{name}}
-                    </h1>
-                </div>
+                <h1 class="actor-content-name">
+                    {{name}}
+                </h1>
 
                 <div class="actor-info">
                     <div class="actor-info-header">Основная информация</div>
@@ -66,12 +61,10 @@
                     </div>
                     <div class="actor-info-row">
                         <div class="actor-info-title">Жанры</div>
-
                         {{#each genres}}
                             <a href="" class="actor-info-link">{{this}}</a>
                             {{#unless @last}}<span>&nbsp;</span>{{/unless}}
                         {{/each}}
-
                     </div>
                     <div class="actor-info-row">
                         <div class="actor-info-title">Всего фильмов</div>
@@ -102,9 +95,7 @@
                         {{/each}}
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

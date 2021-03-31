@@ -4,9 +4,6 @@ import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './actor.tmpl.js';
 
-
-// TODO: callbacks, constructor
-
 /**
  * Представление страницы актера
  */
@@ -19,11 +16,11 @@ export default class ActorView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['actor.hbs']);
 
-        this.setActorData = this.setActorData.bind(this);
+        this.setActorDataCallback = this.setActorDataCallback.bind(this);
         this.addToFavoritesCallback = this.addToFavoritesCallback.bind(this);
         this.processLogout = this.processLogout.bind(this);
 
-        globalEventBus.on('set actor data', this.setActorData);
+        globalEventBus.on('set actor data', this.setActorDataCallback);
         globalEventBus.on('logout status', this.processLogout);
     }
 
@@ -55,7 +52,7 @@ export default class ActorView extends BaseView {
             });
         }
 
-        document.getElementById('actor-button-addtofavorites').
+        document.getElementById('actor-button-like').
             addEventListener('click', this.addToFavoritesCallback);
     }
 
@@ -63,7 +60,7 @@ export default class ActorView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('actor-button-addtofavorites').
+        document.getElementById('actor-button-like').
             removeEventListener('click', this.addToFavoritesCallback);
     }
 
@@ -71,7 +68,7 @@ export default class ActorView extends BaseView {
      * Установка данных об актере
      * @param {Object} data - данные актера
      */
-    setActorData(data) {
+    setActorDataCallback(data) {
         super.render(data);
 
         this.setEventListeners();
