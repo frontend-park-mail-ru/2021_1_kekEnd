@@ -58,9 +58,14 @@
                 </div>
                 <div class="movie_content_center">
                     <div class="movie_info_title">
-                        <h1>
+                        <h1 class="movie-title">
                             {{title}}
                         </h1>
+
+                        <h2 class="movie-rating">
+                            <!-- TODO: replace with rating field when backend is ready -->
+                            7.1
+                        </h2>
                     </div>
                     <div class="meta_info">
 
@@ -175,14 +180,43 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
-                    <h3 class="movie_content_right_header">В главных ролях</h3>
-                    <ul class="actors_list">
+                    {{#if userRating}}
+                        <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
+                        <p id="delete-rating" class="delete-rating">Удалить оценку</p>
+                    {{else}}
+                        <h3 class="rate-movie">Оцените фильм</h3>
+                    {{/if}}
+                    <div class="rating-stars-container">
+                        <input class="input-star max-star" id="star-10" type="radio" name="star"/>
+                        <label class="label-star" for="star-10" data-rating="10"></label>
+                        <input class="input-star" id="star-9" type="radio" name="star"/>
+                        <label class="label-star" for="star-9" data-rating="9"></label>
+                        <input class="input-star" id="star-8" type="radio" name="star"/>
+                        <label class="label-star" for="star-8" data-rating="8"></label>
+                        <input class="input-star" id="star-7" type="radio" name="star"/>
+                        <label class="label-star" for="star-7" data-rating="7"></label>
+                        <input class="input-star" id="star-6" type="radio" name="star"/>
+                        <label class="label-star" for="star-6" data-rating="6"></label>
+                        <input class="input-star" id="star-5" type="radio" name="star"/>
+                        <label class="label-star" for="star-5" data-rating="5"></label>
+                        <input class="input-star" id="star-4" type="radio" name="star"/>
+                        <label class="label-star" for="star-4" data-rating="4"></label>
+                        <input class="input-star" id="star-3" type="radio" name="star"/>
+                        <label class="label-star" for="star-3" data-rating="3"></label>
+                        <input class="input-star" id="star-2" type="radio" name="star"/>
+                        <label class="label-star" for="star-2" data-rating="2"></label>
+                        <input class="input-star" id="star-1" type="radio" name="star"/>
+                        <label class="label-star" for="star-1" data-rating="1"></label>
+                    </div>
 
-                        {{#each actors}}
-                            <li><a class="actors_list_item">{{this}}</a></li>
-                        {{/each}}
-
-                    </ul>
+                    <div class="main-roles">
+                        <h3 class="movie_content_right_header">В главных ролях</h3>
+                        <ul class="actors_list">
+                            {{#each actors}}
+                                <li><a class="actors_list_item">{{this}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,11 +232,14 @@
                             <form id="review" class="review-form">
                                 <select name="review_type" class="select-review-type" id="select-type">
                                     <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
-                                            value="positive">Положительная</option>
+                                            value="positive">Положительная
+                                    </option>
                                     <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
-                                            value="neutral">Нейтральная</option>
+                                            value="neutral">Нейтральная
+                                    </option>
                                     <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
-                                            value="negative">Отрицательная</option>
+                                            value="negative">Отрицательная
+                                    </option>
                                 </select>
                                 <input name="title" type="text" class="input-field input-review-title review-input"
                                        placeholder="Заголовок" value="{{userReview.title}}">
@@ -219,11 +256,11 @@
                     <div class="review-content-container {{userReview.review_type}}-review-background">
                         <h3 class="your-review">
                             Ваша рецензия
-                            <button class="fa-button edit-button" id="edit-button">
-                                <i class="far fa-edit fa-lg"></i>
+                            <button class="fa-button edit-button" id="edit-button" data-movie-id="{{id}}">
+                                <i class="fa fa-pencil-square-o fa-2x"></i>
                             </button>
-                            <button class="fa-button delete-button" id="delete-button">
-                                <i class="far fa-trash-alt fa-lg"></i>
+                            <button class="fa-button delete-button" id="delete-button" data-movie-id="{{id}}">
+                                <i class="fa fa-trash-o fa-2x"></i>
                             </button>
                         </h3>
                         <div class="review-body">

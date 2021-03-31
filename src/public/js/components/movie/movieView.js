@@ -26,11 +26,15 @@ export default class MovieView extends BaseView {
         globalEventBus.on('review edited', this.processReviewChange.bind(this));
         globalEventBus.on('review deleted', this.processReviewChange.bind(this));
         globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
+        globalEventBus.on('rating uploaded', this.displayNewRating.bind(this));
+        globalEventBus.on('rating deleted', this.removeRating.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
         this.deleteReviewClickedCallback = this.deleteReviewClicked.bind(this);
+        this.ratingSubmittedCallback = this.ratingSubmitted.bind(this);
+        this.deleteRatingClickedCallback = this.deleteRatingClicked.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         this.plusClickedCallback = this.plusClicked.bind(this);
@@ -71,6 +75,12 @@ export default class MovieView extends BaseView {
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
 
+        document.getElementById('delete-rating')?.addEventListener('click', this.deleteRatingClickedCallback);
+
+        [...document.getElementsByClassName('label-star')].forEach((star) => {
+            star.addEventListener('click', this.ratingSubmittedCallback);
+        });
+
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.addEventListener('click', this.paginationButtonClickedCallback);
         });
@@ -88,6 +98,10 @@ export default class MovieView extends BaseView {
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.removeEventListener('click', this.deleteReviewClickedCallback);
 
+        [...document.getElementsByClassName('label-star')].forEach((star) => {
+            star.removeEventListener('click', this.ratingSubmittedCallback);
+        });
+
         [...document.getElementsByClassName('pagination-button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
         });
@@ -101,6 +115,7 @@ export default class MovieView extends BaseView {
         this.data = data;
         super.render(this.data);
 
+        this.setUserRating();
         this.setEventListeners();
     }
 
@@ -113,6 +128,13 @@ export default class MovieView extends BaseView {
         }
     }
 
+    setUserRating() {
+        if (this.data.userRating !== null) {
+            const starID = `star-${this.data.userRating.score}`;
+            document.getElementById(starID).checked = true;
+        }
+    }
+
     /**
      * Выход со страницы
      * @param {boolean} status - статус запроса на выход
@@ -120,6 +142,23 @@ export default class MovieView extends BaseView {
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
+        }
+    }
+
+    displayNewRating(status, score) {
+        if (status) {
+            this.data.userRating = {
+                'movie_id': this.data.id,
+                'score': score,
+            };
+            this.setMovieData(this.data);
+        }
+    }
+
+    removeRating(status) {
+        if (status) {
+            this.data.userRating = null;
+            this.setMovieData(this.data);
         }
     }
 
@@ -161,6 +200,15 @@ export default class MovieView extends BaseView {
 
     deleteReviewClicked() {
         globalEventBus.emit('delete review', this.data.id);
+    }
+
+    ratingSubmitted(event) {
+        const action = (this.data.userRating === null) ? 'send rating' : 'edit rating';
+        globalEventBus.emit(action, this.data.id, event.target.getAttribute('data-rating'));
+    }
+
+    deleteRatingClicked() {
+        globalEventBus.emit('delete rating', this.data.id);
     }
 
     paginationButtonClicked(event) {

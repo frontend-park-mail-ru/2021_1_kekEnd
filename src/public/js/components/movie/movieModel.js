@@ -15,6 +15,9 @@ export default class MovieModel {
         globalEventBus.on('send review', this.addReview.bind(this));
         globalEventBus.on('edit review', this.editReview.bind(this));
         globalEventBus.on('delete review', this.deleteReview.bind(this));
+        globalEventBus.on('send rating', this.addRating.bind(this));
+        globalEventBus.on('edit rating', this.editRating.bind(this));
+        globalEventBus.on('delete rating', this.deleteRating.bind(this));
         globalEventBus.on('get reviews page', this.getReviewsPage.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
@@ -24,13 +27,15 @@ export default class MovieModel {
      * @param {number} id - id фильма
      */
     getMovieData(id) {
-        Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id), API.getUserReviewForMovie(id)])
+        Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id),
+            API.getUserReviewForMovie(id), API.getUserRatingForMovie(id)])
             .then((responses) => {
-                const [userResp, movieDataResp, movieReviewsResp, userReviewResp] = responses;
+                const [userResp, movieDataResp, movieReviewsResp, userReviewResp, userRatingResp] = responses;
                 const movieData = {
                     ...movieDataResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
+                    'userRating': (userRatingResp.status === OK_CODE) ? (userRatingResp.data) : null,
                 };
                 if (movieReviewsResp.status === OK_CODE) {
                     movieData.reviewsData = movieReviewsResp.data;
@@ -64,6 +69,27 @@ export default class MovieModel {
         API.getMovieReviews(id, page)
             .then((res) => {
                 globalEventBus.emit('set reviews page', res.status === OK_CODE, res.data);
+            });
+    }
+
+    addRating(id, score) {
+        API.addMovieRating(id, score)
+            .then((res) => {
+                globalEventBus.emit('rating uploaded', res.status === CREATED, score);
+            });
+    }
+
+    editRating(id, score) {
+        API.editUserRatingForMovie(id, score)
+            .then((res) => {
+                globalEventBus.emit('rating uploaded', res.status === OK_CODE, score);
+            });
+    }
+
+    deleteRating(id) {
+        API.deleteUserRatingForMovie(id)
+            .then((res) => {
+                globalEventBus.emit('rating deleted', res.status === OK_CODE);
             });
     }
 
