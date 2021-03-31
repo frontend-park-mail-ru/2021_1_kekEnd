@@ -161,6 +161,10 @@ class Api {
         }));
     }
 
+    deleteUserRatingForMovie(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`, 'DELETE');
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

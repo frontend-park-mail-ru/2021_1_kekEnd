@@ -273,8 +273,15 @@
 }
 
 .rate-movie {
-    margin-bottom: 16px;
     text-align: right;
+}
+
+.delete-rating {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 16px;
 }
 
 .input-star {

@@ -27,12 +27,14 @@ export default class MovieView extends BaseView {
         globalEventBus.on('review deleted', this.processReviewChange.bind(this));
         globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
         globalEventBus.on('rating uploaded', this.displayNewRating.bind(this));
+        globalEventBus.on('rating deleted', this.removeRating.bind(this));
         globalEventBus.on('logout status', this.processLogout.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
         this.deleteReviewClickedCallback = this.deleteReviewClicked.bind(this);
         this.ratingSubmittedCallback = this.ratingSubmitted.bind(this);
+        this.deleteRatingClickedCallback = this.deleteRatingClicked.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         this.plusClickedCallback = this.plusClicked.bind(this);
@@ -73,6 +75,8 @@ export default class MovieView extends BaseView {
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
 
+        document.getElementById('delete-rating')?.addEventListener('click', this.deleteRatingClickedCallback);
+
         [...document.getElementsByClassName('label-star')].forEach((star) => {
             star.addEventListener('click', this.ratingSubmittedCallback);
         });
@@ -111,7 +115,6 @@ export default class MovieView extends BaseView {
         this.data = data;
         super.render(this.data);
 
-        console.log(this.data);
         this.setUserRating();
         this.setEventListeners();
     }
@@ -148,6 +151,13 @@ export default class MovieView extends BaseView {
                 'movie_id': this.data.id,
                 'score': score,
             };
+            this.setMovieData(this.data);
+        }
+    }
+
+    removeRating(status) {
+        if (status) {
+            this.data.userRating = null;
             this.setMovieData(this.data);
         }
     }
@@ -195,6 +205,10 @@ export default class MovieView extends BaseView {
     ratingSubmitted(event) {
         const action = (this.data.userRating === null) ? 'send rating' : 'edit rating';
         globalEventBus.emit(action, this.data.id, event.target.getAttribute('data-rating'));
+    }
+
+    deleteRatingClicked() {
+        globalEventBus.emit('delete rating', this.data.id);
     }
 
     paginationButtonClicked(event) {

@@ -17,6 +17,7 @@ export default class MovieModel {
         globalEventBus.on('delete review', this.deleteReview.bind(this));
         globalEventBus.on('send rating', this.addRating.bind(this));
         globalEventBus.on('edit rating', this.editRating.bind(this));
+        globalEventBus.on('delete rating', this.deleteRating.bind(this));
         globalEventBus.on('get reviews page', this.getReviewsPage.bind(this));
         globalEventBus.on('logout clicked', this.logout.bind(this));
     }
@@ -82,6 +83,13 @@ export default class MovieModel {
         API.editUserRatingForMovie(id, score)
             .then((res) => {
                 globalEventBus.emit('rating uploaded', res.status === OK_CODE, score);
+            });
+    }
+
+    deleteRating(id) {
+        API.deleteUserRatingForMovie(id)
+            .then((res) => {
+                globalEventBus.emit('rating deleted', res.status === OK_CODE);
             });
     }
 
