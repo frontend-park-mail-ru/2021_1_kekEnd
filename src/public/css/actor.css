@@ -60,7 +60,6 @@
 }
 
 .actor-info-header {
-    font-size: 20px;
     margin-bottom: 12px;
 }
 
@@ -75,7 +74,7 @@
     font-size: 14px;
 }
 
-.actor-info-link {
+.actor-info-link:hover {
     color: #ff6600;
 }
 
