@@ -67,11 +67,16 @@
 .actor-info-title {
     width: 156px;
     font-size: 14px;
+    color: rgb(107, 107, 107);
 }
 
 .actor-info-link {
     text-decoration: none;
     font-size: 14px;
+}
+
+.actor-info-link {
+    color: #ff6600;
 }
 
 .actor-info-value {
