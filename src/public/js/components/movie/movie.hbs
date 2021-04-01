@@ -63,8 +63,7 @@
                         </h1>
 
                         <h2 class="movie-rating">
-                            <!-- TODO: replace with rating field when backend is ready -->
-                            7.1
+                            {{rating}}
                         </h2>
                     </div>
                     <div class="meta_info">
@@ -299,21 +298,19 @@
         <hr class="reviews-separator"/>
 
         {{#each reviewsData.reviews}}
-            {{#if (notEq this.author ../userReview.author)}}
-                {{#if @first}}
-                <div class="content-container" id="first-review">
-                {{else}}
-                <div class="content-container">
-                {{/if}}
-                <div class="review-content-container {{this.review_type}}-review-background">
-                    <h3 class="your-review">Рецензия {{this.author}}</h3>
-                    <div class="review-body">
-                        <p class="review-title">{{this.title}}</p>
-                        <p class="review-content">{{this.content}}</p>
-                    </div>
+            {{#if @first}}
+            <div class="content-container" id="first-review">
+            {{else}}
+            <div class="content-container">
+            {{/if}}
+            <div class="review-content-container {{this.review_type}}-review-background">
+                <h3 class="your-review">Рецензия {{this.author}}</h3>
+                <div class="review-body">
+                    <p class="review-title">{{this.title}}</p>
+                    <p class="review-content">{{this.content}}</p>
                 </div>
             </div>
-            {{/if}}
+        </div>
         {{/each}}
 
         {{#if (notEq reviewsData.pages_number 1)}}

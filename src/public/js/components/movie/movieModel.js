@@ -1,6 +1,7 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
 import {CREATED, OK_CODE} from '../../utils/codes.js';
+import {objectsMatch} from '../../utils/objectsMatch.js';
 
 
 /**
@@ -38,6 +39,9 @@ export default class MovieModel {
                     'userRating': (userRatingResp.status === OK_CODE) ? (userRatingResp.data) : null,
                 };
                 if (movieReviewsResp.status === OK_CODE) {
+                    movieReviewsResp.data.reviews = movieReviewsResp.data.reviews?.filter((review) => {
+                        return !objectsMatch(movieData.userReview, review);
+                    });
                     movieData.reviewsData = movieReviewsResp.data;
                 }
                 globalEventBus.emit('set movie data', movieData);
