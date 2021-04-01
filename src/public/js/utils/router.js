@@ -13,41 +13,43 @@ export class Router {
     }
 
     start() {
-        window.addEventListener('load', () => {
-            const path = location.pathname;
-            this.searchForParams(path);
+        const activate = (href, event=null) => {
+            const [path, params] = this.searchForParams(href, event);
+            this.pushState(path, {}, params);
+        };
+
+        window.addEventListener('load', (event) => {
+            activate(location.pathname, event);
         });
 
-        window.addEventListener('popstate', (event) => {
-            const path = event.target.location.pathname;
-            event.preventDefault();
-            this.searchForParams(path, event);
+        window.addEventListener('popstate', () => {
+            activate(location.pathname);
         });
 
         window.addEventListener('click', (event) => {
             const {target} = event;
             const link = findAscendingTag(target, 'A');
-            const path = (link !== null) ? link.href : null;
-
-            this.searchForParams(path, event);
+            const href = (link !== null) ? link.href : null;
+            activate(href, event);
         });
     }
 
-    searchForParams(path, event=null) {
+    searchForParams(path, event = null) {
+        if (path === null) {
+            return;
+        }
         for (const i in PATHS) {
-            if (path !== null && path.includes(PATHS[i])) {
-                if (event !== null) {
-                    event.preventDefault();
-                }
-                const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
-                this.pushState(PATHS[i], {}, parameters);
-                break;
+            if (path.includes(PATHS[i])) {
+                console.log('path[i]:', PATHS[i]);
+                event?.preventDefault();
+                return [PATHS[i], path.substring(path.lastIndexOf('/') + 1)];
             }
         }
     }
 
     pushState(path = '/', state = {}, parameters = '') {
-        let newState; let newPath;
+        let newState;
+        let newPath;
         if (parameters) {
             newState = `${state}/${parameters}`;
             newPath = `${path}/${parameters}`;
@@ -55,6 +57,7 @@ export class Router {
             newState = state;
             newPath = path;
         }
+        console.log(path, location.pathname);
         if (path !== location.pathname) {
             history.pushState(newState, document.title, newPath);
         } else {
