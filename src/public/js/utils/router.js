@@ -13,55 +13,52 @@ export class Router {
     }
 
     start() {
-        const activate = (href, event=null) => {
-            const [path, params] = this.searchForParams(href, event);
-            this.pushState(path, {}, params);
-        };
-
         window.addEventListener('load', (event) => {
-            activate(location.pathname, event);
+            console.log("LOAD");
+            this.activate(location.pathname, event);
         });
 
-        window.addEventListener('popstate', () => {
-            activate(location.pathname);
+        window.addEventListener('popstate', (event) => {
+            console.log("POPSTATE");
+            this.activate(location.pathname, event);
         });
 
         window.addEventListener('click', (event) => {
+            console.log("CLICK");
             const {target} = event;
             const link = findAscendingTag(target, 'A');
             const href = (link !== null) ? link.href : null;
-            activate(href, event);
+            this.activate(href, event);
         });
     }
 
-    searchForParams(path, event = null) {
+    activate(path, event=null) {
         if (path === null) {
             return;
         }
         for (const i in PATHS) {
             if (path.includes(PATHS[i])) {
-                console.log('path[i]:', PATHS[i]);
                 event?.preventDefault();
-                return [PATHS[i], path.substring(path.lastIndexOf('/') + 1)];
+                let params = path.substring(path.lastIndexOf('/') + 1);
+                if (PATHS[i].includes(params)) {
+                    params = null;
+                }
+                console.log('pushing', PATHS[i], 'with params:', params);
+                this.pushState(PATHS[i], {}, params);
+                return;
             }
         }
-    }
+    };
 
     pushState(path = '/', state = {}, parameters = '') {
-        let newState;
-        let newPath;
+        let newPath = path;
         if (parameters) {
-            newState = `${state}/${parameters}`;
             newPath = `${path}/${parameters}`;
-        } else {
-            newState = state;
-            newPath = path;
         }
-        console.log(path, location.pathname);
         if (path !== location.pathname) {
-            history.pushState(newState, document.title, newPath);
+            history.pushState(state, document.title, newPath);
         } else {
-            history.replaceState(newState, document.title, newPath);
+            history.replaceState(state, document.title, newPath);
         }
 
         this.handlePath(path, parameters);

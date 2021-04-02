@@ -37,26 +37,13 @@ export default class ProfileView extends BaseView {
     }
 
     /**
-     * Переход на страницу настроек
-     */
-    redirectSettings() {
-        globalRouter.pushState(PATHS.settings);
-    }
-
-    /**
      * Установка колбеков
      */
     setEventListeners() {
-        const button = document.getElementById('button-profile-settings');
-        button.addEventListener('click', this.redirectSettings);
-
-        const logoutButton = document.getElementById('logout-button');
-        if (logoutButton !== null) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                globalEventBus.emit('logout clicked');
-            });
-        }
+        document.getElementById('logout-button')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            globalEventBus.emit('logout clicked');
+        });
     }
 
     /**

@@ -62,6 +62,10 @@
     margin-top: 4px;
 }
 
+.settings-link {
+    color: var(--primary-text-color);
+}
+
 .stats {
     display: flex;
     justify-content: space-between;
