@@ -45,15 +45,12 @@
                     <div class="movie_content_left_inner">
                         <img class="movie_content_left_img" src="{{poster}}">
                         <img class="movie_content_left_img" src="{{trailer_preview}}">
-                        <button id="button-watch-later" class="watch_later_button">
-                            Буду смотреть
-                        </button>
-                        <button id="button-plus" class="plus_button">
-                            +
-                        </button>
-                        <button id="button-other" class="other_button">
-                            Еще какая-то кнопка
-                        </button>
+                        <div class="movie-page-bottom-buttons">
+                            <input class="input-watched" id="watched-button" type="checkbox" name="watched">
+                            <label class="label-watched" for="watched-button"></label>
+                            <input class="input-like" id="like-button" type="checkbox" name="liked">
+                            <label class="label-like" for="like-button"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="movie_content_center">

@@ -53,7 +53,7 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-     * Очистисть страницу
+     * Очистить страницу
      */
     hide() {
         this.removeEventListeners();

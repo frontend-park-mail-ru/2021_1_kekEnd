@@ -61,7 +61,7 @@
     font-size: 24px;
 }
 
-.input-watched, .input-liked {
+.input-watched, .input-like {
     display: none;
 }
 
@@ -70,7 +70,16 @@
     cursor: pointer;
 }
 
-.label-liked:before {
+.label-like:before {
     content: '\f08a';
     cursor: pointer;
+}
+
+.input-watched:checked ~ .label-watched:before {
+    color: deepskyblue;
+}
+
+.input-like:checked ~ .label-like:before {
+    color: deeppink;
+    content: '\f004';
 }

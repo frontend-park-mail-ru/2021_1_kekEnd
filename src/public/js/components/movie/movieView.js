@@ -36,9 +36,8 @@ export default class MovieView extends BaseView {
         this.ratingSubmittedCallback = this.ratingSubmitted.bind(this);
         this.deleteRatingClickedCallback = this.deleteRatingClicked.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
-        this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
-        this.plusClickedCallback = this.plusClicked.bind(this);
-        this.otherClickedCallback = this.otherClicked.bind(this);
+        this.watchedClickedCallback = this.watchedClicked.bind(this);
+        this.likeClickedCallback = this.likeClicked.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -51,7 +50,7 @@ export default class MovieView extends BaseView {
     }
 
     /**
-     * Очистисть страницу
+     * Очистить страницу
      */
     hide() {
         this.removeEventListeners();
@@ -64,9 +63,8 @@ export default class MovieView extends BaseView {
     setEventListeners() {
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
-        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
+        document.getElementById('watched-button').addEventListener('click', this.watchedClickedCallback);
+        document.getElementById('like-button').addEventListener('click', this.likeClickedCallback);
 
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
@@ -89,9 +87,7 @@ export default class MovieView extends BaseView {
     removeEventListeners() {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
 
-        document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
+        document.getElementById('button-watch-later').
 
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
@@ -268,23 +264,18 @@ export default class MovieView extends BaseView {
     }
 
     /**
-     * Обработчик нажатия на кнопку "Смотреть позже"
+     * Обработчик нажатия на кнопку "Просмотрено"
      */
-    watchLaterClicked() {
-        console.log('watch later clicked');
+    watchedClicked() {
+        // TODO: api request
+        console.log('watched clicked');
     }
 
     /**
-     * Обработчик нажатия на кнопку "+"
+     * Обработчик нажатия на кнопку "Лайк"
      */
-    plusClicked() {
-        console.log('plus clicked');
-    }
-
-    /**
-     * Обработчик нажатия на кнопку "Другое"
-     */
-    otherClicked() {
-        console.log('other clicked');
+    likeClicked() {
+        // TODO: api request
+        console.log('like clicked');
     }
 }
