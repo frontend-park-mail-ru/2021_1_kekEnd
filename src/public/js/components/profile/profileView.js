@@ -3,6 +3,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './profile.tmpl.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -17,15 +18,15 @@ export default class ProfileView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['profile.hbs']);
 
-        globalEventBus.on('set profile data', this.setProfileData.bind(this));
-        globalEventBus.on('logout status', this.processLogout.bind(this));
+        globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
     }
 
     /**
      * Запуск рендера
      */
     render() {
-        globalEventBus.emit('get profile data');
+        globalEventBus.emit(busEvents.GET_PROFILE_DATA);
     }
 
     /**
@@ -42,7 +43,7 @@ export default class ProfileView extends BaseView {
     setEventListeners() {
         document.getElementById('logout-button')?.addEventListener('click', (e) => {
             e.preventDefault();
-            globalEventBus.emit('logout clicked');
+            globalEventBus.emit(busEvents.LOGOUT_CLICKED);
         });
     }
 
@@ -50,8 +51,7 @@ export default class ProfileView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        const button = document.getElementById('button-profile-settings');
-        button.removeEventListener('click', this.redirectSettings);
+
     }
 
     /**

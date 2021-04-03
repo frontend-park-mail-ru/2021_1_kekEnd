@@ -1,5 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -10,7 +11,7 @@ export default class LoginModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('login clicked', this.checkLogin.bind(this));
+        globalEventBus.on(busEvents.LOGIN_CLICKED, this.checkLogin.bind(this));
     }
     /**
      * Проверка авторизации пользователя
@@ -19,7 +20,7 @@ export default class LoginModel {
     checkLogin(userData) {
         API.login(userData)
             .then((res) => {
-                globalEventBus.emit('login status', res.status);
+                globalEventBus.emit(busEvents.LOGIN_STATUS, res.status);
             });
     }
 }

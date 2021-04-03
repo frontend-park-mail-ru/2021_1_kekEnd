@@ -7,6 +7,7 @@ import './login.tmpl.js';
 import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
 import {setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 /**
  * Представление страницы логина
@@ -20,7 +21,7 @@ export default class LoginView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['login.hbs']);
 
-        globalEventBus.on('login status', this.processLoginAttempt.bind(this));
+        globalEventBus.on(busEvents.LOGIN_STATUS, this.processLoginAttempt.bind(this));
     }
 
     /**
@@ -42,7 +43,7 @@ export default class LoginView extends BaseView {
 
             const data = getFormValues(form);
 
-            globalEventBus.emit('login clicked', data);
+            globalEventBus.emit(busEvents.LOGIN_CLICKED, data);
         });
 
         setListenersForHidingValidationError();

@@ -3,17 +3,19 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './main.tmpl.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 export default class MainView extends BaseView {
     constructor(parent) {
+        // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['main.hbs']);
 
-        globalEventBus.on('set main page data', this.setMainPageData.bind(this));
-        globalEventBus.on('logout status', this.processLogout.bind(this));
+        globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
     }
 
     render() {
-        globalEventBus.emit('get main page data');
+        globalEventBus.emit(busEvents.GET_MAIN_PAGE_DATA);
     }
 
     hide() {

@@ -3,17 +3,19 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './moviesList.tmpl.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 export default class MoviesListView extends BaseView {
     constructor(parent) {
+        // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['moviesList.hbs']);
 
-        globalEventBus.on('set best movies', this.setBestMovies.bind(this));
-        globalEventBus.on('logout status', this.processLogout.bind(this));
+        globalEventBus.on(busEvents.SET_BEST_MOVIES, this.setBestMovies.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
     }
 
     render() {
-        globalEventBus.emit('get best movies');
+        globalEventBus.emit(busEvents.GET_BEST_MOVIES);
     }
 
     hide() {

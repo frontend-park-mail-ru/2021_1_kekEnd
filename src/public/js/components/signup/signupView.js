@@ -8,6 +8,7 @@ import {setValidationResult, setListenersForHidingValidationError} from '../../u
 import './signup.tmpl.js';
 import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
 import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -22,7 +23,7 @@ export default class SignupView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['signup.hbs']);
 
-        globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
     }
 
     /**
@@ -68,7 +69,7 @@ export default class SignupView extends BaseView {
             ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
 
             if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
-                globalEventBus.emit('signup clicked', data);
+                globalEventBus.emit(busEvents.SIGNUP_CLICKED, data);
             }
         });
 

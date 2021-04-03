@@ -1,14 +1,15 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 export default class MainModel {
     /**
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('get main page data', this.getBestMoviesPreview.bind(this));
-        globalEventBus.on('logout clicked', this.logout.bind(this));
+        globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getBestMoviesPreview.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -18,7 +19,7 @@ export default class MainModel {
         Promise.all([API.getUser(), API.getBestMovies(1)])
             .then((responses) => {
                 const [userResp, bestMoviesResp] = responses;
-                globalEventBus.emit('set main page data', {
+                globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
                     ...bestMoviesResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
                 });
@@ -31,7 +32,7 @@ export default class MainModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK_CODE);
+                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }
