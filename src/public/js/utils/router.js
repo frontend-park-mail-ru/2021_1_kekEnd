@@ -40,7 +40,7 @@ export class Router {
         for (const i in PATHS) {
             if (path.includes(PATHS[i])) {
                 event?.preventDefault();
-                const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length);
+                const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length + 1);
                 console.log('pushing', PATHS[i], 'with params:', params);
                 this.pushState(PATHS[i], {}, params);
                 return;

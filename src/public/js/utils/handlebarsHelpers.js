@@ -4,11 +4,13 @@ export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('notEq', notEqHelper);
     // eslint-disable-next-line no-undef
-    Handlebars.registerHelper('pagination', paginationHelper);
-    // eslint-disable-next-line no-undef
     Handlebars.registerHelper('inc', incHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('dec', decHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('gte', gteHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('pagination', paginationHelper);
 };
 
 
@@ -26,6 +28,10 @@ export const eqHelper = (arg1, arg2, options) => {
 
 export const notEqHelper = (arg1, arg2, options) => {
     return arg1 !== arg2;
+};
+
+export const gteHelper = (arg1, arg2, options) => {
+    return arg1 >= arg2;
 };
 
 export const paginationHelper = (currentPage, pagesNumber, options) => {

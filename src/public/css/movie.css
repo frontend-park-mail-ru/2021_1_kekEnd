@@ -231,7 +231,18 @@
 .movie-rating {
     display: inline;
     margin-left: 12px;
+}
+
+.positive-rating {
     color: var(--valid-color);
+}
+
+.neutral-rating {
+    color: lightgrey;
+}
+
+.negative-rating {
+    color: var(--invalid-color);
 }
 
 .info_row {

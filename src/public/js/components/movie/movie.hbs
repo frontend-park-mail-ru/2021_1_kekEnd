@@ -62,14 +62,14 @@
                             {{title}}
                         </h1>
 
-                        <h2 class="movie-rating">
-                            {{rating}}
-                        </h2>
+                        {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
+                        {{else}}
+                            {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
+                            {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
+                        {{/if}}
                     </div>
                     <div class="meta_info">
-
                         <p>{{description}}</p>
-
                     </div>
                     <div class="movie_info">
                         <div class="info_row_nounderline">
