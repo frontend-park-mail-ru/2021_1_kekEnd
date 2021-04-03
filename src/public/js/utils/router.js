@@ -13,14 +13,14 @@ export class Router {
     }
 
     start() {
-        window.addEventListener('load', (event) => {
+        window.addEventListener('load', () => {
             console.log("LOAD");
-            this.activate(location.pathname, event);
+            this.activate(location.pathname);
         });
 
-        window.addEventListener('popstate', (event) => {
+        window.addEventListener('popstate', () => {
             console.log("POPSTATE");
-            this.activate(location.pathname, event);
+            this.activate(location.pathname);
         });
 
         window.addEventListener('click', (event) => {
@@ -36,13 +36,11 @@ export class Router {
         if (path === null) {
             return;
         }
+
         for (const i in PATHS) {
             if (path.includes(PATHS[i])) {
                 event?.preventDefault();
-                let params = path.substring(path.lastIndexOf('/') + 1);
-                if (PATHS[i].includes(params)) {
-                    params = null;
-                }
+                const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length);
                 console.log('pushing', PATHS[i], 'with params:', params);
                 this.pushState(PATHS[i], {}, params);
                 return;
