@@ -8,18 +8,18 @@ export default class MoviesListModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on(busEvents.GET_BEST_MOVIES, this.getBestMovies.bind(this));
+        globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
      * Получение первой страницы лучших фильмов
      */
-    getBestMovies() {
-        Promise.all([API.getUser(), API.getBestMovies(1)])
+    getBestMovies(page=1) {
+        Promise.all([API.getUser(), API.getBestMovies(page)])
             .then((responses) => {
                 const [userResp, bestMoviesResp] = responses;
-                globalEventBus.emit(busEvents.SET_BEST_MOVIES, {
+                globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
                     ...bestMoviesResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
                 });

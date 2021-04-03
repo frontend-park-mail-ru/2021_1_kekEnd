@@ -10,14 +10,15 @@ export default class MoviesListView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['moviesList.hbs']);
 
-        globalEventBus.on(busEvents.SET_BEST_MOVIES, this.setBestMovies.bind(this));
+        globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setBestMovies.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
+        this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     render() {
-        globalEventBus.emit(busEvents.GET_BEST_MOVIES);
+        globalEventBus.emit(busEvents.GET_BEST_MOVIES_PAGE);
     }
 
     hide() {
@@ -35,6 +36,9 @@ export default class MoviesListView extends BaseView {
      */
     setEventListeners() {
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
+            button.addEventListener('click', this.paginationButtonClickedCallback);
+        });
     }
 
     /**
@@ -42,6 +46,17 @@ export default class MoviesListView extends BaseView {
      */
     removeEventListeners() {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
+            button.removeEventListener('click', this.paginationButtonClickedCallback);
+        });
+    }
+
+    /**
+     * Нажатие на кнопку пагинации в списке фильмов
+     * @param {Object} event - событие нажатия на кнопку пагинации
+     */
+    paginationButtonClicked(event) {
+        globalEventBus.emit(busEvents.GET_BEST_MOVIES_PAGE, event.target.getAttribute('data-page-index'));
     }
 
     logoutClicked() {

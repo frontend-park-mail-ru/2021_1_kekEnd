@@ -29,6 +29,6 @@ export const busEvents = {
     SET_REVIEWS_PAGE: 'set reviews page',
     GET_MAIN_PAGE_DATA: 'get main page data',
     SET_MAIN_PAGE_DATA: 'set main page data',
-    GET_BEST_MOVIES: 'get best movies',
-    SET_BEST_MOVIES: 'set best movies'
+    GET_BEST_MOVIES_PAGE: 'get best movies page',
+    SET_MOVIES_PAGE: 'set movies page'
 }
