@@ -34,13 +34,11 @@
 
 
 <div class="main">
-    <h3 class="section-name">Лучшие фильмы</h3>
-    <!--  TODO: change to /movies/best/1 when router is fixed  -->
-    <a class="view-all" href="/best">смотреть ТОП-100</a>
+    <h3 class="section-name">ТОП-100</h3>
 
-    <div class="slider">
         {{#each best_movies}}
-            <div class="slider-card">
+            <div class="movie-card">
+                <p>{{this.title}}</p>
                 <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
             </div>
         {{/each}}
