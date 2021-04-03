@@ -1,9 +1,8 @@
 export const PATHS = {
-    main: '/',
+    main: '/main',  // TODO: make it '/' after router is fixed
     login: '/login',
     signup: '/signup',
     movie: '/movie',
     settings: '/settings',
-    profile: '/me', // временно, пока не готовы главная страница и остальные контроллеры
+    profile: '/me'
 };
-
