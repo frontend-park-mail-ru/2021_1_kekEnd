@@ -20,7 +20,7 @@ export default class MainModel {
             .then((responses) => {
                 const [userResp, bestMoviesResp] = responses;
                 globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
-                    ...bestMoviesResp.data,
+                    'best_movies': bestMoviesResp.data.movies,
                     'isAuthorized': userResp.status === OK_CODE,
                 });
             });
