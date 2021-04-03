@@ -6,7 +6,7 @@ import './settings.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
-import {PASSWORDS_MISMATCH} from '../../utils/constant.js';
+import {PASSWORDS_MISMATCH} from '../../utils/errorMessages.js';
 
 
 /**

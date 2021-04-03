@@ -6,7 +6,7 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
-import {UPLOAD_ERROR} from '../../utils/constant.js';
+import {UPLOAD_ERROR} from '../../utils/errorMessages.js';
 import {scrollToTargetAdjusted} from '../../utils/scrollToTarget.js';
 
 /**

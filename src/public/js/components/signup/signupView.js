@@ -7,7 +7,7 @@ import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
 import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
-import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/constant.js';
+import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
 
 
 /**
