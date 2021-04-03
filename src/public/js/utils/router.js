@@ -13,52 +13,52 @@ export class Router {
     }
 
     start() {
-        window.addEventListener('load', () => {
-            const path = location.pathname;
-            this.searchForParams(path);
+        window.addEventListener('load', (event) => {
+            console.log("LOAD");
+            this.activate(location.pathname, event);
         });
 
         window.addEventListener('popstate', (event) => {
-            const path = event.target.location.pathname;
-            event.preventDefault();
-            this.searchForParams(path, event);
+            console.log("POPSTATE");
+            this.activate(location.pathname, event);
         });
 
         window.addEventListener('click', (event) => {
+            console.log("CLICK");
             const {target} = event;
             const link = findAscendingTag(target, 'A');
-            const path = (link !== null) ? link.href : null;
-
-            this.searchForParams(path, event);
+            const href = (link !== null) ? link.href : null;
+            this.activate(href, event);
         });
     }
 
-    searchForParams(path, event=null) {
+    activate(path, event=null) {
+        if (path === null) {
+            return;
+        }
         for (const i in PATHS) {
-            if (path !== null && path.includes(PATHS[i])) {
-                if (event !== null) {
-                    event.preventDefault();
+            if (path.includes(PATHS[i])) {
+                event?.preventDefault();
+                let params = path.substring(path.lastIndexOf('/') + 1);
+                if (PATHS[i].includes(params)) {
+                    params = null;
                 }
-                const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
-                this.pushState(PATHS[i], {}, parameters);
-                break;
+                console.log('pushing', PATHS[i], 'with params:', params);
+                this.pushState(PATHS[i], {}, params);
+                return;
             }
         }
-    }
+    };
 
     pushState(path = '/', state = {}, parameters = '') {
-        let newState; let newPath;
+        let newPath = path;
         if (parameters) {
-            newState = `${state}/${parameters}`;
             newPath = `${path}/${parameters}`;
-        } else {
-            newState = state;
-            newPath = path;
         }
         if (path !== location.pathname) {
-            history.pushState(newState, document.title, newPath);
+            history.pushState(state, document.title, newPath);
         } else {
-            history.replaceState(newState, document.title, newPath);
+            history.replaceState(state, document.title, newPath);
         }
 
         this.handlePath(path, parameters);

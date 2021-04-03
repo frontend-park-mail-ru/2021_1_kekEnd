@@ -48,6 +48,10 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Создание рецензии
+     * @param {Object} review - объект с рецензией
+     */
     addReview(review) {
         API.addReview(review)
             .then((res) => {
@@ -55,6 +59,10 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Редактирование рецензии
+     * @param {Object} review - объект с рецензией
+     */
     editReview(review) {
         API.editUserReviewForMovie(review)
             .then((res) => {
@@ -62,6 +70,10 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Удаление рецензии
+     * @param {number} id - id рецензии
+     */
     deleteReview(id) {
         API.deleteUserReviewForMovie(id)
             .then((res) => {
@@ -69,6 +81,11 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Получение страницы с рецензиями пользователей
+     * @param {number} id - id фильма
+     * @param {number} page - номер страницы
+     */
     getReviewsPage(id, page) {
         API.getMovieReviews(id, page)
             .then((res) => {
@@ -76,6 +93,11 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Добавление оценки к фильму
+     * @param {number} id - id фильма
+     * @param {number} score - оценка от 1 до 10
+     */
     addRating(id, score) {
         API.addMovieRating(id, score)
             .then((res) => {
@@ -83,6 +105,11 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Редактирование оценки к фильму
+     * @param {number} id - id фильма
+     * @param {number} score - оценка от 1 до 10
+     */
     editRating(id, score) {
         API.editUserRatingForMovie(id, score)
             .then((res) => {
@@ -90,6 +117,10 @@ export default class MovieModel {
             });
     }
 
+    /**
+     * Удаление оценки к фильму
+     * @param {number} id - id фильма
+     */
     deleteRating(id) {
         API.deleteUserRatingForMovie(id)
             .then((res) => {
