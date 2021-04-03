@@ -59,5 +59,30 @@
             </div>
         </div>
     {{/each}}
+
+    {{#if (notEq pages_number 1)}}
+        {{#pagination current_page pages_number}}
+            <div class="pagination-wrapper">
+                {{#unless startFromFirstPage}}
+                    <button class="pagination-button" data-page-index="{{dec ../reviewsData.current_page}}">&lt;
+                    </button>
+                {{/unless}}
+
+                {{#each pages}}
+                    {{#if isCurrent}}
+                        <button disabled class="pagination-button pagination-current-button"
+                                data-page-index="{{page}}">{{page}}</button>
+                    {{else}}
+                        <button class="pagination-button" data-page-index="{{page}}">{{page}}</button>
+                    {{/if}}
+                {{/each}}
+
+                {{#unless endAtLastPage}}
+                    <button class="pagination-button" data-page-index="{{inc ../reviewsData.current_page}}">&gt;
+                    </button>
+                {{/unless}}
+            </div>
+        {{/pagination}}
+    {{/if}}
 </div>
-</div>
+
