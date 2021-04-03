@@ -41,17 +41,17 @@
             <div class="movie-card-left">
                 <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
                 <div class="bottom-buttons">
-                    <input class="input-watched" id="watched-button" type="checkbox" name="watched">
-                    <label class="label-watched" for="watched-button"></label>
-                    <input class="input-like" id="like-button" type="checkbox" name="liked">
-                    <label class="label-like" for="like-button"></label>
+                    <input class="input-watched" id="watched-button-{{this.id}}" type="checkbox" name="watched">
+                    <label class="label-watched" for="watched-button-{{this.id}}"></label>
+                    <input class="input-like" id="like-button-{{this.id}}" type="checkbox" name="liked">
+                    <label class="label-like" for="like-button-{{this.id}}"></label>
                 </div>
             </div>
             <div class="movie-card-right">
                 <a class="movie-link" href="/movie/{{this.id}}"><h3 class="movie-card-title">{{this.title}}</h3></a>
-                {{#if (gte rating 7)}}<h4 class="movie-card-rating positive-rating">{{this.rating}}</h4>
+                {{#if (gte this.rating 7)}}<h4 class="movie-card-rating positive-rating">{{this.rating}}</h4>
                 {{else}}
-                    {{#if (gte rating 4)}}<h4 class="movie-card-rating neutral-rating">{{this.rating}}</h4>
+                    {{#if (gte this.rating 4)}}<h4 class="movie-card-rating neutral-rating">{{this.rating}}</h4>
                     {{else}}<h4 class="movie-card-rating negative-rating">{{this.rating}}</h4>{{/if}}
                 {{/if}}
                 <p class="movie-card-genre">{{this.genre}}</p>
