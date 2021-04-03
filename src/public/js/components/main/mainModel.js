@@ -15,9 +15,13 @@ export default class MainModel {
      * Получение первой страницы лучших фильмов
      */
     getBestMoviesPreview() {
-        API.getBestMovies(1)
-            .then((res) => {
-                globalEventBus.emit('set main page data', res.status === OK_CODE);
+        Promise.all([API.getUser(), API.getBestMovies(1)])
+            .then((responses) => {
+                const [userResp, bestMoviesResp] = responses;
+                globalEventBus.emit('set main page data', {
+                    ...bestMoviesResp.data,
+                    'isAuthorized': userResp.status === OK_CODE,
+                });
             });
     }
 
