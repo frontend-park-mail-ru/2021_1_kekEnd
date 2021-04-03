@@ -49,3 +49,28 @@
 .movie-card-description {
     padding-right: 16px;
 }
+
+.bottom-buttons {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+    color: var(--secondary-text-color);
+    font-family: 'FontAwesome';
+    font-size: 24px;
+}
+
+.input-watched, .input-liked {
+    display: none;
+}
+
+.label-watched:before {
+    content: '\f06e';
+    cursor: pointer;
+}
+
+.label-liked:before {
+    content: '\f08a';
+    cursor: pointer;
+}
