@@ -20,6 +20,8 @@ export default class ProfileView extends BaseView {
 
         globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
+
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -33,25 +35,26 @@ export default class ProfileView extends BaseView {
      * Очистисть страницу
      */
     hide() {
-        this.parent.innerHTML = '';
         this.removeEventListeners();
+        this.parent.innerHTML = '';
     }
 
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('logout-button')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-        });
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+    }
 
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**

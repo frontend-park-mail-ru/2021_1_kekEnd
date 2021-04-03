@@ -32,6 +32,7 @@ export default class SettingsView extends BaseView {
 
         this.saveClickedCallback = this.saveClicked.bind(this);
         this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -63,13 +64,7 @@ export default class SettingsView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        const logoutButton = document.getElementById('logout-button');
-        if (logoutButton !== null) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-            });
-        }
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
         document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
@@ -117,8 +112,13 @@ export default class SettingsView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
         document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
+    }
+
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**

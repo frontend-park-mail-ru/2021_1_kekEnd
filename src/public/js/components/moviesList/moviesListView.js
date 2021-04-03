@@ -12,6 +12,8 @@ export default class MoviesListView extends BaseView {
 
         globalEventBus.on(busEvents.SET_BEST_MOVIES, this.setBestMovies.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
+
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     render() {
@@ -19,15 +21,31 @@ export default class MoviesListView extends BaseView {
     }
 
     hide() {
+        this.removeEventListeners();
         this.parent.innerHTML = '';
-        // this.removeEventListeners();
     }
 
     setBestMovies(data) {
-        console.log(data);
         super.render(data);
+        this.setEventListeners();
+    }
 
-        // this.setEventListeners();
+    /**
+     * Установка колбеков
+     */
+    setEventListeners() {
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+    }
+
+    /**
+     * Удаление колбеков
+     */
+    removeEventListeners() {
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+    }
+
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**

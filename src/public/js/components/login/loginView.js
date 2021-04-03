@@ -22,6 +22,8 @@ export default class LoginView extends BaseView {
         super(parent, Handlebars.templates['login.hbs']);
 
         globalEventBus.on(busEvents.LOGIN_STATUS, this.processLoginAttempt.bind(this));
+
+        this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
 
     /**
@@ -32,21 +34,26 @@ export default class LoginView extends BaseView {
         this.setEventListeners();
     }
 
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
+    }
+
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        const form = document.getElementById('login');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const data = getFormValues(form);
-
-            globalEventBus.emit(busEvents.LOGIN_CLICKED, data);
-        });
-
+        document.getElementById('login').addEventListener('submit', this.formSubmittedCallback);
         setListenersForHidingValidationError();
+    }
+
+    removeEventListeners() {
+        document.getElementById('login').removeEventListener('submit', this.formSubmittedCallback);
+    }
+
+    formSubmitted(event) {
+        event.preventDefault();
+        globalEventBus.emit(busEvents.LOGIN_CLICKED, getFormValues(event.target));
     }
 
     /**

@@ -39,6 +39,7 @@ export default class MovieView extends BaseView {
         this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
         this.plusClickedCallback = this.plusClicked.bind(this);
         this.otherClickedCallback = this.otherClicked.bind(this);
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -61,11 +62,7 @@ export default class MovieView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        const logoutButton = document.getElementById('logout-button');
-        logoutButton?.addEventListener('click', (e) => {
-            e.preventDefault();
-            globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-        });
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
         document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
@@ -90,6 +87,8 @@ export default class MovieView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+
         document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClickedCallback);
         document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
         document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
@@ -141,6 +140,10 @@ export default class MovieView extends BaseView {
             const starID = `star-${this.data.userRating.score}`;
             document.getElementById(starID).checked = true;
         }
+    }
+
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**
