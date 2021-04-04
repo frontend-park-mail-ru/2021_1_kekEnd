@@ -1,5 +1,6 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -10,7 +11,7 @@ export default class Model {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('signup clicked', this.createUser.bind(this));
+        globalEventBus.on(busEvents.SIGNUP_CLICKED, this.createUser.bind(this));
     }
 
     /**
@@ -20,7 +21,7 @@ export default class Model {
     createUser(data) {
         API.signup(data)
             .then((res) => {
-                globalEventBus.emit('signup status', res.status);
+                globalEventBus.emit(busEvents.SIGNUP_STATUS, res.status);
             });
     }
 }

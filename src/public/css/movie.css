@@ -231,7 +231,18 @@
 .movie-rating {
     display: inline;
     margin-left: 12px;
+}
+
+.positive-rating {
     color: var(--valid-color);
+}
+
+.neutral-rating {
+    color: lightgrey;
+}
+
+.negative-rating {
+    color: var(--invalid-color);
 }
 
 .info_row {
@@ -282,6 +293,17 @@
     font-size: 14px;
     text-align: right;
     margin-bottom: 16px;
+}
+
+.movie-page-bottom-buttons {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 20px;
+    color: white;
+    font-family: 'FontAwesome';
+    font-size: 32px;
 }
 
 .input-star {

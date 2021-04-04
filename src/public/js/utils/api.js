@@ -165,6 +165,10 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`, 'DELETE');
     }
 
+    getBestMovies(page=1) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=best&page=${page}`);
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

@@ -1,0 +1,88 @@
+<div class="header">
+    <div class="header__section">
+        <div class="header__item header-logo">
+            <a href="/">КиноПоиск</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Фильмы</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Актеры</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Поиск</a>
+        </div>
+    </div>
+    <div class="header__section">
+        {{#if isAuthorized}}
+            <div class="header__item header-button">
+                <a href="/me">Профиль</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/logout" id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header-button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+
+<div class="main">
+    <h3 class="section-name">ТОП-100</h3>
+
+    {{#each movies}}
+        <div class="movie-card">
+            <div class="movie-card-left">
+                <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
+                <div class="bottom-buttons">
+                    <input class="input-watched" id="watched-button-{{this.id}}" type="checkbox" name="watched">
+                    <label class="label-watched" for="watched-button-{{this.id}}"></label>
+                    <input class="input-like" id="like-button-{{this.id}}" type="checkbox" name="liked">
+                    <label class="label-like" for="like-button-{{this.id}}"></label>
+                </div>
+            </div>
+            <div class="movie-card-right">
+                <a class="movie-link" href="/movie/{{this.id}}"><h3 class="movie-card-title">{{this.title}}</h3></a>
+                {{#if (gte this.rating 7)}}<h4 class="movie-card-rating positive-rating">{{this.rating}}</h4>
+                {{else}}
+                    {{#if (gte this.rating 4)}}<h4 class="movie-card-rating neutral-rating">{{this.rating}}</h4>
+                    {{else}}<h4 class="movie-card-rating negative-rating">{{this.rating}}</h4>{{/if}}
+                {{/if}}
+                <p class="movie-card-genre">{{this.genre}}</p>
+                <p class="movie-card-description">{{this.description}}</p>
+            </div>
+        </div>
+    {{/each}}
+
+    {{#if (notEq pages_number 1)}}
+        {{#pagination current_page pages_number}}
+            <div class="pagination-wrapper">
+                {{#unless startFromFirstPage}}
+                    <button class="pagination-button" data-page-index="{{dec ../reviewsData.current_page}}">&lt;
+                    </button>
+                {{/unless}}
+
+                {{#each pages}}
+                    {{#if isCurrent}}
+                        <button disabled class="pagination-button pagination-current-button"
+                                data-page-index="{{page}}">{{page}}</button>
+                    {{else}}
+                        <button class="pagination-button" data-page-index="{{page}}">{{page}}</button>
+                    {{/if}}
+                {{/each}}
+
+                {{#unless endAtLastPage}}
+                    <button class="pagination-button" data-page-index="{{inc ../reviewsData.current_page}}">&gt;
+                    </button>
+                {{/unless}}
+            </div>
+        {{/pagination}}
+    {{/if}}
+</div>
+

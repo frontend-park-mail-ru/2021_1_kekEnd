@@ -1,0 +1,48 @@
+<div class="header">
+    <div class="header__section">
+        <div class="header__item header-logo">
+            <a href="/">КиноПоиск</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Фильмы</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Актеры</a>
+        </div>
+        <div class="header__item header-button">
+            <a href="/">Поиск</a>
+        </div>
+    </div>
+    <div class="header__section">
+        {{#if isAuthorized}}
+            <div class="header__item header-button">
+                <a href="/me">Профиль</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/logout" id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header-button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header-button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+
+<div class="main">
+    <h3 class="section-name">Лучшие фильмы</h3>
+    <!--  TODO: change to /movies/best/1 when router is fixed  -->
+    <a class="view-all" href="/best">смотреть ТОП-100</a>
+
+    <div class="slider">
+        {{#each best_movies}}
+            <div class="slider-card">
+                <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
+            </div>
+        {{/each}}
+    </div>
+</div>

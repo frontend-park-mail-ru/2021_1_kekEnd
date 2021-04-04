@@ -7,12 +7,16 @@ import MovieController from './public/js/components/movie/movieController.js';
 import ActorController from './public/js/components/actor/actorController.js';
 import SettingsController from './public/js/components/settings/settingsController.js';
 import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js';
+import MainController from './public/js/components/main/mainController.js';
+import MoviesListController from './public/js/components/moviesList/moviesListController.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
 
     registerHandlebarsHelpers();
 
+    globalRouter.register(PATHS.main, new MainController(application).view);
+    globalRouter.register(PATHS.best, new MoviesListController(application).view);
     globalRouter.register(PATHS.profile, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
     globalRouter.register(PATHS.signup, new SignupController(application).view);

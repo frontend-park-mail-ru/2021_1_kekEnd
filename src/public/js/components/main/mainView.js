@@ -2,41 +2,32 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
-import './profile.tmpl.js';
+import './main.tmpl.js';
 import {busEvents} from '../../utils/busEvents.js';
 
-
-/**
- * Представление страницы профиля
- */
-export default class ProfileView extends BaseView {
-    /**
-     * Конструктор
-     * @param {Element} parent - элемент для рендера
-     */
+export default class MainView extends BaseView {
     constructor(parent) {
         // eslint-disable-next-line no-undef
-        super(parent, Handlebars.templates['profile.hbs']);
+        super(parent, Handlebars.templates['main.hbs']);
 
-        globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
+        globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
-    /**
-     * Запуск рендера
-     */
     render() {
-        globalEventBus.emit(busEvents.GET_PROFILE_DATA);
+        globalEventBus.emit(busEvents.GET_MAIN_PAGE_DATA);
     }
 
-    /**
-     * Очистить страницу
-     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
+    }
+
+    setMainPageData(data) {
+        super.render(data);
+        this.setEventListeners();
     }
 
     /**
@@ -55,16 +46,6 @@ export default class ProfileView extends BaseView {
 
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Установка данных профиля
-     * @param {Object} data - данные профиля
-     */
-    setProfileData(data) {
-        super.render(data);
-
-        this.setEventListeners();
     }
 
     /**

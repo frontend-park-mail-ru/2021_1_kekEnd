@@ -6,7 +6,8 @@ import './settings.tmpl.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
-import {PASSWORDS_MISMATCH} from '../../utils/constant.js';
+import {PASSWORDS_MISMATCH} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -24,20 +25,21 @@ export default class SettingsView extends BaseView {
         this.settings = {};
         this.input = {};
 
-        globalEventBus.on('set settings data', this.setSettings.bind(this));
-        globalEventBus.on('response change settings', this.displayServerResponse.bind(this));
-        globalEventBus.on('logout status', this.processLogout.bind(this));
-        globalEventBus.on('avatar uploaded', this.displayServerResponseAvatar.bind(this));
+        globalEventBus.on(busEvents.SET_SETTINGS_DATA, this.setSettings.bind(this));
+        globalEventBus.on(busEvents.RESPONSE_CHANGE_SETTINGS, this.displayServerResponse.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
+        globalEventBus.on(busEvents.AVATAR_UPLOADED, this.displayServerResponseAvatar.bind(this));
 
         this.saveClickedCallback = this.saveClicked.bind(this);
         this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
      * Запуск рендера
      */
     render() {
-        globalEventBus.emit('get settings data');
+        globalEventBus.emit(busEvents.GET_SETTINGS_DATA);
     }
 
     /**
@@ -51,7 +53,7 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-     * Очистисть страницу
+     * Очистить страницу
      */
     hide() {
         this.removeEventListeners();
@@ -62,13 +64,7 @@ export default class SettingsView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        const logoutButton = document.getElementById('logout-button');
-        if (logoutButton !== null) {
-            logoutButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                globalEventBus.emit('logout clicked');
-            });
-        }
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
         document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
@@ -116,8 +112,13 @@ export default class SettingsView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
         document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
+    }
+
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**
@@ -125,7 +126,7 @@ export default class SettingsView extends BaseView {
      */
     uploadAvatarClicked() {
         const selectedFile = document.getElementById('avatar').files[0];
-        globalEventBus.emit('upload avatar', selectedFile);
+        globalEventBus.emit(busEvents.UPLOAD_AVATAR, selectedFile);
     }
 
     /**
@@ -235,7 +236,7 @@ export default class SettingsView extends BaseView {
      */
     sendInput(settings) {
         if (JSON.stringify(settings) !== '{}') {
-            globalEventBus.emit('request change settings', settings);
+            globalEventBus.emit(busEvents.REQUEST_CHANGE_SETTINGS, settings);
         }
     }
 

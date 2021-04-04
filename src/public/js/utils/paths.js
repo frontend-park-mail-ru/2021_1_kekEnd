@@ -1,9 +1,10 @@
 export const PATHS = {
     login: '/login',
     signup: '/signup',
+    best: '/best',
     movie: '/movie',
     actor: '/actor',
     settings: '/settings',
-    profile: '/', // временно, пока не готовы главная страница и остальные контроллеры
+    profile: '/me',
+    main: '/'
 };
-

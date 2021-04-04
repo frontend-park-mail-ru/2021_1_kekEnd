@@ -16,7 +16,7 @@
     <div class="header__section">
         {{#if isAuthorized}}
             <div class="header__item header-button">
-                <a href="/">Профиль</a>
+                <a href="/me">Профиль</a>
             </div>
             <div class="header__item header-button">
                 <a href="/logout" id="logout-button">Выйти</a>
@@ -45,15 +45,12 @@
                     <div class="movie_content_left_inner">
                         <img class="movie_content_left_img" src="{{poster}}">
                         <img class="movie_content_left_img" src="{{trailer_preview}}">
-                        <button id="button-watch-later" class="watch_later_button">
-                            Буду смотреть
-                        </button>
-                        <button id="button-plus" class="plus_button">
-                            +
-                        </button>
-                        <button id="button-other" class="other_button">
-                            Еще какая-то кнопка
-                        </button>
+                        <div class="movie-page-bottom-buttons">
+                            <input class="input-watched" id="watched-button" type="checkbox" name="watched">
+                            <label class="label-watched" for="watched-button"></label>
+                            <input class="input-like" id="like-button" type="checkbox" name="liked">
+                            <label class="label-like" for="like-button"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="movie_content_center">
@@ -62,15 +59,14 @@
                             {{title}}
                         </h1>
 
-                        <h2 class="movie-rating">
-                            <!-- TODO: replace with rating field when backend is ready -->
-                            7.1
-                        </h2>
+                        {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
+                        {{else}}
+                            {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
+                            {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
+                        {{/if}}
                     </div>
                     <div class="meta_info">
-
                         <p>{{description}}</p>
-
                     </div>
                     <div class="movie_info">
                         <div class="info_row_nounderline">
@@ -299,21 +295,19 @@
         <hr class="reviews-separator"/>
 
         {{#each reviewsData.reviews}}
-            {{#if (notEq this.author ../userReview.author)}}
-                {{#if @first}}
-                <div class="content-container" id="first-review">
-                {{else}}
-                <div class="content-container">
-                {{/if}}
-                <div class="review-content-container {{this.review_type}}-review-background">
-                    <h3 class="your-review">Рецензия {{this.author}}</h3>
-                    <div class="review-body">
-                        <p class="review-title">{{this.title}}</p>
-                        <p class="review-content">{{this.content}}</p>
-                    </div>
+            {{#if @first}}
+            <div class="content-container" id="first-review">
+            {{else}}
+            <div class="content-container">
+            {{/if}}
+            <div class="review-content-container {{this.review_type}}-review-background">
+                <h3 class="your-review">Рецензия {{this.author}}</h3>
+                <div class="review-body">
+                    <p class="review-title">{{this.title}}</p>
+                    <p class="review-content">{{this.content}}</p>
                 </div>
             </div>
-            {{/if}}
+        </div>
         {{/each}}
 
         {{#if (notEq reviewsData.pages_number 1)}}

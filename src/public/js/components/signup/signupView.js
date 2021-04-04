@@ -7,7 +7,8 @@ import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
 import './signup.tmpl.js';
 import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
-import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/constant.js';
+import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -22,7 +23,9 @@ export default class SignupView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['signup.hbs']);
 
-        globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
+
+        this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
 
     /**
@@ -33,46 +36,54 @@ export default class SignupView extends BaseView {
         this.setEventListeners();
     }
 
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
+    }
+
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        const form = document.getElementById('signup');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const data = getFormValues(form);
-
-            const validator = new Validator();
-            const loginError = validator.validateLogin(data.username);
-            const emailError = validator.validateEmail(data.email);
-            const passwordError = validator.validatePassword(data.password);
-
-            [
-                [
-                    document.getElementById('username-input'),
-                    document.getElementById('validation-hint-login'),
-                    loginError,
-                ],
-                [
-                    document.getElementById('email-input'),
-                    document.getElementById('validation-hint-email'),
-                    emailError,
-                ],
-                [
-                    document.getElementById('password-input'),
-                    document.getElementById('validation-hint-password'),
-                    passwordError,
-                ],
-            ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
-
-            if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
-                globalEventBus.emit('signup clicked', data);
-            }
-        });
-
+        document.getElementById('signup').addEventListener('submit', this.formSubmittedCallback);
         setListenersForHidingValidationError();
+    }
+
+    removeEventListeners() {
+        document.getElementById('signup').removeEventListener('submit', this.formSubmittedCallback);
+    }
+
+    formSubmitted(event) {
+        event.preventDefault();
+
+        const data = getFormValues(event.target);
+
+        const validator = new Validator();
+        const loginError = validator.validateLogin(data.username);
+        const emailError = validator.validateEmail(data.email);
+        const passwordError = validator.validatePassword(data.password);
+
+        [
+            [
+                document.getElementById('username-input'),
+                document.getElementById('validation-hint-login'),
+                loginError,
+            ],
+            [
+                document.getElementById('email-input'),
+                document.getElementById('validation-hint-email'),
+                emailError,
+            ],
+            [
+                document.getElementById('password-input'),
+                document.getElementById('validation-hint-password'),
+                passwordError,
+            ],
+        ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
+
+        if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
+            globalEventBus.emit(busEvents.SIGNUP_CLICKED, data);
+        }
     }
 
     /**
