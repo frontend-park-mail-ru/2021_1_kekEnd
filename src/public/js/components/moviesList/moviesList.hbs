@@ -42,10 +42,12 @@
                 <a href="/movie/{{this.id}}"><img class="movie-card-img" src="{{this.poster}}"></a>
             </div>
             <div class="movie-card-center">
-                <a class="movie-link card-info-link" href="/movie/{{this.id}}"><h3 class="movie-card-title">{{this.title}}</h3></a>
+                <a class="movie-link card-info-link" href="/movie/{{this.id}}"><h3
+                        class="movie-card-title">{{this.title}}</h3></a>
                 <p class="movie-card-genre">
                     {{#each genre}}
-                        <a href="" class="genre-link card-info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
+                        <a href="" class="genre-link card-info-link">{{this}}</a>{{#unless @last}}
+                        <span>, </span>{{/unless}}
                     {{/each}}
                 </p>
                 <p class="movie-card-description">{{this.description}}</p>
@@ -56,12 +58,16 @@
                     {{#if (gte this.rating 4)}}<h4 class="movie-rating neutral-rating">{{this.rating}}</h4>
                     {{else}}<h4 class="movie-rating negative-rating">{{this.rating}}</h4>{{/if}}
                 {{/if}}
-                <div class="bottom-buttons">
-                    <input class="input-watched movie-card-input-watched" id="watched-button-{{this.id}}" type="checkbox" name="watched">
-                    <label class="label-watched" for="watched-button-{{this.id}}"></label>
-                    <input class="input-like movie-card-input-like" id="like-button-{{this.id}}" type="checkbox" name="liked">
-                    <label class="label-like" for="like-button-{{this.id}}"></label>
-                </div>
+                {{#if isAuthorized}}
+                    <div class="bottom-buttons">
+                        <input class="input-watched movie-card-input-watched" id="watched-button-{{this.id}}"
+                               type="checkbox" name="watched">
+                        <label class="label-watched" for="watched-button-{{this.id}}"></label>
+                        <input class="input-like movie-card-input-like" id="like-button-{{this.id}}" type="checkbox"
+                               name="liked">
+                        <label class="label-like" for="like-button-{{this.id}}"></label>
+                    </div>
+                {{/if}}
             </div>
         </div>
     {{/each}}

@@ -63,8 +63,8 @@ export default class MovieView extends BaseView {
     setEventListeners() {
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
-        document.getElementById('watched-button').addEventListener('click', this.watchedClickedCallback);
-        document.getElementById('like-button').addEventListener('click', this.likeClickedCallback);
+        document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
+        document.getElementById('like-button')?.addEventListener('click', this.likeClickedCallback);
 
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
@@ -87,7 +87,8 @@ export default class MovieView extends BaseView {
     removeEventListeners() {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
 
-        document.getElementById('button-watch-later').
+        document.getElementById('watched-button')?.removeEventListener('click', this.watchedClickedCallback);
+        document.getElementById('like-button')?.removeEventListener('click', this.likeClickedCallback);
 
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
