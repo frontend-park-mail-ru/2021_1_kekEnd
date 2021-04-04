@@ -42,8 +42,12 @@
                     <a href="/movie/{{this.id}}"><img class="movie-card-img" src="{{this.poster}}"></a>
                 </div>
                 <div class="movie-card-center">
-                    <a class="movie-link card-info-link" href="/movie/{{this.id}}"><h3
-                            class="movie-card-title">{{this.title}}</h3></a>
+                    <a class="movie-link card-info-link" href="/movie/{{this.id}}">
+                        <h3 class="movie-card-title tooltip">
+                            {{this.title}}
+                        </h3>
+                        <span class="tooltip-text">{{this.title}}</span>
+                    </a>
                     <p class="movie-card-genre">
                         {{#each genre}}
                             <a href="" class="genre-link card-info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
