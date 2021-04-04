@@ -58,7 +58,7 @@
                     {{#if (gte this.rating 4)}}<h4 class="movie-rating neutral-rating">{{this.rating}}</h4>
                     {{else}}<h4 class="movie-rating negative-rating">{{this.rating}}</h4>{{/if}}
                 {{/if}}
-                {{#if isAuthorized}}
+                {{#if ../isAuthorized}}
                     <div class="bottom-buttons">
                         <input class="input-watched movie-card-input-watched" id="watched-button-{{this.id}}"
                                type="checkbox" name="watched">

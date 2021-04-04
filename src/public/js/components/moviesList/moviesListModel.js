@@ -14,6 +14,7 @@ export default class MoviesListModel {
 
     /**
      * Получение первой страницы лучших фильмов
+     * @param {number} page - номер страницы
      */
     getBestMovies(page=1) {
         Promise.all([API.getUser(), API.getBestMovies(page)])

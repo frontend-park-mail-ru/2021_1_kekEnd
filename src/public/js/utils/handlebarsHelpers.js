@@ -14,23 +14,23 @@ export const registerHandlebarsHelpers = () => {
 };
 
 
-export const incHelper = (value, options) => {
+export const incHelper = (value) => {
     return parseInt(value) + 1;
 };
 
-export const decHelper = (value, options) => {
+export const decHelper = (value) => {
     return parseInt(value) - 1;
 };
 
-export const eqHelper = (arg1, arg2, options) => {
+export const eqHelper = (arg1, arg2) => {
     return arg1 === arg2;
 };
 
-export const notEqHelper = (arg1, arg2, options) => {
+export const notEqHelper = (arg1, arg2) => {
     return arg1 !== arg2;
 };
 
-export const gteHelper = (arg1, arg2, options) => {
+export const gteHelper = (arg1, arg2) => {
     return arg1 >= arg2;
 };
 
