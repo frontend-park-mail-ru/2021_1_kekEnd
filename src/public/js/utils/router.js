@@ -14,17 +14,14 @@ export class Router {
 
     start() {
         window.addEventListener('load', () => {
-            console.log("LOAD");
             this.activate(location.pathname);
         });
 
         window.addEventListener('popstate', () => {
-            console.log("POPSTATE");
             this.activate(location.pathname);
         });
 
         window.addEventListener('click', (event) => {
-            console.log("CLICK");
             const {target} = event;
             const link = findAscendingTag(target, 'A');
             const href = (link !== null) ? link.href : null;
@@ -41,7 +38,6 @@ export class Router {
             if (path.includes(PATHS[i])) {
                 event?.preventDefault();
                 const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length + 1);
-                console.log('pushing', PATHS[i], 'with params:', params);
                 this.pushState(PATHS[i], {}, params);
                 return;
             }
@@ -53,10 +49,8 @@ export class Router {
         if (parameters) {
             newPath = `${path}/${parameters}`;
         }
-        if (path !== location.pathname) {
+        if (newPath !== window.location.pathname) {
             history.pushState(state, document.title, newPath);
-        } else {
-            history.replaceState(state, document.title, newPath);
         }
 
         this.handlePath(path, parameters);
