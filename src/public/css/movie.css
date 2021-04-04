@@ -261,15 +261,21 @@
     margin-bottom: 16px;
 }
 
-.movie-page-bottom-buttons {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 48px;
-    margin-top: 20px;
+.watch-like-buttons {
+    display: inline-flex;
+    gap: 16px;
     color: white;
     font-family: 'FontAwesome';
-    font-size: 32px;
+    font-size: 24px;
+    margin-right: 40px;
+}
+
+.movie-page-input-watched:not(:checked):hover ~ .label-watched:before {
+    color: var(--secondary-text-color);
+}
+
+.movie-page-input-like:not(:checked):hover ~ .label-like:before {
+    color: var(--secondary-text-color);
 }
 
 .input-star {

@@ -45,12 +45,6 @@
                     <div class="movie_content_left_inner">
                         <img class="movie_content_left_img" src="{{poster}}">
                         <img class="movie_content_left_img" src="{{trailer_preview}}">
-                        <div class="movie-page-bottom-buttons">
-                            <input class="input-watched" id="watched-button" type="checkbox" name="watched">
-                            <label class="label-watched" for="watched-button"></label>
-                            <input class="input-like" id="like-button" type="checkbox" name="liked">
-                            <label class="label-like" for="like-button"></label>
-                        </div>
                     </div>
                 </div>
                 <div class="movie_content_center">
@@ -170,11 +164,19 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
+                    <div class="watch-like-buttons">
+                        <input class="input-watched movie-page-input-watched" id="watched-button" type="checkbox" name="watched">
+                        <label class="label-watched" for="watched-button"></label>
+                        <input class="input-like movie-page-input-like" id="like-button" type="checkbox" name="liked">
+                        <label class="label-like" for="like-button"></label>
+                    </div>
+
                     {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
                     {{else}}
                         {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
                         {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
                     {{/if}}
+
                     {{#if userRating}}
                         <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
                         <p id="delete-rating" class="delete-rating">Удалить оценку</p>

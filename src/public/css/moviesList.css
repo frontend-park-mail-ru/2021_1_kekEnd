@@ -106,10 +106,10 @@
     content: '\f004';
 }
 
-.input-watched:not(:checked):hover ~ .label-watched:before {
+.movie-card-input-watched:not(:checked):hover ~ .label-watched:before {
     color: black;
 }
 
-.input-like:not(:checked):hover ~ .label-like:before {
+.movie-card-input-like:not(:checked):hover ~ .label-like:before {
     color: black;
 }
