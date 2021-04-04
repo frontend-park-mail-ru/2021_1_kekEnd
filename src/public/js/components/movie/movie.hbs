@@ -58,12 +58,6 @@
                         <h1 class="movie-title">
                             {{title}}
                         </h1>
-
-                        {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
-                        {{else}}
-                            {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
-                            {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
-                        {{/if}}
                     </div>
                     <div class="meta_info">
                         <p>{{description}}</p>
@@ -176,6 +170,11 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
+                    {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
+                    {{else}}
+                        {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
+                        {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
+                    {{/if}}
                     {{#if userRating}}
                         <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
                         <p id="delete-rating" class="delete-rating">Удалить оценку</p>

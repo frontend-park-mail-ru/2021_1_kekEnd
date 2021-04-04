@@ -1,10 +1,11 @@
 .movie-card {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: 50%;
+    grid-template-columns: 3fr 6fr 1fr;
+    width: 40%;
+    height: 150px;
     background-color: white;
     margin: 12px auto 50px auto;
-    padding: 20px 0;
+    padding: 12px 0;
     border-radius: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
@@ -15,17 +16,26 @@
     margin: 0 auto;
 }
 
-.movie-card img {
+.movie-card-right {
+    text-align: center;
+}
+
+.movie-card-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 8px;
     margin-top: -48px;
     box-shadow: 12px 12px 16px rgba(0, 0, 0, 0.5);
+    transition: all .2s;
+}
+
+.movie-card-img:hover {
+    margin-top: -52px;
 }
 
 .movie-card-title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
     display: inline;
 }
@@ -35,27 +45,39 @@
     text-decoration: none;
 }
 
-.movie-card-rating {
-    display: inline;
-    margin-left: 20px;
-    font-size: 32px;
+.genre-link {
+    color: var(--secondary-text-color);
+    text-decoration: none;
 }
 
 .movie-card-genre {
     color: var(--secondary-text-color);
-    margin: 12px 0;
+    margin: 8px 0;
+}
+
+.card-info-link {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.card-info-link:hover {
+    color: var(--accent-color);
 }
 
 .movie-card-description {
-    padding-right: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
 }
 
 .bottom-buttons {
-    text-align: center;
     display: flex;
     justify-content: center;
-    gap: 32px;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
     color: var(--secondary-text-color);
     font-family: 'FontAwesome';
     font-size: 24px;
@@ -80,6 +102,14 @@
 }
 
 .input-like:checked ~ .label-like:before {
-    color: deeppink;
+    color: var(--button-gradient-first);
     content: '\f004';
+}
+
+.input-watched:not(:checked):hover ~ .label-watched:before {
+    color: black;
+}
+
+.input-like:not(:checked):hover ~ .label-like:before {
+    color: black;
 }
