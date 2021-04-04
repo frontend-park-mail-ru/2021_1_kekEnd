@@ -1,19 +1,24 @@
+.movies-list-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .movie-card {
     display: grid;
     grid-template-columns: 3fr 6fr 1fr;
-    width: 40%;
-    height: 150px;
+    width: 90%;
+    height: 120px;
     background-color: white;
     margin: 12px auto 50px auto;
-    padding: 12px 0;
+    padding: 4px 0;
     border-radius: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
 .movie-card-left {
-    width: 110px;
-    height: 180px;
-    margin: 0 auto;
+    width: 80px;
+    height: 140px;
+    margin: 0 auto
 }
 
 .movie-card-right {
@@ -35,7 +40,7 @@
 }
 
 .movie-card-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     display: inline;
 }
@@ -52,12 +57,12 @@
 
 .movie-card-genre {
     color: var(--secondary-text-color);
-    margin: 8px 0;
+    margin: 0 0 4px 0;
 }
 
 .card-info-link {
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .card-info-link:hover {

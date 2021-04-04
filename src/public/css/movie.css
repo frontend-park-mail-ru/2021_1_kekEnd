@@ -191,11 +191,11 @@
 .movie-rating {
     display: inline-block;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     text-align: center;
     padding: 4px;
-    font-size: 24px;
+    font-size: 16px;
     color: white;
 }
 
