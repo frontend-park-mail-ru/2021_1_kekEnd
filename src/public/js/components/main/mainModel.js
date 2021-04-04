@@ -9,6 +9,7 @@ export default class MainModel {
      */
     constructor() {
         globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getBestMoviesPreview.bind(this));
+        globalEventBus.on(busEvents.GET_MOVIES_BY_GENRES, this.getMoviesByGenres.bind(this));
         globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
@@ -25,6 +26,14 @@ export default class MainModel {
                 });
             });
     }
+    
+    /**
+     * Получение первой страницы фильмов по выбранным жанрам
+     */
+    getMoviesByGenres(genres) {
+        ///TODO: request movies by genres
+        console.log('requested movies by genres:' + genres);
+    }
 
     /**
      * Выход со страницы
@@ -36,3 +45,4 @@ export default class MainModel {
             });
     }
 }
+
