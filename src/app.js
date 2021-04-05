@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     registerHandlebarsHelpers();
 
     globalRouter.register(PATHS.main, new MainController(application).view);
-    globalRouter.register(PATHS.best, new MoviesListController(application).view);
+    globalRouter.register(PATHS.movies, new MoviesListController(application).view);
     globalRouter.register(PATHS.profile, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
     globalRouter.register(PATHS.signup, new SignupController(application).view);

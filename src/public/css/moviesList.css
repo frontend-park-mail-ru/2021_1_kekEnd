@@ -64,12 +64,13 @@
     border-radius: 8px;
     padding: 4px;
     position: absolute;
+    visibility: hidden;
 }
 
 .tooltip-text::after {
     content: " ";
     position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
+    bottom: 100%; /* At the top of the tooltip */
     left: 50%;
     margin-left: -4px;
     border-width: 4px;
@@ -78,7 +79,8 @@
 }
 
 .tooltip:hover ~ .tooltip-text {
-   opacity: 1;
+    opacity: 1;
+    visibility: visible;
 }
 
 .movie-link {

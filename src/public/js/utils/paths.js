@@ -1,7 +1,7 @@
 export const PATHS = {
     login: '/login',
     signup: '/signup',
-    best: '/best',
+    movies: '/movies',
     movie: '/movie',
     settings: '/settings',
     profile: '/me',

@@ -14,11 +14,11 @@ export class Router {
 
     start() {
         window.addEventListener('load', () => {
-            this.activate(location.pathname);
+            this.activate(this.addTrailingSlash(location.pathname) + location.search);
         });
 
         window.addEventListener('popstate', () => {
-            this.activate(location.pathname);
+            this.activate(this.addTrailingSlash(location.pathname) + location.pathname);
         });
 
         window.addEventListener('click', (event) => {
@@ -67,6 +67,8 @@ export class Router {
     forward() {
         window.history.forward();
     }
+
+    addTrailingSlash = (path) => (path.substr(-1) !== '/') ? path + '/' : path;
 }
 
 export const globalRouter = new Router();

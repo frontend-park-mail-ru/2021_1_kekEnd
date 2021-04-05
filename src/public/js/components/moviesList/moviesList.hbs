@@ -80,22 +80,27 @@
         {{#pagination current_page pages_number}}
             <div class="pagination-wrapper">
                 {{#unless startFromFirstPage}}
-                    <button class="pagination-button" data-page-index="{{dec ../reviewsData.current_page}}">&lt;
-                    </button>
+                    <a href="/movies/best/{{dec ../reviewsData.current_page}}">
+                        <button class="pagination-button">&lt;</button>
+                    </a>
                 {{/unless}}
 
                 {{#each pages}}
                     {{#if isCurrent}}
-                        <button disabled class="pagination-button pagination-current-button"
-                                data-page-index="{{page}}">{{page}}</button>
+                        <a href="/movies/best/{{page}}">
+                            <button disabled class="pagination-button pagination-current-button">{{page}}</button>
+                        </a>
                     {{else}}
-                        <button class="pagination-button" data-page-index="{{page}}">{{page}}</button>
+                        <a href="/movies/best/{{page}}">
+                            <button class="pagination-button">{{page}}</button>
+                        </a>
                     {{/if}}
                 {{/each}}
 
                 {{#unless endAtLastPage}}
-                    <button class="pagination-button" data-page-index="{{inc ../reviewsData.current_page}}">&gt;
-                    </button>
+                    <a href="/movies/best/{{inc ../reviewsData.current_page}}">
+                        <button class="pagination-button">&gt;</button>
+                    </a>
                 {{/unless}}
             </div>
         {{/pagination}}
