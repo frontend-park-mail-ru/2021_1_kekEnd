@@ -48,6 +48,10 @@
     overflow: hidden;
 }
 
+.movie-card-title::before {
+    content: attr(data-index) ".";
+}
+
 .tooltip {
     position: relative;
 }

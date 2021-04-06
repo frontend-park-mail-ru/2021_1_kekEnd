@@ -43,7 +43,8 @@
                 </div>
                 <div class="movie-card-center">
                     <a class="movie-link card-info-link" href="/movie/{{this.id}}">
-                        <h3 class="movie-card-title tooltip">
+                        <h3 class="movie-card-title tooltip"
+                            data-index="{{calculateMovieIndex ../current_page ../max_items (inc @index)}}">
                             {{this.title}}
                         </h3>
                         <span class="tooltip-text">{{this.title}}</span>
