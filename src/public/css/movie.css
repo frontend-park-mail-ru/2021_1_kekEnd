@@ -109,7 +109,7 @@
 }
 
 .background_trailer_img {
-    height: 400px;
+    height: 140%;
     box-shadow: 0 0 30px 30px var(--movie-background-color) inset;
     background-repeat: no-repeat;
     background-position: center;
@@ -129,6 +129,7 @@
 }
 
 .movie_content_left_img {
+    width: 90%;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;

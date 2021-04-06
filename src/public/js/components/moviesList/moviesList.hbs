@@ -81,7 +81,7 @@
         {{#pagination current_page pages_number}}
             <div class="pagination-wrapper">
                 {{#unless startFromFirstPage}}
-                    <a href="/movies/best/{{dec ../reviewsData.current_page}}">
+                    <a href="/movies/best/{{dec ../current_page}}">
                         <button class="pagination-button">&lt;</button>
                     </a>
                 {{/unless}}
@@ -99,7 +99,7 @@
                 {{/each}}
 
                 {{#unless endAtLastPage}}
-                    <a href="/movies/best/{{inc ../reviewsData.current_page}}">
+                    <a href="/movies/best/{{inc ../current_page}}">
                         <button class="pagination-button">&gt;</button>
                     </a>
                 {{/unless}}

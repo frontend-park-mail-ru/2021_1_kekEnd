@@ -56,24 +56,6 @@
                     <div class="meta_info">
                         <p>{{description}}</p>
                     </div>
-                    <div class="movie_info">
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Аудиодорожки</div>
-                            {{#each voiceover}}
-                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}
-                            {{/each}}
-                        </div>
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Субтитры</div>
-                            {{#each subtitles}}
-                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
-                        </div>
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Качество</div>
-
-                            <span class="info_link">{{quality}}</span>
-                        </div>
-                    </div>
 
                     <h2 class="movie_info_title">О фильме</h2>
 
