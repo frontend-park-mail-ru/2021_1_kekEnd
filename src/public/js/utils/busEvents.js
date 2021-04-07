@@ -1,6 +1,9 @@
 export const busEvents = {
+    CHECK_AUTH: 'check auth',
+    LOAD_LOGIN_PAGE: 'load login page',
     LOGIN_CLICKED: 'login clicked',
     LOGIN_STATUS: 'login status',
+    LOAD_SIGNUP_PAGE: 'load signup page',
     SIGNUP_CLICKED: 'signup clicked',
     SIGNUP_STATUS: 'signup status',
     LOGOUT_CLICKED: 'logout clicked',

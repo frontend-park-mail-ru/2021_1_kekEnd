@@ -5,10 +5,10 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-import './signup.tmpl.js';
 import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
 import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
 import {busEvents} from '../../utils/busEvents.js';
+import './signup.tmpl.js';
 
 
 /**
@@ -24,6 +24,7 @@ export default class SignupView extends BaseView {
         super(parent, Handlebars.templates['signup.hbs']);
 
         globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.LOAD_SIGNUP_PAGE, this.setSignupPage.bind(this));
 
         this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
@@ -32,6 +33,10 @@ export default class SignupView extends BaseView {
      * Запуск рендера
      */
     render() {
+        globalEventBus.emit(busEvents.CHECK_AUTH);
+    }
+
+    setSignupPage() {
         super.render();
         this.setEventListeners();
     }
