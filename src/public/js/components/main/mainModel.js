@@ -3,12 +3,16 @@ import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+/**
+ * Модель главной страницы
+ */
 export default class MainModel {
     /**
      * Конструктор
      */
     constructor() {
         globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getBestMoviesPreview.bind(this));
+        globalEventBus.on(busEvents.GET_MOVIES_BY_GENRES, this.getMoviesByGenres.bind(this));
         globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
@@ -27,6 +31,15 @@ export default class MainModel {
     }
 
     /**
+     * Получение первой страницы фильмов по выбранным жанрам
+     * @param {Array} genres - список жанров
+     */
+    getMoviesByGenres(genres) {
+        ///TODO: request movies by genres
+        console.log('requested movies by genres:' + genres);
+    }
+
+    /**
      * Выход со страницы
      */
     logout() {
@@ -36,3 +49,4 @@ export default class MainModel {
             });
     }
 }
+

@@ -44,4 +44,18 @@
             </div>
         {{/each}}
     </div>
+
+
+    <h3 class="section-name">По жанрам</h3>
+    <div class="main-genre-container">
+        {{#each genres}}
+            <div class="main-genre-box">{{this.name}}</div>
+        {{/each}}
+        <div class="main-genre-search">
+            <button id="main-genre-search-button">Показать</button>
+        </div>
+    </div>
+
+
 </div>
+

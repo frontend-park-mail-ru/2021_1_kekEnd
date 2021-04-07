@@ -5,35 +5,72 @@ import BaseView from '../baseView.js';
 import './main.tmpl.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+/**
+ * Представление главной страницы
+ */
 export default class MainView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['main.hbs']);
 
         globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
+        globalEventBus.on(busEvents.SET_MOVIES_BY_GENRES, this.setMoviesByGenres.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
+    /**
+     * Запуск рендера
+     */
     render() {
         globalEventBus.emit(busEvents.GET_MAIN_PAGE_DATA);
     }
 
+    /**
+     * Очистить страницу
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
     }
 
+    /**
+     * Установка данных главной страницы
+     * @param {Object} data - данные главной страницы
+     */
     setMainPageData(data) {
         super.render(data);
         this.setEventListeners();
     }
 
     /**
+     * Установка фильмов по фильмам
+     * @param {Object} data - данные о фильмах, ответ с бека
+     */
+    setMoviesByGenres(data) {
+        super.render(data); ///TODO: breaks everythings?
+        Array.from(document.getElementsByClassName('main-genre-box'))
+            .forEach( element => element.AddEventListener('click', (button) => {
+                if (button.classList.contains('genre-selected')) {
+                    button.removeClass('genre-selected');
+                } else {
+                    button.addClass('genre-selected');
+                }
+            }) );
+        ///TODO: test
+    }
+
+    /**
      * Установка колбеков
      */
     setEventListeners() {
+        document.getElementById('main-genre-search-button')?.addEventListener('click',
+            this.searchMoviesByGenresCallback);
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
     }
 
@@ -41,9 +78,27 @@ export default class MainView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('main-genre-search-button')?.removeEventListener('click',
+            this.searchMoviesByGenresCallback);
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
     }
 
+    /**
+     * Колбек нажатия на кнопку поиска фильмов по жанрам
+     */
+    searchMoviesByGenresCallback() {
+        const genres = document.getElementsByClassName('main-genre-box')
+            .filter( element => element.classList.contains('genre-selected') )
+            .map( element => element.innerText );
+        globalEventBus.emit(busEvents.GET_MOVIES_BY_GENRES, genres);
+        ///TODO: test
+        console.log('search by genres clicked: ' + genres);
+    }
+
+
+    /*
+     * Колбек логаута
+     */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
@@ -58,3 +113,4 @@ export default class MainView extends BaseView {
         }
     }
 }
+
