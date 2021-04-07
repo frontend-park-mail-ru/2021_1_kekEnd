@@ -18,19 +18,22 @@ export default class LoginModel {
         globalEventBus.on(busEvents.LOGIN_CLICKED, this.checkLogin.bind(this));
     }
 
+    /**
+     * Проверка, если пользователь уже авторизован
+     */
     checkAuthentication() {
         API.getUser()
             .then((res) => {
-               if (res.status === OK_CODE) {
-                   globalRouter.pushState(PATHS.profile);
-               } else {
-                   globalEventBus.emit(busEvents.LOAD_LOGIN_PAGE);
-               }
+                if (res.status === OK_CODE) {
+                    globalRouter.pushState(PATHS.profile);
+                } else {
+                    globalEventBus.emit(busEvents.LOAD_LOGIN_PAGE);
+                }
             });
     }
 
     /**
-     * Проверка авторизации пользователя
+     * Проверка успешности авторизации пользователя
      * @param {Object} userData - данные пользователя
      */
     checkLogin(userData) {

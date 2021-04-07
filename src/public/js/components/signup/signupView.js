@@ -30,17 +30,23 @@ export default class SignupView extends BaseView {
     }
 
     /**
-     * Запуск рендера
+     * Проверка, если пользователь уже авторизован
      */
     render() {
         globalEventBus.emit(busEvents.CHECK_AUTH);
     }
 
+    /**
+     * Запуск рендера и подписка на события
+     */
     setSignupPage() {
         super.render();
         this.setEventListeners();
     }
 
+    /**
+     * "Деструктор" страницы
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
@@ -54,10 +60,17 @@ export default class SignupView extends BaseView {
         setListenersForHidingValidationError();
     }
 
+    /**
+     * Удаление колбеков
+     */
     removeEventListeners() {
         document.getElementById('signup').removeEventListener('submit', this.formSubmittedCallback);
     }
 
+    /**
+     * Обработка отправки формы регистрации
+     * @param {Object} event - событие отправки формы
+     */
     formSubmitted(event) {
         event.preventDefault();
 

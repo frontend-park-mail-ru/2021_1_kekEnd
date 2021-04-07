@@ -18,6 +18,9 @@ export default class Model {
         globalEventBus.on(busEvents.SIGNUP_CLICKED, this.createUser.bind(this));
     }
 
+    /**
+     * Проверка, если пользователь уже авторизован
+     */
     checkAuthentication() {
         API.getUser()
             .then((res) => {

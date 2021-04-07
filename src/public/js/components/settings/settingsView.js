@@ -117,6 +117,9 @@ export default class SettingsView extends BaseView {
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
     }
 
+    /**
+     * Обработка нажатия на логаут
+     */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }

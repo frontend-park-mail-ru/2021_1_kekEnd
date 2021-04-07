@@ -53,6 +53,9 @@ export default class ProfileView extends BaseView {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
     }
 
+    /**
+     * Обработка нажатия на логаут
+     */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
@@ -63,7 +66,6 @@ export default class ProfileView extends BaseView {
      */
     setProfileData(data) {
         super.render(data);
-
         this.setEventListeners();
     }
 

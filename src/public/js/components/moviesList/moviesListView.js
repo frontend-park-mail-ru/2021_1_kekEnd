@@ -5,7 +5,14 @@ import BaseView from '../baseView.js';
 import './moviesList.tmpl.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+/**
+ * Представление страницы списка фильмов
+ */
 export default class MoviesListView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
     constructor(parent) {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['moviesList.hbs']);
@@ -16,6 +23,10 @@ export default class MoviesListView extends BaseView {
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
+    /**
+     * Открытие нужной страницы в зависимости от параметров
+     * @param {Object} params - параметры страницы
+     */
     render(params) {
         const [category, page, query] = params.split('/');
         if (category === 'best') {
@@ -31,11 +42,18 @@ export default class MoviesListView extends BaseView {
         }
     }
 
+    /**
+     * "Деструктор" страницы
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
     }
 
+    /**
+     * Запуск рендера и подписки на события
+     * @param {Object} data - данные о списке фильмов
+     */
     setBestMovies(data) {
         super.render(data);
         this.setEventListeners();
@@ -55,6 +73,9 @@ export default class MoviesListView extends BaseView {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
     }
 
+    /**
+     * Обработка нажатия на логаут
+     */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }

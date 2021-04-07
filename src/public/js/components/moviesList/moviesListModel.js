@@ -3,6 +3,9 @@ import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+/**
+ * Модель страницы списка фильмов
+ */
 export default class MoviesListModel {
     /**
      * Конструктор

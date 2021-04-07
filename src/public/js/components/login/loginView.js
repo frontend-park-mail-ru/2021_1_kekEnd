@@ -28,17 +28,23 @@ export default class LoginView extends BaseView {
     }
 
     /**
-     * Запуск рендера и установка колбеков
+     * Проверка, если пользователь уже авторизован
      */
     render() {
         globalEventBus.emit(busEvents.CHECK_AUTH);
     }
 
+    /**
+     * Запуск рендера и установка колбеков
+     */
     setLoginPage() {
         super.render();
         this.setEventListeners();
     }
 
+    /**
+     * "Деструктор" страницы
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
@@ -52,17 +58,24 @@ export default class LoginView extends BaseView {
         setListenersForHidingValidationError();
     }
 
+    /**
+     * Удаление колбеков
+     */
     removeEventListeners() {
         document.getElementById('login').removeEventListener('submit', this.formSubmittedCallback);
     }
 
+    /**
+     * Обработка отправки формы
+     * @param {Object} event - событие отправки формы
+     */
     formSubmitted(event) {
         event.preventDefault();
         globalEventBus.emit(busEvents.LOGIN_CLICKED, getFormValues(event.target));
     }
 
     /**
-     * Проверка статуса логин запроса
+     * Проверка статуса запроса на вход
      * @param {number} status - статус запроса
      */
     processLoginAttempt(status) {

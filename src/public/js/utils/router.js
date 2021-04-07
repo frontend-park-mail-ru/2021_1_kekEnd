@@ -3,15 +3,29 @@
 import {PATHS} from './paths.js';
 import {findAscendingTag} from './findAscendingTag.js';
 
+/**
+ * Роутер
+ */
 export class Router {
+    /**
+     * Конструктор - создание роутов
+     */
     constructor() {
         this.routes = new Map();
     }
 
+    /**
+     * Добавление нового роута
+     * @param {string} path - путь
+     * @param {Object} view - объект представления с методом render()
+     */
     register(path, view) {
         this.routes.set(path, view);
     }
 
+    /**
+     * Запуск роутера
+     */
     start() {
         window.addEventListener('load', () => {
             this.activate(location.pathname);
@@ -29,6 +43,11 @@ export class Router {
         });
     }
 
+    /**
+     * Поиск пути и выделение параметров из url
+     * @param {string|null} path - путь
+     * @param {Object} event - событие, порожденное кликом
+     */
     activate(path, event=null) {
         if (path === null) {
             return;
@@ -42,8 +61,14 @@ export class Router {
                 return;
             }
         }
-    };
+    }
 
+    /**
+     * Формирование пути в адресной строке и history.pushState()
+     * @param {string} path - путь
+     * @param {Object} state - объект состояния
+     * @param {string} parameters - параметры пути
+     */
     pushState(path = '/', state = {}, parameters = '') {
         let newPath = path;
         if (location.search) {
@@ -59,14 +84,25 @@ export class Router {
         this.handlePath(path, parameters);
     }
 
+    /**
+     * Запусг рендера предаствления по пути
+     * @param {string} path - путь
+     * @param {string} parameters - параметры пути
+     */
     handlePath(path, parameters = '') {
         this.routes.get(path).render(parameters);
     }
 
+    /**
+     * Переход на предыдущую страницу
+     */
     back() {
         window.history.back();
     }
 
+    /**
+     * Переход на следующую страницу
+     */
     forward() {
         window.history.forward();
     }
