@@ -18,7 +18,6 @@ export default class MainView extends BaseView {
         super(parent, Handlebars.templates['main.hbs']);
 
         globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
-        globalEventBus.on(busEvents.SET_MOVIES_BY_GENRES, this.setMoviesByGenres.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
@@ -49,29 +48,21 @@ export default class MainView extends BaseView {
     }
 
     /**
-     * Установка фильмов по фильмам
-     * @param {Object} data - данные о фильмах, ответ с бека
+     * Установка колбеков
      */
-    setMoviesByGenres(data) {
-        super.render(data); ///TODO: breaks everythings?
+    setEventListeners() {
+        document.getElementById('main-genre-search-button')?.addEventListener('click',
+            this.searchMoviesByGenresCallback);
         Array.from(document.getElementsByClassName('main-genre-box'))
-            .forEach( element => element.AddEventListener('click', (button) => {
+            .forEach( element => element.addEventListener('click', (button) => {
                 if (button.classList.contains('genre-selected')) {
                     button.removeClass('genre-selected');
                 } else {
                     button.addClass('genre-selected');
                 }
             }) );
-        ///TODO: test
-    }
-
-    /**
-     * Установка колбеков
-     */
-    setEventListeners() {
-        document.getElementById('main-genre-search-button')?.addEventListener('click',
-            this.searchMoviesByGenresCallback);
-        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+        document.getElementById('logout-button')?.addEventListener('click',
+            this.logoutClickedCallback);
     }
 
     /**
@@ -80,7 +71,16 @@ export default class MainView extends BaseView {
     removeEventListeners() {
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
-        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+        Array.from(document.getElementsByClassName('main-genre-box'))
+            .forEach( element => element.removeEventListener('click', (button) => {
+                if (button.classList.contains('genre-selected')) {
+                    button.removeClass('genre-selected');
+                } else {
+                    button.addClass('genre-selected');
+                }
+            }) );
+        document.getElementById('logout-button')?.removeEventListener('click',
+            this.logoutClickedCallback);
     }
 
     /**
@@ -90,11 +90,9 @@ export default class MainView extends BaseView {
         const genres = document.getElementsByClassName('main-genre-box')
             .filter( element => element.classList.contains('genre-selected') )
             .map( element => element.innerText );
-        globalEventBus.emit(busEvents.GET_MOVIES_BY_GENRES, genres);
-        ///TODO: test
+        ///TODO: redirect
         console.log('search by genres clicked: ' + genres);
     }
-
 
     /*
      * Колбек логаута

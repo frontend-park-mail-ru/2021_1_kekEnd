@@ -169,6 +169,10 @@ class Api {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=best&page=${page}`);
     }
 
+    getMoviesByGenres(genres, page=1) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/?category=genre&page=${page}/?filer=${genres.join('+')}`);    ///TODO: right?
+    }
+
     /**
      * Получить любимые фильмы пользователя
      */

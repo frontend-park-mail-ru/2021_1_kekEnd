@@ -30,8 +30,7 @@ export const busEvents = {
     GET_MAIN_PAGE_DATA: 'get main page data',
     SET_MAIN_PAGE_DATA: 'set main page data',
     GET_BEST_MOVIES_PAGE: 'get best movies page',
+    GET_GENRE_MOVIES_PAGE: 'get genres movies page',
     SET_MOVIES_PAGE: 'set movies page',
-    GET_MOVIES_BY_GENRES: 'get movies by genres',
-    SET_MOVIES_BY_GENRES: 'set movies by genres',
 }
 
