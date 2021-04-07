@@ -4,6 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {AUTH_ERROR} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -14,8 +15,8 @@ export default class ProfileModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('get profile data', this.getProfileData.bind(this));
-        globalEventBus.on('logout clicked', this.logout.bind(this));
+        globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -45,7 +46,7 @@ export default class ProfileModel {
                     throw new Error(AUTH_ERROR);
                 }
                 const [userData, reviews] = responses.map((resp) => resp.data);
-                globalEventBus.emit('set profile data', {
+                globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
                     ...userData,
                     ...additionalData,
                     'isAuthorized': true,
@@ -65,7 +66,7 @@ export default class ProfileModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK_CODE);
+                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

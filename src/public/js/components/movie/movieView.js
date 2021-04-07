@@ -6,8 +6,9 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationHint} from '../../utils/setValidationResult.js';
-import {UPLOAD_ERROR} from '../../utils/constant.js';
+import {UPLOAD_ERROR} from '../../utils/errorMessages.js';
 import {scrollToTargetAdjusted} from '../../utils/scrollToTarget.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 /**
  * Представление страницы фильма
@@ -21,14 +22,13 @@ export default class MovieView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['movie.hbs']);
 
-        globalEventBus.on('set movie data', this.setMovieData.bind(this));
-        globalEventBus.on('review uploaded', this.displayNewReview.bind(this));
-        globalEventBus.on('review edited', this.processReviewChange.bind(this));
-        globalEventBus.on('review deleted', this.processReviewChange.bind(this));
-        globalEventBus.on('set reviews page', this.setReviewsPage.bind(this));
-        globalEventBus.on('rating uploaded', this.displayNewRating.bind(this));
-        globalEventBus.on('rating deleted', this.removeRating.bind(this));
-        globalEventBus.on('logout status', this.processLogout.bind(this));
+        globalEventBus.on(busEvents.SET_MOVIE_DATA, this.setMovieData.bind(this));
+        globalEventBus.on(busEvents.REVIEW_UPLOADED, this.displayNewReview.bind(this));
+        globalEventBus.on(busEvents.REVIEW_DELETED, this.processReviewDeletion.bind(this));
+        globalEventBus.on(busEvents.SET_REVIEWS_PAGE, this.setReviewsPage.bind(this));
+        globalEventBus.on(busEvents.RATING_UPLOADED, this.displayNewRating.bind(this));
+        globalEventBus.on(busEvents.RATING_DELETED, this.removeRating.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
@@ -36,9 +36,9 @@ export default class MovieView extends BaseView {
         this.ratingSubmittedCallback = this.ratingSubmitted.bind(this);
         this.deleteRatingClickedCallback = this.deleteRatingClicked.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
-        this.watchLaterClickedCallback = this.watchLaterClicked.bind(this);
-        this.plusClickedCallback = this.plusClicked.bind(this);
-        this.otherClickedCallback = this.otherClicked.bind(this);
+        this.watchedClickedCallback = this.watchedClicked.bind(this);
+        this.likeClickedCallback = this.likeClicked.bind(this);
+        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -46,11 +46,11 @@ export default class MovieView extends BaseView {
      * @param {number} id - id фильма
      */
     render(id) {
-        globalEventBus.emit('get movie data', id);
+        globalEventBus.emit(busEvents.GET_MOVIE_DATA, id);
     }
 
     /**
-     * Очистисть страницу
+     * Очистить страницу
      */
     hide() {
         this.removeEventListeners();
@@ -61,15 +61,10 @@ export default class MovieView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        const logoutButton = document.getElementById('logout-button');
-        logoutButton?.addEventListener('click', (e) => {
-            e.preventDefault();
-            globalEventBus.emit('logout clicked');
-        });
+        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
-        document.getElementById('button-watch-later').addEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').addEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').addEventListener('click', this.otherClickedCallback);
+        document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
+        document.getElementById('like-button')?.addEventListener('click', this.likeClickedCallback);
 
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
@@ -90,9 +85,10 @@ export default class MovieView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('button-watch-later').removeEventListener('click', this.watchLaterClickedCallback);
-        document.getElementById('button-plus').removeEventListener('click', this.plusClickedCallback);
-        document.getElementById('button-other').removeEventListener('click', this.otherClickedCallback);
+        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+
+        document.getElementById('watched-button')?.removeEventListener('click', this.watchedClickedCallback);
+        document.getElementById('like-button')?.removeEventListener('click', this.likeClickedCallback);
 
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
@@ -119,6 +115,11 @@ export default class MovieView extends BaseView {
         this.setEventListeners();
     }
 
+    /**
+     * Установка блока с рецензиями пользователей
+     * @param {boolean} status - успешность запроса
+     * @param {Object} reviewsData - информация о рецензиях
+     */
     setReviewsPage(status, reviewsData) {
         if (status) {
             this.data.reviewsData = reviewsData;
@@ -128,11 +129,18 @@ export default class MovieView extends BaseView {
         }
     }
 
+    /**
+     * Отображение оценки пользователя к фильму
+     */
     setUserRating() {
         if (this.data.userRating !== null) {
             const starID = `star-${this.data.userRating.score}`;
             document.getElementById(starID).checked = true;
         }
+    }
+
+    logoutClicked() {
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**
@@ -145,6 +153,11 @@ export default class MovieView extends BaseView {
         }
     }
 
+    /**
+     * Отображение новой оценки к фильму
+     * @param {boolean} status - статус создания оценки
+     * @param {number} score - оценка пользователя
+     */
     displayNewRating(status, score) {
         if (status) {
             this.data.userRating = {
@@ -155,6 +168,10 @@ export default class MovieView extends BaseView {
         }
     }
 
+    /**
+     * Реакция на удаление оценки
+     * @param {boolean} status - статус редактирования оценки
+     */
     removeRating(status) {
         if (status) {
             this.data.userRating = null;
@@ -162,6 +179,11 @@ export default class MovieView extends BaseView {
         }
     }
 
+    /**
+     * Отображение новой рецензии пользователя
+     * @param {boolean} status - статус создания рецензии
+     * @param {Object} review - объект рецензии
+     */
     displayNewReview(status, review) {
         if (status) {
             this.data.userReview = review;
@@ -172,12 +194,22 @@ export default class MovieView extends BaseView {
         document.getElementById('validation-hint-review').innerText = UPLOAD_ERROR;
     }
 
-    processReviewChange(status, movieID) {
+    /**
+     * Реакция на удаление рецензии
+     * @param {boolean} status - статус удаление рецензии
+     * @param {number} movieID - id фильма
+     */
+    processReviewDeletion(status, movieID) {
         if (status) {
-            this.render(movieID);
+            this.data.userReview = null;
+            this.setMovieData(this.data);
         }
     }
 
+    /**
+     * Обработка отправки формы с рецензией
+     * @param {Object} event - событие submitted
+     */
     reviewFormSubmitted(event) {
         event.preventDefault();
 
@@ -188,51 +220,63 @@ export default class MovieView extends BaseView {
         const reviewErrors = validator.validateReview(data);
         const validationHint = document.getElementById('validation-hint-review');
         if (reviewErrors.length === 0) {
-            globalEventBus.emit((this.data.wantsToEditReview) ? 'edit review' : 'send review', data);
+            globalEventBus.emit((this.data.wantsToEditReview) ? busEvents.EDIT_REVIEW : busEvents.SEND_REVIEW, data);
             return;
         }
         setValidationHint(validationHint, reviewErrors);
     }
 
+    /**
+     * Нажатие на кнопку редактирования рецензии
+     */
     editReviewClicked() {
         this.setMovieData({...this.data, 'wantsToEditReview': true});
     }
 
+    /**
+     * Нажатие на кнопку удаления рецензии
+     */
     deleteReviewClicked() {
-        globalEventBus.emit('delete review', this.data.id);
+        globalEventBus.emit(busEvents.DELETE_REVIEW, this.data.id);
     }
 
+    /**
+     * Нажатие на кнопку добавления оценки
+     * @param {Object} event - событие нажатия на "звезду"
+     */
     ratingSubmitted(event) {
-        const action = (this.data.userRating === null) ? 'send rating' : 'edit rating';
+        const action = (this.data.userRating === null) ? busEvents.SEND_RATING : busEvents.EDIT_RATING;
         globalEventBus.emit(action, this.data.id, event.target.getAttribute('data-rating'));
     }
 
+    /**
+     * Нажатие на кнопку удаления оценки
+     */
     deleteRatingClicked() {
-        globalEventBus.emit('delete rating', this.data.id);
+        globalEventBus.emit(busEvents.DELETE_RATING, this.data.id);
     }
 
+    /**
+     * Нажатие на кнопку пагинации в списке рецензий
+     * @param {Object} event - событие нажатия на кнопку пагинации
+     */
     paginationButtonClicked(event) {
-        globalEventBus.emit('get reviews page', this.data.id, event.target.getAttribute('data-page-index'));
+        globalEventBus.emit(busEvents.GET_REVIEWS_PAGE, this.data.id, event.target.getAttribute('data-page-index'));
     }
 
     /**
-     * Обработчик нажатия на кнопку "Смотреть позже"
+     * Обработчик нажатия на кнопку "Просмотрено"
      */
-    watchLaterClicked() {
-        console.log('watch later clicked');
+    watchedClicked() {
+        // TODO: api request
+        console.log('watched clicked');
     }
 
     /**
-     * Обработчик нажатия на кнопку "+"
+     * Обработчик нажатия на кнопку "Лайк"
      */
-    plusClicked() {
-        console.log('plus clicked');
-    }
-
-    /**
-     * Обработчик нажатия на кнопку "Другое"
-     */
-    otherClicked() {
-        console.log('other clicked');
+    likeClicked() {
+        // TODO: api request
+        console.log('like clicked');
     }
 }

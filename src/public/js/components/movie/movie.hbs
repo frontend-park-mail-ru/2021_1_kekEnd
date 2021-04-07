@@ -16,7 +16,7 @@
     <div class="header__section">
         {{#if isAuthorized}}
             <div class="header__item header-button">
-                <a href="/">Профиль</a>
+                <a href="/me">Профиль</a>
             </div>
             <div class="header__item header-button">
                 <a href="/logout" id="logout-button">Выйти</a>
@@ -45,15 +45,6 @@
                     <div class="movie_content_left_inner">
                         <img class="movie_content_left_img" src="{{poster}}">
                         <img class="movie_content_left_img" src="{{trailer_preview}}">
-                        <button id="button-watch-later" class="watch_later_button">
-                            Буду смотреть
-                        </button>
-                        <button id="button-plus" class="plus_button">
-                            +
-                        </button>
-                        <button id="button-other" class="other_button">
-                            Еще какая-то кнопка
-                        </button>
                     </div>
                 </div>
                 <div class="movie_content_center">
@@ -61,34 +52,9 @@
                         <h1 class="movie-title">
                             {{title}}
                         </h1>
-
-                        <h2 class="movie-rating">
-                            <!-- TODO: replace with rating field when backend is ready -->
-                            7.1
-                        </h2>
                     </div>
                     <div class="meta_info">
-
                         <p>{{description}}</p>
-
-                    </div>
-                    <div class="movie_info">
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Аудиодорожки</div>
-                            {{#each voiceover}}
-                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}
-                            {{/each}}
-                        </div>
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Субтитры</div>
-                            {{#each subtitles}}
-                                <span class="info_link">{{this}}</span>{{#unless @last}}, {{/unless}}{{/each}}
-                        </div>
-                        <div class="info_row_nounderline">
-                            <div class="info_title">Качество</div>
-
-                            <span class="info_link">{{quality}}</span>
-                        </div>
                     </div>
 
                     <h2 class="movie_info_title">О фильме</h2>
@@ -180,34 +146,53 @@
                     </div>
                 </div>
                 <div class="movie_content_right">
-                    {{#if userRating}}
-                        <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
-                        <p id="delete-rating" class="delete-rating">Удалить оценку</p>
-                    {{else}}
-                        <h3 class="rate-movie">Оцените фильм</h3>
+                    {{#if isAuthorized}}
+                        <div class="watch-like-buttons">
+                            <input class="input-watched movie-page-input-watched" id="watched-button" type="checkbox"
+                                   name="watched">
+                            <label class="label-watched" for="watched-button"></label>
+                            <input class="input-like movie-page-input-like" id="like-button" type="checkbox"
+                                   name="liked">
+                            <label class="label-like" for="like-button"></label>
+                        </div>
                     {{/if}}
-                    <div class="rating-stars-container">
-                        <input class="input-star max-star" id="star-10" type="radio" name="star"/>
-                        <label class="label-star" for="star-10" data-rating="10"></label>
-                        <input class="input-star" id="star-9" type="radio" name="star"/>
-                        <label class="label-star" for="star-9" data-rating="9"></label>
-                        <input class="input-star" id="star-8" type="radio" name="star"/>
-                        <label class="label-star" for="star-8" data-rating="8"></label>
-                        <input class="input-star" id="star-7" type="radio" name="star"/>
-                        <label class="label-star" for="star-7" data-rating="7"></label>
-                        <input class="input-star" id="star-6" type="radio" name="star"/>
-                        <label class="label-star" for="star-6" data-rating="6"></label>
-                        <input class="input-star" id="star-5" type="radio" name="star"/>
-                        <label class="label-star" for="star-5" data-rating="5"></label>
-                        <input class="input-star" id="star-4" type="radio" name="star"/>
-                        <label class="label-star" for="star-4" data-rating="4"></label>
-                        <input class="input-star" id="star-3" type="radio" name="star"/>
-                        <label class="label-star" for="star-3" data-rating="3"></label>
-                        <input class="input-star" id="star-2" type="radio" name="star"/>
-                        <label class="label-star" for="star-2" data-rating="2"></label>
-                        <input class="input-star" id="star-1" type="radio" name="star"/>
-                        <label class="label-star" for="star-1" data-rating="1"></label>
-                    </div>
+
+                    {{#if (gte rating 7)}}<h2 class="movie-rating positive-rating">{{rating}}</h2>
+                    {{else}}
+                        {{#if (gte rating 4)}}<h2 class="movie-rating neutral-rating">{{rating}}</h2>
+                        {{else}}<h2 class="movie-rating negative-rating">{{rating}}</h2>{{/if}}
+                    {{/if}}
+
+                    {{#if isAuthorized}}
+                        {{#if userRating}}
+                            <h3 class="rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
+                            <p id="delete-rating" class="delete-rating">Удалить оценку</p>
+                        {{else}}
+                            <h3 class="rate-movie">Оцените фильм</h3>
+                        {{/if}}
+                        <div class="rating-stars-container">
+                            <input class="input-star max-star" id="star-10" type="radio" name="star"/>
+                            <label class="label-star" for="star-10" data-rating="10"></label>
+                            <input class="input-star" id="star-9" type="radio" name="star"/>
+                            <label class="label-star" for="star-9" data-rating="9"></label>
+                            <input class="input-star" id="star-8" type="radio" name="star"/>
+                            <label class="label-star" for="star-8" data-rating="8"></label>
+                            <input class="input-star" id="star-7" type="radio" name="star"/>
+                            <label class="label-star" for="star-7" data-rating="7"></label>
+                            <input class="input-star" id="star-6" type="radio" name="star"/>
+                            <label class="label-star" for="star-6" data-rating="6"></label>
+                            <input class="input-star" id="star-5" type="radio" name="star"/>
+                            <label class="label-star" for="star-5" data-rating="5"></label>
+                            <input class="input-star" id="star-4" type="radio" name="star"/>
+                            <label class="label-star" for="star-4" data-rating="4"></label>
+                            <input class="input-star" id="star-3" type="radio" name="star"/>
+                            <label class="label-star" for="star-3" data-rating="3"></label>
+                            <input class="input-star" id="star-2" type="radio" name="star"/>
+                            <label class="label-star" for="star-2" data-rating="2"></label>
+                            <input class="input-star" id="star-1" type="radio" name="star"/>
+                            <label class="label-star" for="star-1" data-rating="1"></label>
+                        </div>
+                    {{/if}}
 
                     <div class="main-roles">
                         <h3 class="movie_content_right_header">В главных ролях</h3>
@@ -299,21 +284,19 @@
         <hr class="reviews-separator"/>
 
         {{#each reviewsData.reviews}}
-            {{#if (notEq this.author ../userReview.author)}}
-                {{#if @first}}
-                <div class="content-container" id="first-review">
-                {{else}}
-                <div class="content-container">
-                {{/if}}
-                <div class="review-content-container {{this.review_type}}-review-background">
-                    <h3 class="your-review">Рецензия {{this.author}}</h3>
-                    <div class="review-body">
-                        <p class="review-title">{{this.title}}</p>
-                        <p class="review-content">{{this.content}}</p>
-                    </div>
+            {{#if @first}}
+            <div class="content-container" id="first-review">
+            {{else}}
+            <div class="content-container">
+            {{/if}}
+            <div class="review-content-container {{this.review_type}}-review-background">
+                <h3 class="your-review">Рецензия {{this.author}}</h3>
+                <div class="review-body">
+                    <p class="review-title">{{this.title}}</p>
+                    <p class="review-content">{{this.content}}</p>
                 </div>
             </div>
-            {{/if}}
+        </div>
         {{/each}}
 
         {{#if (notEq reviewsData.pages_number 1)}}

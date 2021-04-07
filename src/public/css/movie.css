@@ -109,49 +109,11 @@
 }
 
 .background_trailer_img {
-    height: 400px;
+    height: 140%;
     box-shadow: 0 0 30px 30px var(--movie-background-color) inset;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
-
-.watch_later_button {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    border-radius: 8px;
-    border: 0;
-    width: 80%;
-    height: 40px;
-    background: linear-gradient(to right, var(--button-gradient-first), var(--button-gradient-second));
-    color: white;
-    font-size: medium;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.plus_button {
-    background: linear-gradient(to right, var(--button-gradient-first), var(--button-gradient-second));
-    color: white;
-    font-size: large;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    border: 0;
-    margin-left: 10px;
-    font-weight: 200;
-}
-
-.other_button {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    border-radius: 8px;
-    border: 0;
-    height: 40px;
-    width: 100%;
-    background: linear-gradient(to right, var(--button-gradient-first), var(--button-gradient-second));
-    color: white;
-    font-size: medium;
-    margin: 30px auto;
 }
 
 .movie_content_left {
@@ -162,13 +124,13 @@
 
 .movie_content_left_inner {
     text-align: center;
-    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .movie_content_left_img {
-    margin-top: 30px;
+    width: 90%;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -183,12 +145,11 @@
     width: 20%;
     margin-right: 24px;
     color: white;
-    position: relative;
-    top: -100px;
+    margin-top: 20px;
+    text-align: right;
 }
 
 .main-roles {
-    float: right;
     margin-top: 48px;
 }
 
@@ -229,9 +190,26 @@
 }
 
 .movie-rating {
-    display: inline;
-    margin-left: 12px;
-    color: var(--valid-color);
+    display: inline-block;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    padding: 4px;
+    font-size: 16px;
+    color: white;
+}
+
+.positive-rating {
+    background: var(--positive-rating);
+}
+
+.neutral-rating {
+    background: var(--neutral-rating);
+}
+
+.negative-rating {
+    background: var(--negative-rating);
 }
 
 .info_row {
@@ -282,6 +260,23 @@
     font-size: 14px;
     text-align: right;
     margin-bottom: 16px;
+}
+
+.watch-like-buttons {
+    display: inline-flex;
+    gap: 16px;
+    color: white;
+    font-family: 'FontAwesome';
+    font-size: 24px;
+    margin-right: 40px;
+}
+
+.movie-page-input-watched:not(:checked):hover ~ .label-watched:before {
+    color: var(--secondary-text-color);
+}
+
+.movie-page-input-like:not(:checked):hover ~ .label-like:before {
+    color: var(--secondary-text-color);
 }
 
 .input-star {

@@ -22,7 +22,6 @@
         "ignoreRegExpLiterals": true,
         "ignoreStrings": false,
         "ignoreTemplateLiterals": false
-      }],
-      "require-jsdoc": "off" // убрать после JSDoc
+      }]
     }
 }

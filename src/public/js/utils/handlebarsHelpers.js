@@ -4,29 +4,41 @@ export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('notEq', notEqHelper);
     // eslint-disable-next-line no-undef
-    Handlebars.registerHelper('pagination', paginationHelper);
-    // eslint-disable-next-line no-undef
     Handlebars.registerHelper('inc', incHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('dec', decHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('gte', gteHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('calculateMovieIndex', calculateMovieIndex);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('pagination', paginationHelper);
 };
 
 
-export const incHelper = (value, options) => {
+export const incHelper = (value) => {
     return parseInt(value) + 1;
 };
 
-export const decHelper = (value, options) => {
+export const decHelper = (value) => {
     return parseInt(value) - 1;
 };
 
-export const eqHelper = (arg1, arg2, options) => {
+export const eqHelper = (arg1, arg2) => {
     return arg1 === arg2;
 };
 
-export const notEqHelper = (arg1, arg2, options) => {
+export const notEqHelper = (arg1, arg2) => {
     return arg1 !== arg2;
 };
+
+export const gteHelper = (arg1, arg2) => {
+    return arg1 >= arg2;
+};
+
+export const calculateMovieIndex = (currentPage, pageSize, index) => {
+    return (currentPage - 1) * pageSize + index;
+}
 
 export const paginationHelper = (currentPage, pagesNumber, options) => {
     const [startPage, endPage] = getPaginationRange(currentPage, pagesNumber);
