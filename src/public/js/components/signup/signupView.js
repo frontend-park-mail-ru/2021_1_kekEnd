@@ -33,7 +33,7 @@ export default class SignupView extends BaseView {
      * Проверка, если пользователь уже авторизован
      */
     render() {
-        globalEventBus.emit(busEvents.CHECK_AUTH);
+        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_SIGNUP);
     }
 
     /**

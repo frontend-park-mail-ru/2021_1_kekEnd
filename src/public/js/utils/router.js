@@ -85,7 +85,7 @@ export class Router {
     }
 
     /**
-     * Запусг рендера предаствления по пути
+     * Запуск рендера представления по пути
      * @param {string} path - путь
      * @param {string} parameters - параметры пути
      */

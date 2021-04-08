@@ -31,7 +31,7 @@ export default class LoginView extends BaseView {
      * Проверка, если пользователь уже авторизован
      */
     render() {
-        globalEventBus.emit(busEvents.CHECK_AUTH);
+        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_LOGIN);
     }
 
     /**
