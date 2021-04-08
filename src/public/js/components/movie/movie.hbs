@@ -238,7 +238,7 @@
                 </div>
             {{else}}
                 <div class="content-container">
-                    <div class="review-content-container {{userReview.review_type}}-review-background">
+                    <div class="review-content-container review_background_{{userReview.review_type}}">
                         <h3 class="your-review">
                             Ваша рецензия
                             <button class="fa-button edit-button" id="edit-button" data-movie-id="{{id}}">
@@ -289,7 +289,7 @@
             {{else}}
             <div class="content-container">
             {{/if}}
-            <div class="review-content-container {{this.review_type}}-review-background">
+            <div class="review-content-container review_background_{{this.review_type}}">
                 <h3 class="your-review">Рецензия {{this.author}}</h3>
                 <div class="review-body">
                     <p class="review-title">{{this.title}}</p>

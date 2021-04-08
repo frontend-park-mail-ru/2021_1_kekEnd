@@ -88,15 +88,15 @@
     font-size: 16px;
 }
 
-.positive-review-background {
+.review_background_positive {
     background-color: var(--positive-review-color);
 }
 
-.neutral-review-background {
+.review_background_neutral {
     background-color: lightgrey;
 }
 
-.negative-review-background {
+.review_background_negative {
     background-color: var(--negative-review-background);
 }
 

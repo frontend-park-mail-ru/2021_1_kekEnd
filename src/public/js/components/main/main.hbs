@@ -34,12 +34,12 @@
 
 
 <div class="main">
-    <h3 class="section-name">Лучшие фильмы</h3>
+    <h3 class="main__section-name">Лучшие фильмы</h3>
     <a class="view-all" href="/movies/best/1">смотреть ТОП-100</a>
 
-    <div class="slider">
+    <div class="main__slider">
         {{#each best_movies}}
-            <div class="slider-card">
+            <div class="slider__card">
                 <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
             </div>
         {{/each}}
