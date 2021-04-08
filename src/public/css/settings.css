@@ -1,9 +1,9 @@
-.settings-header {
+.settings-inner__header {
     text-align: center;
     font-size: 24px;
 }
 
-.settings-box-outer {
+.main__settings-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -13,12 +13,12 @@
     border-radius: 16px;
 }
 
-.settings-avatar-img {
+.avatar-container__img {
     width: 250px;
     height: 250px;
 }
 
-.settings-avatar-box {
+.settings-box__avatar-box {
     width: 250px;
     height: 360px;
     position: relative;
@@ -30,18 +30,18 @@
     flex-direction: column;
 }
 
-.settings-avatar-container {
+.avatar-box__avatar-container {
     width: 250px;
     height: 250px;
 }
 
-.settings-avatar-container-buttons {
+.avatar-box__buttons {
     display: flex;
     flex-direction: column;
     margin-top: 0;
 }
 
-.upload-file-button {
+.buttons__upload-file {
     background-color: var(--primary-color);
     border: none;
     color: white;
@@ -56,7 +56,7 @@
     border-bottom-right-radius: 20px;
 }
 
-.settings-box {
+.settings-box__settings-inner {
     width: 440px;
     position: relative;
     margin: 5px;
@@ -65,7 +65,7 @@
     border-radius: 16px;
 }
 
-.settings-table {
+.settings-inner__settings-table {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -73,7 +73,7 @@
     margin: 0;
 }
 
-.settings-table-inner {
+.settings-table__settings-row {
     overflow: auto;
     display: flex;
     flex-direction: row;
@@ -81,22 +81,22 @@
     min-height: 50px;
 }
 
-.settings-table-inner-left {
+.settings-row__left {
     width: 200px;
     display: flex;
     align-items: center;
 }
 
-.settings-table-inner-right {
+.settings-row__right {
     width: 240px;
     display: block;
 }
 
-.settings-save-button {
+.settings-inner__save-button {
     margin-top: 24px;
 }
 
-.settings-errors {
+.settings-box__settings-errors {
     text-align: right;
 }
 
