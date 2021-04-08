@@ -126,7 +126,7 @@
     gap: 12px;
     margin-top: 12px;
     color: var(--secondary-text-color);
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
     font-size: 24px;
 }
 
@@ -135,12 +135,12 @@
 }
 
 .label-watched:before {
-    content: '\f06e';
+    content: "\f06e";
     cursor: pointer;
 }
 
 .label-like:before {
-    content: '\f08a';
+    content: "\f08a";
     cursor: pointer;
 }
 
@@ -150,7 +150,7 @@
 
 .input-like:checked ~ .label-like:before {
     color: var(--button-gradient-first);
-    content: '\f004';
+    content: "\f004";
 }
 
 .movie-card-input-watched:not(:checked):hover ~ .label-watched:before {
