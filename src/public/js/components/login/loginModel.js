@@ -14,7 +14,7 @@ export default class LoginModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on(busEvents.CHECK_AUTH, this.checkAuthentication.bind(this));
+        globalEventBus.on(busEvents.CHECK_AUTH_REDIRECT_LOGIN, this.checkAuthentication.bind(this));
         globalEventBus.on(busEvents.LOGIN_CLICKED, this.checkLogin.bind(this));
     }
 

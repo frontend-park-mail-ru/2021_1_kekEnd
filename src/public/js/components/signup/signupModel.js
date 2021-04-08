@@ -14,7 +14,7 @@ export default class Model {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on(busEvents.CHECK_AUTH, this.checkAuthentication.bind(this));
+        globalEventBus.on(busEvents.CHECK_AUTH_REDIRECT_SIGNUP, this.checkAuthentication.bind(this));
         globalEventBus.on(busEvents.SIGNUP_CLICKED, this.createUser.bind(this));
     }
 
