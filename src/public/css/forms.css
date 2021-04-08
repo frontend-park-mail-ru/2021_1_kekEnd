@@ -7,7 +7,7 @@
     border-radius: 16px;
 }
 
-.button-box {
+.form-box__button-box {
     width: 240px;
     margin: 36px auto;
     position: relative;
@@ -16,7 +16,7 @@
     display: flex;
 }
 
-.toggle-button {
+.button-box__toggle-button {
     width: 120px;
     padding: 12px 0;
     cursor: pointer;
@@ -26,7 +26,7 @@
     position: relative;
 }
 
-.button-wrap {
+.button-box__button-wrap {
     top: 0;
     left: 0;
     position: absolute;
@@ -37,12 +37,12 @@
     transition: .5s;
 }
 
-.social-icons {
+.form-box__social-icons {
     margin: 32px auto;
     text-align: center;
 }
 
-.social-icons img {
+.form-box__social-icons img {
     width: 30px;
     margin: 0 12px;
     box-shadow: 0 0 20px 0 #7F7F7F3D;
@@ -50,16 +50,16 @@
     border-radius: 50%;
 }
 
-.signup-form, .login-form {
+.form-box__form {
     margin: 0 auto;
 }
 
-.input-group {
+.form-box__input-group {
     width: 280px;
     transition: .5s;
 }
 
-.input-field {
+.form__input-field {
     width: 100%;
     padding: 12px 2px 12px 14px;
     margin: 4px 0;
@@ -79,17 +79,17 @@
     border-radius: 4px;
 }
 
-.validation-hint {
+.form__validation-hint {
     font-size: 12px;
     color: var(--invalid-color);
 }
 
-.send-form-hint {
+.form__send-form-hint {
     margin-bottom: 20px;
     text-align: center;
 }
 
-.submit-button {
+.form__submit-button {
     width: 85%;
     padding: 12px 32px;
     cursor: pointer;
@@ -102,11 +102,11 @@
     color: white;
 }
 
-.checkbox {
+.form__checkbox {
     margin: 24px 4px 32px 0;
 }
 
-.checkbox-label {
+.form__checkbox-label {
     color: var(--secondary-text-color);
     font-size: 12px;
 }
@@ -125,7 +125,7 @@
     left: 120px;
 }
 
-.button-white-text {
+.button-box__button_white_text {
     color: white;
 }
 

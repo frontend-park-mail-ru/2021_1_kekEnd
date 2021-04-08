@@ -1,51 +1,52 @@
 <div class="header">
     <div class="header__section">
-        <div class="header__item header-logo">
+        <div class="header__item header__logo">
             <a href="/">КиноПоиск</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Фильмы</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Актеры</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Поиск</a>
         </div>
     </div>
     <div class="header__section">
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/login">Войти</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/signup">Регистрация</a>
         </div>
     </div>
 </div>
 
-    <div class="main">
-        <div class="form-box">
-            <div class="button-box">
-                <div id="current-button" class="button-wrap"></div>
-                <button type="button" class="toggle-button button-white-text" id="login-button">Войти</button>
-                <a href="/signup">
-                    <button type="button" class="toggle-button" id="signup-button">Регистрация</button>
-                </a>
-            </div>
-
-            <div class="social-icons">
-                <img src="public/img/fb.png" alt="Facebook"/>
-                <img src="public/img/tw.png" alt="Twitter"/>
-                <img src="public/img/gp.png" alt="Google"/>
-            </div>
-
-            <form id="login" class="login-form input-group">
-                <input name="username" type="text" class="input-field" placeholder="Имя пользователя">
-                <input name="password" type="password" class="input-field" placeholder="Пароль">
-                <input name="remember-me" id="remember-checkbox" type="checkbox" class="checkbox">
-                <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
-                <p class="validation-hint send-form-hint" id="validation-hint-login"><em></em></p>
-                <button type="submit" id="login-submit" class="submit-button">Вход</button>
-            </form>
+<div class="main">
+    <div class="form-box">
+        <div class="form-box__button-box">
+            <div id="button-box__current-button" class="button-box__button-wrap"></div>
+            <button type="button" class="button-box__toggle-button button-box__button_white_text"
+                    id="login-button">Войти</button>
+            <a href="/signup">
+                <button type="button" class="button-box__toggle-button" id="signup-button">Регистрация</button>
+            </a>
         </div>
+
+        <div class="form-box__social-icons">
+            <img src="public/img/fb.png" alt="Facebook"/>
+            <img src="public/img/tw.png" alt="Twitter"/>
+            <img src="public/img/gp.png" alt="Google"/>
+        </div>
+
+        <form id="login" class="form-box__form form-box__input-group">
+            <input name="username" type="text" class="form__input-field" placeholder="Имя пользователя">
+            <input name="password" type="password" class="form__input-field" placeholder="Пароль">
+            <input name="remember-me" id="remember-checkbox" type="checkbox" class="form__checkbox">
+            <label for="remember-checkbox" class="form__checkbox-label">Запомнить меня</label>
+            <p class="form__validation-hint form__send-form-hint" id="validation-hint-login"><em></em></p>
+            <button type="submit" id="login-submit" class="form__submit-button">Вход</button>
+        </form>
     </div>
+</div>

@@ -1,31 +1,31 @@
 <div class="header">
     <div class="header__section">
-        <div class="header__item header-logo">
+        <div class="header__item header__logo">
             <a href="/">КиноПоиск</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Фильмы</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Актеры</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Поиск</a>
         </div>
     </div>
     <div class="header__section">
         {{#if isAuthorized}}
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/me">Профиль</a>
             </div>
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/logout" id="logout-button">Выйти</a>
             </div>
         {{else}}
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/login">Войти</a>
             </div>
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/signup">Регистрация</a>
             </div>
         {{/if}}
@@ -226,12 +226,12 @@
                                             value="negative">Отрицательная
                                     </option>
                                 </select>
-                                <input name="title" type="text" class="input-field input-review-title review-input"
+                                <input name="title" type="text" class="form__input-field input-review-title review-input"
                                        placeholder="Заголовок" value="{{userReview.title}}">
-                                <textarea name="content" class="input-field input-review-content review-input"
+                                <textarea name="content" class="form__input-field input-review-content review-input"
                                           placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
-                                <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
-                                <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                                <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
+                                <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
                             </form>
                         </div>
                     </div>
@@ -267,12 +267,12 @@
                                 <option value="neutral">Нейтральная</option>
                                 <option value="negative">Отрицательная</option>
                             </select>
-                            <input name="title" type="text" class="input-field input-review-title review-input"
+                            <input name="title" type="text" class="form__input-field input-review-title review-input"
                                    placeholder="Заголовок">
-                            <textarea name="content" class="input-field input-review-content review-input"
+                            <textarea name="content" class="form__input-field input-review-content review-input"
                                       placeholder="Ваши впечатления о фильме"></textarea>
-                            <p class="validation-hint send-form-hint" id="validation-hint-review"><em></em></p>
-                            <button type="submit" id="review-button" class="submit-button">Отправить</button>
+                            <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
+                            <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
                         </form>
                     </div>
                 </div>

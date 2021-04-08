@@ -40,13 +40,13 @@ body {
     border-radius: 4px;
 }
 
-.header-logo {
+.header__logo {
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.header-button {
+.header__button {
     cursor: pointer;
 }
 
