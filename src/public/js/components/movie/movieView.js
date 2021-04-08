@@ -76,7 +76,7 @@ export default class MovieView extends BaseView {
             star.addEventListener('click', this.ratingSubmittedCallback);
         });
 
-        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
+        [...document.getElementsByClassName('pagination-wrapper__button')].forEach((button) => {
             button.addEventListener('click', this.paginationButtonClickedCallback);
         });
     }
@@ -98,7 +98,7 @@ export default class MovieView extends BaseView {
             star.removeEventListener('click', this.ratingSubmittedCallback);
         });
 
-        [...document.getElementsByClassName('pagination-button')].forEach((button) => {
+        [...document.getElementsByClassName('pagination-wrapper__button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
         });
     }
