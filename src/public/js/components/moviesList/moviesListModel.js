@@ -40,6 +40,7 @@ export default class MoviesListModel {
                 globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
                     ...genresMoviesResp.data,
                     type: 'genres',
+                    genres,
                     'isAuthorized': userResp.status === OK_CODE,
                 });
             }); 
@@ -55,3 +56,4 @@ export default class MoviesListModel {
             });
     }
 }
+

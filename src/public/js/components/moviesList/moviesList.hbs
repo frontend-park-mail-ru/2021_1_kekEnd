@@ -34,7 +34,17 @@
 
 
 <div class="main">
-    <h3 class="page-title">ТОП-100</h3>
+    {{#if (eq type "best")}}
+        <h3 class="page-title">ТОП-100</h3>
+    {{/if}}
+    {{#if (eq type "genres")}}
+        <h3 class="page-title">По жанрам:</h3>
+        <div class="movieslist-genres-list">
+            {{#each genres}}
+                <p href="" class="movieslist-genres-genre">{{this}}</a>
+            {{/each}}
+        </div>
+    {{/if}}
     <div class="movies-list-grid">
         {{#each movies}}
             <div class="movie-card">
@@ -77,6 +87,7 @@
         {{/each}}
     </div>
 
+    <!-- parametrize -->
     {{#if (notEq pages_number 1)}}
         {{#pagination current_page pages_number}}
             <div class="pagination-wrapper">
