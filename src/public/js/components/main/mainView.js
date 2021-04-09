@@ -95,7 +95,7 @@ export default class MainView extends BaseView {
         if (genres.length) {
             console.log('search by genres clicked: ' + genres);
             // /TODO: search by genres
-            document.getElementById('main-genre-search-button').href=`movies/genre/1/?filter=${genres.join('+')}`;
+            document.getElementById('main-genre-search-button').href=`/movies/genre/1/?filter=${genres.join('+')}`;
         } else {
             // return false;
         }
