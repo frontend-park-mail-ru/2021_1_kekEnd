@@ -1,5 +1,9 @@
 .main-genre-container {
+    display: block;
+}
 
+.main-genres-genres-container {
+    display: block;
 }
 
 .main-genre-box {

@@ -48,14 +48,16 @@
 
     <h3 class="section-name">По жанрам</h3>
     <div class="main-genre-container">
-        {{#each genres}}
-            <div class="main-genre-box" id="{{this.name}}">{{this.name}}</div>
-        {{/each}}
-        <!-- TEMP -->
-            <div class="main-genre-box" id="horror">horror</div>
-            <div class="main-genre-box" id="drama">drama</div>
-            <div class="main-genre-box" id="comedy">comedy</div>
-        <!-- TEMP -->
+        <div class="main-genres-genres-container">
+            {{#each genres}}
+                <div class="main-genre-box" id="{{this.name}}">{{this.name}}</div>
+            {{/each}}
+            <!-- TEMP -->
+                <div class="main-genre-box" id="horror">horror</div>
+                <div class="main-genre-box" id="drama">drama</div>
+                <div class="main-genre-box" id="comedy">comedy</div>
+            <!-- TEMP -->
+        </div>
         <div class="main-genre-search">
             <button id="main-genre-search-button">Показать</button>
         </div>
