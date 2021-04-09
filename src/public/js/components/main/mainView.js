@@ -54,11 +54,13 @@ export default class MainView extends BaseView {
         document.getElementById('main-genre-search-button')?.addEventListener('click',
             this.searchMoviesByGenresCallback);
         Array.from(document.getElementsByClassName('main-genre-box'))
-            .forEach( (element) => element.addEventListener('click', (button) => {
+            .forEach( (element) => element.addEventListener('click', (event) => {
+                const button = event.toElement;
+                console.log(button);
                 if (button.classList.contains('genre-selected')) {
-                    button.removeClass('genre-selected');
+                    button.classList.remove('genre-selected');
                 } else {
-                    button.addClass('genre-selected');
+                    button.classList.add('genre-selected');
                 }
             }) );
         document.getElementById('logout-button')?.addEventListener('click',
