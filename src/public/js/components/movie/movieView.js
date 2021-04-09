@@ -72,7 +72,7 @@ export default class MovieView extends BaseView {
 
         document.getElementById('delete-rating')?.addEventListener('click', this.deleteRatingClickedCallback);
 
-        [...document.getElementsByClassName('label-star')].forEach((star) => {
+        [...document.getElementsByClassName('rating-stars__label-star')].forEach((star) => {
             star.addEventListener('click', this.ratingSubmittedCallback);
         });
 
@@ -94,7 +94,7 @@ export default class MovieView extends BaseView {
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.removeEventListener('click', this.deleteReviewClickedCallback);
 
-        [...document.getElementsByClassName('label-star')].forEach((star) => {
+        [...document.getElementsByClassName('rating-stars__label-star')].forEach((star) => {
             star.removeEventListener('click', this.ratingSubmittedCallback);
         });
 
