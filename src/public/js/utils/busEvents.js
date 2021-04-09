@@ -1,6 +1,10 @@
 export const busEvents = {
+    CHECK_AUTH_REDIRECT_LOGIN: 'check auth before login',
+    LOAD_LOGIN_PAGE: 'load login page',
     LOGIN_CLICKED: 'login clicked',
     LOGIN_STATUS: 'login status',
+    CHECK_AUTH_REDIRECT_SIGNUP: 'check auth before signup',
+    LOAD_SIGNUP_PAGE: 'load signup page',
     SIGNUP_CLICKED: 'signup clicked',
     SIGNUP_STATUS: 'signup status',
     LOGOUT_CLICKED: 'logout clicked',
@@ -30,5 +34,5 @@ export const busEvents = {
     GET_MAIN_PAGE_DATA: 'get main page data',
     SET_MAIN_PAGE_DATA: 'set main page data',
     GET_BEST_MOVIES_PAGE: 'get best movies page',
-    SET_MOVIES_PAGE: 'set movies page'
-}
+    SET_MOVIES_PAGE: 'set movies page',
+};

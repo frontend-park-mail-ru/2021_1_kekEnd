@@ -139,6 +139,9 @@ export default class MovieView extends BaseView {
         }
     }
 
+    /**
+     * Обработка нажатия логаута
+     */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
