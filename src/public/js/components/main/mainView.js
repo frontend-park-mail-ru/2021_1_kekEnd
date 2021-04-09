@@ -54,7 +54,7 @@ export default class MainView extends BaseView {
         document.getElementById('main-genre-search-button')?.addEventListener('click',
             this.searchMoviesByGenresCallback);
         Array.from(document.getElementsByClassName('main-genre-box'))
-            .forEach( element => element.addEventListener('click', (button) => {
+            .forEach( (element) => element.addEventListener('click', (button) => {
                 if (button.classList.contains('genre-selected')) {
                     button.removeClass('genre-selected');
                 } else {
@@ -72,7 +72,7 @@ export default class MainView extends BaseView {
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
         Array.from(document.getElementsByClassName('main-genre-box'))
-            .forEach( element => element.removeEventListener('click', (button) => {
+            .forEach( (element) => element.removeEventListener('click', (button) => {
                 if (button.classList.contains('genre-selected')) {
                     button.removeClass('genre-selected');
                 } else {
@@ -87,14 +87,14 @@ export default class MainView extends BaseView {
      * Колбек нажатия на кнопку поиска фильмов по жанрам
      */
     searchMoviesByGenresCallback() {
-        const genres = document.getElementsByClassName('main-genre-box')
-            .filter( element => element.classList.contains('genre-selected') )
-            .map( element => element.innerText );
-        ///TODO: redirect
+        const genres = Array.from(document.getElementsByClassName('main-genre-box'))
+            .filter( (element) => element.classList.contains('genre-selected') )
+            .map( (element) => element.innerText );
+        // /TODO: redirect
         console.log('search by genres clicked: ' + genres);
     }
 
-    /*
+    /**
      * Колбек логаута
      */
     logoutClicked() {
