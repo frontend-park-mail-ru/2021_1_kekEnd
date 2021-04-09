@@ -28,6 +28,7 @@ export default class MainModel {
                     'isAuthorized': userResp.status === OK_CODE,
                 });
             });
+        // /TODO: get genres
     }
 
     /**
@@ -35,7 +36,7 @@ export default class MainModel {
      * @param {Array} genres - список жанров
      */
     getMoviesByGenres(genres) {
-        ///TODO: request movies by genres
+        // /TODO: request movies by genres
         console.log('requested movies by genres:' + genres);
     }
 
