@@ -56,7 +56,6 @@ export default class MainView extends BaseView {
         Array.from(document.getElementsByClassName('main-genre-box'))
             .forEach( (element) => element.addEventListener('click', (event) => {
                 const button = event.toElement;
-                console.log(button);
                 if (button.classList.contains('genre-selected')) {
                     button.classList.remove('genre-selected');
                 } else {
@@ -74,11 +73,12 @@ export default class MainView extends BaseView {
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
         Array.from(document.getElementsByClassName('main-genre-box'))
-            .forEach( (element) => element.removeEventListener('click', (button) => {
+            .forEach( (element) => element.removeEventListener('click', (event) => {
+                const button = event.toElement;
                 if (button.classList.contains('genre-selected')) {
-                    button.removeClass('genre-selected');
+                    button.classList.remove('genre-selected');
                 } else {
-                    button.addClass('genre-selected');
+                    button.classList.add('genre-selected');
                 }
             }) );
         document.getElementById('logout-button')?.removeEventListener('click',

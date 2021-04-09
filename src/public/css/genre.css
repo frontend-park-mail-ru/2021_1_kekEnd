@@ -3,13 +3,15 @@
 }
 
 .main-genres-genres-container {
-    display: block;
+    display: inline-block;
 }
 
 .main-genre-box {
     background-color: white;
     color: black;
     border-radius: 16px;
+    padding: 5px;
+    user-select: none;
 }
 
 .genre-selected {
