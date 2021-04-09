@@ -1,17 +1,26 @@
 .main-genre-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-genres-genres-container {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
 }
 
 .main-genre-box {
     background-color: white;
     color: black;
-    border-radius: 16px;
-    padding: 5px;
+    border: 1px;
+    border-radius: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 3px;
     user-select: none;
+    font-size: 14px;
 }
 
 .genre-selected {

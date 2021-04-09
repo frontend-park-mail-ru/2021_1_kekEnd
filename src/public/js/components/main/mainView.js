@@ -92,8 +92,10 @@ export default class MainView extends BaseView {
         const genres = Array.from(document.getElementsByClassName('main-genre-box'))
             .filter( (element) => element.classList.contains('genre-selected') )
             .map( (element) => element.innerText );
-        // /TODO: redirect
-        console.log('search by genres clicked: ' + genres);
+        if (genres.length) {
+            console.log('search by genres clicked: ' + genres);
+            // /TODO: search by genres
+        }
     }
 
     /**
