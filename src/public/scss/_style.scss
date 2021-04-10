@@ -36,7 +36,7 @@ body {
 
     &__item:hover {
         background-color: $accent-color;
-        border-radius: 4px;
+        border-radius: $xs-border-radius;
     }
 
     &__logo {
@@ -80,7 +80,7 @@ body {
     }
 
     &__button:hover:not([disabled]) {
-        background-color: #ddd;
-        border: 2px solid #ddd;
+        background-color: $whitish;
+        border: 2px solid $whitish;
     }
 }

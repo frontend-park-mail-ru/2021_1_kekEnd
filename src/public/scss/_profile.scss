@@ -30,8 +30,8 @@
     width: 550px;
     height: 200px;
     background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    border-radius: $m-border-radius;
+    box-shadow: 0 0 12px $transparent-black;
     margin: 0 auto;
   }
 
@@ -53,8 +53,8 @@
   img {
     width: 100%;
     height: 100%;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-top-left-radius: $xs-border-radius;
+    border-bottom-left-radius: $xs-border-radius;
   }
 }
 
@@ -122,15 +122,15 @@
   width: 110px;
   height: 180px;
   margin: 12px 0;
-  border: 4px solid rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 4px solid $transparent_white;
+  border-radius: $m-border-radius;
+  box-shadow: 0 0 12px $transparent-black;
 
   img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: $s-border-radius;
   }
 
   &:first-child {
@@ -149,7 +149,7 @@
     margin: 12px 0;
     background-color: white;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
+    border-radius: $s-border-radius;
     overflow: hidden;
   }
 
@@ -165,7 +165,7 @@
 .review-card__content {
   height: 100%;
   padding: 20px 16px 20px 16px;
-  border-radius: 8px;
+  border-radius: $s-border-radius;
 }
 
 .content {

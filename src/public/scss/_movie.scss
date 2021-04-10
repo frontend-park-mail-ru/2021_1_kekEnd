@@ -9,7 +9,7 @@
     margin: 20px auto 20px auto;
     background-color: white;
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
+    border-radius: $s-border-radius;
     overflow: hidden;
   }
 
@@ -107,7 +107,7 @@
 }
 
 .review_background_neutral {
-  background-color: lightgrey;
+  background-color: $light-grey;
 }
 
 .review_background_negative {
@@ -142,14 +142,14 @@
   &__movie-flex-center {
     width: 50%;
     display: inline-block;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid $movie-separator-color;
   }
 
   &__movie-flex-right {
     width: 20%;
-    margin-right: 24px;
     color: white;
     margin-top: 20px;
+    margin-right: 24px;
     text-align: right;
   }
 }
@@ -198,7 +198,7 @@
 
   &__movie_info {
     text-align: left;
-    color: floralwhite;
+    color: $movie-info-color;
   }
 
   &__title-box {
@@ -241,7 +241,7 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid;
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: $movie-separator-color;
 }
 
 .info-row {
@@ -310,19 +310,19 @@
     float: right;
     padding: 4px;
     font-size: 14px;
-    color: aliceblue;
+    color: $stars-color;
     transition: all .2s;
   }
 
   &__input-star:checked ~ &__label-star:before {
-    content: "\f005";
-    color: #FD4;
+    content: $filled-star-code;
+    color: $max-star-color;
     transition: all .25s;
   }
 
   &__max-star:checked ~ &__label-star:before {
-    color: #FE7;
-    text-shadow: 0 0 20px #952;
+    color: $filled-star-color;
+    text-shadow: 0 0 20px $max-star-shadow;
   }
 
   &__label-star:hover {
@@ -330,7 +330,7 @@
   }
 
   &__label-star:before {
-    content: "\f006";
+    content: $star-code;
     font-family: "FontAwesome";
   }
 }
