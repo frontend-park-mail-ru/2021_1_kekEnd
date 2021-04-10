@@ -5,8 +5,10 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
+import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
+import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 import './signup.tmpl.js';
-import {CREATED} from '../../utils/codes.js';
 
 
 /**
@@ -21,70 +23,98 @@ export default class SignupView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['signup.hbs']);
 
-        globalEventBus.on('signup status', this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.LOAD_SIGNUP_PAGE, this.setSignupPage.bind(this));
+
+        this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
 
     /**
-     * Запуск рендера
+     * Проверка, если пользователь уже авторизован
      */
     render() {
+        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_SIGNUP);
+    }
+
+    /**
+     * Запуск рендера и подписка на события
+     */
+    setSignupPage() {
         super.render();
         this.setEventListeners();
+    }
+
+    /**
+     * "Деструктор" страницы
+     */
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
     }
 
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        const form = document.getElementById('signup');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const data = getFormValues(form);
-
-            const validator = new Validator();
-            const loginError = validator.validateLogin(data.username);
-            const emailError = validator.validateEmail(data.email);
-            const passwordError = validator.validatePassword(data.password);
-
-            [
-                [
-                    document.getElementById('username-input'),
-                    document.getElementById('validation-hint-login'),
-                    loginError,
-                ],
-                [
-                    document.getElementById('email-input'),
-                    document.getElementById('validation-hint-email'),
-                    emailError,
-                ],
-                [
-                    document.getElementById('password-input'),
-                    document.getElementById('validation-hint-password'),
-                    passwordError,
-                ],
-            ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
-
-            if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
-                globalEventBus.emit('signup clicked', data);
-            }
-        });
-
+        document.getElementById('signup').addEventListener('submit', this.formSubmittedCallback);
         setListenersForHidingValidationError();
     }
 
     /**
+     * Удаление колбеков
+     */
+    removeEventListeners() {
+        document.getElementById('signup').removeEventListener('submit', this.formSubmittedCallback);
+    }
+
+    /**
+     * Обработка отправки формы регистрации
+     * @param {Object} event - событие отправки формы
+     */
+    formSubmitted(event) {
+        event.preventDefault();
+
+        const data = getFormValues(event.target);
+
+        const validator = new Validator();
+        const loginError = validator.validateLogin(data.username);
+        const emailError = validator.validateEmail(data.email);
+        const passwordError = validator.validatePassword(data.password);
+
+        [
+            [
+                document.getElementById('username-input'),
+                document.getElementById('validation-hint-login'),
+                loginError,
+            ],
+            [
+                document.getElementById('email-input'),
+                document.getElementById('validation-hint-email'),
+                emailError,
+            ],
+            [
+                document.getElementById('password-input'),
+                document.getElementById('validation-hint-password'),
+                passwordError,
+            ],
+        ].forEach(([inputField, inputHint, errors]) => setValidationResult(inputField, inputHint, errors));
+
+        if ([loginError, emailError, passwordError].every((error) => error.length === 0)) {
+            globalEventBus.emit(busEvents.SIGNUP_CLICKED, data);
+        }
+    }
+
+    /**
      * Обработка статуса после запроса регистрации
-     * @param {int} status - статус запроса
+     * @param {number} status - статус запроса
      */
     processSignupAttempt(status) {
         if (status === CREATED) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Введены некорректные данные!',
-                500: 'Пользователь с таким логином уже существует!',
+                [BAD_REQUEST]: INCORRECT_DATA,
+                [INTERNAL_SERVER_ERROR]: ALREADY_EXISTS,
             };
             document.getElementById('validation-hint-signup').innerText = errors[status];
         }

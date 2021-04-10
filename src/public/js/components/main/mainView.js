@@ -2,41 +2,49 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
-import './profile.tmpl.js';
+import './main.tmpl.js';
 import {busEvents} from '../../utils/busEvents.js';
 
-
 /**
- * Представление страницы профиля
+ * Представление главной страницы
  */
-export default class ProfileView extends BaseView {
+export default class MainView extends BaseView {
     /**
      * Конструктор
      * @param {Element} parent - элемент для рендера
      */
     constructor(parent) {
         // eslint-disable-next-line no-undef
-        super(parent, Handlebars.templates['profile.hbs']);
+        super(parent, Handlebars.templates['main.hbs']);
 
-        globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
+        globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
-     * Запуск рендера
+     * Проверка, если пользователь уже авторизован
      */
     render() {
-        globalEventBus.emit(busEvents.GET_PROFILE_DATA);
+        globalEventBus.emit(busEvents.GET_MAIN_PAGE_DATA);
     }
 
     /**
-     * Очистить страницу
+     * "Деструктор" страницы
      */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
+    }
+
+    /**
+     * Запуск рендера и установка колбеков
+     * @param {Object} data - данные о списке фильмов для главной страницы
+     */
+    setMainPageData(data) {
+        super.render(data);
+        this.setEventListeners();
     }
 
     /**
@@ -54,19 +62,10 @@ export default class ProfileView extends BaseView {
     }
 
     /**
-     * Обработка нажатия на логаут
+     * Обработка нажатия логаута
      */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Установка данных профиля
-     * @param {Object} data - данные профиля
-     */
-    setProfileData(data) {
-        super.render(data);
-        this.setEventListeners();
     }
 
     /**

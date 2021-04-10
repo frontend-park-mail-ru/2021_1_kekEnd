@@ -1,5 +1,9 @@
 import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
+import {busEvents} from '../../utils/busEvents.js';
+import {OK_CODE} from '../../utils/codes.js';
+import {globalRouter} from '../../utils/router.js';
+import {PATHS} from '../../utils/paths.js';
 
 
 /**
@@ -10,17 +14,22 @@ export default class Model {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('signup clicked', this.createUser.bind(this));
+        globalEventBus.on(busEvents.CHECK_AUTH_REDIRECT_SIGNUP, this.checkAuthentication.bind(this));
+        globalEventBus.on(busEvents.SIGNUP_CLICKED, this.createUser.bind(this));
     }
 
     /**
-     * Проверка на существование пользователя
-     * @param {Object} data - данные о пользователе
-     * @return {bool} - статус запроса
+     * Проверка, если пользователь уже авторизован
      */
-    userNotExists(data) {
-        // запрос к серверу на проверку существования пользователя
-        return true;
+    checkAuthentication() {
+        API.getUser()
+            .then((res) => {
+                if (res.status === OK_CODE) {
+                    globalRouter.pushState(PATHS.profile);
+                } else {
+                    globalEventBus.emit(busEvents.LOAD_SIGNUP_PAGE);
+                }
+            });
     }
 
     /**
@@ -28,11 +37,9 @@ export default class Model {
      * @param {Object} data - данные о пользователе
      */
     createUser(data) {
-        if (this.userNotExists(data)) {
-            API.signup(data)
-                .then((res) => {
-                    globalEventBus.emit('signup status', res.status);
-                });
-        }
+        API.signup(data)
+            .then((res) => {
+                globalEventBus.emit(busEvents.SIGNUP_STATUS, res.status);
+            });
     }
 }

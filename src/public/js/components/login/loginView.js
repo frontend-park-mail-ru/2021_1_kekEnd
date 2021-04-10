@@ -3,10 +3,11 @@ import BaseView from '../baseView.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
-import './login.tmpl.js';
-import {OK_CODE} from '../../utils/codes.js';
+import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
 import {setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-
+import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
+import './login.tmpl.js';
 
 /**
  * Представление страницы логина
@@ -20,46 +21,71 @@ export default class LoginView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['login.hbs']);
 
-        globalEventBus.on('login status', this.processLoginAttempt.bind(this));
+        globalEventBus.on(busEvents.LOGIN_STATUS, this.processLoginAttempt.bind(this));
+        globalEventBus.on(busEvents.LOAD_LOGIN_PAGE, this.setLoginPage.bind(this));
+
+        this.formSubmittedCallback = this.formSubmitted.bind(this);
+    }
+
+    /**
+     * Проверка, если пользователь уже авторизован
+     */
+    render() {
+        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_LOGIN);
     }
 
     /**
      * Запуск рендера и установка колбеков
      */
-    render() {
+    setLoginPage() {
         super.render();
         this.setEventListeners();
+    }
+
+    /**
+     * "Деструктор" страницы
+     */
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
     }
 
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        const form = document.getElementById('login');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const data = getFormValues(form);
-
-            globalEventBus.emit('login clicked', data);
-        });
-
+        document.getElementById('login').addEventListener('submit', this.formSubmittedCallback);
         setListenersForHidingValidationError();
     }
 
     /**
-     * Проверка статуса логин запроса
-     * @param {int} status - статус запроса
+     * Удаление колбеков
+     */
+    removeEventListeners() {
+        document.getElementById('login').removeEventListener('submit', this.formSubmittedCallback);
+    }
+
+    /**
+     * Обработка отправки формы
+     * @param {Object} event - событие отправки формы
+     */
+    formSubmitted(event) {
+        event.preventDefault();
+        globalEventBus.emit(busEvents.LOGIN_CLICKED, getFormValues(event.target));
+    }
+
+    /**
+     * Проверка статуса запроса на вход
+     * @param {number} status - статус запроса
      */
     processLoginAttempt(status) {
         if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
         } else {
             const errors = {
-                400: 'Введены некорректные данные!',
-                401: 'Введен некорректный логин или пароль!',
-                500: 'Ошибка сервера',
+                [BAD_REQUEST]: INCORRECT_DATA,
+                [UNAUTHORIZED]: INCORRECT_LOGIN,
+                [INTERNAL_SERVER_ERROR]: SERVER_ERROR,
             };
             document.getElementById('validation-hint-login').innerText = errors[status];
         }
