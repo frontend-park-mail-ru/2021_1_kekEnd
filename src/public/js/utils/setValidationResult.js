@@ -25,9 +25,9 @@ export const setValidationResult = (inputField, hintElement, errors) => {
 };
 
 export const setListenersForHidingValidationError = () => {
-    [...document.querySelectorAll('.input-field')].forEach((item) => {
+    [...document.querySelectorAll('.form__input-field')].forEach((item) => {
         item.addEventListener('click', () => {
-            [...document.querySelectorAll('.validation-hint')].forEach((item) => {
+            [...document.querySelectorAll('.form__validation-hint')].forEach((item) => {
                 item.innerText = '';
             });
         });
