@@ -8,6 +8,23 @@
   border-radius: 16px;
 }
 
+.avatar-container__img {
+  width: 250px;
+  height: 250px;
+}
+
+.settings-box__avatar-box {
+  width: 250px;
+  height: 360px;
+  position: relative;
+  margin: 5px;
+  background-color: white;
+  padding: 32px 32px 32px 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
 .avatar-box {
   &__avatar-container {
     width: 250px;
@@ -19,11 +36,6 @@
     flex-direction: column;
     margin-top: 0;
   }
-}
-
-.avatar-container__img {
-  width: 250px;
-  height: 250px;
 }
 
 .buttons__upload-file {
