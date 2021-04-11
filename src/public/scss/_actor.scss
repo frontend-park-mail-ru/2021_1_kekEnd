@@ -1,0 +1,127 @@
+.actor-content-container {
+  width: 80%;
+  margin: 40px auto 20px;
+  padding: 32px 32px 32px 32px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.flex_container {
+  display: flex;
+}
+
+.actor-content-left-inner {
+  text-align: center;
+  width: 100%;
+}
+
+.actor-avatar-img {
+  border-radius: 8px;
+}
+
+.actor-button-like {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  border: 0;
+  width: 90%;
+  height: 40px;
+  background: linear-gradient(to right, #FF105F, #FF9900);
+  color: white;
+  font-size: medium;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actor-content-center {
+  width: 80%;
+  display: inline-block;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 50px;
+  padding-left: 50px;
+}
+
+.actor-content-name {
+  margin-bottom: 8px;
+}
+
+.actor-biography-content {
+  margin-top: 10px;
+}
+
+.actor-biography-header {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.actor-biography-text-container {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.actor-biography-text {
+  color: #424242;
+}
+
+.actor-info-header {
+  margin-bottom: 12px;
+}
+
+.actor-info-title {
+  width: 156px;
+  font-size: 14px;
+  color: rgb(107, 107, 107);
+}
+
+.actor-info-link {
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+}
+
+.actor-info-link:hover {
+  color: #1a66ff;
+}
+
+.actor-info-value {
+  font-size: 14px;
+}
+
+.actor-info-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.actor-movies-content {
+  margin-top: 10px;
+}
+
+.actor-movies-header {
+  font-size: 24px;
+}
+
+.actor-movies-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+  border-bottom-color: rgba(55, 55, 55, 0.2);
+}
+
+.actor-movie-title {
+  color: #0000e6;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.actor-movie-title:hover {
+  color: #1a66ff;
+}
+
+.actor-movie-rating {
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=_actor.css.map */

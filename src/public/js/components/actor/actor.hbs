@@ -1,0 +1,104 @@
+<div class="header">
+    <div class="header__section">
+        <div class="header__item header__logo">
+            <a href="/">КиноПоиск</a>
+        </div>
+        <div class="header__item header__button">
+            <a href="/">Фильмы</a>
+        </div>
+        <div class="header__item header__button">
+            <a href="/">Актеры</a>
+        </div>
+        <div class="header__item header__button">
+            <a href="/">Поиск</a>
+        </div>
+    </div>
+    <div class="header__section">
+        {{#if isAuthorized}}
+            <div class="header__item header__button">
+                <a href="/me">Профиль</a>
+            </div>
+            <div class="header__item header__button">
+                <a href="/logout" id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header__button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header__button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+<div class="main">
+    <div class="actor-content-container">
+        <div class="flex_container">
+            <div class="actor-content-left">
+                <div class="actor-content-left-inner">
+                    <img class="actor-avatar-img" src="{{avatar}}">
+                    <button id="actor-button-like" class="actor-button-like">
+                        В избранное
+                    </button>
+                </div>
+            </div>
+
+            <div class="actor-content-center">
+                <h1 class="actor-content-name">
+                    {{name}}
+                </h1>
+
+                <div class="actor-info">
+                    <div class="actor-info-header">
+                        <h2>Основная информация</h2>
+                    </div>
+                    <div class="actor-info-row">
+                        <div class="actor-info-title">Дата рождения</div>
+                        <div class="actor-info-value">{{birthdate}}</div>
+                    </div>
+                    <div class="actor-info-row">
+                        <div class="actor-info-title">Страна</div>
+                        <div class="actor-info-value">{{origin}}</div>
+                    </div>
+                    <div class="actor-info-row">
+                        <div class="actor-info-title">Жанры</div>
+                        {{#each genres}}
+                            <a href="" class="actor-info-link">{{this}}</a>
+                            {{#unless @last}}<span>&nbsp;</span>{{/unless}}
+                        {{/each}}
+                    </div>
+                    <div class="actor-info-row">
+                        <div class="actor-info-title">Всего фильмов</div>
+                        <p class="actor-info-value">{{movies_count}}</p>
+                    </div>
+                    <div class="actor-info-row">
+                        <div class="actor-info-title">Средний рейтинг фильмов</div>
+                        <p class="actor-info-value">{{movies_rating}}</p>
+                    </div>
+
+                    <div class="actor-biography-content">
+                        <h2 class="actor-biography-header">Биография</h2>
+                        <div class="actor-biography-text-container">
+                            <p class="actor-biography-text">{{biography}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="actor-movies-content">
+                    <h2 class="actor-movies-header">Фильмы</h2>
+                    <div class="actor-movies-list">
+                        {{#each movies}}
+                            <div class="actor-movies-item">
+                                <a class="actor-movie-title actor-info-link" href="{{this.url}}">{{this.title}}</a>
+                                <p class="actor-movie-rating">Рейтинг: {{this.rating}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
