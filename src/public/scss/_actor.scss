@@ -1,4 +1,4 @@
-.actor-content-container {
+.main__actor-content {
   width: 80%;
   margin: 40px auto 20px;
   padding: 32px 32px 32px 32px;
@@ -6,20 +6,20 @@
   background-color: white;
 }
 
-.flex_container {
+.actor-content__flex-container {
   display: flex;
 }
 
-.actor-content-left-inner {
+.flex-container__left-inner {
   text-align: center;
   width: 100%;
 }
 
-.actor-avatar-img {
+.left-inner__actor-avatar-img {
   border-radius: 8px;
 }
 
-.actor-button-like {
+.left-inner__actor-button-like {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   border: 0;
@@ -33,7 +33,7 @@
   margin-right: auto;
 }
 
-.actor-content-center {
+.flex-container__center {
   width: 80%;
   display: inline-block;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
@@ -41,53 +41,53 @@
   padding-left: 50px;
 }
 
-.actor-content-name {
+.center__actor-name {
   margin-bottom: 8px;
 }
 
-.actor-biography-content {
+.actor-info__biography {
   margin-top: 10px;
 }
 
-.actor-biography-header {
+.biography__header {
   font-size: 24px;
   margin-bottom: 12px;
 }
 
-.actor-biography-text-container {
+.biography__text-container {
   font-size: 14px;
   margin-bottom: 12px;
 }
 
-.actor-biography-text {
+.biography__text {
   color: #424242;
 }
 
-.actor-info-header {
+.actor-info__header {
   margin-bottom: 12px;
 }
 
-.actor-info-title {
+.info-row__info-title {
   width: 156px;
   font-size: 14px;
   color: rgb(107, 107, 107);
 }
 
-.actor-info-link {
+.info-row__info-link {
   text-decoration: none;
   font-size: 14px;
   color: black;
 }
 
-.actor-info-link:hover {
+.info-row__info-link:hover {
   color: #1a66ff;
 }
 
-.actor-info-value {
+.info-row__info-value {
   font-size: 14px;
 }
 
-.actor-info-row {
+.actor-info__info-row {
   display: flex;
   align-items: center;
   padding: 10px 0;
@@ -95,32 +95,32 @@
   border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 
-.actor-movies-content {
+.center__actor-movies {
   margin-top: 10px;
 }
 
-.actor-movies-header {
+.actor-movies__header {
   font-size: 24px;
 }
 
-.actor-movies-item {
+.movies-list__movies-item {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid;
   border-bottom-color: rgba(55, 55, 55, 0.2);
 }
 
-.actor-movie-title {
+.movies-item__title {
   color: #0000e6;
   text-decoration: none;
   font-size: 18px;
 }
 
-.actor-movie-title:hover {
+.movies-item__title:hover {
   color: #1a66ff;
 }
 
-.actor-movie-rating {
+.movies-item__rating {
   font-size: 14px;
 }
 
