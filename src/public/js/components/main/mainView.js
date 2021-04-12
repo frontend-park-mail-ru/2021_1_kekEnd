@@ -53,15 +53,10 @@ export default class MainView extends BaseView {
     setEventListeners() {
         document.getElementById('main-genre-search-button')?.addEventListener('click',
             this.searchMoviesByGenresCallback);
-        Array.from(document.getElementsByClassName('genres-list__item-box'))
-            .forEach( (element) => element.addEventListener('click', (event) => {
-                const button = event.toElement;
-                if (button.classList.contains('genre-selected')) {
-                    button.classList.remove('genre-selected');
-                } else {
-                    button.classList.add('genre-selected');
-                }
-            }) );
+
+        [...document.getElementsByClassName('genres-list__item-box')]
+            .forEach((element) => element.addEventListener('click', this.selectGenresListener));
+
         document.getElementById('logout-button')?.addEventListener('click',
             this.logoutClickedCallback);
     }
@@ -72,15 +67,8 @@ export default class MainView extends BaseView {
     removeEventListeners() {
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
-        Array.from(document.getElementsByClassName('genres-list__item-box'))
-            .forEach( (element) => element.removeEventListener('click', (event) => {
-                const button = event.toElement;
-                if (button.classList.contains('genre-selected')) {
-                    button.classList.remove('genre-selected');
-                } else {
-                    button.classList.add('genre-selected');
-                }
-            }) );
+        [...document.getElementsByClassName('genres-list__item-box')]
+            .forEach((element) => element.removeEventListener('click', this.selectGenresListener));
         document.getElementById('logout-button')?.removeEventListener('click',
             this.logoutClickedCallback);
     }
@@ -89,15 +77,13 @@ export default class MainView extends BaseView {
      * Колбек нажатия на кнопку поиска фильмов по жанрам
      */
     searchMoviesByGenresCallback() {
-        const genres = Array.from(document.getElementsByClassName('genres-list__item-box'))
-            .filter( (element) => element.classList.contains('genre-selected') )
-            .map( (element) => element.innerText );
+        const genres = [...document.getElementsByClassName('genres-list__item-box')]
+            .filter((element) => element.classList.contains('genre-selected'))
+            .map((element) => element.innerText);
         if (genres.length) {
             console.log('search by genres clicked: ' + genres);
             // /TODO: se arch by genres
-            document.getElementById('main-genre-search-button').href=`/movies/genre/1/?filter=${genres.join('+')}`;
-        } else {
-            // return false;
+            document.getElementById('main-genre-search-button').href = `/movies/genre/1/?filter=${genres.join('+')}`;
         }
     }
 
@@ -115,6 +101,19 @@ export default class MainView extends BaseView {
     processLogout(status) {
         if (status) {
             globalRouter.pushState(PATHS.login);
+        }
+    }
+
+    /**
+     * Логика клика на кнопку жанра
+     * @param {Object} event - объект события
+     */
+    selectGenresListener(event) {
+        const button = event.target;
+        if (button.classList.contains('genre-selected')) {
+            button.classList.remove('genre-selected');
+        } else {
+            button.classList.add('genre-selected');
         }
     }
 }
