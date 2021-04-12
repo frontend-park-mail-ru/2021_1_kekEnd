@@ -1,9 +1,15 @@
-.main__genres-selection {
-    margin-left: 50px;
-}
+.main {
+    &__genres-selection {
+        margin-left: 50px;
+    }
 
-.main__genres-list {
-    display: flex;
+    &__genres-list {
+        display: flex;
+    }
+
+    &__show-button {
+        margin-top: 4px;
+    }
 }
 
 .genres-list__item-box {
@@ -20,8 +26,4 @@
 .genre-selected {
     background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
     color: white;
-}
-
-.main__show-button {
-    margin-top: 4px;
 }

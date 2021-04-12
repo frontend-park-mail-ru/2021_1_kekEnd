@@ -82,7 +82,7 @@ export default class MainView extends BaseView {
             .filter((element) => element.classList.contains('genre-selected'))
             .map((element) => element.getAttribute('data-genre'));
         if (genres.length) {
-            document.getElementById('main-genre-search-button').href = `/movies/genre/1/?filter=${genres.join('+')}`;
+            document.getElementById('main-genre-search-button').href += genres.join('+');
         }
     }
 

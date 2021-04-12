@@ -34,7 +34,7 @@ export default class MoviesListView extends BaseView {
             return;
         }
         if (category === 'genre') {
-            const genres = query.slice('?filter='.length).split('+'); // а почему бы и нет?
+            const genres = query.slice('?filter='.length).split('+');
             globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres);
         }
     }
