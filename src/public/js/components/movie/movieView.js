@@ -54,7 +54,6 @@ export default class MovieView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**

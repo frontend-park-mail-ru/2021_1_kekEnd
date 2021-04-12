@@ -57,7 +57,6 @@ export default class SettingsView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**

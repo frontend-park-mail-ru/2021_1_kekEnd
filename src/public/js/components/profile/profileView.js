@@ -36,7 +36,6 @@ export default class ProfileView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**

@@ -49,7 +49,6 @@ export default class SignupView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**

@@ -49,7 +49,6 @@ export default class MoviesListView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**

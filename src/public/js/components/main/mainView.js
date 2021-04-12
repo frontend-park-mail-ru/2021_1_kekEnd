@@ -35,7 +35,6 @@ export default class MainView extends BaseView {
      */
     hide() {
         this.removeEventListeners();
-        this.parent.innerHTML = '';
     }
 
     /**
@@ -117,4 +116,3 @@ export default class MainView extends BaseView {
         }
     }
 }
-

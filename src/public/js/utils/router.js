@@ -90,7 +90,9 @@ export class Router {
      * @param {string} parameters - параметры пути
      */
     handlePath(path, parameters = '') {
-        this.routes.get(path).render(parameters);
+        this.currentView?.hide();
+        this.currentView = this.routes.get(path);
+        this.currentView.render(parameters);
     }
 
     /**
