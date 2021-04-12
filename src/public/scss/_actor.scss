@@ -42,7 +42,7 @@
     border: 0;
     width: 90%;
     height: 40px;
-    background: linear-gradient(to right, #FF105F, #FF9900);
+    background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
     color: white;
     font-size: medium;
     margin-top: 20px;
