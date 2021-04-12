@@ -44,6 +44,7 @@ export default class MoviesListModel {
                 globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
                     ...genresMoviesResp.data,
                     'type': 'genres',
+                    'query': `?filter=${genres.join('+')}`,
                     genres,
                     'isAuthorized': userResp.status === OK_CODE,
                 });

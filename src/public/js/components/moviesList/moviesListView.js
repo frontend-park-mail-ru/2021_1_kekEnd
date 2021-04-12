@@ -35,7 +35,7 @@ export default class MoviesListView extends BaseView {
         }
         if (category === 'genre') {
             const genres = query.slice('?filter='.length).split('+');
-            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres);
+            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres, page);
         }
     }
 

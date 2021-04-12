@@ -28,27 +28,28 @@ export class Router {
      */
     start() {
         window.addEventListener('load', () => {
-            this.activate(location.pathname);
+            this.activate(location.pathname, location.search);
         });
 
         window.addEventListener('popstate', () => {
-            this.activate(location.pathname);
+            this.activate(location.pathname, location.search);
         });
 
         window.addEventListener('click', (event) => {
             const {target} = event;
             const link = findAscendingTag(target, 'A');
             const href = (link !== null) ? link.href : null;
-            this.activate(href, event);
+            this.activate(href, '', event);
         });
     }
 
     /**
      * Поиск пути и выделение параметров из url
      * @param {string|null} path - путь
+     * @param {string} query - query-параметры
      * @param {Object} event - событие, порожденное кликом
      */
-    activate(path, event=null) {
+    activate(path, query, event=null) {
         if (path === null) {
             return;
         }
@@ -57,7 +58,7 @@ export class Router {
             if (path.includes(PATHS[i])) {
                 event?.preventDefault();
                 const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length + 1);
-                this.pushState(PATHS[i], {}, params);
+                this.pushState(PATHS[i], query, {}, params);
                 return;
             }
         }
@@ -66,18 +67,19 @@ export class Router {
     /**
      * Формирование пути в адресной строке и history.pushState()
      * @param {string} path - путь
+     * @param {string} query - query-параметры
      * @param {Object} state - объект состояния
      * @param {string} parameters - параметры пути
      */
-    pushState(path = '/', state = {}, parameters = '') {
+    pushState(path = '/', query, state = {}, parameters = '') {
         let newPath = path;
-        if (location.search) {
-            parameters += (location.pathname.slice(-1) === '/') ? location.search : '/' + location.search;
+        if (query) {
+            parameters += (location.pathname.slice(-1) === '/') ? query : '/' + query;
         }
         if (parameters) {
             newPath = `${path}/${parameters}`;
         }
-        if (newPath !== window.location.pathname) {
+        if (newPath !== location.pathname) {
             history.pushState(state, document.title, newPath);
         }
 
