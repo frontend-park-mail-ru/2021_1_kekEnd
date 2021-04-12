@@ -3,7 +3,13 @@
   margin: 40px auto 20px;
   padding: 32px 32px 32px 32px;
   border-radius: 16px;
-  background-color: white;
+  background-color: $movie-background-color;
+}
+
+.actor-content__header {
+  font-size: 24px;
+  margin: 12px 0;
+  color: $white-text-color;
 }
 
 .actor-content__flex-container {
@@ -19,9 +25,9 @@
   &__center {
     width: 80%;
     display: inline-block;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
     margin-left: 50px;
     padding-left: 50px;
+    border-left: 1px solid $movie-separator-color;
   }
 }
 
@@ -47,6 +53,7 @@
 
 .center {
   &__actor-name {
+    color: $white-text-color;
     margin-bottom: 8px;
   }
 
@@ -56,26 +63,17 @@
 }
 
 .biography {
-  &__header {
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
-
   &__text-container {
     font-size: 14px;
     margin-bottom: 12px;
   }
 
   &__text {
-    color: #424242;
+    color: $white-text-color;
   }
 }
 
 .actor-info {
-  &__header {
-    margin-bottom: 12px;
-  }
-
   &__biography {
     margin-top: 10px;
   }
@@ -89,34 +87,7 @@
   }
 }
 
-.info-row {
-  &__info-title {
-    width: 156px;
-    font-size: 14px;
-    color: rgb(107, 107, 107);
-  }
-
-  &__info-value {
-    font-size: 14px;
-  }
-
-  &__info-link {
-    text-decoration: none;
-    font-size: 14px;
-    color: black;
-
-    &:hover {
-      color: #1a66ff;
-    }
-  }
-}
-
-.actor-movies__header {
-  font-size: 24px;
-}
-
 .movies-list__movies-item {
-  padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid;
   border-bottom-color: rgba(55, 55, 55, 0.2);
@@ -124,17 +95,13 @@
 
 .movies-item {
   &__title {
-    color: #0000e6;
     text-decoration: none;
-    font-size: 18px;
-
-    &:hover {
-      color: #1a66ff;
-    }
+    font-size: 20px;
   }
 
   &__rating {
-    font-size: 14px;
+    font-size: 16px;
+    color: $secondary-text-color;
   }
 }
 
