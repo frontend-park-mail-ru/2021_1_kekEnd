@@ -34,11 +34,6 @@ export default class MoviesListView extends BaseView {
             return;
         }
         if (category === 'genre') {
-            console.log(query);
-            // TODO Олегу:
-            // CHECK в query строка вида ?filter=comedy+horror+drama
-            // CHECK надо получить массив жанров и вызвать .emit(busEvents.GET_GENRE_MOVIES_PAGE, <массив>);
-            // CHECK метод getMoviesByGenres определить в moviesListModel.js
             const genres = query.slice('?filter='.length).split('+'); // а почему бы и нет?
             globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres);
         }

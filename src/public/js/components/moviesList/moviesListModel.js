@@ -17,7 +17,7 @@ export default class MoviesListModel {
     }
 
     /**
-     * Получение первой страницы лучших фильмов
+     * Получение заданной страницы лучших фильмов
      * @param {number} page - номер страницы
      */
     getBestMovies(page=1) {
@@ -33,7 +33,7 @@ export default class MoviesListModel {
     }
 
     /**
-     * Получение первой страницы фильмов по выбранным жанрам
+     * Получение заданной страницы фильмов по выбранным жанрам
      * @param {string[]} genres - массив нужных жанров
      * @param {number} page - номер страницы
      */

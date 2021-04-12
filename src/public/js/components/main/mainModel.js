@@ -28,15 +28,13 @@ export default class MainModel {
                     'isAuthorized': userResp.status === OK_CODE,
                 });
             });
-        // /TODO: get genres
     }
 
     /**
      * Получение первой страницы фильмов по выбранным жанрам
-     * @param {Array} genres - список жанров
+     * @param {string[]} genres - список жанров
      */
     getMoviesByGenres(genres) {
-        // /TODO: request movies by genres
         console.log('requested movies by genres:' + genres);
     }
 

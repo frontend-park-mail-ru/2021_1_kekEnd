@@ -38,12 +38,12 @@
         <h3 class="main__page-title">ТОП-100</h3>
     {{/if}}
     {{#if (eq type "genres")}}
-        <h3 class="page-title">По жанрам:</h3>
-        <div class="movieslist-genres-list">
+        <h3 class="main__page-title">
+            По жанрам:
             {{#each genres}}
-                <a href="" class="movieslist-genres-genre">{{this}}</a>
+                <a href="" class="genres-list__genre">{{this}}</a>{{#unless @last}}<span class="genres-list__genre">, </span>{{/unless}}
             {{/each}}
-        </div>
+        </h3>
     {{/if}}
     <div class="main__movies-list-grid">
         {{#each movies}}

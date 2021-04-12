@@ -66,8 +66,10 @@ export default class MainView extends BaseView {
     removeEventListeners() {
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
+
         [...document.getElementsByClassName('genres-list__item-box')]
             .forEach((element) => element.removeEventListener('click', this.selectGenresListener));
+
         document.getElementById('logout-button')?.removeEventListener('click',
             this.logoutClickedCallback);
     }
@@ -78,10 +80,8 @@ export default class MainView extends BaseView {
     searchMoviesByGenresCallback() {
         const genres = [...document.getElementsByClassName('genres-list__item-box')]
             .filter((element) => element.classList.contains('genre-selected'))
-            .map((element) => element.innerText);
+            .map((element) => element.getAttribute('data-genre'));
         if (genres.length) {
-            console.log('search by genres clicked: ' + genres);
-            // /TODO: se arch by genres
             document.getElementById('main-genre-search-button').href = `/movies/genre/1/?filter=${genres.join('+')}`;
         }
     }
