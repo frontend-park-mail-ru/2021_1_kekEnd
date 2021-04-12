@@ -6,7 +6,7 @@ class Api {
      * Конструктор
      */
     constructor() {
-        this.host = '89.208.198.186';
+        this.host = 'localhost';
         this.port = '8080';
     }
 

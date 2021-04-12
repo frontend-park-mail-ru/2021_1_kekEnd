@@ -80,7 +80,7 @@ export default class MainView extends BaseView {
     searchMoviesByGenresCallback() {
         const genres = [...document.getElementsByClassName('genres-list__item-box')]
             .filter((element) => element.classList.contains('genre-selected'))
-            .map((element) => element.getAttribute('data-genre'));
+            .map((element) => element.innerText);
         if (genres.length) {
             document.getElementById('main-genre-search-button').href += genres.join('+');
         }

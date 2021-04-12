@@ -41,7 +41,7 @@
         <h3 class="main__page-title">
             По жанрам:
             {{#each genres}}
-                <a href="" class="genres-list__genre">{{this}}</a>{{#unless @last}}<span class="genres-list__genre">, </span>{{/unless}}
+                <a href="" class="genres-list__genre">{{decodeURI this}}</a>{{#unless @last}}<span class="genres-list__genre">, </span>{{/unless}}
             {{/each}}
         </h3>
     {{/if}}
