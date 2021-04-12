@@ -38,7 +38,7 @@ export const gteHelper = (arg1, arg2) => {
 
 export const calculateMovieIndex = (currentPage, pageSize, index) => {
     return (currentPage - 1) * pageSize + index;
-}
+};
 
 export const paginationHelper = (currentPage, pagesNumber, options) => {
     const [startPage, endPage] = getPaginationRange(currentPage, pagesNumber);

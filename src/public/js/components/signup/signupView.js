@@ -5,10 +5,10 @@ import {PATHS} from '../../utils/paths.js';
 import {getFormValues} from '../../utils/formDataWork.js';
 import Validator from '../../utils/validation.js';
 import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-import './signup.tmpl.js';
 import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
 import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
 import {busEvents} from '../../utils/busEvents.js';
+import './signup.tmpl.js';
 
 
 /**
@@ -24,18 +24,29 @@ export default class SignupView extends BaseView {
         super(parent, Handlebars.templates['signup.hbs']);
 
         globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
+        globalEventBus.on(busEvents.LOAD_SIGNUP_PAGE, this.setSignupPage.bind(this));
 
         this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
 
     /**
-     * Запуск рендера
+     * Проверка, если пользователь уже авторизован
      */
     render() {
+        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_SIGNUP);
+    }
+
+    /**
+     * Запуск рендера и подписка на события
+     */
+    setSignupPage() {
         super.render();
         this.setEventListeners();
     }
 
+    /**
+     * "Деструктор" страницы
+     */
     hide() {
         this.removeEventListeners();
         this.parent.innerHTML = '';
@@ -49,10 +60,17 @@ export default class SignupView extends BaseView {
         setListenersForHidingValidationError();
     }
 
+    /**
+     * Удаление колбеков
+     */
     removeEventListeners() {
         document.getElementById('signup').removeEventListener('submit', this.formSubmittedCallback);
     }
 
+    /**
+     * Обработка отправки формы регистрации
+     * @param {Object} event - событие отправки формы
+     */
     formSubmitted(event) {
         event.preventDefault();
 

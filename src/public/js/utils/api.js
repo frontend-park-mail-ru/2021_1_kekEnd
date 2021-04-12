@@ -1,3 +1,6 @@
+/**
+ * Класс для работы с API
+ */
 class Api {
     /**
      * Конструктор
@@ -103,7 +106,7 @@ class Api {
      * Получить все рецензии к фильму
      * @param {number} id - id фильма
      * @param {number} page - страница с рецензиями
-     * @return {Promise<{data: *, status: number}>} - статус запроса и список рецензий к фильму
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком рецензий к фильму
      */
     getMovieReviews(id, page=1) {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/reviews?page=${page}`);
@@ -129,20 +132,36 @@ class Api {
     /**
      * Получить рецензию пользователя к фильму
      * @param {number} id - id фильма
-     * @return {Promise<{data: *, status: number}>} - статус запроса и объект рецензии
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и объектом рецензии
      */
     getUserReviewForMovie(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`);
     }
 
+    /**
+     * Редактировать рецензию
+     * @param {Object} formData - новые данные формы
+     * @return {Promise<{status: number}>} - промис со статусом запроса
+     */
     editUserReviewForMovie(formData) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${formData.movie_id}/reviews`, 'PUT', JSON.stringify(formData));
     }
 
+    /**
+     * Удаление рецензии
+     * @param {number} id - идентификатор фильма
+     * @return {Promise<{status: number}>} - промис со статусом запроса
+     */
     deleteUserReviewForMovie(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`, 'DELETE');
     }
 
+    /**
+     * Добавить оценку фильму
+     * @param {number} id - идентификатор фильма
+     * @param {number} score - оценка фильма
+     * @return {Promise<{status: number}>} - промис со статусом запроса
+     */
     addMovieRating(id, score) {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'POST', JSON.stringify({
             'movie_id': id,
@@ -150,10 +169,21 @@ class Api {
         }));
     }
 
+    /**
+     * Получить оценку пользователя к фильму
+     * @param {number} id - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и оценкой пользователя
+     */
     getUserRatingForMovie(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`);
     }
 
+    /**
+     * Редактировать оценку пользователя к фильму
+     * @param {number} id - идентификатор фильма
+     * @param {number} newScore - новая оценка
+     * @return {Promise<{status: number}>} - промис со статусом запроса
+     */
     editUserRatingForMovie(id, newScore) {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'PUT', JSON.stringify({
             'movie_id': id,
@@ -161,16 +191,32 @@ class Api {
         }));
     }
 
+    /**
+     * Удалить оценку пользователя к фильму
+     * @param {number} id - идентификатор фильма
+     * @return {Promise<{status: number}>} - промис со статусом запроса
+     */
     deleteUserRatingForMovie(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`, 'DELETE');
     }
 
+    /**
+     * Получение страницы списка лучших фильмов
+     * @param {number} page - номер страницы
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком фильмов
+     */
     getBestMovies(page=1) {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=best&page=${page}`);
     }
 
+    /**
+     * Получение фильмов по заданным жанрам
+     * @param {string[]} genres - массив нужных жанров
+     * @param {number} page - номер страницы
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком фильмов
+     */
     getMoviesByGenres(genres, page=1) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/?category=genre&page=${page}/?filer=${genres.join('+')}`);    ///TODO: right?
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=genre&filter=${genres.join('+')}&page=${page}`);
     }
 
     /**

@@ -3,6 +3,9 @@ import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+/**
+ * Модель страницы списка фильмов
+ */
 export default class MoviesListModel {
     /**
      * Конструктор
@@ -23,7 +26,7 @@ export default class MoviesListModel {
                 const [userResp, bestMoviesResp] = responses;
                 globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
                     ...bestMoviesResp.data,
-                    type: 'best',
+                    'type': 'best',
                     'isAuthorized': userResp.status === OK_CODE,
                 });
             });
@@ -31,6 +34,7 @@ export default class MoviesListModel {
 
     /**
      * Получение первой страницы фильмов по выбранным жанрам
+     * @param {string[]} genres - массив нужных жанров
      * @param {number} page - номер страницы
      */
     getGenreMovies(genres, page=1) {
@@ -39,11 +43,11 @@ export default class MoviesListModel {
                 const [userResp, genresMoviesResp] = responses;
                 globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
                     ...genresMoviesResp.data,
-                    type: 'genres',
+                    'type': 'genres',
                     genres,
                     'isAuthorized': userResp.status === OK_CODE,
                 });
-            }); 
+            });
     }
 
     /**

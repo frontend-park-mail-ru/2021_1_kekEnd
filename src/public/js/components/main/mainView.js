@@ -94,7 +94,7 @@ export default class MainView extends BaseView {
             .map( (element) => element.innerText );
         if (genres.length) {
             console.log('search by genres clicked: ' + genres);
-            ///TODO: search by genres
+            // /TODO: search by genres
             document.getElementById('main-genre-search-button').href=`/movies/genre/1/?filter=${genres.join('+')}`;
         } else {
             // return false;
@@ -102,7 +102,7 @@ export default class MainView extends BaseView {
     }
 
     /**
-     * Колбек логаута
+     * Обработка нажатия логаута
      */
     logoutClicked() {
         globalEventBus.emit(busEvents.LOGOUT_CLICKED);

@@ -1,31 +1,31 @@
 <div class="header">
     <div class="header__section">
-        <div class="header__item header-logo">
+        <div class="header__item header__logo">
             <a href="/">КиноПоиск</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Фильмы</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Актеры</a>
         </div>
-        <div class="header__item header-button">
+        <div class="header__item header__button">
             <a href="/">Поиск</a>
         </div>
     </div>
     <div class="header__section">
         {{#if isAuthorized}}
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/me">Профиль</a>
             </div>
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/logout" id="logout-button">Выйти</a>
             </div>
         {{else}}
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/login">Войти</a>
             </div>
-            <div class="header__item header-button">
+            <div class="header__item header__button">
                 <a href="/signup">Регистрация</a>
             </div>
         {{/if}}
@@ -34,52 +34,54 @@
 
 
 <div class="main">
+<<<<<<< HEAD
     {{#if (eq type "best")}}
-        <h3 class="page-title">ТОП-100</h3>
+        <h3 class="main__page-title">ТОП-100</h3>
     {{/if}}
     {{#if (eq type "genres")}}
         <h3 class="page-title">По жанрам:</h3>
         <div class="movieslist-genres-list">
             {{#each genres}}
-                <p href="" class="movieslist-genres-genre">{{this}}</a>
+                <a href="" class="movieslist-genres-genre">{{this}}</a>
             {{/each}}
         </div>
     {{/if}}
-    <div class="movies-list-grid">
+    <div class="main__movies-list-grid">
         {{#each movies}}
-            <div class="movie-card">
-                <div class="movie-card-left">
+            <div class="movies-list-grid__movie-card">
+                <div class="movie-card__left">
                     <a href="/movie/{{this.id}}"><img class="movie-card-img" src="{{this.poster}}"></a>
                 </div>
-                <div class="movie-card-center">
-                    <a class="movie-link card-info-link" href="/movie/{{this.id}}">
-                        <h3 class="movie-card-title tooltip"
+                <div class="movie-card__center">
+                    <a class="center__movie-link center__info-link" href="/movie/{{this.id}}">
+                        <h3 class="center__card-title center__tooltip"
                             data-index="{{calculateMovieIndex ../current_page ../max_items (inc @index)}}">
                             {{this.title}}
                         </h3>
-                        <span class="tooltip-text">{{this.title}}</span>
+                        <span class="center__tooltip-text">{{this.title}}</span>
                     </a>
-                    <p class="movie-card-genre">
+                    <p class="center__movie-genres">
                         {{#each genre}}
-                            <a href="" class="genre-link card-info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
+                            <a href="" class="movie-genres__genre-link center__info-link">
+                                {{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
                         {{/each}}
                     </p>
-                    <p class="movie-card-description">{{this.description}}</p>
+                    <p class="center__movie-description">{{this.description}}</p>
                 </div>
-                <div class="movie-card-right">
-                    {{#if (gte this.rating 7)}}<h4 class="movie-rating positive-rating">{{this.rating}}</h4>
+                <div class="movie-card__right">
+                    {{#if (gte this.rating 7)}}<h4 class="right__movie-rating positive-rating">{{this.rating}}</h4>
                     {{else}}
-                        {{#if (gte this.rating 4)}}<h4 class="movie-rating neutral-rating">{{this.rating}}</h4>
-                        {{else}}<h4 class="movie-rating negative-rating">{{this.rating}}</h4>{{/if}}
+                        {{#if (gte this.rating 4)}}<h4 class="right__movie-rating neutral-rating">{{this.rating}}</h4>
+                        {{else}}<h4 class="right__movie-rating negative-rating">{{this.rating}}</h4>{{/if}}
                     {{/if}}
                     {{#if ../isAuthorized}}
-                        <div class="bottom-buttons">
-                            <input class="input-watched movie-card-input-watched" id="watched-button-{{this.id}}"
-                                   type="checkbox" name="watched">
-                            <label class="label-watched" for="watched-button-{{this.id}}"></label>
-                            <input class="input-like movie-card-input-like" id="like-button-{{this.id}}" type="checkbox"
-                                   name="liked">
-                            <label class="label-like" for="like-button-{{this.id}}"></label>
+                        <div class="right__bottom-buttons">
+                            <input class="buttons__input-watched buttons__movie-card-input-watched"
+                                   id="watched-button-{{this.id}}" type="checkbox" name="watched">
+                            <label class="buttons__label-watched" for="watched-button-{{this.id}}"></label>
+                            <input class="buttons__input-like buttons__movie-card-input-like"
+                                   id="like-button-{{this.id}}" type="checkbox" name="liked">
+                            <label class="buttons__label-like" for="like-button-{{this.id}}"></label>
                         </div>
                     {{/if}}
                 </div>
@@ -90,28 +92,28 @@
     <!-- parametrize -->
     {{#if (notEq pages_number 1)}}
         {{#pagination current_page pages_number}}
-            <div class="pagination-wrapper">
+            <div class="main__pagination-wrapper">
                 {{#unless startFromFirstPage}}
                     <a href="/movies/best/{{dec ../current_page}}">
-                        <button class="pagination-button">&lt;</button>
+                        <button class="pagination-wrapper__button">&lt;</button>
                     </a>
                 {{/unless}}
 
                 {{#each pages}}
                     {{#if isCurrent}}
                         <a href="/movies/best/{{page}}">
-                            <button disabled class="pagination-button pagination-current-button">{{page}}</button>
+                            <button disabled class="pagination-wrapper__button">{{page}}</button>
                         </a>
                     {{else}}
                         <a href="/movies/best/{{page}}">
-                            <button class="pagination-button">{{page}}</button>
+                            <button class="pagination-wrapper__button">{{page}}</button>
                         </a>
                     {{/if}}
                 {{/each}}
 
                 {{#unless endAtLastPage}}
                     <a href="/movies/best/{{inc ../current_page}}">
-                        <button class="pagination-button">&gt;</button>
+                        <button class="pagination-wrapper__button">&gt;</button>
                     </a>
                 {{/unless}}
             </div>
