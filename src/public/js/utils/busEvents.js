@@ -35,4 +35,5 @@ export const busEvents = {
     SET_MAIN_PAGE_DATA: 'set main page data',
     GET_BEST_MOVIES_PAGE: 'get best movies page',
     SET_MOVIES_PAGE: 'set movies page',
+    SHOW_POPUP: 'show popup',
 };

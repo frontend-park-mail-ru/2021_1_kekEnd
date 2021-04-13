@@ -4,6 +4,7 @@ import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
+import {CONNECTION_ERROR} from '../../utils/errorMessages.js';
 
 
 /**
@@ -31,6 +32,9 @@ export default class SettingsModel {
                 } else {
                     globalRouter.pushState(PATHS.login);
                 }
+            })
+            .catch(() => {
+                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -44,6 +48,9 @@ export default class SettingsModel {
         API.uploadAvatar(formData)
             .then((res) => {
                 globalEventBus.emit('avatar uploaded', res.status);
+            })
+            .catch(() => {
+                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -57,6 +64,9 @@ export default class SettingsModel {
                 if (res) {
                     globalEventBus.emit('response change settings', res.status);
                 }
+            })
+            .catch(() => {
+                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
