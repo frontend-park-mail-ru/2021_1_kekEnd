@@ -8,13 +8,7 @@ import SettingsController from './public/js/components/settings/settingsControll
 import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js';
 import MainController from './public/js/components/main/mainController.js';
 import MoviesListController from './public/js/components/moviesList/moviesListController.js';
-import './public/js/components/partials/navbar.tmpl.js';
-import './public/js/components/partials/top_login_signup.tmpl.js';
 
-// eslint-disable-next-line no-undef
-Handlebars.registerPartial('navbar', Handlebars.templates['navbar.hbs']);
-// eslint-disable-next-line no-undef
-Handlebars.registerPartial('top_login_signup', Handlebars.templates['top_login_signup.hbs']);
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
