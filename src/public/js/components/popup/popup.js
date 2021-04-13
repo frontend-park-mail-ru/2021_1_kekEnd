@@ -43,4 +43,4 @@ export default class PopUp {
     }
 }
 
-export const popup = new PopUp(document.getElementById('app'));
+export const popup = new PopUp();
