@@ -48,14 +48,9 @@
     <h3 class="main__section-name">По жанрам</h3>
     <div class="main__genres-selection">
         <div class="main__genres-list">
-            {{#each genres}}
-                <div class="genres-list__item-box" id="{{this.name}}">{{this.name}}</div>
+            {{#each available_genres}}
+                <div class="genres-list__item-box">{{this}}</div>
             {{/each}}
-            <!-- TEMP -->
-            <div class="genres-list__item-box">ужасы</div>
-            <div class="genres-list__item-box">драма</div>
-            <div class="genres-list__item-box">комедия</div>
-            <!-- TEMP -->
             <a href="/movies/genre/1/?filter=" id="main-genre-search-button" class="main__show-button view-all">показать</a>
         </div>
     </div>

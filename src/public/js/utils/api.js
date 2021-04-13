@@ -210,6 +210,14 @@ class Api {
     }
 
     /**
+     * Получить все доступные для выбора жанры
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком жанров
+     */
+    getAllAvailableGenres() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/genres`);
+    }
+
+    /**
      * Получение фильмов по заданным жанрам
      * @param {string[]} genres - массив нужных жанров
      * @param {number} page - номер страницы

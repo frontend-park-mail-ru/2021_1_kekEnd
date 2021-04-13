@@ -11,21 +11,22 @@ export default class MainModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getBestMoviesPreview.bind(this));
-        globalEventBus.on(busEvents.GET_MOVIES_BY_GENRES, this.getMoviesByGenres.bind(this));
+        globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getMainPageData.bind(this));
+        globalEventBus.on(busEvents.GET_MOVIES_BY_GENRES_PREVIEW, this.getMoviesByGenresPreview.bind(this));
         globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
      * Получение первой страницы лучших фильмов
      */
-    getBestMoviesPreview() {
-        Promise.all([API.getUser(), API.getBestMovies(1)])
+    getMainPageData() {
+        Promise.all([API.getUser(), API.getBestMovies(1), API.getAllAvailableGenres()])
             .then((responses) => {
-                const [userResp, bestMoviesResp] = responses;
+                const [userResp, bestMoviesResp, genresResp] = responses;
                 globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
-                    'best_movies': bestMoviesResp.data.movies,
                     'isAuthorized': userResp.status === OK_CODE,
+                    'best_movies': bestMoviesResp.data.movies,
+                    'available_genres': genresResp.data,
                 });
             });
     }
@@ -34,7 +35,7 @@ export default class MainModel {
      * Получение первой страницы фильмов по выбранным жанрам
      * @param {string[]} genres - список жанров
      */
-    getMoviesByGenres(genres) {
+    getMoviesByGenresPreview(genres) {
         console.log('requested movies by genres:' + genres);
     }
 
