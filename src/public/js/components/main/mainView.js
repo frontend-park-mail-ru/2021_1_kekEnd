@@ -58,6 +58,7 @@ export default class MainView extends BaseView {
         this.data.movies_by_genres_preview = data;
         super.render(this.data);
         this.setEventListeners();
+        this.selectChosenGenres(this.data.selected_genres);
     }
 
     /**
@@ -143,6 +144,19 @@ export default class MainView extends BaseView {
         } else {
             button.classList.add('genre-selected');
         }
+    }
+
+    /**
+     * После ререндера отметить выбранные жанры
+     * @param {string[]} genres - список выбранных жанров
+     */
+    selectChosenGenres = (genres) => {
+        [...document.getElementsByClassName('genres-list__item-box')]
+            .forEach((genre) => {
+                if (genres.includes(genre.innerText)) {
+                    genre.classList.add('genre-selected');
+                }
+            });
     }
 
     /**
