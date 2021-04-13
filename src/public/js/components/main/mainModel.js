@@ -36,7 +36,10 @@ export default class MainModel {
      * @param {string[]} genres - список жанров
      */
     getMoviesByGenresPreview(genres) {
-        console.log('requested movies by genres:' + genres);
+        API.getMoviesByGenres(genres, 1)
+            .then((res) => {
+                globalEventBus.emit(busEvents.SET_MOVIES_BY_GENRES_PREVIEW, res.data.movies);
+            });
     }
 
     /**

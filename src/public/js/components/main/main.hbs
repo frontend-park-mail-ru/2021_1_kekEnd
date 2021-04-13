@@ -51,7 +51,18 @@
             {{#each available_genres}}
                 <div class="genres-list__item-box">{{this}}</div>
             {{/each}}
-            <a href="/movies/genre/1/?filter=" id="main-genre-search-button" class="main__show-button view-all">показать</a>
+            <button id="main-genre-get-preview" class="main__show-button view-all button-as-link">показать</button>
         </div>
     </div>
+
+    {{#if movies_by_genres_preview}}
+        <a href="/movies/genre/1/?filter=" id="main-genre-search-button" class="view-all_margin_l">смотреть все</a>
+        <div class="main__slider">
+            {{#each movies_by_genres_preview}}
+                <div class="slider__card">
+                    <a href="/movie/{{this.id}}"><img src="{{this.poster}}"></a>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
 </div>

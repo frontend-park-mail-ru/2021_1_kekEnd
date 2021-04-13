@@ -18,8 +18,11 @@ export default class MainView extends BaseView {
         super(parent, Handlebars.templates['main.hbs']);
 
         globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
+        globalEventBus.on(busEvents.SET_MOVIES_BY_GENRES_PREVIEW, this.setMoviesByGenresPreview.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
+        this.searchMoviesByGenresCallback = this.searchMoviesByGenres.bind(this);
+        this.searchMoviesByGenresPreviewCallback = this.searchMoviesByGenresPreview.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -42,7 +45,18 @@ export default class MainView extends BaseView {
      * @param {Object} data - данные главной страницы
      */
     setMainPageData(data) {
-        super.render(data);
+        this.data = data;
+        super.render(this.data);
+        this.setEventListeners();
+    }
+
+    /**
+     * Показать превью фильмов по выбранным жанрам
+     * @param {Object} data - список фильмов
+     */
+    setMoviesByGenresPreview(data) {
+        this.data.movies_by_genres_preview = data;
+        super.render(this.data);
         this.setEventListeners();
     }
 
@@ -50,6 +64,9 @@ export default class MainView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
+        document.getElementById('main-genre-get-preview')?.addEventListener('click',
+            this.searchMoviesByGenresPreviewCallback);
+
         document.getElementById('main-genre-search-button')?.addEventListener('click',
             this.searchMoviesByGenresCallback);
 
@@ -64,6 +81,9 @@ export default class MainView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        document.getElementById('main-genre-get-preview')?.removeEventListener('click',
+            this.searchMoviesByGenresPreviewCallback);
+
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
 
@@ -75,12 +95,21 @@ export default class MainView extends BaseView {
     }
 
     /**
-     * Колбек нажатия на кнопку поиска фильмов по жанрам
+     * Колбек нажатия на кнопку "показать" в поиске фильмов по жанрам
      */
-    searchMoviesByGenresCallback() {
-        const genres = [...document.getElementsByClassName('genres-list__item-box')]
-            .filter((element) => element.classList.contains('genre-selected'))
-            .map((element) => element.innerText);
+    searchMoviesByGenresPreview() {
+        const genres = this.getSelectedGenres();
+        this.data.selected_genres = genres;
+        if (genres.length) {
+            globalEventBus.emit(busEvents.GET_MOVIES_BY_GENRES_PREVIEW, genres);
+        }
+    }
+
+    /**
+     * Колбек нажатия на кнопку "смотреть все" в поиске фильмов по жанрам
+     */
+    searchMoviesByGenres() {
+        const genres = this.data.selected_genres;
         if (genres.length) {
             document.getElementById('main-genre-search-button').href += genres.join('+');
         }
@@ -107,12 +136,22 @@ export default class MainView extends BaseView {
      * Логика клика на кнопку жанра
      * @param {Object} event - объект события
      */
-    selectGenresListener(event) {
+    selectGenresListener = (event) => {
         const button = event.target;
         if (button.classList.contains('genre-selected')) {
             button.classList.remove('genre-selected');
         } else {
             button.classList.add('genre-selected');
         }
+    }
+
+    /**
+     * Получение выбранных жанров
+     * @return {(string|string|*)[]} - список выбранных пользователем жанров
+     */
+    getSelectedGenres = () => {
+        return [...document.getElementsByClassName('genres-list__item-box')]
+            .filter((element) => element.classList.contains('genre-selected'))
+            .map((element) => element.innerText);
     }
 }
