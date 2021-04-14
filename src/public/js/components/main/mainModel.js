@@ -3,6 +3,7 @@ import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
 
+
 /**
  * Модель главной страницы
  */

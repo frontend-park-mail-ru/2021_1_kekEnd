@@ -7,7 +7,7 @@
   &__section-name {
     display: inline-block;
     font-size: 24px;
-    color: white;
+    color: $white-color;
     padding-left: 50px;
     margin: 32px 0;
   }
@@ -31,7 +31,7 @@
   &__container {
     width: 550px;
     height: 200px;
-    background-color: white;
+    background-color: $white-color;
     border-radius: $m-border-radius;
     box-shadow: 0 0 12px $transparent-black;
     margin: 0 auto;
@@ -92,7 +92,7 @@
     display: block;
     border: 0;
     outline: none;
-    background-color: white;
+    background-color: $white-color;
     cursor: pointer;
     text-decoration: underline;
     font-size: 14px;
@@ -153,8 +153,8 @@
     flex: 0 0 auto;
     width: 200px;
     margin: 12px 0;
-    background-color: white;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    background-color: $white-color;
+    box-shadow: 0 0 12px $slider-box-shadow-color;
     border-radius: $s-border-radius;
     overflow: hidden;
   }

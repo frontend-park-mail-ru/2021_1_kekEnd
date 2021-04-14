@@ -1,27 +1,5 @@
-<div class="header">
-    <div class="header__section">
-        <div class="header__item header__logo">
-            <a href="/">КиноПоиск</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Фильмы</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Актеры</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Поиск</a>
-        </div>
-    </div>
-    <div class="header__section">
-        <div class="header__item header__button">
-            <a href="/login">Войти</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/signup">Регистрация</a>
-        </div>
-    </div>
-</div>
+{{> navbar}}
+
 
 <div class="main">
     <div class="form-box">
@@ -35,11 +13,7 @@
             </button>
         </div>
 
-        <div class="form-box__social-icons">
-            <img src="public/img/fb.png"/>
-            <img src="public/img/tw.png"/>
-            <img src="public/img/gp.png"/>
-        </div>
+        {{> loginIcons}}
 
         <form id="signup" class="form-box__form form-box__input-group" novalidate>
             <input name="username" type="text" class="form__input-field" id="username-input"

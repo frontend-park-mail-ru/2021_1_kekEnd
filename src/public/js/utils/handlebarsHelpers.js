@@ -1,3 +1,6 @@
+import '../components/partials/navbar.tmpl.js';
+import '../components/partials/loginIcons.tmpl.js';
+
 export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('eq', eqHelper);
@@ -15,6 +18,11 @@ export const registerHandlebarsHelpers = () => {
     Handlebars.registerHelper('decodeURI', decodeURIHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('pagination', paginationHelper);
+
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('navbar', Handlebars.templates['navbar.hbs']);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('loginIcons', Handlebars.templates['loginIcons.hbs']);
 };
 
 
