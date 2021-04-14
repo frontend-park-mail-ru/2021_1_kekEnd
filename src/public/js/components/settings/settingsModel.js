@@ -3,6 +3,7 @@ import {API} from '../../utils/api.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -13,10 +14,10 @@ export default class SettingsModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('get settings data', this.getSettingsData.bind(this));
-        globalEventBus.on('request change settings', this.changeSettings.bind(this));
-        globalEventBus.on('logout clicked', this.logout.bind(this));
-        globalEventBus.on('upload avatar', this.sendAvatar.bind(this));
+        globalEventBus.on(busEvents.GET_SETTINGS_DATA, this.getSettingsData.bind(this));
+        globalEventBus.on(busEvents.REQUEST_CHANGE_SETTINGS, this.changeSettings.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
+        globalEventBus.on(busEvents.UPLOAD_AVATAR, this.sendAvatar.bind(this));
     }
 
     /**

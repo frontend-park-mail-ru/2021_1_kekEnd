@@ -1,6 +1,6 @@
 'use strict';
 
-import Validator from '/utils/validation.js'
+import Validator from '../../src/public/js/utils/validation.js'
 
 QUnit.module('Validation test', function () {
 

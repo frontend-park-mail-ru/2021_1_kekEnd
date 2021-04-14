@@ -1,0 +1,177 @@
+.main__movies-list-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.genres-list__genre {
+  color: $white-text-color;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.movies-list-grid__movie-card {
+  display: grid;
+  grid-template-columns: 3fr 6fr 1fr;
+  width: 90%;
+  height: 120px;
+  background-color: $white-color;
+  margin: 12px auto 50px auto;
+  padding: 4px 0;
+  border-radius: $l-border-radius;
+  box-shadow: 0 0 12px $transparent-black;
+}
+
+.movie-card {
+
+  &__left {
+    width: 80px;
+    height: 140px;
+    margin: 0 auto
+  }
+
+  &__right {
+    text-align: center;
+  }
+}
+
+.movie-card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: $s-border-radius;
+  margin-top: -48px;
+  box-shadow: 12px 12px 16px $transparent-black;
+  transition: all .2s;
+
+  &:hover {
+    margin-top: -52px;
+  }
+}
+
+.center__card-title {
+  font-size: 20px;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &::before {
+    content: attr(data-index) ".";
+  }
+}
+
+.center {
+
+  &__tooltip {
+    position: relative;
+  }
+
+  &__tooltip-text {
+    opacity: 0;
+    transition: opacity 1s;
+    transition-delay: 0.3s;
+    width: 120px;
+    font-size: 12px;
+    background-color: $secondary-text-color;
+    color: $white-color;
+    text-align: center;
+    border-radius: $s-border-radius;
+    padding: 4px;
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &__tooltip-text::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -4px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent $secondary-text-color transparent;
+  }
+
+  &__tooltip:hover ~ &__tooltip-text {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__movie-link {
+    color: $primary-text-color;
+    text-decoration: none;
+  }
+
+  &__movie-genres {
+    color: $secondary-text-color;
+    margin: 0 0 4px 0;
+  }
+
+  &__info-link {
+    text-decoration: none;
+    font-size: 12px;
+
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  &__movie-description {
+    display: -webkit-box;
+    -webkit-line-clamp: $description-max-lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+  }
+}
+
+.movie-genres__genre-link {
+  color: $secondary-text-color;
+  text-decoration: none;
+}
+
+.right__bottom-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  color: $secondary-text-color;
+  font-family: "FontAwesome";
+  font-size: 24px;
+}
+
+.buttons {
+
+  &__input-watched, &__input-like {
+    display: none;
+  }
+
+  &__label-watched:before {
+    content: $watched-button-code;
+    cursor: pointer;
+  }
+
+  &__label-like:before {
+    content: $like-button-code;
+    cursor: pointer;
+  }
+
+  &__input-watched:checked ~ &__label-watched:before {
+    color: $filled-watched-button-color;
+  }
+
+  &__input-like:checked ~ &__label-like:before {
+    color: $button-gradient-first;
+    content: $filled-like-button-code;
+  }
+
+  &__movie-card-input-watched:not(:checked):hover ~ &__label-watched:before {
+    color: black;
+  }
+
+  &__movie-card-input-like:not(:checked):hover ~ &__label-like:before {
+    color: black;
+  }
+}

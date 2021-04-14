@@ -3,6 +3,8 @@ import {API} from '../../utils/api.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
+import {AUTH_ERROR} from '../../utils/errorMessages.js';
+import {busEvents} from '../../utils/busEvents.js';
 
 
 /**
@@ -13,8 +15,8 @@ export default class ProfileModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('get profile data', this.getProfileData.bind(this));
-        globalEventBus.on('logout clicked', this.logout.bind(this));
+        globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -24,30 +26,39 @@ export default class ProfileModel {
         // this data is not yet on backend but we need to show some pictures
         const additionalData = {
             favourite_movies: [
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/14af6019-b2fe-4e1e-bee5-334d9e472d94/300x450',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/73cf2ed0-fd52-47a2-9e26-74104360786a/300x450',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/96d93e3a-fdbf-4b6f-b02d-2fc9c2648a18/300x450',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/4b27e219-a8a5-4d85-9874-57d6016e0837/300x450',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/1d36b3f8-3379-4801-9606-c330eed60a01/300x450',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/0b76b2a2-d1c7-4f04-a284-80ff7bb709a4/300x450',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/300.jpg',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/301.jpg',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/302.jpg',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/303.jpg',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/304.jpg',
+                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
             ],
             favourite_actors: [
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/2eb2fc4d-a8bd-43b0-83cd-35feacb8ccae/280x420',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/8faa0fd8-6780-4fc2-84ef-3fb89687bd85/280x420',
+                'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/0f64539d-b236-4e01-8791-f19233705c59/280x420',
                 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
             ],
         };
 
-        API.getUser()
-            .then((res) => {
-                if (res.status === OK_CODE) {
-                    globalEventBus.emit('set profile data', {'isAuthorized': true, ...res.data, ...additionalData});
-                } else {
+        Promise.all([API.getUser(), API.getUserReviews()])
+            .then((responses) => {
+                if (responses.some((resp) => resp.status !== OK_CODE)) {
+                    throw new Error(AUTH_ERROR);
+                }
+                const [userData, reviews] = responses.map((resp) => resp.data);
+                globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
+                    ...userData,
+                    ...additionalData,
+                    'isAuthorized': true,
+                    'reviews': reviews,
+                });
+            })
+            .catch((err) => {
+                if (err.message === AUTH_ERROR) {
                     globalRouter.pushState(PATHS.login);
                 }
             });
     }
-
 
     /**
      * Выход со страницы
@@ -55,7 +66,7 @@ export default class ProfileModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK_CODE);
+                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

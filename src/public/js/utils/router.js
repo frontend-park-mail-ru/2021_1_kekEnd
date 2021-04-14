@@ -3,79 +3,113 @@
 import {PATHS} from './paths.js';
 import {findAscendingTag} from './findAscendingTag.js';
 
+/**
+ * Роутер
+ */
 export class Router {
+    /**
+     * Конструктор - создание роутов
+     */
     constructor() {
         this.routes = new Map();
     }
 
+    /**
+     * Добавление нового роута
+     * @param {string} path - путь
+     * @param {Object} view - объект представления с методом render()
+     */
     register(path, view) {
         this.routes.set(path, view);
     }
 
+    /**
+     * Запуск роутера
+     */
     start() {
         window.addEventListener('load', () => {
-            const path = location.pathname;
-            this.searchForParams(path);
+            this.activate(location.pathname, location.search);
         });
 
-        window.addEventListener('popstate', (event) => {
-            const path = event.target.location.pathname;
-            event.preventDefault();
-            this.searchForParams(path, event);
+        window.addEventListener('popstate', () => {
+            this.activate(location.pathname, location.search);
         });
 
         window.addEventListener('click', (event) => {
             const {target} = event;
             const link = findAscendingTag(target, 'A');
-            const path = (link !== null) ? link.href : null;
-
-            this.searchForParams(path, event);
+            const href = (link !== null) ? link.href : null;
+            this.activate(href, '', event);
         });
     }
 
-    searchForParams(path, event=null) {
+    /**
+     * Поиск пути и выделение параметров из url
+     * @param {string|null} path - путь
+     * @param {string} query - query-параметры
+     * @param {Object} event - событие, порожденное кликом
+     */
+    activate(path, query, event=null) {
+        if (path === null) {
+            return;
+        }
+
         for (const i in PATHS) {
-            if (path !== null && path.includes(PATHS[i])) {
-                if (event !== null) {
-                    event.preventDefault();
-                }
-                const parameters = path.substring(path.indexOf(PATHS[i]) + 1).substring(PATHS[i].length);
-                this.pushState(PATHS[i], {}, parameters);
-                break;
+            if (path.includes(PATHS[i])) {
+                event?.preventDefault();
+                const params = path.substring(path.indexOf(PATHS[i]) + PATHS[i].length + 1);
+                this.pushState(PATHS[i], query, {}, params);
+                return;
             }
         }
     }
 
-    pushState(path = '/', state = {}, parameters = '') {
-        let newState; let newPath;
-        if (parameters) {
-            newState = `${state}/${parameters}`;
-            newPath = `${path}/${parameters}`;
-        } else {
-            newState = state;
-            newPath = path;
+    /**
+     * Формирование пути в адресной строке и history.pushState()
+     * @param {string} path - путь
+     * @param {string} query - query-параметры
+     * @param {Object} state - объект состояния
+     * @param {string} parameters - параметры пути
+     */
+    pushState(path = '/', query, state = {}, parameters = '') {
+        let newPath = path;
+        if (query) {
+            parameters += (location.pathname.slice(-1) === '/') ? query : '/' + query;
         }
-        if (path !== location.pathname) {
-            history.pushState(newState, document.title, newPath);
-        } else {
-            history.replaceState(newState, document.title, newPath);
+        if (parameters) {
+            newPath = `${path}/${parameters}`;
+        }
+        if (newPath !== location.pathname) {
+            history.pushState(state, document.title, newPath);
         }
 
         this.handlePath(path, parameters);
     }
 
+    /**
+     * Запуск рендера представления по пути
+     * @param {string} path - путь
+     * @param {string} parameters - параметры пути
+     */
     handlePath(path, parameters = '') {
-        this.routes.get(path).render(parameters);
+        this.currentView?.hide();
+        this.currentView = this.routes.get(path);
+        this.currentView.render(parameters);
     }
 
+    /**
+     * Переход на предыдущую страницу
+     */
     back() {
         window.history.back();
     }
 
+    /**
+     * Переход на следующую страницу
+     */
     forward() {
         window.history.forward();
     }
 }
 
 export const globalRouter = new Router();
-

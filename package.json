@@ -4,10 +4,14 @@
   "description": "* [Теняев Олег](https://github.com/grillow)\r * [Афимин Илья](https://github.com/IfuryI)\r * [Бахметьев Глеб](https://github.com/polyanimal)\r * [Зотов Алексей](https://github.com/let-robots-reign)",
   "main": "server.js",
   "scripts": {
-    "start": "npm run gentmpl && node server.js",
+    "start express": "npm run scss && npm run gentmpl && node server.js",
+    "build": "NODE_ENV='production' webpack",
+    "start": "npm run scss && npm run gentmpl && webpack serve",
     "gentmpl": "./gentmpl.sh",
     "test": "node test/server.js",
-    "lint": "npx eslint ./src --fix"
+    "lint": "npx eslint ./src --fix && npx stylelint \"**/*.scss\" --fix",
+    "scss": "sass src/public/scss:src/public/css",
+    "scss watch": "sass --watch src/public/scss:src/public/css"
   },
   "husky": {
     "hooks": {
@@ -28,7 +32,9 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2021_1_kekEnd#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.22.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.2.0",
@@ -39,6 +45,10 @@
     "handlebars": "^4.7.7",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "prettier": "2.2.1"
+    "sass": "^1.32.8",
+    "stylelint": "^13.12.0",
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
