@@ -122,7 +122,7 @@ export default class ActorModel {
 
             3: {
                 avatar: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
-                name: 'Боб Одинкёрк',
+                name: 'Киану Ривз',
                 biography: 'В детстве Ривзу часто приходилось менять место жительства, переезжая вместе с матерью, ' +
                     'которая после развода в 1966 году стала художником по костюмам. Сначала они перебрались в ' +
                     'Австралию, затем в Нью-Йорк. Там его мать познакомилась с бродвейским и голливудским режиссёром ' +
@@ -164,7 +164,7 @@ export default class ActorModel {
             },
         };
 
-        globalEventBus.emit('set actor data', actors[id]);
+        globalEventBus.emit('set actor data', {...actors[id], 'isAuthorized': true});
     }
 
     /**
