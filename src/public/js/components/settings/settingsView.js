@@ -53,11 +53,10 @@ export default class SettingsView extends BaseView {
     }
 
     /**
-     * Очистить страницу
+     * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**

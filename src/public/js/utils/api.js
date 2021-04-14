@@ -210,6 +210,24 @@ class Api {
     }
 
     /**
+     * Получить все доступные для выбора жанры
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком жанров
+     */
+    getAllAvailableGenres() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/genres`);
+    }
+
+    /**
+     * Получение фильмов по заданным жанрам
+     * @param {string[]} genres - массив нужных жанров
+     * @param {number} page - номер страницы
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком фильмов
+     */
+    getMoviesByGenres(genres, page=1) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=genre&filter=${genres.join('+')}&page=${page}`);
+    }
+
+    /**
      * Получить любимые фильмы пользователя
      */
     getBestUsersMovies() {

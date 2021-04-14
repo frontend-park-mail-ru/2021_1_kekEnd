@@ -46,8 +46,7 @@ export default class LoginView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**

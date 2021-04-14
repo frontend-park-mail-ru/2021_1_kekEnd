@@ -48,8 +48,7 @@ export default class SignupView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**

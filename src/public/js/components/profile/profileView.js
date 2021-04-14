@@ -32,11 +32,10 @@ export default class ProfileView extends BaseView {
     }
 
     /**
-     * Очистить страницу
+     * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**

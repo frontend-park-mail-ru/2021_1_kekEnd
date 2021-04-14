@@ -34,11 +34,10 @@ export default class ActorView extends BaseView {
     }
 
     /**
-     * Очистисть страницу
+     * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**

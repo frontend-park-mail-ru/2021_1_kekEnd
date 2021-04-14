@@ -22,4 +22,12 @@ export default class BaseView {
     render(data) {
         this.parent.innerHTML = this.template(data);
     }
+
+    /**
+     * "Деструктор" страницы
+     * @param {Object} page - объект страницы, у которой определен removeEventListeners()
+     */
+    hide(page) {
+        page.removeEventListeners();
+    }
 }
