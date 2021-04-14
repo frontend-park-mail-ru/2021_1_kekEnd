@@ -1,6 +1,6 @@
 'use strict';
 
-import { EventBus } from '/utils/eventbus.js'
+import { EventBus } from '../../src/public/js/utils/eventbus.js'
 
 QUnit.module('EventBus test', function () {
 
@@ -9,7 +9,7 @@ QUnit.module('EventBus test', function () {
         let a = 0;
         bus.on('sample', () => { a = a + 1; });
         bus.emit('sample');
-		
+
         assert.strictEqual(a, 1);
 	});
 
@@ -20,7 +20,7 @@ QUnit.module('EventBus test', function () {
         bus.on('sample', () => { a = a + 1; });
         bus.on('sample', () => { b = b + 1337; });
         bus.emit('sample');
-		
+
         assert.strictEqual(a, 1);
         assert.strictEqual(b, 1337);
 	});
@@ -46,7 +46,7 @@ QUnit.module('EventBus test', function () {
 
         assert.strictEqual(a, 1337);
         assert.deepEqual(b, [ 1337 ]);
-        
+
         bus.emit('sample', 228);
 
         assert.strictEqual(a, 228);
