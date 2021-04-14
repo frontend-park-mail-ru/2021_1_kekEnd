@@ -10,6 +10,7 @@ import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js'
 import MainController from './public/js/components/main/mainController.js';
 import MoviesListController from './public/js/components/moviesList/moviesListController.js';
 
+
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');
 

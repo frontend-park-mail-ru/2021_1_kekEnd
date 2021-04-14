@@ -6,3 +6,6 @@ handlebars src/public/js/components/actor/actor.hbs -f src/public/js/components/
 handlebars src/public/js/components/settings/settings.hbs -f src/public/js/components/settings/settings.tmpl.js
 handlebars src/public/js/components/login/login.hbs -f src/public/js/components/login/login.tmpl.js
 handlebars src/public/js/components/signup/signup.hbs -f src/public/js/components/signup/signup.tmpl.js
+
+handlebars src/public/js/components/partials/navbar.hbs -f src/public/js/components/partials/navbar.tmpl.js
+handlebars src/public/js/components/partials/top_login_signup.hbs -f src/public/js/components/partials/top_login_signup.tmpl.js
