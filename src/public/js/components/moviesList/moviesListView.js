@@ -43,7 +43,7 @@ export default class MoviesListView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
+        super.hide(this);
     }
 
     /**

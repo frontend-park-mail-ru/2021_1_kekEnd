@@ -26,6 +26,7 @@
 }
 
 .avatar-box {
+
   &__avatar-container {
     width: 250px;
     height: 250px;
@@ -54,6 +55,7 @@
 }
 
 .settings-box {
+
   &__settings-inner {
     width: 440px;
     position: relative;
@@ -69,6 +71,7 @@
 }
 
 .settings-inner {
+
   &__header {
     text-align: center;
     font-size: 24px;
@@ -96,6 +99,7 @@
 }
 
 .settings-row {
+
   &__left {
     width: 200px;
     display: flex;

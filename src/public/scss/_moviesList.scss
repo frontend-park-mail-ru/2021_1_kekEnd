@@ -22,6 +22,7 @@
 }
 
 .movie-card {
+
   &__left {
     width: 80px;
     height: 140px;
@@ -61,6 +62,7 @@
 }
 
 .center {
+
   &__tooltip {
     position: relative;
   }
@@ -141,6 +143,7 @@
 }
 
 .buttons {
+
   &__input-watched, &__input-like {
     display: none;
   }

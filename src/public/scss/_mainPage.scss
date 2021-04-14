@@ -1,13 +1,15 @@
 .view-all {
   color: $transparent_white;
-  margin: 0 12px;
-  font-size: 14px;
+  display: block;
+  margin: 12px auto;
+  text-align: center;
+  font-size: 16px;
   font-weight: bold;
 
-  &_margin_l {
+  &_display_inline {
     @extend .view-all;
-    display: inline-block;
-    margin: 12px 0 8px 50px;
+    margin: 0 12px;
+    font-size: 14px;
   }
 }
 

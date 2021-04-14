@@ -17,6 +17,7 @@
 }
 
 .flex-container {
+
   &__left-inner {
     text-align: center;
     width: 100%;
@@ -32,6 +33,7 @@
 }
 
 .left-inner {
+
   &__actor-avatar-img {
     border-radius: 8px;
   }
@@ -52,6 +54,7 @@
 }
 
 .center {
+
   &__actor-name {
     color: $white-text-color;
     margin-bottom: 8px;
@@ -63,6 +66,7 @@
 }
 
 .biography {
+
   &__text-container {
     font-size: 14px;
     margin-bottom: 12px;
@@ -74,6 +78,7 @@
 }
 
 .actor-info {
+
   &__biography {
     margin-top: 10px;
   }
@@ -94,6 +99,7 @@
 }
 
 .movies-item {
+
   &__title {
     text-decoration: none;
     font-size: 20px;
@@ -104,5 +110,3 @@
     color: $secondary-text-color;
   }
 }
-
-/*# sourceMappingURL=_actor.css.map */
