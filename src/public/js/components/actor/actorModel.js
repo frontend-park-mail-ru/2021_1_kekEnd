@@ -164,7 +164,6 @@ export default class ActorModel {
             },
         };
 
-        console.log(actors[id]);
         globalEventBus.emit('set actor data', actors[id]);
     }
 
