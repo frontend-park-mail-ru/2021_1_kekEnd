@@ -61,7 +61,7 @@
                     </a>
                     <p class="center__movie-genres">
                         {{#each genre}}
-                            <a href="" class="movie-genres__genre-link center__info-link">
+                            <a href="/movies/genre/1/?filter={{this}}" class="movie-genres__genre-link center__info-link">
                                 {{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
                         {{/each}}
                     </p>

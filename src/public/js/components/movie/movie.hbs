@@ -73,7 +73,7 @@
                         <div class="movie-info__info-row">
                             <div class="info-row__info-title">Жанр</div>
                             {{#each genre}}
-                                <a href="" class="info-row__info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
+                                <a href="/movies/genre/1/?filter={{this}}" class="info-row__info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
                             {{/each}}
                         </div>
                         <div class="movie-info__info-row">
