@@ -14,7 +14,7 @@
   grid-template-columns: 3fr 6fr 1fr;
   width: 90%;
   height: 120px;
-  background-color: white;
+  background-color: $white-color;
   margin: 12px auto 50px auto;
   padding: 4px 0;
   border-radius: $l-border-radius;
@@ -74,7 +74,7 @@
     width: 120px;
     font-size: 12px;
     background-color: $secondary-text-color;
-    color: white;
+    color: $white-color;
     text-align: center;
     border-radius: $s-border-radius;
     padding: 4px;

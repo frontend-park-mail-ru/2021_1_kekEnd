@@ -1,3 +1,8 @@
+import {globalEventBus} from './eventbus.js';
+import {CONNECTION_ERROR} from './errorMessages.js';
+import {busEvents} from './busEvents.js';
+
+
 /**
  * Класс для работы с API
  */
@@ -23,6 +28,8 @@ class Api {
             mode: 'cors',
             credentials: 'include',
             body: data,
+        }).catch(() => {
+            globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
         });
 
         let responseData;
