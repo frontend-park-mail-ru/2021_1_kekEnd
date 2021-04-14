@@ -6,7 +6,7 @@
   "scripts": {
     "start express": "npm run scss && npm run gentmpl && node server.js",
     "build": "NODE_ENV='production' webpack",
-    "start": "npm run scss && npm run gentmpl && webpack serve",
+    "start": "npm run scss && npm run gentmpl && webpack serve --config webpack.config.js --hot --inline",
     "gentmpl": "./gentmpl.sh",
     "test": "node test/server.js",
     "lint": "npx eslint ./src --fix && npx stylelint \"**/*.scss\" --fix",

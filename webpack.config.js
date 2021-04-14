@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
     entry: './src/app.js',
@@ -15,9 +15,10 @@ module.exports = {
     target: 'node',
     mode: 'development',
     devServer: {
-        publicPath: "/",
-        contentBase: "./src",
+        publicPath: '/',
+        contentBase: './src',
         hot: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true,
     },
 };
