@@ -1,112 +1,112 @@
 .main__actor-content {
-    width: 80%;
-    margin: 40px auto 20px;
-    padding: 32px 32px 32px 32px;
-    border-radius: 16px;
-    background-color: $movie-background-color;
+  width: 80%;
+  margin: 40px auto 20px;
+  padding: 32px 32px 32px 32px;
+  border-radius: 16px;
+  background-color: $movie-background-color;
 }
 
 .actor-content__header {
-    font-size: 24px;
-    margin: 12px 0;
-    color: $white-text-color;
+  font-size: 24px;
+  margin: 12px 0;
+  color: $white-text-color;
 }
 
 .actor-content__flex-container {
-    display: flex;
+  display: flex;
 }
 
 .flex-container {
 
-    &__left-inner {
-        text-align: center;
-        width: 100%;
-    }
+  &__left-inner {
+    text-align: center;
+    width: 100%;
+  }
 
-    &__center {
-        width: 80%;
-        display: inline-block;
-        margin-left: 50px;
-        padding-left: 50px;
-        border-left: 1px solid $movie-separator-color;
-    }
+  &__center {
+    width: 80%;
+    display: inline-block;
+    margin-left: 50px;
+    padding-left: 50px;
+    border-left: 1px solid $movie-separator-color;
+  }
 }
 
 .left-inner {
 
-    &__actor-avatar-img {
-        border-radius: 8px;
-    }
+  &__actor-avatar-img {
+    border-radius: 8px;
+  }
 
-    &__actor-button-like {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        border-radius: 8px;
-        border: 0;
-        width: 90%;
-        height: 40px;
-        background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
-        color: white;
-        font-size: medium;
-        margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  &__actor-button-like {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    border: 0;
+    width: 90%;
+    height: 40px;
+    background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
+    color: white;
+    font-size: medium;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .center {
 
-    &__actor-name {
-        color: $white-text-color;
-        margin-bottom: 8px;
-    }
+  &__actor-name {
+    color: $white-text-color;
+    margin-bottom: 8px;
+  }
 
-    &__actor-movies {
-        margin-top: 10px;
-    }
+  &__actor-movies {
+    margin-top: 10px;
+  }
 }
 
 .biography {
 
-    &__text-container {
-        font-size: 14px;
-        margin-bottom: 12px;
-    }
+  &__text-container {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
 
-    &__text {
-        color: $white-text-color;
-    }
+  &__text {
+    color: $white-text-color;
+  }
 }
 
 .actor-info {
 
-    &__biography {
-        margin-top: 10px;
-    }
+  &__biography {
+    margin-top: 10px;
+  }
 
-    &__info-row {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-        border-bottom: 1px solid;
-        border-bottom-color: rgba(0, 0, 0, 0.1);
-    }
+  &__info-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .movies-list__movies-item {
-    padding-bottom: 10px;
-    border-bottom: 1px solid;
-    border-bottom-color: rgba(55, 55, 55, 0.2);
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+  border-bottom-color: rgba(55, 55, 55, 0.2);
 }
 
 .movies-item {
 
-    &__title {
-        text-decoration: none;
-        font-size: 20px;
-    }
+  &__title {
+    text-decoration: none;
+    font-size: 20px;
+  }
 
-    &__rating {
-        font-size: 16px;
-        color: $secondary-text-color;
-    }
+  &__rating {
+    font-size: 16px;
+    color: $secondary-text-color;
+  }
 }

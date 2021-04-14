@@ -1,31 +1,31 @@
 .main {
 
-    &__genres-selection {
-        margin-left: 50px;
-    }
+  &__genres-selection {
+    margin-left: 50px;
+  }
 
-    &__genres-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
+  &__genres-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 
-    &__show-button {
-        margin-top: 4px;
-    }
+  &__show-button {
+    margin-top: 4px;
+  }
 }
 
 .genres-list__item-box {
-    background-color: white;
-    color: black;
-    border: 1px;
-    border-radius: 8px;
-    padding: 4px 12px;
-    user-select: none;
-    font-size: 14px;
+  background-color: white;
+  color: black;
+  border: 1px;
+  border-radius: 8px;
+  padding: 4px 12px;
+  user-select: none;
+  font-size: 14px;
 }
 
 .genre-selected {
-    background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
-    color: white;
+  background: linear-gradient(to right, $button-gradient-first, $button-gradient-second);
+  color: white;
 }
