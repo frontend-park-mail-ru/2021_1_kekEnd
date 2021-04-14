@@ -14,3 +14,4 @@ export default class MainController {
         this.model = new MainModel();
     }
 }
+

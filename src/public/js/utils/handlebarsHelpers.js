@@ -1,3 +1,6 @@
+import '../components/partials/navbar.tmpl.js';
+import '../components/partials/top_login_signup.tmpl.js';
+
 export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('eq', eqHelper);
@@ -10,9 +13,16 @@ export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('gte', gteHelper);
     // eslint-disable-next-line no-undef
-    Handlebars.registerHelper('calculateMovieIndex', calculateMovieIndex);
+    Handlebars.registerHelper('calculateMovieIndex', calculateMovieIndexHelper);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('decodeURI', decodeURIHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('pagination', paginationHelper);
+
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('navbar', Handlebars.templates['navbar.hbs']);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('top_login_signup', Handlebars.templates['top_login_signup.hbs']);
 };
 
 
@@ -36,8 +46,12 @@ export const gteHelper = (arg1, arg2) => {
     return arg1 >= arg2;
 };
 
-export const calculateMovieIndex = (currentPage, pageSize, index) => {
+export const calculateMovieIndexHelper = (currentPage, pageSize, index) => {
     return (currentPage - 1) * pageSize + index;
+};
+
+export const decodeURIHelper = (str) => {
+    return decodeURI(str);
 };
 
 export const paginationHelper = (currentPage, pagesNumber, options) => {

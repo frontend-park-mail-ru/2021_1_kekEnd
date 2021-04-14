@@ -17,7 +17,7 @@ export default class MoviesListView extends BaseView {
         // eslint-disable-next-line no-undef
         super(parent, Handlebars.templates['moviesList.hbs']);
 
-        globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setBestMovies.bind(this));
+        globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
@@ -34,11 +34,8 @@ export default class MoviesListView extends BaseView {
             return;
         }
         if (category === 'genre') {
-            console.log(query);
-            // TODO Олегу:
-            // в query строка вида ?filter=comedy+horror+drama
-            // надо получить массив жанров и вызвать .emit(busEvents.GET_GENRE_MOVIES_PAGE, <массив>);
-            // метод getMoviesByGenres определить в moviesListModel.js
+            const genres = query.slice('?filter='.length).split('+');
+            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres, page);
         }
     }
 
@@ -46,15 +43,14 @@ export default class MoviesListView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
-        this.removeEventListeners();
-        this.parent.innerHTML = '';
+        super.hide(this);
     }
 
     /**
      * Запуск рендера и подписки на события
      * @param {Object} data - данные о списке фильмов
      */
-    setBestMovies(data) {
+    setMovies(data) {
         super.render(data);
         this.setEventListeners();
     }
@@ -90,3 +86,4 @@ export default class MoviesListView extends BaseView {
         }
     }
 }
+

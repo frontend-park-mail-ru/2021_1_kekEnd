@@ -3,6 +3,12 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.genres-list__genre {
+  color: $white-text-color;
+  font-size: 18px;
+  text-decoration: none;
+}
+
 .movies-list-grid__movie-card {
   display: grid;
   grid-template-columns: 3fr 6fr 1fr;

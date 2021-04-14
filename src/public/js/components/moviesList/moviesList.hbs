@@ -1,40 +1,18 @@
-<div class="header">
-    <div class="header__section">
-        <div class="header__item header__logo">
-            <a href="/">КиноПоиск</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Фильмы</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Актеры</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Поиск</a>
-        </div>
-    </div>
-    <div class="header__section">
-        {{#if isAuthorized}}
-            <div class="header__item header__button">
-                <a href="/me">Профиль</a>
-            </div>
-            <div class="header__item header__button">
-                <a href="/logout" id="logout-button">Выйти</a>
-            </div>
-        {{else}}
-            <div class="header__item header__button">
-                <a href="/login">Войти</a>
-            </div>
-            <div class="header__item header__button">
-                <a href="/signup">Регистрация</a>
-            </div>
-        {{/if}}
-    </div>
-</div>
+{{> navbar}}
 
 
 <div class="main">
-    <h3 class="main__page-title">ТОП-100</h3>
+    {{#if (eq type "best")}}
+        <h3 class="main__page-title">ТОП-100</h3>
+    {{/if}}
+    {{#if (eq type "genres")}}
+        <h3 class="main__page-title">
+            По жанрам:
+            {{#each genres}}
+                <a href="" class="genres-list__genre">{{decodeURI this}}</a>{{#unless @last}}<span class="genres-list__genre">, </span>{{/unless}}
+            {{/each}}
+        </h3>
+    {{/if}}
     <div class="main__movies-list-grid">
         {{#each movies}}
             <div class="movies-list-grid__movie-card">
@@ -51,7 +29,7 @@
                     </a>
                     <p class="center__movie-genres">
                         {{#each genre}}
-                            <a href="" class="movie-genres__genre-link center__info-link">
+                            <a href="/movies/genre/1/?filter={{this}}" class="movie-genres__genre-link center__info-link">
                                 {{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
                         {{/each}}
                     </p>
@@ -78,34 +56,40 @@
         {{/each}}
     </div>
 
+    <!-- parametrize -->
     {{#if (notEq pages_number 1)}}
         {{#pagination current_page pages_number}}
             <div class="main__pagination-wrapper">
                 {{#unless startFromFirstPage}}
-                    <a href="/movies/best/{{dec ../current_page}}">
+                    {{#if (eq ../type "best")}}
+                        <a href="/movies/best/{{dec ../current_page}}">
+                    {{else}}
+                        <a href="/movies/genre/{{dec ../current_page}}/{{../query}}">
+                    {{/if}}
                         <button class="pagination-wrapper__button">&lt;</button>
                     </a>
                 {{/unless}}
 
                 {{#each pages}}
-                    {{#if isCurrent}}
+                    {{#if (eq ../../type "best")}}
                         <a href="/movies/best/{{page}}">
-                            <button disabled class="pagination-wrapper__button">{{page}}</button>
-                        </a>
                     {{else}}
-                        <a href="/movies/best/{{page}}">
-                            <button class="pagination-wrapper__button">{{page}}</button>
-                        </a>
+                        <a href="/movies/genre/{{page}}/{{../../query}}">
                     {{/if}}
+                    <button {{#if isCurrent}}disabled{{/if}} class="pagination-wrapper__button">{{page}}</button>
+                    </a>
                 {{/each}}
 
                 {{#unless endAtLastPage}}
-                    <a href="/movies/best/{{inc ../current_page}}">
-                        <button class="pagination-wrapper__button">&gt;</button>
+                    {{#if (eq ../type "best")}}
+                        <a href="/movies/best/{{inc ../current_page}}">
+                    {{else}}
+                        <a href="/movies/genre/{{inc ../current_page}}/{{../query}}">
+                    {{/if}}
+                    <button class="pagination-wrapper__button">&gt;</button>
                     </a>
                 {{/unless}}
             </div>
         {{/pagination}}
     {{/if}}
 </div>
-
