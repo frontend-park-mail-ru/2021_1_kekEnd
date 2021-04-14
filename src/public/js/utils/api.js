@@ -28,10 +28,9 @@ class Api {
             mode: 'cors',
             credentials: 'include',
             body: data,
-        })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
-            });
+        }).catch(() => {
+            globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
+        });
 
         let responseData;
         try {
