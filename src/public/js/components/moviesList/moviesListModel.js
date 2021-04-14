@@ -2,7 +2,6 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {API} from '../../utils/api.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {busEvents} from '../../utils/busEvents.js';
-import {CONNECTION_ERROR} from '../../utils/errorMessages.js';
 
 
 /**
@@ -29,9 +28,6 @@ export default class MoviesListModel {
                     ...bestMoviesResp.data,
                     'isAuthorized': userResp.status === OK_CODE,
                 });
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 

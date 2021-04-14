@@ -2,14 +2,18 @@ import {globalEventBus} from '../../utils/eventbus.js';
 import {busEvents} from '../../utils/busEvents.js';
 import './popup.tmpl.js';
 
+
 /**
  * Попап уведомление
  */
 export default class PopUp {
     /**
      * Конструктор
+     * @param {Element} parent - элемент для рендера
      */
-    constructor() {
+    constructor(parent) {
+        this.parent = parent;
+
         // eslint-disable-next-line no-undef
         this.renderHBS = Handlebars.templates['popup.hbs'];
 
@@ -30,7 +34,11 @@ export default class PopUp {
      * @param {Object} data - описание для попапа
      */
     render(data) {
-        document.body.insertAdjacentHTML('beforeend', this.renderHBS(data));
+        if (document.getElementById('popup-msg')) {
+            return;
+        }
+
+        this.parent.insertAdjacentHTML('beforeend', this.renderHBS(data));
         this.setEventListeners();
     }
 
@@ -43,4 +51,4 @@ export default class PopUp {
     }
 }
 
-export const popup = new PopUp();
+export const popup = new PopUp(document.getElementById('app'));

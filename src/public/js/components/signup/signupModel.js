@@ -4,7 +4,6 @@ import {busEvents} from '../../utils/busEvents.js';
 import {OK_CODE} from '../../utils/codes.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
-import {CONNECTION_ERROR} from '../../utils/errorMessages.js';
 
 
 /**
@@ -30,9 +29,6 @@ export default class Model {
                 } else {
                     globalEventBus.emit(busEvents.LOAD_SIGNUP_PAGE);
                 }
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -44,9 +40,6 @@ export default class Model {
         API.signup(data)
             .then((res) => {
                 globalEventBus.emit(busEvents.SIGNUP_STATUS, res.status);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 }

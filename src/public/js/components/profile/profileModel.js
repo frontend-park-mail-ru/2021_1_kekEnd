@@ -3,7 +3,7 @@ import {API} from '../../utils/api.js';
 import {globalRouter} from '../../utils/router.js';
 import {PATHS} from '../../utils/paths.js';
 import {OK_CODE} from '../../utils/codes.js';
-import {AUTH_ERROR, CONNECTION_ERROR} from '../../utils/errorMessages.js';
+import {AUTH_ERROR} from '../../utils/errorMessages.js';
 import {busEvents} from '../../utils/busEvents.js';
 
 
@@ -54,7 +54,6 @@ export default class ProfileModel {
                 });
             })
             .catch((err) => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
                 if (err.message === AUTH_ERROR) {
                     globalRouter.pushState(PATHS.login);
                 }

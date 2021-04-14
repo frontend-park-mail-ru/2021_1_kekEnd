@@ -1,349 +1,349 @@
 .center {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main {
 
-    &__content-container {
-        width: 80%;
-        margin: 20px auto 20px auto;
-        background-color: white;
-        box-shadow: 0 0 24px rgba(0, 0, 0, 0.7);
-        border-radius: $s-border-radius;
-        overflow: hidden;
-    }
+  &__content-container {
+    width: 80%;
+    margin: 20px auto 20px auto;
+    background-color: white;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.7);
+    border-radius: $s-border-radius;
+    overflow: hidden;
+  }
 
-    &__reviews-separator {
-        width: 80%;
-        margin: 40px auto 40px auto;
-    }
+  &__reviews-separator {
+    width: 80%;
+    margin: 40px auto 40px auto;
+  }
 }
 
 .content-container {
 
-    &__movie-container, &__write-review {
-        background-color: $movie-background-color;
-        padding-bottom: 20px;
-    }
+  &__movie-container, &__write-review {
+    background-color: $movie-background-color;
+    padding-bottom: 20px;
+  }
 
-    &__review-content {
-        padding-bottom: 20px;
-    }
+  &__review-content {
+    padding-bottom: 20px;
+  }
 }
 
 .your-review__edit-button {
-    margin-left: 12px;
+  margin-left: 12px;
 }
 
 .fa-button {
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: inherit;
-    vertical-align: middle;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: inherit;
+  vertical-align: middle;
 }
 
 .write-review {
 
-    &__your-review {
-        padding: 40px 0 0 40px;
-        font-size: 24px;
-        text-align: center;
+  &__your-review {
+    padding: 40px 0 0 40px;
+    font-size: 24px;
+    text-align: center;
 
-        &_color_white {
-            color: white;
-        }
+    &_color_white {
+      color: white;
     }
+  }
 
-    &__review-form-container {
-        margin: auto;
-        padding: 40px 0 40px 40px;
-        width: 600px;
-    }
+  &__review-form-container {
+    margin: auto;
+    padding: 40px 0 40px 40px;
+    width: 600px;
+  }
 }
 
 .review-form {
 
-    &__select-review-type {
-        padding: 8px;
-        margin-bottom: 8px;
+  &__select-review-type {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  &__input-review-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+
+    &::placeholder {
+      color: $secondary-text-color;
     }
+  }
 
-    &__input-review-title {
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
+  &__input-review-content {
+    font-size: 16px;
+    height: 120px;
+    color: white;
 
-        &::placeholder {
-            color: $secondary-text-color;
-        }
+    &::placeholder {
+      color: $secondary-text-color;
     }
-
-    &__input-review-content {
-        font-size: 16px;
-        height: 120px;
-        color: white;
-
-        &::placeholder {
-            color: $secondary-text-color;
-        }
-    }
+  }
 }
 
 .review-body {
 
-    &__title {
-        margin: 20px 40px 0 40px;
-        padding-bottom: 20px;
-        font-size: 20px;
-        font-weight: bold;
-        border-bottom: 1px solid;
-    }
+  &__title {
+    margin: 20px 40px 0 40px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid;
+  }
 
-    &__content {
-        margin: 20px 0 40px 40px;
-        font-size: 16px;
-    }
+  &__content {
+    margin: 20px 0 40px 40px;
+    font-size: 16px;
+  }
 }
 
 .review_background_positive {
-    background-color: $positive-review-color;
+  background-color: $positive-review-color;
 }
 
 .review_background_neutral {
-    background-color: $light-grey;
+  background-color: $light-grey;
 }
 
 .review_background_negative {
-    background-color: $negative-review-background;
+  background-color: $negative-review-background;
 }
 
 .movie-container {
 
-    &__movie-flex {
-        display: flex;
-    }
+  &__movie-flex {
+    display: flex;
+  }
 
-    &__background-trailer {
-        height: 270px;
-    }
+  &__background-trailer {
+    height: 270px;
+  }
 }
 
 .background-trailer__img {
-    height: 140%;
-    box-shadow: 0 0 30px 30px $movie-background-color inset;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  height: 140%;
+  box-shadow: 0 0 30px 30px $movie-background-color inset;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .movie-flex {
 
-    &__movie-flex-left {
-        width: 30%;
-        display: inline-block;
-        align-content: center;
-    }
+  &__movie-flex-left {
+    width: 30%;
+    display: inline-block;
+    align-content: center;
+  }
 
-    &__movie-flex-center {
-        width: 50%;
-        display: inline-block;
-        border-left: 1px solid $movie-separator-color;
-    }
+  &__movie-flex-center {
+    width: 50%;
+    display: inline-block;
+    border-left: 1px solid $movie-separator-color;
+  }
 
-    &__movie-flex-right {
-        width: 20%;
-        color: white;
-        margin-top: 20px;
-        margin-right: 24px;
-        text-align: right;
-    }
+  &__movie-flex-right {
+    width: 20%;
+    color: white;
+    margin-top: 20px;
+    margin-right: 24px;
+    text-align: right;
+  }
 }
 
 .movie-flex-left__inner {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .inner__img_position_left {
-    width: 90%;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 90%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .movie-flex-right__main-roles {
-    margin-top: 48px;
+  margin-top: 48px;
 }
 
 .main-roles__actors-list {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .actors-list {
 
-    &__item {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
+  &__item {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
 
-        &:hover {
-            color: $accent-color;
-            cursor: pointer;
-        }
+    &:hover {
+      color: $accent-color;
+      cursor: pointer;
     }
+  }
 }
 
 .movie-flex-center {
 
-    &__meta_info {
-        font-size: 16px;
-        line-height: 22px;
-        color: white;
-        margin: 16px 0 24px 50px;
-    }
+  &__meta_info {
+    font-size: 16px;
+    line-height: 22px;
+    color: white;
+    margin: 16px 0 24px 50px;
+  }
 
-    &__movie_info {
-        text-align: left;
-        color: $movie-info-color;
-    }
+  &__movie_info {
+    text-align: left;
+    color: $movie-info-color;
+  }
 
-    &__title-box {
-        margin-left: 50px;
-        margin-top: 20px;
-        color: white;
-    }
+  &__title-box {
+    margin-left: 50px;
+    margin-top: 20px;
+    color: white;
+  }
 }
 
 .title-box__title {
-    display: inline;
+  display: inline;
 }
 
 .right__movie-rating {
-    display: inline-block;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    padding: 4px;
-    font-size: 16px;
-    color: white;
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  padding: 4px;
+  font-size: 16px;
+  color: white;
 }
 
 .positive-rating {
-    background: $positive-rating;
+  background: $positive-rating;
 }
 
 .neutral-rating {
-    background: $neutral-rating;
+  background: $neutral-rating;
 }
 
 .negative-rating {
-    background: $negative-rating;
+  background: $negative-rating;
 }
 
 .movie-info__info-row {
-    display: flex;
-    margin-left: 50px;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid;
-    border-bottom-color: $movie-separator-color;
+  display: flex;
+  margin-left: 50px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid;
+  border-bottom-color: $movie-separator-color;
 }
 
 .info-row {
 
-    &__info-title {
-        width: 156px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-        font-size: 13px;
-        color: $secondary-text-color;
-    }
+  &__info-title {
+    width: 156px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    color: $secondary-text-color;
+  }
 
-    &__info-link {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
+  &__info-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
 
-        &:hover {
-            color: $accent-color;
-        }
+    &:hover {
+      color: $accent-color;
     }
+  }
 }
 
 .info_value {
-    color: $secondary-text-color;
-    font-size: 14px;
+  color: $secondary-text-color;
+  font-size: 14px;
 }
 
 .movie-flex-right {
 
-    &__rate-movie {
-        text-align: right;
-    }
+  &__rate-movie {
+    text-align: right;
+  }
 
-    &__delete-rating {
-        cursor: pointer;
-        text-decoration: underline;
-        font-size: 14px;
-        text-align: right;
-        margin-bottom: 16px;
-    }
+  &__delete-rating {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 16px;
+  }
 
-    &__buttons {
-        display: inline-flex;
-        gap: 16px;
-        color: white;
-        font-family: "FontAwesome";
-        font-size: 24px;
-        margin-right: 40px;
-    }
+  &__buttons {
+    display: inline-flex;
+    gap: 16px;
+    color: white;
+    font-family: "FontAwesome";
+    font-size: 24px;
+    margin-right: 40px;
+  }
 }
 
 .buttons {
 
-    &__movie-page-input-watched:not(:checked):hover ~ &__label-watched:before {
-        color: $secondary-text-color;
-    }
+  &__movie-page-input-watched:not(:checked):hover ~ &__label-watched:before {
+    color: $secondary-text-color;
+  }
 
-    &__movie-page-input-like:not(:checked):hover ~ &__label-like:before {
-        color: $secondary-text-color;
-    }
+  &__movie-page-input-like:not(:checked):hover ~ &__label-like:before {
+    color: $secondary-text-color;
+  }
 }
 
 .rating-stars {
 
-    &__input-star {
-        display: none;
-    }
+  &__input-star {
+    display: none;
+  }
 
-    &__label-star {
-        float: right;
-        padding: 4px;
-        font-size: 14px;
-        color: $stars-color;
-        transition: all .2s;
-    }
+  &__label-star {
+    float: right;
+    padding: 4px;
+    font-size: 14px;
+    color: $stars-color;
+    transition: all .2s;
+  }
 
-    &__input-star:checked ~ &__label-star:before {
-        content: $filled-star-code;
-        color: $max-star-color;
-        transition: all .25s;
-    }
+  &__input-star:checked ~ &__label-star:before {
+    content: $filled-star-code;
+    color: $max-star-color;
+    transition: all .25s;
+  }
 
-    &__max-star:checked ~ &__label-star:before {
-        color: $filled-star-color;
-        text-shadow: 0 0 20px $max-star-shadow;
-    }
+  &__max-star:checked ~ &__label-star:before {
+    color: $filled-star-color;
+    text-shadow: 0 0 20px $max-star-shadow;
+  }
 
-    &__label-star:hover {
-        transform: rotate(-15deg) scale(1.3);
-    }
+  &__label-star:hover {
+    transform: rotate(-15deg) scale(1.3);
+  }
 
-    &__label-star:before {
-        content: $star-code;
-        font-family: "FontAwesome";
-    }
+  &__label-star:before {
+    content: $star-code;
+    font-family: "FontAwesome";
+  }
 }

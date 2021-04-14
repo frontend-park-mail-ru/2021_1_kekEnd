@@ -3,7 +3,6 @@ import {API} from '../../utils/api.js';
 import {CREATED, OK_CODE} from '../../utils/codes.js';
 import {objectsMatch} from '../../utils/objectsMatch.js';
 import {busEvents} from '../../utils/busEvents.js';
-import {CONNECTION_ERROR} from '../../utils/errorMessages.js';
 
 
 /**
@@ -47,9 +46,6 @@ export default class MovieModel {
                     movieData.reviewsData = movieReviewsResp.data;
                 }
                 globalEventBus.emit(busEvents.SET_MOVIE_DATA, movieData);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -61,9 +57,6 @@ export default class MovieModel {
         API.addReview(review)
             .then((res) => {
                 globalEventBus.emit(busEvents.REVIEW_UPLOADED, res.status === CREATED, review);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -75,9 +68,6 @@ export default class MovieModel {
         API.editUserReviewForMovie(review)
             .then((res) => {
                 globalEventBus.emit(busEvents.REVIEW_UPLOADED, res.status === OK_CODE, review);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -89,9 +79,6 @@ export default class MovieModel {
         API.deleteUserReviewForMovie(id)
             .then((res) => {
                 globalEventBus.emit(busEvents.REVIEW_DELETED, res.status === OK_CODE, id);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -104,9 +91,6 @@ export default class MovieModel {
         API.getMovieReviews(id, page)
             .then((res) => {
                 globalEventBus.emit(busEvents.SET_REVIEWS_PAGE, res.status === OK_CODE, res.data);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -119,9 +103,6 @@ export default class MovieModel {
         API.addMovieRating(id, score)
             .then((res) => {
                 globalEventBus.emit(busEvents.RATING_UPLOADED, res.status === CREATED, score);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -134,9 +115,6 @@ export default class MovieModel {
         API.editUserRatingForMovie(id, score)
             .then((res) => {
                 globalEventBus.emit(busEvents.RATING_UPLOADED, res.status === OK_CODE, score);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
@@ -148,9 +126,6 @@ export default class MovieModel {
         API.deleteUserRatingForMovie(id)
             .then((res) => {
                 globalEventBus.emit(busEvents.RATING_DELETED, res.status === OK_CODE);
-            })
-            .catch(() => {
-                globalEventBus.emit(busEvents.SHOW_POPUP, {'description': CONNECTION_ERROR});
             });
     }
 
