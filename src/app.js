@@ -9,6 +9,19 @@ import SettingsController from './public/js/components/settings/settingsControll
 import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js';
 import MainController from './public/js/components/main/mainController.js';
 import MoviesListController from './public/js/components/moviesList/moviesListController.js';
+import './public/js/components/popup/popup.js';
+
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {scope: '/'})
+        .then((registration) => {
+            console.log('sw registration on scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
 
 window.addEventListener('DOMContentLoaded', () => {
     const application = document.getElementById('app');

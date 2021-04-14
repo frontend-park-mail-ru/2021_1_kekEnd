@@ -2,7 +2,7 @@
   width: 380px;
   position: relative;
   margin: 80px auto;
-  background-color: white;
+  background-color: $white-color;
   padding: 4px 4px 32px 4px;
   border-radius: $l-border-radius;
 
@@ -94,7 +94,7 @@
     border: 0;
     outline: none;
     border-radius: $xl-border-radius;
-    color: white;
+    color: $white-color;
   }
 
   &__checkbox {
@@ -132,5 +132,5 @@
 }
 
 .button-box__button_text_white {
-  color: white;
+  color: $white-color;
 }
