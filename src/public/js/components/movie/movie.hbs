@@ -140,7 +140,7 @@
                         <h3 class="main-roles__header">В главных ролях</h3>
                         <ul class="main-roles__actors-list">
                             {{#each actors}}
-                                <li><a class="actors-list__item">{{this}}</a></li>
+                                <li><a href='/actor/{{this.id}}' class="actors-list__item">{{this.name}}</a></li>
                             {{/each}}
                         </ul>
                     </div>
