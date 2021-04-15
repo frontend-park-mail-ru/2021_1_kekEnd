@@ -45,7 +45,7 @@
     <div class="main__slider">
         {{#each favourite_actors}}
             <div class="slider__card">
-                <a href="/actor/{{ inc @index}}"><img src="{{this}}"></a>
+                <a href="/actor/{{this.id}}"><img src="{{this.poster}}"></a>
             </div>
         {{/each}}
     </div>

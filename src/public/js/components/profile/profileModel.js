@@ -34,9 +34,18 @@ export default class ProfileModel {
                 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
             ],
             favourite_actors: [
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/2eb2fc4d-a8bd-43b0-83cd-35feacb8ccae/280x420',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/0f64539d-b236-4e01-8791-f19233705c59/280x420',
-                'https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/f3270b86-abfb-4fce-8a1b-8ba6901ddcea/280x420',
+                {
+                    'id': 61,
+                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/20287.jpg',
+                },
+                {
+                    'id': 26,
+                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/373.jpg',
+                },
+                {
+                    'id': 91,
+                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/6264.jpg',
+                },
             ],
         };
 
