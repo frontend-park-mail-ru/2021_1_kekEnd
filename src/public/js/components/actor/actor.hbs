@@ -29,21 +29,20 @@
                         <div class="info-row__info-title">Страна</div>
                         <div class="info-row__info-value">{{origin}}</div>
                     </div>
+
                     <div class="actor-info__info-row">
-                        <div class="info-row__info-title">Жанры</div>
-                        {{#each genres}}
-                            <a href="" class="info-row__info-link">{{this}}</a>
-                            {{#unless @last}}<span>&nbsp;</span>{{/unless}}
-                        {{/each}}
+                        <div class="info-row__info-title">Профессия</div>
+                        <div class="info-row__info-value">{{profession}}</div>
                     </div>
+
                     <div class="actor-info__info-row">
                         <div class="info-row__info-title">Всего фильмов</div>
                         <p class="info-row__info-value">{{movies_count}}</p>
                     </div>
-                    <div class="actor-info__info-row">
-                        <div class="info-row__info-title">Средний рейтинг фильмов</div>
-                        <p class="info-row__info-value">{{movies_rating}}</p>
-                    </div>
+<!--                    <div class="actor-info__info-row">-->
+<!--                        <div class="info-row__info-title">Средний рейтинг фильмов</div>-->
+<!--                        <p class="info-row__info-value">{{movies_rating}}</p>-->
+<!--                    </div>-->
 
                     <div class="actor-info__biography">
                         <h2 class="actor-content__header">Биография</h2>
@@ -59,7 +58,7 @@
                     <div class="actor-movies__movies-list">
                         {{#each movies}}
                             <div class="movies-list__movies-item">
-                                <a class="movies-item__title info-row__info-link" href="{{this.url}}">{{this.title}}</a>
+                                <a class="movies-item__title info-row__info-link" href="/movie/{{this.id}}">{{this.title}}</a>
                                 <p class="movies-item__rating">Рейтинг: {{this.rating}}</p>
                             </div>
                         {{/each}}

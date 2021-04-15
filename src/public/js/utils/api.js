@@ -235,6 +235,15 @@ class Api {
     }
 
     /**
+     * Получить информацию об актере
+     * @param {number} id - id актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getActorData(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}`);
+    }
+
+    /**
      * Получить любимые фильмы пользователя
      */
     getBestUsersMovies() {
