@@ -8,7 +8,6 @@
   &__content-container {
     width: 80%;
     margin: 20px auto 20px auto;
-    background-color: $white-color;
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.7);
     border-radius: $s-border-radius;
     overflow: hidden;
@@ -24,7 +23,7 @@
 
   &__movie-container, &__write-review {
     background-color: $movie-background-color;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
   }
 
   &__review-content {
@@ -124,15 +123,10 @@
   &__movie-flex {
     display: flex;
   }
-
-  &__background-trailer {
-    height: 270px;
-  }
 }
 
 .background-trailer__img {
-  height: 140%;
-  box-shadow: 0 0 30px 30px $movie-background-color inset;
+  height: 350px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -142,19 +136,16 @@
 
   &__movie-flex-left {
     width: 30%;
-    display: inline-block;
-    align-content: center;
   }
 
   &__movie-flex-center {
     width: 50%;
-    display: inline-block;
-    border-left: 1px solid $movie-separator-color;
+    border-left: 1px solid $whitish;
   }
 
   &__movie-flex-right {
     width: 20%;
-    color: $white-color;
+    color: $primary-text-color;
     margin-top: 20px;
     margin-right: 24px;
     text-align: right;
@@ -185,7 +176,7 @@
 .actors-list {
 
   &__item {
-    color: $white-color;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
 
@@ -201,19 +192,19 @@
   &__meta_info {
     font-size: 16px;
     line-height: 22px;
-    color: $white-color;
+    color: $primary-text-color;
     margin: 16px 0 24px 50px;
   }
 
   &__movie_info {
     text-align: left;
-    color: $movie-info-color;
   }
 
   &__title-box {
     margin-left: 50px;
     margin-top: 20px;
-    color: $white-color;
+    margin-bottom: 12px;
+    color: $primary-text-color;
   }
 }
 
@@ -250,7 +241,7 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid;
-  border-bottom-color: $movie-separator-color;
+  border-bottom-color: $whitish;
 }
 
 .info-row {
@@ -263,13 +254,13 @@
   }
 
   &__info-value {
-    color: white;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
   }
 
   &__info-link {
-    color: $white-color;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
 
@@ -301,7 +292,7 @@
   &__buttons {
     display: inline-flex;
     gap: 16px;
-    color: $white-color;
+    color: $primary-text-color;
     font-family: "FontAwesome";
     font-size: 24px;
     margin-right: 40px;
@@ -329,7 +320,7 @@
     float: right;
     padding: 4px;
     font-size: 14px;
-    color: $stars-color;
+    color: $primary-text-color;
     transition: all .2s;
   }
 
