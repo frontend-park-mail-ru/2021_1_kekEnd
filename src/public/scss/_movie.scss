@@ -49,10 +49,6 @@
     padding: 40px 0 0 40px;
     font-size: 24px;
     text-align: center;
-
-    &_color_white {
-      color: $white-color;
-    }
   }
 
   &__review-form-container {
@@ -72,7 +68,6 @@
   &__input-review-title {
     font-size: 20px;
     font-weight: bold;
-    color: $white-color;
 
     &::placeholder {
       color: $secondary-text-color;
@@ -82,7 +77,6 @@
   &__input-review-content {
     font-size: 16px;
     height: 120px;
-    color: $white-color;
 
     &::placeholder {
       color: $secondary-text-color;
