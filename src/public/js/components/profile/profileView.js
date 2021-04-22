@@ -109,8 +109,8 @@ export default class ProfileView extends BaseView {
      * @param {Object} event - событие клика
      */
     leftArrowClicked = (event) => {
-        // const carousel = event.target.parentElement.previousElementSibling;
-        console.log('scrolling to left');
+        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
+        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + 50, behavior: 'smooth'});
     }
 
     /**
@@ -118,8 +118,8 @@ export default class ProfileView extends BaseView {
      * @param {Object} event - событие клика
      */
     rightArrowClicked = (event) => {
-        // const carousel = event.target.parentElement.previousElementSibling;
-        console.log('scrolling to right');
+        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
+        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - 50, behavior: 'smooth'});
     }
 
     /**
