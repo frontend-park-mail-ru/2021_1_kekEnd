@@ -4,6 +4,7 @@ import {PATHS} from '../../utils/paths.js';
 import BaseView from '../baseView.js';
 import './main.tmpl.js';
 import {busEvents} from '../../utils/busEvents.js';
+import {scrollCarousel} from '../../utils/carousel.js';
 
 /**
  * Представление главной страницы
@@ -24,6 +25,9 @@ export default class MainView extends BaseView {
         this.searchMoviesByGenresCallback = this.searchMoviesByGenres.bind(this);
         this.searchMoviesByGenresPreviewCallback = this.searchMoviesByGenresPreview.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
+        this.carouselScrolledCallback = this.carouselScrolled.bind(this);
+        this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
+        this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
     }
 
     /**
@@ -55,7 +59,7 @@ export default class MainView extends BaseView {
      * @param {Object} data - список фильмов
      */
     setMoviesByGenresPreview(data) {
-        this.data.movies_by_genres_preview = data;
+        this.data.movies_by_genres_preview = (data !== null) ? data : [];
         super.render(this.data);
         this.setEventListeners();
         this.selectChosenGenres(this.data.selected_genres);
@@ -76,6 +80,19 @@ export default class MainView extends BaseView {
 
         document.getElementById('logout-button')?.addEventListener('click',
             this.logoutClickedCallback);
+
+        [...document.getElementsByClassName('main__slider')]
+            .forEach((element) => {
+                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+                if (element.offsetWidth === element.scrollWidth) {
+                    // все элементы целиком вмещаются, стрелки прокрутки не нужны
+                    rightArrow.classList.add('carousel-arrows__arrow_hidden');
+                }
+                element.addEventListener('scroll', this.carouselScrolledCallback);
+                leftArrow.addEventListener('click', this.leftArrowClickedCallback);
+                rightArrow.addEventListener('click', this.rightArrowClickedCallback);
+            });
     }
 
     /**
@@ -93,6 +110,15 @@ export default class MainView extends BaseView {
 
         document.getElementById('logout-button')?.removeEventListener('click',
             this.logoutClickedCallback);
+
+        [...document.getElementsByClassName('main__slider')]
+            .forEach((element) => {
+                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+                element.removeEventListener('scroll', this.carouselScrolledCallback);
+                leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
+                rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
+            });
     }
 
     /**
@@ -167,5 +193,34 @@ export default class MainView extends BaseView {
         return [...document.getElementsByClassName('genres-list__item-box')]
             .filter((element) => element.classList.contains('genre-selected'))
             .map((element) => element.innerText);
+    }
+
+    /**
+     * Обработка нажатия на стрелку "назад" в карусели
+     * @param {Object} event - событие клика
+     */
+    leftArrowClicked = (event) => {
+        // const carousel = event.target.parentElement.previousElementSibling;
+        console.log('scrolling to left');
+    }
+
+    /**
+     * Обработка нажатия на стрелку "вперед" в карусели
+     * @param {Object} event - событие клика
+     */
+    rightArrowClicked = (event) => {
+        // const carousel = event.target.parentElement.previousElementSibling;
+        console.log('scrolling to right');
+    }
+
+    /**
+     * Обработка скролла в карусели
+     * @param {Object} event - событие скролла
+     */
+    carouselScrolled = (event) => {
+        const carousel = event.target;
+        const leftArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+        const rightArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+        scrollCarousel(carousel, leftArrow, rightArrow);
     }
 }

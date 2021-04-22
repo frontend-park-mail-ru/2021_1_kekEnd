@@ -27,7 +27,7 @@ export default class MainModel {
                 globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
                     'isAuthorized': userResp.status === OK_CODE,
                     'best_movies': bestMoviesResp.data.movies,
-                    'available_genres': genresResp.data,
+                    'available_genres': genresResp.data.sort(),
                 });
             });
     }
