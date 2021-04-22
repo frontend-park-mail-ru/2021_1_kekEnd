@@ -3,61 +3,6 @@
   &__profile-card {
     margin-top: 50px;
   }
-
-  &__section-name {
-    font-family: "Comfortaa", sans-serif;
-    display: inline-block;
-    font-size: 24px;
-    color: $primary-text-color;
-    padding-left: 50px;
-    margin: 32px 0;
-  }
-
-  &__slider-wrapper {
-    position: relative;
-  }
-
-  &__slider {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto;
-    scroll-behavior: smooth;
-    gap: 16px;
-    padding: 0 50px;
-  }
-
-  &__slider::-webkit-scrollbar {
-    display: none;
-  }
-
-  &__arrows {
-    background-color: $white-color;
-  }
-}
-
-.carousel-arrows {
-  &__arrow {
-    position: absolute;
-    top: 40%;
-    color: $primary-text-color;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-
-    &_left {
-      left: 0;
-      margin-left: 8px;
-    }
-
-    &_right {
-      right: 0;
-      margin-right: 8px;
-    }
-
-    &_hidden {
-      visibility: hidden;
-    }
-  }
 }
 
 .profile-card {
@@ -153,30 +98,6 @@
   &__value {
     font-size: 18px;
     font-weight: 400;
-  }
-}
-
-.slider__card {
-  flex: 0 0 auto;
-  width: 150px;
-  height: 245px;
-  margin: 12px 0;
-  border-radius: $m-border-radius;
-  box-shadow: 0 0 12px $transparent-black;
-
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: $m-border-radius;
-  }
-
-  &:first-child {
-    margin-left: auto;
-  }
-
-  &:last-child {
-    margin-right: auto;
   }
 }
 

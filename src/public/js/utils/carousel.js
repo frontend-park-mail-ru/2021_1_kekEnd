@@ -5,13 +5,13 @@
  * @param {Object} rightArrow - объект стрелки "вперед"
  */
 export const scrollCarousel = (carousel, leftArrow, rightArrow) => {
-    const arrowMargin = 20; // TODO: remove magic number
+    const arrowWidth = rightArrow.offsetWidth;
     const invisiblePartWidth = carousel.scrollWidth - carousel.offsetWidth;
     const carouselPosition = carousel.scrollLeft;
-    const carouselEndOffset = invisiblePartWidth - arrowMargin;
+    const carouselEndOffset = invisiblePartWidth - arrowWidth;
     const hiddenClassName = 'carousel-arrows__arrow_hidden';
 
-    if (carouselPosition <= arrowMargin) {
+    if (carouselPosition <= arrowWidth) {
         leftArrow.classList.add(hiddenClassName);
         rightArrow.classList.remove(hiddenClassName);
         return;
