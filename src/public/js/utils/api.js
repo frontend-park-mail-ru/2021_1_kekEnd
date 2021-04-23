@@ -1,6 +1,6 @@
-import {globalEventBus} from './eventbus.js';
-import {CONNECTION_ERROR} from './errorMessages.js';
-import {busEvents} from './busEvents.js';
+import {globalEventBus} from './eventbus';
+import {CONNECTION_ERROR} from './errorMessages';
+import {busEvents} from './busEvents';
 
 
 /**

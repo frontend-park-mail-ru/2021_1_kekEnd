@@ -1,6 +1,6 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from '../../utils/api.js';
-import {OK_CODE} from '../../utils/codes.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {API} from '../../utils/api';
+import {OK_CODE} from '../../utils/codes';
 
 
 /**

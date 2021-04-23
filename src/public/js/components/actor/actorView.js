@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import BaseView from '../baseView.js';
-import './actor.tmpl.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import BaseView from '../baseView';
+import './actor.tmpl';
 
 /**
  * Представление страницы актера

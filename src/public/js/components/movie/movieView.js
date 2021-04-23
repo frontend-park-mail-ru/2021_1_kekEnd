@@ -1,14 +1,14 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import BaseView from '../baseView.js';
-import './movie.tmpl.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import {getFormValues} from '../../utils/formDataWork.js';
-import Validator from '../../utils/validation.js';
-import {setValidationHint} from '../../utils/setValidationResult.js';
-import {UPLOAD_ERROR} from '../../utils/errorMessages.js';
-import {scrollToTargetAdjusted} from '../../utils/scrollToTarget.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import BaseView from '../baseView';
+import './movie.tmpl';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import {getFormValues} from '../../utils/formDataWork';
+import Validator from '../../utils/validation';
+import {setValidationHint} from '../../utils/setValidationResult';
+import {UPLOAD_ERROR} from '../../utils/errorMessages';
+import {scrollToTargetAdjusted} from '../../utils/scrollToTarget';
+import {busEvents} from '../../utils/busEvents';
 
 /**
  * Представление страницы фильма

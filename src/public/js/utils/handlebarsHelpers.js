@@ -1,5 +1,5 @@
-import '../components/partials/navbar.tmpl.js';
-import '../components/partials/loginIcons.tmpl.js';
+import '../components/partials/navbar.tmpl';
+import '../components/partials/loginIcons.tmpl';
 
 export const registerHandlebarsHelpers = () => {
     // eslint-disable-next-line no-undef

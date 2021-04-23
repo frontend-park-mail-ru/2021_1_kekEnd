@@ -1,13 +1,13 @@
-import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-import {globalEventBus} from '../../utils/eventbus.js';
-import BaseView from '../baseView.js';
-import Validator from '../../utils/validation.js';
-import './settings.tmpl.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import {OK_CODE} from '../../utils/codes.js';
-import {PASSWORDS_MISMATCH} from '../../utils/errorMessages.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult';
+import {globalEventBus} from '../../utils/eventbus';
+import BaseView from '../baseView';
+import Validator from '../../utils/validation';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import {OK_CODE} from '../../utils/codes';
+import {PASSWORDS_MISMATCH} from '../../utils/errorMessages';
+import {busEvents} from '../../utils/busEvents';
+import './settings.tmpl';
 
 
 /**

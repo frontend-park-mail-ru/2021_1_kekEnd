@@ -1,5 +1,5 @@
-import MoviesListModel from './moviesListModel.js';
-import MoviesListView from './moviesListView.js';
+import MoviesListModel from './moviesListModel';
+import MoviesListView from './moviesListView';
 
 /**
  * Контроллер страницы списка фильмов

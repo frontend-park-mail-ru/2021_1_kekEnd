@@ -1,9 +1,9 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import BaseView from '../baseView.js';
-import './profile.tmpl.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import BaseView from '../baseView';
+import './profile.tmpl';
+import {busEvents} from '../../utils/busEvents';
 import {scrollCarousel} from '../../utils/carousel';
 
 

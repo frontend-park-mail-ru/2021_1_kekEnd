@@ -1,10 +1,10 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from '../../utils/api.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import {OK_CODE} from '../../utils/codes.js';
-import {AUTH_ERROR} from '../../utils/errorMessages.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {API} from '../../utils/api';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import {OK_CODE} from '../../utils/codes';
+import {AUTH_ERROR} from '../../utils/errorMessages';
+import {busEvents} from '../../utils/busEvents';
 
 
 /**
