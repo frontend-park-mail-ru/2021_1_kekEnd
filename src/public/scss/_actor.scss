@@ -9,7 +9,7 @@
 .actor-content__header {
   font-size: 24px;
   margin: 12px 0;
-  color: $white-text-color;
+  color: $primary-text-color;
 }
 
 .actor-content__flex-container {
@@ -35,6 +35,7 @@
 .left-inner {
 
   &__actor-avatar-img {
+    width: 90%;
     border-radius: 8px;
   }
 
@@ -56,7 +57,7 @@
 .center {
 
   &__actor-name {
-    color: $white-text-color;
+    color: $primary-text-color;
     margin-bottom: 8px;
   }
 
@@ -73,7 +74,7 @@
   }
 
   &__text {
-    color: $white-text-color;
+    color: $primary-text-color;
   }
 }
 
