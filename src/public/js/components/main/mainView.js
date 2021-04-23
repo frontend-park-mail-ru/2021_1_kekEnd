@@ -2,9 +2,9 @@ import {globalEventBus} from '../../utils/eventbus';
 import {globalRouter} from '../../utils/router';
 import {PATHS} from '../../utils/paths';
 import BaseView from '../baseView';
-import './main.tmpl';
 import {busEvents} from '../../utils/busEvents';
 import {scrollCarousel} from '../../utils/carousel';
+import './main.tmpl';
 
 /**
  * Представление главной страницы
@@ -69,14 +69,14 @@ export default class MainView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('main-genre-get-preview')?.addEventListener('click',
-            this.searchMoviesByGenresPreviewCallback);
-
         document.getElementById('main-genre-search-button')?.addEventListener('click',
             this.searchMoviesByGenresCallback);
 
         [...document.getElementsByClassName('genres-list__item-box')]
-            .forEach((element) => element.addEventListener('click', this.selectGenresListener));
+            .forEach((element) => {
+                element.addEventListener('click', this.selectGenresListener);
+                element.addEventListener('click', this.searchMoviesByGenresPreviewCallback);
+            });
 
         document.getElementById('logout-button')?.addEventListener('click',
             this.logoutClickedCallback);
@@ -106,7 +106,10 @@ export default class MainView extends BaseView {
             this.searchMoviesByGenresCallback);
 
         [...document.getElementsByClassName('genres-list__item-box')]
-            .forEach((element) => element.removeEventListener('click', this.selectGenresListener));
+            .forEach((element) => {
+                element.removeEventListener('click', this.selectGenresListener);
+                element.removeEventListener('click', this.searchMoviesByGenresPreviewCallback);
+            });
 
         document.getElementById('logout-button')?.removeEventListener('click',
             this.logoutClickedCallback);
