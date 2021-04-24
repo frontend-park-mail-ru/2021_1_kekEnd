@@ -8,9 +8,7 @@
     {{#if (eq type "genres")}}
         <h3 class="main__page-title">
             По жанрам:
-            {{#each genres}}
-                <a href="/movies/genre/1/?filter={{decodeURI this}}" class="genres-list__genre">{{decodeURI this}}</a>{{#unless @last}}<span class="genres-list__genre">, </span>{{/unless}}
-            {{/each}}
+            {{#each genres}}<a href="/movies/genre/1/?filter={{decodeURI this}}" class="genres-list__genre">{{decodeURI this}}</a>{{#unless @last}}<span class="genres-list__genre">/</span>{{/unless}}{{/each}}
         </h3>
     {{/if}}
     <div class="main__movies-list-grid">
@@ -46,9 +44,9 @@
                             <input class="buttons__input-watched buttons__movie-card-input-watched"
                                    id="watched-button-{{this.id}}" type="checkbox" name="watched">
                             <label class="buttons__label-watched" for="watched-button-{{this.id}}"></label>
-                            <input class="buttons__input-like buttons__movie-card-input-like"
-                                   id="like-button-{{this.id}}" type="checkbox" name="liked">
-                            <label class="buttons__label-like" for="like-button-{{this.id}}"></label>
+                            <input class="buttons__input-playlist buttons__movie-card-input-playlist"
+                                   id="playlist-button-{{this.id}}" type="checkbox" name="playlist">
+                            <label class="buttons__label-playlist" for="playlist-button-{{this.id}}"></label>
                         </div>
                     {{/if}}
                 </div>

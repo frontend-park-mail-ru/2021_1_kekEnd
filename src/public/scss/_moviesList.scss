@@ -144,7 +144,7 @@
 
 .buttons {
 
-  &__input-watched, &__input-like {
+  &__input-watched, &__input-playlist {
     display: none;
   }
 
@@ -153,8 +153,8 @@
     cursor: pointer;
   }
 
-  &__label-like:before {
-    content: $like-button-code;
+  &__label-playlist:before {
+    content: $plus-button-code;
     cursor: pointer;
   }
 
@@ -162,16 +162,11 @@
     color: $filled-watched-button-color;
   }
 
-  &__input-like:checked ~ &__label-like:before {
-    color: $button-gradient-first;
-    content: $filled-like-button-code;
-  }
-
   &__movie-card-input-watched:not(:checked):hover ~ &__label-watched:before {
     color: black;
   }
 
-  &__movie-card-input-like:not(:checked):hover ~ &__label-like:before {
+  &__movie-card-input-playlist:not(:checked):hover ~ &__label-playlist:before {
     color: black;
   }
 }
