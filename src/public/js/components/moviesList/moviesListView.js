@@ -20,6 +20,8 @@ export default class MoviesListView extends BaseView {
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
+        this.watchedClickedCallback = this.watchedClicked.bind(this);
+        this.playlistClickedCallback = this.playlistClicked.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -67,6 +69,22 @@ export default class MoviesListView extends BaseView {
      */
     removeEventListeners() {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+    }
+
+    /**
+     * Обработчик нажатия на кнопку "Просмотрено"
+     */
+    watchedClicked() {
+        // TODO: api request
+        console.log('watched clicked');
+    }
+
+    /**
+     * Обработчик нажатия на кнопку "Лайк"
+     */
+    playlistClicked() {
+        // TODO: api request
+        console.log('add to playlist clicked');
     }
 
     /**

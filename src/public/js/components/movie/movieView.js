@@ -37,7 +37,7 @@ export default class MovieView extends BaseView {
         this.deleteRatingClickedCallback = this.deleteRatingClicked.bind(this);
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchedClickedCallback = this.watchedClicked.bind(this);
-        this.likeClickedCallback = this.likeClicked.bind(this);
+        this.playlistClickedCallback = this.playlistClicked.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -63,7 +63,7 @@ export default class MovieView extends BaseView {
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
 
         document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
-        document.getElementById('like-button')?.addEventListener('click', this.likeClickedCallback);
+        document.getElementById('playlist-button')?.addEventListener('click', this.playlistClickedCallback);
 
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
@@ -87,7 +87,7 @@ export default class MovieView extends BaseView {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
 
         document.getElementById('watched-button')?.removeEventListener('click', this.watchedClickedCallback);
-        document.getElementById('like-button')?.removeEventListener('click', this.likeClickedCallback);
+        document.getElementById('playlist-button')?.removeEventListener('click', this.playlistClickedCallback);
 
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
@@ -277,8 +277,8 @@ export default class MovieView extends BaseView {
     /**
      * Обработчик нажатия на кнопку "Лайк"
      */
-    likeClicked() {
+    playlistClicked() {
         // TODO: api request
-        console.log('like clicked');
+        console.log('add to playlist clicked');
     }
 }
