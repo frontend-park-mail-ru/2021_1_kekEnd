@@ -91,10 +91,10 @@
                     {{#if isAuthorized}}
                         <div class="movie-flex-right__buttons">
                             <input class="buttons__input-watched buttons__movie-page-input-watched"
-                                   id="watched-button" type="checkbox" name="watched">
+                                   id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
                             <label class="buttons__label-watched" for="watched-button"></label>
                             <input class="buttons__input-playlist buttons__movie-page-input-playlist"
-                                   id="playlist-button" type="checkbox" name="playlist">
+                                   id="playlist-button" type="checkbox" name="playlist" data-id="{{id}}">
                             <label class="buttons__label-playlist" for="playlist-button"></label>
                         </div>
                     {{/if}}

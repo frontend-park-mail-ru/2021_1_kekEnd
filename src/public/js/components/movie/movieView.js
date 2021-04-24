@@ -268,17 +268,22 @@ export default class MovieView extends BaseView {
 
     /**
      * Обработчик нажатия на кнопку "Просмотрено"
+     * @param {Object} event - событие нажатия
      */
-    watchedClicked() {
+    watchedClicked(event) {
         // TODO: api request
-        console.log('watched clicked');
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`watched movie ${movieId}`);
     }
 
     /**
      * Обработчик нажатия на кнопку "Лайк"
+     * @param {Object} event - событие нажатия
      */
-    playlistClicked() {
+    playlistClicked(event) {
         // TODO: api request
-        console.log('add to playlist clicked');
+        console.log(event.target);
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`add to playlist movie ${movieId}`);
     }
 }

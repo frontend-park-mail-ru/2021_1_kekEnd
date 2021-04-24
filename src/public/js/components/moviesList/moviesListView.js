@@ -61,6 +61,11 @@ export default class MoviesListView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
+        [...document.getElementsByClassName('buttons__input-watched')]
+            .forEach((element) => element.addEventListener('click', this.watchedClickedCallback));
+        [...document.getElementsByClassName('buttons__input-playlist')]
+            .forEach((element) => element.addEventListener('click', this.playlistClickedCallback));
+
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
     }
 
@@ -68,23 +73,32 @@ export default class MoviesListView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
+        [...document.getElementsByClassName('buttons__input-watched')]
+            .forEach((element) => element.removeEventListener('click', this.watchedClickedCallback));
+        [...document.getElementsByClassName('buttons__input-playlist')]
+            .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
+
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
     }
 
     /**
      * Обработчик нажатия на кнопку "Просмотрено"
+     * @param {Object} event - событие нажатия
      */
-    watchedClicked() {
+    watchedClicked(event) {
         // TODO: api request
-        console.log('watched clicked');
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`watched movie ${movieId}`);
     }
 
     /**
      * Обработчик нажатия на кнопку "Лайк"
+     * @param {Object} event - событие нажатия
      */
-    playlistClicked() {
+    playlistClicked(event) {
         // TODO: api request
-        console.log('add to playlist clicked');
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`add to playlist movie ${movieId}`);
     }
 
     /**
