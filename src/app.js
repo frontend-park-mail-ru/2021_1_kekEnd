@@ -11,6 +11,7 @@ import MainController from './public/js/pages/main/mainController';
 import MoviesListController from './public/js/pages/moviesList/moviesListController';
 import './public/js/pages/popup/popup';
 import './public/scss/compound.scss';
+import {userMeta} from './public/js/utils/userMeta';
 
 
 if ('serviceWorker' in navigator) {
@@ -24,8 +25,10 @@ if ('serviceWorker' in navigator) {
 }
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const application = document.getElementById('app');
+
+    await userMeta.initMeta();
 
     registerHandlebarsHelpers();
 

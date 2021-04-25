@@ -1,3 +1,6 @@
+import {API} from './api';
+import {OK_CODE} from './codes';
+
 const AUTH_STATUS = 'auth status';
 
 /**
@@ -9,6 +12,14 @@ class UserMeta {
      */
     constructor() {
         localStorage.setItem(AUTH_STATUS, 'false');
+    }
+
+    /**
+     * Выставить в localStorage значение авторизованности
+     * @return {Promise<void>} - промис с действием "выставление статуса авторизации"
+     */
+    async initMeta() {
+        API.getUser().then((res) => this.setAuthorized(res.status === OK_CODE));
     }
 
     /**

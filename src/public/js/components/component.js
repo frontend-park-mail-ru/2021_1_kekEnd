@@ -15,5 +15,25 @@ export class Component {
     /**
      * Отрисовка компонента
      */
-    render() {}
+    render() {
+        this.parent.innerHTML = this.tmpl();
+    }
+
+    /**
+     * HTML-код компонента
+     */
+    tmpl() {
+    }
+
+    /**
+     * Установить листенеры компоненту
+     */
+    setEventListeners() {
+    }
+
+    /**
+     * Убрать листенеры компонента
+     */
+    removeEventListeners() {
+    }
 }
