@@ -9,6 +9,7 @@ import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
 import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages';
 import {busEvents} from '../../utils/busEvents';
 import './signup.tmpl';
+import {userMeta} from '../../utils/userMeta';
 
 
 /**
@@ -24,7 +25,6 @@ export default class SignupView extends BaseView {
         super(parent, Handlebars.templates['signup.hbs']);
 
         globalEventBus.on(busEvents.SIGNUP_STATUS, this.processSignupAttempt.bind(this));
-        globalEventBus.on(busEvents.LOAD_SIGNUP_PAGE, this.setSignupPage.bind(this));
 
         this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
@@ -33,7 +33,11 @@ export default class SignupView extends BaseView {
      * Проверка, если пользователь уже авторизован
      */
     render() {
-        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_SIGNUP);
+        if (userMeta.getAuthorized()) {
+            globalRouter.pushState(PATHS.profile);
+        } else {
+            this.setSignupPage();
+        }
     }
 
     /**
@@ -63,7 +67,7 @@ export default class SignupView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('signup').removeEventListener('submit', this.formSubmittedCallback);
+        document.getElementById('signup')?.removeEventListener('submit', this.formSubmittedCallback);
     }
 
     /**

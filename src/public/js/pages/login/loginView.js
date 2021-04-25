@@ -8,6 +8,7 @@ import {setListenersForHidingValidationError} from '../../utils/setValidationRes
 import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages';
 import {busEvents} from '../../utils/busEvents';
 import './login.tmpl';
+import {userMeta} from '../../utils/userMeta';
 
 /**
  * Представление страницы логина
@@ -22,7 +23,6 @@ export default class LoginView extends BaseView {
         super(parent, Handlebars.templates['login.hbs']);
 
         globalEventBus.on(busEvents.LOGIN_STATUS, this.processLoginAttempt.bind(this));
-        globalEventBus.on(busEvents.LOAD_LOGIN_PAGE, this.setLoginPage.bind(this));
 
         this.formSubmittedCallback = this.formSubmitted.bind(this);
     }
@@ -31,7 +31,11 @@ export default class LoginView extends BaseView {
      * Проверка, если пользователь уже авторизован
      */
     render() {
-        globalEventBus.emit(busEvents.CHECK_AUTH_REDIRECT_LOGIN);
+        if (userMeta.getAuthorized()) {
+            globalRouter.pushState(PATHS.profile);
+        } else {
+            this.setLoginPage();
+        }
     }
 
     /**
@@ -61,7 +65,7 @@ export default class LoginView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('login').removeEventListener('submit', this.formSubmittedCallback);
+        document.getElementById('login')?.removeEventListener('submit', this.formSubmittedCallback);
     }
 
     /**
