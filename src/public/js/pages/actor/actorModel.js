@@ -1,6 +1,7 @@
 import {globalEventBus} from '../../utils/eventbus';
 import {API} from '../../utils/api';
 import {OK_CODE} from '../../utils/codes';
+import {busEvents} from '../../utils/busEvents';
 
 
 /**
@@ -11,9 +12,9 @@ export default class ActorModel {
      * Конструктор
      */
     constructor() {
-        globalEventBus.on('get actor data', this.getActorData.bind(this));
-        globalEventBus.on('add actor to favorites', this.addActorToFavorites.bind(this));
-        globalEventBus.on('logout clicked', this.logout.bind(this));
+        globalEventBus.on(busEvents.GET_ACTOR_DATA, this.getActorData.bind(this));
+        globalEventBus.on(busEvents.LIKE_ACTOR, this.addActorToFavorites.bind(this));
+        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -21,11 +22,9 @@ export default class ActorModel {
      * @param {number} id - id актера
      */
     getActorData(id) {
-        Promise.all([API.getUser(), API.getActorData(id)])
-            .then((responses) => {
-                const [authResp, actorDataResp] = responses;
-                globalEventBus.emit('set actor data',
-                    {...actorDataResp.data, 'isAuthorized': authResp.status === OK_CODE});
+        API.getActorData(id)
+            .then((res) => {
+                globalEventBus.emit(busEvents.SET_ACTOR_DATA, res.data);
             });
     }
 
@@ -53,7 +52,7 @@ export default class ActorModel {
     logout() {
         API.logout()
             .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK_CODE);
+                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

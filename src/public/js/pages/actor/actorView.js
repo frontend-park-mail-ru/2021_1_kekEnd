@@ -2,6 +2,7 @@ import {globalEventBus} from '../../utils/eventbus';
 import {globalRouter} from '../../utils/router';
 import {PATHS} from '../../utils/paths';
 import BaseView from '../baseView';
+import {busEvents} from '../../utils/busEvents';
 import './actor.tmpl';
 
 /**
@@ -21,8 +22,8 @@ export default class ActorView extends BaseView {
         this.addToFavoritesCallback = this.addToFavoritesCallback.bind(this);
         this.processLogout = this.processLogout.bind(this);
 
-        globalEventBus.on('set actor data', this.setActorDataCallback);
-        globalEventBus.on('logout status', this.processLogout);
+        globalEventBus.on(busEvents.SET_ACTOR_DATA, this.setActorDataCallback);
+        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout);
     }
 
     /**
@@ -30,7 +31,7 @@ export default class ActorView extends BaseView {
      * @param {int} id - id актера
      */
     render(id) {
-        globalEventBus.emit('get actor data', id);
+        globalEventBus.emit(busEvents.GET_ACTOR_DATA, id);
     }
 
     /**
@@ -71,7 +72,7 @@ export default class ActorView extends BaseView {
      * Обработчик нажатия на кнопку добавления актера в избранное
      */
     addToFavoritesCallback() {
-        globalEventBus.emit('add actor to favorites');
+        globalEventBus.emit(busEvents.LIKE_ACTOR);
     }
 
     /**
@@ -80,7 +81,7 @@ export default class ActorView extends BaseView {
      */
     logoutClicked(e) {
         e.preventDefault();
-        globalEventBus.emit('logout clicked');
+        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
     }
 
     /**

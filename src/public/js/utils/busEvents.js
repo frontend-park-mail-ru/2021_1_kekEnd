@@ -36,5 +36,8 @@ export const busEvents = {
     GET_MOVIES_BY_GENRES_PREVIEW: 'get genres movies preview',
     SET_MOVIES_BY_GENRES_PREVIEW: 'set genres movies preview',
     SET_MOVIES_PAGE: 'set movies page',
+    GET_ACTOR_DATA: 'get actor data',
+    SET_ACTOR_DATA: 'set actor data',
+    LIKE_ACTOR: 'add actor to favorites',
     SHOW_POPUP: 'show popup',
 };

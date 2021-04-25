@@ -22,14 +22,10 @@ export default class MoviesListModel {
      * @param {number} page - номер страницы
      */
     getBestMovies(page=1) {
-        Promise.all([API.getUser(), API.getBestMovies(page)])
-            .then((responses) => {
-                const [userResp, bestMoviesResp] = responses;
-                globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
-                    ...bestMoviesResp.data,
-                    'type': 'best',
-                    'isAuthorized': userResp.status === OK_CODE,
-                });
+        API.getBestMovies(page)
+            .then((res) => {
+                res.data.type = 'best';
+                globalEventBus.emit(busEvents.SET_MOVIES_PAGE, res.data);
             });
     }
 
@@ -39,15 +35,13 @@ export default class MoviesListModel {
      * @param {number} page - номер страницы
      */
     getGenreMovies(genres, page=1) {
-        Promise.all([API.getUser(), API.getMoviesByGenres(genres, page)])
-            .then((responses) => {
-                const [userResp, genresMoviesResp] = responses;
+        API.getMoviesByGenres(genres, page)
+            .then((res) => {
                 globalEventBus.emit(busEvents.SET_MOVIES_PAGE, {
-                    ...genresMoviesResp.data,
+                    ...res.data,
                     'type': 'genres',
                     'query': `?filter=${genres.join('+')}`,
                     genres,
-                    'isAuthorized': userResp.status === OK_CODE,
                 });
             });
     }

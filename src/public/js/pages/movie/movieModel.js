@@ -29,13 +29,12 @@ export default class MovieModel {
      * @param {number} id - id фильма
      */
     getMovieData(id) {
-        Promise.all([API.getUser(), API.getMovieData(id), API.getMovieReviews(id),
+        Promise.all([API.getMovieData(id), API.getMovieReviews(id),
             API.getUserReviewForMovie(id), API.getUserRatingForMovie(id)])
             .then((responses) => {
-                const [userResp, movieDataResp, movieReviewsResp, userReviewResp, userRatingResp] = responses;
+                const [movieDataResp, movieReviewsResp, userReviewResp, userRatingResp] = responses;
                 const movieData = {
                     ...movieDataResp.data,
-                    'isAuthorized': userResp.status === OK_CODE,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
                     'userRating': (userRatingResp.status === OK_CODE) ? (userRatingResp.data) : null,
                 };

@@ -58,7 +58,6 @@ export default class ProfileModel {
                 globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
                     ...userData,
                     ...additionalData,
-                    'isAuthorized': true,
                     'reviews': reviews,
                 });
             })

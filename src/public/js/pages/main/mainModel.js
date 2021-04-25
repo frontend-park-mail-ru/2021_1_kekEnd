@@ -21,11 +21,10 @@ export default class MainModel {
      * Получение первой страницы лучших фильмов
      */
     getMainPageData() {
-        Promise.all([API.getUser(), API.getBestMovies(1), API.getAllAvailableGenres()])
+        Promise.all([API.getBestMovies(1), API.getAllAvailableGenres()])
             .then((responses) => {
-                const [userResp, bestMoviesResp, genresResp] = responses;
+                const [bestMoviesResp, genresResp] = responses;
                 globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
-                    'isAuthorized': userResp.status === OK_CODE,
                     'best_movies': bestMoviesResp.data.movies,
                     'available_genres': genresResp.data.sort(),
                 });

@@ -27,7 +27,7 @@ export default class SettingsModel {
         API.getUser()
             .then((res) => {
                 if (res.status === OK_CODE) {
-                    globalEventBus.emit('set settings data', {'isAuthorized': true, ...res.data});
+                    globalEventBus.emit('set settings data', res.data);
                 } else {
                     globalRouter.pushState(PATHS.login);
                 }
