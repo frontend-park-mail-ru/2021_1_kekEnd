@@ -1,10 +1,10 @@
 import {globalEventBus} from '../../utils/eventbus';
 import BaseView from '../baseView';
 import {busEvents} from '../../utils/busEvents';
-import {scrollCarousel} from '../../utils/carousel';
 import './main.tmpl';
 import {NavbarRight} from '../../components/navbarRight';
 import {userMeta} from '../../utils/userMeta';
+import {Carousel} from '../../components/carousel';
 
 /**
  * Представление главной страницы
@@ -23,9 +23,6 @@ export default class MainView extends BaseView {
 
         this.searchMoviesByGenresCallback = this.searchMoviesByGenres.bind(this);
         this.searchMoviesByGenresPreviewCallback = this.searchMoviesByGenresPreview.bind(this);
-        this.carouselScrolledCallback = this.carouselScrolled.bind(this);
-        this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
-        this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
     }
 
     /**
@@ -54,6 +51,14 @@ export default class MainView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarRightComponent.render();
 
+        this.bestMoviesCarousel = new Carousel(document.getElementById('best-movies-carousel'),
+            {'itemsType': 'movies', 'items': {...this.data.best_movies}});
+        this.bestMoviesCarousel.render();
+
+        this.genreMoviesCarousel = new Carousel(document.getElementById('genre-movies-carousel'),
+            {'itemsType': 'movies', 'items': {...this.data.movies_by_genres_preview}});
+        this.genreMoviesCarousel.render();
+
         this.setEventListeners();
     }
 
@@ -63,8 +68,9 @@ export default class MainView extends BaseView {
      */
     setMoviesByGenresPreview(data) {
         this.data.movies_by_genres_preview = (data !== null) ? data : [];
-        super.render(this.data);
-        this.setEventListeners();
+        // TODO: плохой перерендер всей страницы
+        // TODO: сохранять позицию скролла других каруселей
+        this.setMainPageData(this.data);
         this.selectChosenGenres(this.data.selected_genres);
     }
 
@@ -81,20 +87,9 @@ export default class MainView extends BaseView {
                 element.addEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        [...document.getElementsByClassName('main__slider')]
-            .forEach((element) => {
-                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-                if (element.offsetWidth === element.scrollWidth) {
-                    // все элементы целиком вмещаются, стрелки прокрутки не нужны
-                    rightArrow.classList.add('carousel-arrows__arrow_hidden');
-                }
-                element.addEventListener('scroll', this.carouselScrolledCallback);
-                leftArrow.addEventListener('click', this.leftArrowClickedCallback);
-                rightArrow.addEventListener('click', this.rightArrowClickedCallback);
-            });
-
         this.navbarRightComponent.setEventListeners();
+        this.bestMoviesCarousel.setEventListeners();
+        this.genreMoviesCarousel.setEventListeners();
     }
 
     /**
@@ -113,16 +108,9 @@ export default class MainView extends BaseView {
                 element.removeEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        [...document.getElementsByClassName('main__slider')]
-            .forEach((element) => {
-                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-                element.removeEventListener('scroll', this.carouselScrolledCallback);
-                leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
-                rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
-            });
-
         this.navbarRightComponent.removeEventListeners();
+        this.bestMoviesCarousel.removeEventListeners();
+        this.genreMoviesCarousel.removeEventListeners();
     }
 
     /**
@@ -180,34 +168,5 @@ export default class MainView extends BaseView {
         return [...document.getElementsByClassName('genres-list__item-box')]
             .filter((element) => element.classList.contains('genre-selected'))
             .map((element) => element.innerText);
-    }
-
-    /**
-     * Обработка нажатия на стрелку "назад" в карусели
-     * @param {Object} event - событие клика
-     */
-    leftArrowClicked = (event) => {
-        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + 50, behavior: 'smooth'});
-    }
-
-    /**
-     * Обработка нажатия на стрелку "вперед" в карусели
-     * @param {Object} event - событие клика
-     */
-    rightArrowClicked = (event) => {
-        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - 50, behavior: 'smooth'});
-    }
-
-    /**
-     * Обработка скролла в карусели
-     * @param {Object} event - событие скролла
-     */
-    carouselScrolled = (event) => {
-        const carousel = event.target;
-        const leftArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-        const rightArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-        scrollCarousel(carousel, leftArrow, rightArrow);
     }
 }

@@ -1,7 +1,7 @@
 import {Component} from './component';
 import {globalRouter} from '../utils/router';
 import {PATHS} from '../utils/paths';
-import '../pages/partials/navbarRight.tmpl';
+import '../partials/navbarRight.tmpl';
 import {API} from '../utils/api';
 import {OK_CODE} from '../utils/codes';
 import {userMeta} from '../utils/userMeta';

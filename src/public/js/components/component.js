@@ -16,7 +16,7 @@ export class Component {
      * Отрисовка компонента
      */
     render() {
-        this.parent.insertAdjacentHTML('beforeend', this.tmpl());
+        this.parent?.insertAdjacentHTML('beforeend', this.tmpl());
     }
 
     /**
