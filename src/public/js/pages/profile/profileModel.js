@@ -24,26 +24,44 @@ export default class ProfileModel {
     getProfileData() {
         // this data is not yet on backend but we need to show some pictures
         const additionalData = {
-            favourite_movies: [
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/300.jpg',
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/301.jpg',
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/302.jpg',
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/303.jpg',
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/304.jpg',
-                'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
+            favorite_movies: [
+                {
+                    id: 1,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/300.jpg',
+                },
+                {
+                    id: 2,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/301.jpg',
+                },
+                {
+                    id: 3,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/302.jpg',
+                },
+                {
+                    id: 4,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/303.jpg',
+                },
+                {
+                    id: 5,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/304.jpg',
+                },
+                {
+                    id: 6,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
+                },
             ],
-            favourite_actors: [
+            favorite_actors: [
                 {
-                    'id': 61,
-                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/20287.jpg',
+                    id: 61,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/20287.jpg',
                 },
                 {
-                    'id': 26,
-                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/373.jpg',
+                    id: 26,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/373.jpg',
                 },
                 {
-                    'id': 91,
-                    'poster': 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/6264.jpg',
+                    id: 91,
+                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/6264.jpg',
                 },
             ],
         };

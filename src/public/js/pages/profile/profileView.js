@@ -1,11 +1,10 @@
 import {globalEventBus} from '../../utils/eventbus';
 import BaseView from '../baseView';
-import './profile.tmpl';
 import {busEvents} from '../../utils/busEvents';
-import {scrollCarousel} from '../../utils/carousel';
 import {NavbarRight} from '../../components/navbarRight';
 import {userMeta} from '../../utils/userMeta';
-
+import {Carousel} from '../../components/carousel';
+import './profile.tmpl';
 
 /**
  * Представление страницы профиля
@@ -20,10 +19,6 @@ export default class ProfileView extends BaseView {
         super(parent, Handlebars.templates['profile.hbs']);
 
         globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
-
-        this.carouselScrolledCallback = this.carouselScrolled.bind(this);
-        this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
-        this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
     }
 
     /**
@@ -44,6 +39,18 @@ export default class ProfileView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarRightComponent.render();
 
+        this.favoriteMoviesCarousel = new Carousel(document.getElementById('favorite-movies-carousel'),
+            {'itemsType': 'movies', 'items': data.favorite_movies});
+        this.favoriteMoviesCarousel.render();
+
+        this.favoriteActorsCarousel = new Carousel(document.getElementById('favorite-actors-carousel'),
+            {'itemsType': 'actors', 'items': data.favorite_actors});
+        this.favoriteActorsCarousel.render();
+
+        this.reviewsCarousel = new Carousel(document.getElementById('reviews-carousel'),
+            {'itemsType': 'reviews', 'items': data.reviews});
+        this.reviewsCarousel.render();
+
         this.setEventListeners();
     }
 
@@ -58,64 +65,19 @@ export default class ProfileView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        [...document.getElementsByClassName('main__slider')]
-            .forEach((element) => {
-                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-                if (element.offsetWidth === element.scrollWidth) {
-                    // все элементы целиком вмещаются, стрелки прокрутки не нужны
-                    rightArrow.classList.add('carousel-arrows__arrow_hidden');
-                }
-                element.addEventListener('scroll', this.carouselScrolledCallback);
-                leftArrow.addEventListener('click', this.leftArrowClickedCallback);
-                rightArrow.addEventListener('click', this.rightArrowClickedCallback);
-            });
-
         this.navbarRightComponent.setEventListeners();
+        this.favoriteMoviesCarousel.setEventListeners();
+        this.favoriteActorsCarousel.setEventListeners();
+        this.reviewsCarousel.setEventListeners();
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        [...document.getElementsByClassName('main__slider')]
-            .forEach((element) => {
-                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-                element.removeEventListener('scroll', this.carouselScrolledCallback);
-                leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
-                rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
-            });
-
         this.navbarRightComponent.removeEventListeners();
-    }
-
-    /**
-     * Обработка нажатия на стрелку "назад" в карусели
-     * @param {Object} event - событие клика
-     */
-    leftArrowClicked = (event) => {
-        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + 50, behavior: 'smooth'});
-    }
-
-    /**
-     * Обработка нажатия на стрелку "вперед" в карусели
-     * @param {Object} event - событие клика
-     */
-    rightArrowClicked = (event) => {
-        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - 50, behavior: 'smooth'});
-    }
-
-    /**
-     * Обработка скролла в карусели
-     * @param {Object} event - событие скролла
-     */
-    carouselScrolled = (event) => {
-        const carousel = event.target;
-        const leftArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
-        const rightArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
-        scrollCarousel(carousel, leftArrow, rightArrow);
+        this.favoriteMoviesCarousel.removeEventListeners();
+        this.favoriteActorsCarousel.removeEventListeners();
+        this.reviewsCarousel.removeEventListeners();
     }
 }
