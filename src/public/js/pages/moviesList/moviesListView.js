@@ -4,6 +4,7 @@ import {busEvents} from '../../utils/busEvents';
 import {NavbarRight} from '../../components/navbarRight';
 import {userMeta} from '../../utils/userMeta';
 import './moviesList.tmpl';
+import {AddToPlaylistWidget} from '../../components/addToPlaylist';
 
 /**
  * Представление страницы списка фильмов
@@ -102,6 +103,29 @@ export default class MoviesListView extends BaseView {
         // TODO: api request
         const movieId = event.target.getAttribute('data-id');
         console.log(`add to playlist movie ${movieId}`);
+        if (event.target.checked) {
+            // TODO: получить информацию о плейлистах с бекенда
+            const playlistsData = {
+                movieId: movieId,
+                userPlaylists: [
+                    {
+                        id: 1,
+                        playlistName: 'Любимые фильмы',
+                        isAdded: true,
+                    },
+                    {
+                        id: 2,
+                        playlistName: 'Кино на вечер',
+                        isAdded: false,
+                    },
+                ],
+            };
+            const widget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
+                playlistsData);
+            widget.render();
+        } else {
+            document.getElementById(`add-to-playlist-${movieId}`).innerHTML = '';
+        }
     }
 }
 
