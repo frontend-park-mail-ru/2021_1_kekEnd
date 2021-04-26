@@ -1,10 +1,10 @@
 import {globalEventBus} from '../../utils/eventbus';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
 import BaseView from '../baseView';
 import {busEvents} from '../../utils/busEvents';
 import {scrollCarousel} from '../../utils/carousel';
 import './main.tmpl';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
 
 /**
  * Представление главной страницы
@@ -20,11 +20,9 @@ export default class MainView extends BaseView {
 
         globalEventBus.on(busEvents.SET_MAIN_PAGE_DATA, this.setMainPageData.bind(this));
         globalEventBus.on(busEvents.SET_MOVIES_BY_GENRES_PREVIEW, this.setMoviesByGenresPreview.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.searchMoviesByGenresCallback = this.searchMoviesByGenres.bind(this);
         this.searchMoviesByGenresPreviewCallback = this.searchMoviesByGenresPreview.bind(this);
-        this.logoutClickedCallback = this.logoutClicked.bind(this);
         this.carouselScrolledCallback = this.carouselScrolled.bind(this);
         this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
         this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
@@ -51,6 +49,11 @@ export default class MainView extends BaseView {
     setMainPageData(data) {
         this.data = data;
         super.render(this.data);
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
+
         this.setEventListeners();
     }
 
@@ -78,9 +81,6 @@ export default class MainView extends BaseView {
                 element.addEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        document.getElementById('logout-button')?.addEventListener('click',
-            this.logoutClickedCallback);
-
         [...document.getElementsByClassName('main__slider')]
             .forEach((element) => {
                 const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
@@ -93,6 +93,8 @@ export default class MainView extends BaseView {
                 leftArrow.addEventListener('click', this.leftArrowClickedCallback);
                 rightArrow.addEventListener('click', this.rightArrowClickedCallback);
             });
+
+        this.navbarRightComponent.setEventListeners();
     }
 
     /**
@@ -111,9 +113,6 @@ export default class MainView extends BaseView {
                 element.removeEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        document.getElementById('logout-button')?.removeEventListener('click',
-            this.logoutClickedCallback);
-
         [...document.getElementsByClassName('main__slider')]
             .forEach((element) => {
                 const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
@@ -122,6 +121,8 @@ export default class MainView extends BaseView {
                 leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
                 rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
             });
+
+        this.navbarRightComponent.removeEventListeners();
     }
 
     /**
@@ -142,23 +143,6 @@ export default class MainView extends BaseView {
         const genres = this.data.selected_genres;
         if (genres.length) {
             document.getElementById('main-genre-search-button').href += genres.join('+');
-        }
-    }
-
-    /**
-     * Обработка нажатия логаута
-     */
-    logoutClicked() {
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Выход со страницы
-     * @param {boolean} status - статус запроса на выход
-     */
-    processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
         }
     }
 

@@ -1,4 +1,4 @@
-<div class="header">
+<div id="header" class="header">
     <div class="header__section">
         <div class="header__item header__logo">
             <a href="/">КиноПоиск</a>
@@ -12,22 +12,5 @@
         <div class="header__item header__button">
             <a href="/">Поиск</a>
         </div>
-    </div>
-    <div class="header__section">
-        {{#if (getAuthStatus)}}
-            <div class="header__item header__button">
-                <a href="/me">Профиль</a>
-            </div>
-            <div class="header__item header__button">
-                <a id="logout-button">Выйти</a>
-            </div>
-        {{else}}
-            <div class="header__item header__button">
-                <a href="/login">Войти</a>
-            </div>
-            <div class="header__item header__button">
-                <a href="/signup">Регистрация</a>
-            </div>
-        {{/if}}
     </div>
 </div>

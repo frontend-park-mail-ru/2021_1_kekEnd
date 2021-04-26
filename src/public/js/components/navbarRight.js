@@ -3,11 +3,12 @@ import {globalEventBus} from '../utils/eventbus';
 import {globalRouter} from '../utils/router';
 import {PATHS} from '../utils/paths';
 import {busEvents} from '../utils/busEvents';
+import '../pages/partials/navbarRight.tmpl';
 
 /**
  * Компонента "Кнопка 'Выход'"
  */
-export class LogoutButton extends Component {
+export class NavbarRight extends Component {
     /**
      * Конструктор кнопки
      * @param {Object} parent - родитель кнопки
@@ -15,6 +16,8 @@ export class LogoutButton extends Component {
      */
     constructor(parent, state) {
         super(parent, state);
+        // eslint-disable-next-line no-undef
+        this.renderHBS = Handlebars.templates['navbarRight.hbs'];
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
         this.processLogout = this.processLogout.bind(this);
@@ -25,9 +28,7 @@ export class LogoutButton extends Component {
      * @return {string} - html-код для вставки к родителю
      */
     tmpl() {
-        return `
-            <a id="logout-button">Выйти</a>
-        `;
+        return this.renderHBS(this.state);
     }
 
     /**
