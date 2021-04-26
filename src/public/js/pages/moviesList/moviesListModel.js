@@ -1,6 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus';
 import {API} from '../../utils/api';
-import {OK_CODE} from '../../utils/codes';
 import {busEvents} from '../../utils/busEvents';
 
 
@@ -14,7 +13,6 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -43,16 +41,6 @@ export default class MoviesListModel {
                     'query': `?filter=${genres.join('+')}`,
                     genres,
                 });
-            });
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

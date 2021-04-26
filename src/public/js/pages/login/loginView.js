@@ -9,6 +9,7 @@ import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMe
 import {busEvents} from '../../utils/busEvents';
 import './login.tmpl';
 import {userMeta} from '../../utils/userMeta';
+import {NavbarRight} from '../../components/navbarRight';
 
 /**
  * Представление страницы логина
@@ -43,6 +44,10 @@ export default class LoginView extends BaseView {
      */
     setLoginPage() {
         super.render();
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'), {'authorized': false});
+        this.navbarRightComponent.render();
+
         this.setEventListeners();
     }
 

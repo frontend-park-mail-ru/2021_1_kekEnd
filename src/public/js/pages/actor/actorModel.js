@@ -1,6 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus';
 import {API} from '../../utils/api';
-import {OK_CODE} from '../../utils/codes';
 import {busEvents} from '../../utils/busEvents';
 
 
@@ -14,7 +13,6 @@ export default class ActorModel {
     constructor() {
         globalEventBus.on(busEvents.GET_ACTOR_DATA, this.getActorData.bind(this));
         globalEventBus.on(busEvents.LIKE_ACTOR, this.addActorToFavorites.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -37,23 +35,9 @@ export default class ActorModel {
         /*
         API.addActorToBestUsersActors(this.id)
             .then((res) => {
-                API.getUser()
-                    .then((authRes) => {
-                        globalEventBus.emit('added actor to favorites',
-                            {...res.data, 'isAuthorized': authRes.status === OK_CODE});
-                    });
+                globalEventBus.emit('added actor to favorites', res.data);
             });
         */
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
-            });
     }
 }
 

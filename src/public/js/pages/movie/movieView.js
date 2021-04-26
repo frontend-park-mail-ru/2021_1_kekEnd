@@ -1,14 +1,14 @@
 import {globalEventBus} from '../../utils/eventbus';
 import BaseView from '../baseView';
-import './movie.tmpl';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
 import {getFormValues} from '../../utils/formDataWork';
 import Validator from '../../utils/validation';
 import {setValidationHint} from '../../utils/setValidationResult';
 import {UPLOAD_ERROR} from '../../utils/errorMessages';
 import {scrollToTargetAdjusted} from '../../utils/scrollToTarget';
 import {busEvents} from '../../utils/busEvents';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
+import './movie.tmpl';
 
 /**
  * Представление страницы фильма
@@ -28,7 +28,6 @@ export default class MovieView extends BaseView {
         globalEventBus.on(busEvents.SET_REVIEWS_PAGE, this.setReviewsPage.bind(this));
         globalEventBus.on(busEvents.RATING_UPLOADED, this.displayNewRating.bind(this));
         globalEventBus.on(busEvents.RATING_DELETED, this.removeRating.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
@@ -38,7 +37,6 @@ export default class MovieView extends BaseView {
         this.paginationButtonClickedCallback = this.paginationButtonClicked.bind(this);
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
-        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -47,6 +45,23 @@ export default class MovieView extends BaseView {
      */
     render(id) {
         globalEventBus.emit(busEvents.GET_MOVIE_DATA, id);
+    }
+
+    /**
+     * Установка данных о фильме
+     * @param {Object} data - данные фильма
+     */
+    setMovieData(data) {
+        this.data = data;
+        super.render(this.data);
+
+        this.setUserRating();
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
+
+        this.setEventListeners();
     }
 
     /**
@@ -60,8 +75,6 @@ export default class MovieView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
-
         document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
         document.getElementById('playlist-button')?.addEventListener('click', this.playlistClickedCallback);
 
@@ -78,14 +91,14 @@ export default class MovieView extends BaseView {
         [...document.getElementsByClassName('pagination-wrapper__button')].forEach((button) => {
             button.addEventListener('click', this.paginationButtonClickedCallback);
         });
+
+        this.navbarRightComponent.setEventListeners();
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
-
         document.getElementById('watched-button')?.removeEventListener('click', this.watchedClickedCallback);
         document.getElementById('playlist-button')?.removeEventListener('click', this.playlistClickedCallback);
 
@@ -100,18 +113,8 @@ export default class MovieView extends BaseView {
         [...document.getElementsByClassName('pagination-wrapper__button')].forEach((button) => {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
         });
-    }
 
-    /**
-     * Установка данных о фильме
-     * @param {Object} data - данные фильма
-     */
-    setMovieData(data) {
-        this.data = data;
-        super.render(this.data);
-
-        this.setUserRating();
-        this.setEventListeners();
+        this.navbarRightComponent.removeEventListeners();
     }
 
     /**
@@ -135,23 +138,6 @@ export default class MovieView extends BaseView {
         if (this.data.userRating !== null) {
             const starID = `star-${this.data.userRating.score}`;
             document.getElementById(starID).checked = true;
-        }
-    }
-
-    /**
-     * Обработка нажатия логаута
-     */
-    logoutClicked() {
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Выход со страницы
-     * @param {boolean} status - статус запроса на выход
-     */
-    processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
         }
     }
 

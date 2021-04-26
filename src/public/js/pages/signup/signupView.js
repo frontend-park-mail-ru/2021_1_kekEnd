@@ -10,6 +10,7 @@ import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages';
 import {busEvents} from '../../utils/busEvents';
 import './signup.tmpl';
 import {userMeta} from '../../utils/userMeta';
+import {NavbarRight} from '../../components/navbarRight';
 
 
 /**
@@ -45,6 +46,10 @@ export default class SignupView extends BaseView {
      */
     setSignupPage() {
         super.render();
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'), {'authorized': false});
+        this.navbarRightComponent.render();
+
         this.setEventListeners();
     }
 

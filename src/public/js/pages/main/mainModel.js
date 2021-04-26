@@ -1,6 +1,5 @@
 import {globalEventBus} from '../../utils/eventbus';
 import {API} from '../../utils/api';
-import {OK_CODE} from '../../utils/codes';
 import {busEvents} from '../../utils/busEvents';
 
 
@@ -14,7 +13,6 @@ export default class MainModel {
     constructor() {
         globalEventBus.on(busEvents.GET_MAIN_PAGE_DATA, this.getMainPageData.bind(this));
         globalEventBus.on(busEvents.GET_MOVIES_BY_GENRES_PREVIEW, this.getMoviesByGenresPreview.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -39,16 +37,6 @@ export default class MainModel {
         API.getMoviesByGenres(genres, 1)
             .then((res) => {
                 globalEventBus.emit(busEvents.SET_MOVIES_BY_GENRES_PREVIEW, res.data.movies);
-            });
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

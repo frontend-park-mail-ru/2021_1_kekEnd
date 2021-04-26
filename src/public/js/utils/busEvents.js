@@ -5,8 +5,6 @@ export const busEvents = {
     LOAD_SIGNUP_PAGE: 'load signup page',
     SIGNUP_CLICKED: 'signup clicked',
     SIGNUP_STATUS: 'signup status',
-    LOGOUT_CLICKED: 'logout clicked',
-    LOGOUT_STATUS: 'logout status',
     GET_PROFILE_DATA: 'get profile data',
     SET_PROFILE_DATA: 'set profile data',
     GET_SETTINGS_DATA: 'get settings data',

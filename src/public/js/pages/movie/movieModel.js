@@ -21,7 +21,6 @@ export default class MovieModel {
         globalEventBus.on(busEvents.EDIT_RATING, this.editRating.bind(this));
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -125,16 +124,6 @@ export default class MovieModel {
         API.deleteUserRatingForMovie(id)
             .then((res) => {
                 globalEventBus.emit(busEvents.RATING_DELETED, res.status === OK_CODE);
-            });
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

@@ -16,7 +16,6 @@ export default class SettingsModel {
     constructor() {
         globalEventBus.on(busEvents.GET_SETTINGS_DATA, this.getSettingsData.bind(this));
         globalEventBus.on(busEvents.REQUEST_CHANGE_SETTINGS, this.changeSettings.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
         globalEventBus.on(busEvents.UPLOAD_AVATAR, this.sendAvatar.bind(this));
     }
 
@@ -57,16 +56,6 @@ export default class SettingsModel {
                 if (res) {
                     globalEventBus.emit('response change settings', res.status);
                 }
-            });
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit('logout status', res.status === OK_CODE);
             });
     }
 }

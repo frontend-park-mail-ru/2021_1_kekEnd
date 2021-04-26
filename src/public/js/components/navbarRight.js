@@ -1,9 +1,10 @@
 import {Component} from './component';
-import {globalEventBus} from '../utils/eventbus';
 import {globalRouter} from '../utils/router';
 import {PATHS} from '../utils/paths';
-import {busEvents} from '../utils/busEvents';
 import '../pages/partials/navbarRight.tmpl';
+import {API} from '../utils/api';
+import {OK_CODE} from '../utils/codes';
+import {userMeta} from '../utils/userMeta';
 
 /**
  * Компонента "Кнопка 'Выход'"
@@ -18,9 +19,7 @@ export class NavbarRight extends Component {
         super(parent, state);
         // eslint-disable-next-line no-undef
         this.renderHBS = Handlebars.templates['navbarRight.hbs'];
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
-        this.processLogout = this.processLogout.bind(this);
     }
 
     /**
@@ -51,16 +50,26 @@ export class NavbarRight extends Component {
      */
     logoutClicked(e) {
         e.preventDefault();
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
+        API.logout().then((res) => this.processLogout(res.status === OK_CODE));
     }
 
     /**
      * Выход со страницы
-     * @param {int} status - статус запроса на выход
+     * @param {boolean} status - статус запроса на выход
      */
     processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
+        if (!status) {
+            return;
+        }
+        userMeta.setAuthorized(false);
+
+        const currentPath = globalRouter.getCurrentPath();
+        if (currentPath === PATHS.profile || currentPath === PATHS.settings) {
+            // если пользователь находился в профиле или настройках, надо выкинуть его на главную
+            globalRouter.pushState(PATHS.main);
+        } else {
+            // если пользователь находился на обычных страницах, перерендерить ее
+            globalRouter.handlePath(currentPath, globalRouter.getCurrentParams());
         }
     }
 }

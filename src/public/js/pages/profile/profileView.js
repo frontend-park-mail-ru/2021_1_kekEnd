@@ -1,10 +1,10 @@
 import {globalEventBus} from '../../utils/eventbus';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
 import BaseView from '../baseView';
 import './profile.tmpl';
 import {busEvents} from '../../utils/busEvents';
 import {scrollCarousel} from '../../utils/carousel';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
 
 
 /**
@@ -20,9 +20,7 @@ export default class ProfileView extends BaseView {
         super(parent, Handlebars.templates['profile.hbs']);
 
         globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
-        this.logoutClickedCallback = this.logoutClicked.bind(this);
         this.carouselScrolledCallback = this.carouselScrolled.bind(this);
         this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
         this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
@@ -36,6 +34,20 @@ export default class ProfileView extends BaseView {
     }
 
     /**
+     * Установка данных профиля
+     * @param {Object} data - данные профиля
+     */
+    setProfileData(data) {
+        super.render(data);
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
+
+        this.setEventListeners();
+    }
+
+    /**
      * "Деструктор" страницы
      */
     hide() {
@@ -46,8 +58,6 @@ export default class ProfileView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
-
         [...document.getElementsByClassName('main__slider')]
             .forEach((element) => {
                 const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
@@ -60,14 +70,14 @@ export default class ProfileView extends BaseView {
                 leftArrow.addEventListener('click', this.leftArrowClickedCallback);
                 rightArrow.addEventListener('click', this.rightArrowClickedCallback);
             });
+
+        this.navbarRightComponent.setEventListeners();
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
-
         [...document.getElementsByClassName('main__slider')]
             .forEach((element) => {
                 const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
@@ -76,32 +86,8 @@ export default class ProfileView extends BaseView {
                 leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
                 rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
             });
-    }
 
-    /**
-     * Обработка нажатия на логаут
-     */
-    logoutClicked() {
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Установка данных профиля
-     * @param {Object} data - данные профиля
-     */
-    setProfileData(data) {
-        super.render(data);
-        this.setEventListeners();
-    }
-
-    /**
-     * Выход со страницы
-     * @param {boolean} status - статус запроса на выход
-     */
-    processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
-        }
+        this.navbarRightComponent.removeEventListeners();
     }
 
     /**

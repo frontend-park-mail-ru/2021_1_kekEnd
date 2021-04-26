@@ -16,7 +16,6 @@ export default class ProfileModel {
      */
     constructor() {
         globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_CLICKED, this.logout.bind(this));
     }
 
     /**
@@ -65,16 +64,6 @@ export default class ProfileModel {
                 if (err.message === AUTH_ERROR) {
                     globalRouter.pushState(PATHS.login);
                 }
-            });
-    }
-
-    /**
-     * Выход со страницы
-     */
-    logout() {
-        API.logout()
-            .then((res) => {
-                globalEventBus.emit(busEvents.LOGOUT_STATUS, res.status === OK_CODE);
             });
     }
 }

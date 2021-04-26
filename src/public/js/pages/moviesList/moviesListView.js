@@ -1,9 +1,9 @@
 import {globalEventBus} from '../../utils/eventbus';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
 import BaseView from '../baseView';
-import './moviesList.tmpl';
 import {busEvents} from '../../utils/busEvents';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
+import './moviesList.tmpl';
 
 /**
  * Представление страницы списка фильмов
@@ -18,11 +18,9 @@ export default class MoviesListView extends BaseView {
         super(parent, Handlebars.templates['moviesList.hbs']);
 
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
-        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -54,6 +52,11 @@ export default class MoviesListView extends BaseView {
      */
     setMovies(data) {
         super.render(data);
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
+
         this.setEventListeners();
     }
 
@@ -66,7 +69,7 @@ export default class MoviesListView extends BaseView {
         [...document.getElementsByClassName('buttons__input-playlist')]
             .forEach((element) => element.addEventListener('click', this.playlistClickedCallback));
 
-        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+        this.navbarRightComponent.setEventListeners();
     }
 
     /**
@@ -78,7 +81,7 @@ export default class MoviesListView extends BaseView {
         [...document.getElementsByClassName('buttons__input-playlist')]
             .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
 
-        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+        this.navbarRightComponent.removeEventListeners();
     }
 
     /**
@@ -99,23 +102,6 @@ export default class MoviesListView extends BaseView {
         // TODO: api request
         const movieId = event.target.getAttribute('data-id');
         console.log(`add to playlist movie ${movieId}`);
-    }
-
-    /**
-     * Обработка нажатия на логаут
-     */
-    logoutClicked() {
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
-    }
-
-    /**
-     * Выход со страницы
-     * @param {boolean} status - статус запроса на выход
-     */
-    processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
-        }
     }
 }
 

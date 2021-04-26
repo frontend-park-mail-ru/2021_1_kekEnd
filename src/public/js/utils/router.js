@@ -95,6 +95,24 @@ export class Router {
         this.currentView?.hide();
         this.currentView = this.routes.get(path);
         this.currentView.render(parameters);
+        this.currentPath = path;
+        this.currentParameters = parameters;
+    }
+
+    /**
+     * Получить текущий путь
+     * @return {string} - текуший путь
+     */
+    getCurrentPath() {
+        return this.currentPath;
+    }
+
+    /**
+     * Получить текущие параметры страницы
+     * @return {string} - текущие параметры
+     */
+    getCurrentParams() {
+        return this.currentParameters;
     }
 
     /**

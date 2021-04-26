@@ -8,6 +8,8 @@ import {OK_CODE} from '../../utils/codes';
 import {PASSWORDS_MISMATCH} from '../../utils/errorMessages';
 import {busEvents} from '../../utils/busEvents';
 import './settings.tmpl';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
 
 
 /**
@@ -27,12 +29,10 @@ export default class SettingsView extends BaseView {
 
         globalEventBus.on(busEvents.SET_SETTINGS_DATA, this.setSettings.bind(this));
         globalEventBus.on(busEvents.RESPONSE_CHANGE_SETTINGS, this.displayServerResponse.bind(this));
-        globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
         globalEventBus.on(busEvents.AVATAR_UPLOADED, this.displayServerResponseAvatar.bind(this));
 
         this.saveClickedCallback = this.saveClicked.bind(this);
         this.uploadAvatarClickedCallback = this.uploadAvatarClicked.bind(this);
-        this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
     /**
@@ -49,6 +49,11 @@ export default class SettingsView extends BaseView {
     setSettings(data) {
         this.settings = data;
         super.render(this.settings);
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
+
         this.setEventListeners();
     }
 
@@ -63,10 +68,10 @@ export default class SettingsView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
-
         document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
+
+        this.navbarRightComponent.setEventListeners();
 
         this.setPhotoPreviewListener();
 
@@ -111,16 +116,9 @@ export default class SettingsView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
         document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
-    }
-
-    /**
-     * Обработка нажатия на логаут
-     */
-    logoutClicked() {
-        globalEventBus.emit(busEvents.LOGOUT_CLICKED);
+        this.navbarRightComponent.removeEventListeners();
     }
 
     /**
@@ -251,16 +249,6 @@ export default class SettingsView extends BaseView {
             globalRouter.pushState(PATHS.profile);
         } else {
             document.getElementById('settings-server-response').innerHTML = status;
-        }
-    }
-
-    /**
-     * Выход со страницы
-     * @param {boolean} status - статус запроса
-     */
-    processLogout(status) {
-        if (status) {
-            globalRouter.pushState(PATHS.login);
         }
     }
 

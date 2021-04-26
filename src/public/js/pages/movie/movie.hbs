@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="movie-flex__movie-flex-right">
-                    {{#if isAuthorized}}
+                    {{#if (getAuthStatus)}}
                         <div class="movie-flex-right__buttons">
                             <input class="buttons__input-watched buttons__movie-page-input-watched"
                                    id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
@@ -109,7 +109,7 @@
                         {{else}}<h2 class="right__movie-rating negative-rating">{{rating}}</h2>{{/if}}
                     {{/if}}
 
-                    {{#if isAuthorized}}
+                    {{#if (getAuthStatus)}}
                         {{#if userRating}}
                             <h3 class="movie-flex-right__rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
                             <p id="delete-rating" class="movie-flex-right__delete-rating">Удалить оценку</p>
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    {{#if isAuthorized}}
+    {{#if (getAuthStatus)}}
         {{#if userReview}}
             {{#if wantsToEditReview}}
                 <div class="main__content-container">
