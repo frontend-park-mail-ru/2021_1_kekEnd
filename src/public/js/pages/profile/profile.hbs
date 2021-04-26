@@ -29,17 +29,31 @@
         </div>
     </div>
 
-    <h3 class="main__section-name">Любимые фильмы</h3>
-
-    <div id='favorite-movies-carousel' class="main__slider-wrapper"></div>
-
-    <h3 class="main__section-name">Любимые актеры</h3>
-
-    <div id='favorite-actors-carousel' class="main__slider-wrapper"></div>
-
+    {{#if favorite_movies}}
+        <h3 class="main__section-name">Любимые фильмы</h3>
+        <div id='favorite-movies-carousel' class="main__slider-wrapper"></div>
+    {{/if}}
+    {{#if favorite_actors}}
+        <h3 class="main__section-name">Любимые актеры</h3>
+        <div id='favorite-actors-carousel' class="main__slider-wrapper"></div>
+    {{/if}}
+    {{#if playlists}}
+        <h3 class="main__section-name">Плейлисты</h3>
+        {{#each playlists}}
+            <div class="main__playlist-row">
+                <button class="playlist-row__accordion">
+                    {{this.playlistName}}
+                </button>
+                <div class="playlist-row__panel">
+                    {{#each this.movies}}
+                        <p class="panel__text">{{this.title}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
     {{#if reviews}}
         <h3 class="main__section-name">Рецензии</h3>
-
         <div id='reviews-carousel' class="main__slider-wrapper"></div>
     {{/if}}
 </div>

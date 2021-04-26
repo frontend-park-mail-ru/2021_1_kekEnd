@@ -22,7 +22,7 @@ export default class ProfileModel {
      * Получение данных профиля
      */
     getProfileData() {
-        // this data is not yet on backend but we need to show some pictures
+        // TODO: implement on backend
         const additionalData = {
             favorite_movies: [
                 {
@@ -62,6 +62,36 @@ export default class ProfileModel {
                 {
                     id: 91,
                     poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/6264.jpg',
+                },
+            ],
+            playlists: [
+                {
+                    id: 1,
+                    playlistName: 'Любимые фильмы',
+                    movies: [
+                        {
+                            id: 1,
+                            title: 'Матрица',
+                        },
+                        {
+                            id: 2,
+                            title: 'Король Лев',
+                        },
+                    ],
+                },
+                {
+                    id: 2,
+                    playlistName: 'Кино на вечер',
+                    movies: [
+                        {
+                            id: 3,
+                            title: 'Душа',
+                        },
+                        {
+                            id: 4,
+                            title: 'Тайна Коко',
+                        },
+                    ],
                 },
             ],
         };
