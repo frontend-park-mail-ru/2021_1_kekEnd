@@ -9,6 +9,7 @@ import {busEvents} from '../../utils/busEvents';
 import {NavbarRight} from '../../components/navbarRight';
 import {userMeta} from '../../utils/userMeta';
 import './movie.tmpl';
+import {AddToPlaylistWidget} from '../../components/addToPlaylist';
 
 /**
  * Представление страницы фильма
@@ -60,6 +61,7 @@ export default class MovieView extends BaseView {
         this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
             {'authorized': userMeta.getAuthorized()});
         this.navbarRightComponent.render();
+
 
         this.setEventListeners();
     }
@@ -263,13 +265,36 @@ export default class MovieView extends BaseView {
     }
 
     /**
-     * Обработчик нажатия на кнопку "Лайк"
+     * Обработчик нажатия на кнопку "Добавить в плейлист"
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
+        // TODO: убрать дублирование
         // TODO: api request
-        console.log(event.target);
         const movieId = event.target.getAttribute('data-id');
         console.log(`add to playlist movie ${movieId}`);
+        if (event.target.checked) {
+            // TODO: получить информацию о плейлистах с бекенда
+            const playlistsData = {
+                movieId: movieId,
+                userPlaylists: [
+                    {
+                        id: 1,
+                        playlistName: 'Любимые фильмы',
+                        isAdded: true,
+                    },
+                    {
+                        id: 2,
+                        playlistName: 'Кино на вечер',
+                        isAdded: false,
+                    },
+                ],
+            };
+            const widget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
+                playlistsData);
+            widget.render();
+        } else {
+            document.getElementById(`add-to-playlist-${movieId}`).innerHTML = '';
+        }
     }
 }

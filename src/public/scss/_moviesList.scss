@@ -173,6 +173,8 @@
   &__add-to-playlist-container {
     // нужно, чтобы блок "Добавить в плейлист" расширялся вправо
     direction: rtl;
+    display: inline-block;
+    text-align: center;
   }
 }
 
