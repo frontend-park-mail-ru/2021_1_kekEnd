@@ -39,18 +39,21 @@
     {{/if}}
     {{#if playlists}}
         <h3 class="main__section-name">Плейлисты</h3>
-        {{#each playlists}}
-            <div class="main__playlist-row">
-                <button class="playlist-row__accordion">
-                    {{this.playlistName}}
-                </button>
-                <div class="playlist-row__panel">
-                    {{#each this.movies}}
-                        <p class="panel__text">{{this.title}}</p>
-                    {{/each}}
+        <div class="main__accordion">
+            {{#each playlists}}
+                <div class="accordion__tab">
+                    <input class="tab__input" type="checkbox" id="tab-{{@index}}" name="tab-group">
+                    <label class="tab__title" for="tab-{{@index}}">{{this.playlistName}}</label>
+                    <div class="tab__content-container">
+                        {{#each this.movies}}
+                            <a class="tab__content-link" href="/movie/{{this.id}}">
+                                <p class="tab__content-row">{{this.title}}</p>
+                            </a>
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-        {{/each}}
+            {{/each}}
+        </div>
     {{/if}}
     {{#if reviews}}
         <h3 class="main__section-name">Рецензии</h3>

@@ -142,3 +142,59 @@
     font-size: 16px;
   }
 }
+
+.accordion__tab {
+  width: 50%;
+  border: 1px solid $divider-color;
+  border-radius: 4px;
+  background-color: $white-color;
+  color: $primary-text-color;
+  margin: 0 auto 12px auto;
+}
+
+.tab {
+
+  &__input, &__content-container {
+    display: none;
+  }
+
+  &__title {
+    padding: 12px;
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+
+    &::after {
+      content: "+";
+      float: right;
+    }
+  }
+
+  &__content-row {
+    padding: 12px 20px;
+
+    &:hover {
+      background-color: $whitish;
+    }
+  }
+
+  &__content-link {
+    text-decoration: none;
+    color: $primary-text-color;
+  }
+
+  :checked + &__title {
+    background-color: $accent-color;
+    border-radius: 4px 4px 0 0;
+    color: $white-color;
+
+    &::after {
+      content: "—";
+    }
+  }
+
+  :checked ~ &__content-container {
+    display: block;
+  }
+}
