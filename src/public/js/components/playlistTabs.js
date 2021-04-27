@@ -1,10 +1,10 @@
 import {Component} from './component';
-import '../partials/playlistTab.tmpl';
+import '../partials/playlistTabs.tmpl';
 
 /**
  * Компонент "Плейлист"
  */
-export class PlaylistTab extends Component {
+export class PlaylistTabs extends Component {
     /**
      * Конструктор компонента
      * @param {Object} parent - родитель компонента
@@ -13,7 +13,8 @@ export class PlaylistTab extends Component {
     constructor(parent, state) {
         super(parent, state);
         // eslint-disable-next-line no-undef
-        this.renderHBS = Handlebars.templates['playlistTab.hbs'];
+        this.renderHBS = Handlebars.templates['playlistTabs.hbs'];
+        this.createPlaylistClickedCallback = this.createPlaylistClicked.bind(this);
     }
 
     /**
@@ -28,13 +29,22 @@ export class PlaylistTab extends Component {
      * Установить листенеры компоненту
      */
     setEventListeners() {
-        console.log('setting listeners');
+        document.getElementById('create-playlist-button')
+            .addEventListener('click', this.createPlaylistClickedCallback);
     }
 
     /**
      * Убрать листенеры компонента
      */
     removeEventListeners() {
-        console.log('removing listeners');
+        document.getElementById('create-playlist-button')
+            .addEventListener('click', this.createPlaylistClickedCallback);
+    }
+
+    /**
+     * Обработка нажатия на кнопку "Создать плейлист"
+     */
+    createPlaylistClicked() {
+        console.log('creating playlist');
     }
 }
