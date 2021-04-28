@@ -93,6 +93,10 @@ export default class ProfileModel {
                         },
                     ],
                 },
+                {
+                    id: 3,
+                    playlistName: 'Пустой',
+                },
             ],
         };
 
