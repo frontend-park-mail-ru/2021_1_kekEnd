@@ -211,3 +211,24 @@
     font-size: 24px;
   }
 }
+
+.create-playlist-container {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 12px auto;
+
+  &__input {
+    padding: 12px;
+    border-radius: $m-border-radius;
+    color: $primary-text-color;
+    border: 1px solid $divider-color;
+    outline: none;
+    font-size: 18px;
+  }
+
+  &__submit {
+    color: $accent-color;
+    font-size: 24px;
+  }
+}
