@@ -20,6 +20,7 @@ export class PlaylistTabs extends Component {
         this.createPlaylistClickedCallback = this.createPlaylistClicked.bind(this);
         this.createPlaylistCallback = this.createPlaylist.bind(this);
         this.removeCreationCallback = this.removeCreationForm.bind(this);
+        this.deleteMovieClickedCallback = this.deleteMovieClicked.bind(this);
     }
 
     /**
@@ -36,6 +37,8 @@ export class PlaylistTabs extends Component {
     setEventListeners() {
         document.getElementById('create-playlist-button')
             .addEventListener('click', this.createPlaylistClickedCallback);
+        [...document.getElementsByClassName('tab__delete-button')]
+            .forEach((el) => el.addEventListener('click', this.deleteMovieClickedCallback));
     }
 
     /**
@@ -44,6 +47,8 @@ export class PlaylistTabs extends Component {
     removeEventListeners() {
         document.getElementById('create-playlist-button')
             .addEventListener('click', this.createPlaylistClickedCallback);
+        [...document.getElementsByClassName('tab__delete-button')]
+            .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
     }
 
     /**
@@ -81,5 +86,18 @@ export class PlaylistTabs extends Component {
             playlistName: playlistName,
         }));
         this.removeCreationForm();
+    }
+
+    /**
+     * Обработка нажатия на кнопку удаления фильма из плейлиста
+     * @param {Object} event - событие нажатия на кнопку
+     */
+    deleteMovieClicked(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const button = event.target.parentElement;
+        const movieId = button.getAttribute('data-movie-id');
+        console.log(`delete movie ${movieId}`);
+        button.closest('.tab__content-link').remove();
     }
 }
