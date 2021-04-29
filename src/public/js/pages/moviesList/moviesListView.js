@@ -96,13 +96,16 @@ export default class MoviesListView extends BaseView {
     }
 
     /**
-     * Обработчик нажатия на кнопку "Лайк"
+     * Обработчик нажатия на кнопку "Добавить в плейлист"
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
         // TODO: api request
         const movieId = event.target.getAttribute('data-id');
-        console.log(`add to playlist movie ${movieId}`);
+
+        this.currentPlaylistWidget?.hide();
+        this.currentPlaylistWidget = null;
+
         if (event.target.checked) {
             // TODO: получить информацию о плейлистах с бекенда
             const playlistsData = {
@@ -120,11 +123,11 @@ export default class MoviesListView extends BaseView {
                     },
                 ],
             };
-            const widget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
+
+            this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
                 playlistsData);
-            widget.render();
-        } else {
-            document.getElementById(`add-to-playlist-${movieId}`).innerHTML = '';
+            this.currentPlaylistWidget.render();
+            this.currentPlaylistWidget.setEventListeners();
         }
     }
 }
