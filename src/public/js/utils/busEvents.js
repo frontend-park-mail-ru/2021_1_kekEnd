@@ -38,4 +38,9 @@ export const busEvents = {
     SET_ACTOR_DATA: 'set actor data',
     LIKE_ACTOR: 'add actor to favorites',
     SHOW_POPUP: 'show popup',
+    GET_USER_PLAYLISTS: 'get user playlists',
+    SET_USER_PLAYLISTS: 'set user playlists',
+    CREATE_PLAYLIST: 'create playlist',
+    ADD_TO_PLAYLIST: 'add movie to playlist',
+    REMOVE_FROM_PLAYLIST: 'remove movie from playlist',
 };

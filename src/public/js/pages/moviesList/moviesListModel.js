@@ -13,6 +13,7 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
+        globalEventBus.on(busEvents.GET_USER_PLAYLISTS, this.getUserPlaylists.bind(this));
     }
 
     /**
@@ -42,6 +43,29 @@ export default class MoviesListModel {
                     genres,
                 });
             });
+    }
+
+    /**
+     * Получить плейлисты пользователя
+     * @param {number} movieId - id текущего фильма
+     */
+    getUserPlaylists(movieId) {
+        // TODO: API request
+        globalEventBus.emit(busEvents.SET_USER_PLAYLISTS, {
+            movieId: movieId,
+            userPlaylists: [
+                {
+                    id: 1,
+                    playlistName: 'Любимые фильмы',
+                    isAdded: true,
+                },
+                {
+                    id: 2,
+                    playlistName: 'Кино на вечер',
+                    isAdded: false,
+                },
+            ],
+        });
     }
 }
 

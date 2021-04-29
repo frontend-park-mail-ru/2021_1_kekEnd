@@ -19,6 +19,7 @@ export default class MoviesListView extends BaseView {
         super(parent, Handlebars.templates['moviesList.hbs']);
 
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
+        globalEventBus.on(busEvents.SET_USER_PLAYLISTS, this.displayPlaylists.bind(this));
 
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
@@ -101,35 +102,25 @@ export default class MoviesListView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
-        // TODO: api request
         const movieId = event.target.getAttribute('data-id');
 
         this.currentPlaylistWidget?.hide();
         this.currentPlaylistWidget = null;
 
         if (event.target.checked) {
-            // TODO: получить информацию о плейлистах с бекенда
-            const playlistsData = {
-                movieId: movieId,
-                userPlaylists: [
-                    {
-                        id: 1,
-                        playlistName: 'Любимые фильмы',
-                        isAdded: true,
-                    },
-                    {
-                        id: 2,
-                        playlistName: 'Кино на вечер',
-                        isAdded: false,
-                    },
-                ],
-            };
-
-            this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
-                playlistsData);
-            this.currentPlaylistWidget.render();
-            this.currentPlaylistWidget.setEventListeners();
+            globalEventBus.emit(busEvents.GET_USER_PLAYLISTS, movieId);
         }
+    }
+
+    /**
+     * Отобразить виджет со списком плейлистов
+     * @param {Object} data - информация о плейлистах
+     */
+    displayPlaylists(data) {
+        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${data.movieId}`),
+            data);
+        this.currentPlaylistWidget.render();
+        this.currentPlaylistWidget.setEventListeners();
     }
 }
 
