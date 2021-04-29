@@ -157,23 +157,28 @@
                         <h3 class="write-review__your-review">Редактирование рецензии</h3>
                         <div class="write-review__review-form-container">
                             <form id="review" class="review-form-container__review-form">
-                                <select name="review_type" class="review-form__select-review-type" id="select-type">
-                                    <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
-                                            value="positive">Положительная
-                                    </option>
-                                    <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
-                                            value="neutral">Нейтральная
-                                    </option>
-                                    <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
-                                            value="negative">Отрицательная
-                                    </option>
-                                </select>
-                                <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                       placeholder="Заголовок" value="{{userReview.title}}">
-                                <textarea name="content" class="form__input-field review-form__input-review-content"
-                                          placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                <div class="review-form-container__grid">
+                                    <div>
+                                        <input name="title" type="text" class="form__input-field review-form__input-review-title"
+                                               placeholder="Заголовок" value="{{userReview.title}}">
+                                        <textarea name="content" class="form__input-field review-form__input-review-content"
+                                                  placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                    </div>
+                                    <select name="review_type" class="review-form__select-review-type" id="select-type">
+                                        <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
+                                                value="positive">Положительная
+                                        </option>
+                                        <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
+                                                value="neutral">Нейтральная
+                                        </option>
+                                        <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
+                                                value="negative">Отрицательная
+                                        </option>
+                                    </select>
+                                </div>
                                 <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
-                                <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
+                                <button type="submit" id="review-button"
+                                        class="form__submit-button form__submit-review">Отправить</button>
                             </form>
                         </div>
                     </div>
@@ -203,18 +208,23 @@
                     <h3 class="write-review__your-review">Напишите рецензию</h3>
                     <div class="write-review__review-form-container">
                         <form id="review" class="review-form-container__review-form">
-                            <select name="review_type" class="review-form__select-review-type" id="select-type">
-                                <option selected disabled>Тип рецензии</option>
-                                <option value="positive">Положительная</option>
-                                <option value="neutral">Нейтральная</option>
-                                <option value="negative">Отрицательная</option>
-                            </select>
-                            <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                   placeholder="Заголовок">
-                            <textarea name="content" class="form__input-field review-form__input-review-content"
-                                      placeholder="Ваши впечатления о фильме"></textarea>
+                            <div class="review-form-container__grid">
+                                <div>
+                                    <input name="title" type="text" class="form__input-field review-form__input-review-title"
+                                           placeholder="Заголовок">
+                                    <textarea name="content" class="form__input-field review-form__input-review-content"
+                                              placeholder="Ваши впечатления о фильме"></textarea>
+                                </div>
+                                <select name="review_type" class="review-form__select-review-type" id="select-type">
+                                    <option selected disabled>Тип рецензии</option>
+                                    <option value="positive">Положительная</option>
+                                    <option value="neutral">Нейтральная</option>
+                                    <option value="negative">Отрицательная</option>
+                                </select>
+                            </div>
                             <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
-                            <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
+                            <button type="submit" id="review-button"
+                                    class="form__submit-button form__submit-review">Отправить</button>
                         </form>
                     </div>
                 </div>
