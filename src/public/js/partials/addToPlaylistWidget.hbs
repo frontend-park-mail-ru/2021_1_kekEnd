@@ -1,17 +1,22 @@
 <div class="add-to-playlist-widget">
     <h3 class="add-to-playlist-widget__title">Добавить в плейлист</h3>
-    {{#each userPlaylists}}
-        <div class="add-to-playlist-widget__playlist-row">
-            <label class="add-to-playlist-widget__label">
-                {{this.playlistName}}
-            </label>
-            {{#if this.isAdded}}
-                <input class="add-to-playlist-widget__checkbox" type="checkbox" data-id="{{../movieId}}" checked/>
-            {{else}}
-                <input class="add-to-playlist-widget__checkbox" type="checkbox" data-id="{{../movieId}}"/>
-            {{/if}}
-        </div>
-    {{/each}}
+    <div id="playlists-list">
+        {{#each userPlaylists}}
+            <div class="add-to-playlist-widget__playlist-row">
+                <label class="add-to-playlist-widget__label" data-playlist-id="{{@index}}">
+                    {{playlistName}}
+                </label>
+                {{#if isAdded}}
+                    <input id="checkbox-{{@index}}" class="add-to-playlist-widget__checkbox" type="checkbox"
+                           data-movie-id="{{../movieId}}" checked/>
+                {{else}}
+                    <input id="checkbox-{{@index}}" class="add-to-playlist-widget__checkbox" type="checkbox"
+                           data-movie-id="{{../movieId}}"/>
+                {{/if}}
+            </div>
+
+        {{/each}}
+    </div>
     <button id="create-playlist-button" class="fa-button create-playlist-button create-playlist-button_size_s">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
         Создать плейлист

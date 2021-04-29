@@ -14,3 +14,4 @@ handlebars src/public/js/partials/carousel.hbs -f src/public/js/partials/carouse
 handlebars src/public/js/partials/addToPlaylistWidget.hbs -f src/public/js/partials/addToPlaylistWidget.tmpl.js
 handlebars src/public/js/partials/playlistTab.hbs -f src/public/js/partials/playlistTab.tmpl.js
 handlebars src/public/js/partials/playlistTabs.hbs -f src/public/js/partials/playlistTabs.tmpl.js
+handlebars src/public/js/partials/playlistRow.hbs -f src/public/js/partials/playlistRow.tmpl.js

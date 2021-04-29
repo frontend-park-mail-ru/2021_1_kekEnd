@@ -83,6 +83,7 @@ export default class MoviesListView extends BaseView {
             .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
 
         this.navbarRightComponent.removeEventListeners();
+        this.currentPlaylistWidget?.hide();
     }
 
     /**
