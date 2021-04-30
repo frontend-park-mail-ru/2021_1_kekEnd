@@ -45,4 +45,6 @@ export const busEvents = {
     REMOVE_FROM_PLAYLIST: 'remove movie from playlist',
     FOLLOW_CLICKED: 'follow clicked',
     FOLLOW_STATUS: 'follow status',
+    GET_FEED: 'get feed',
+    SET_FEED: 'set feed',
 };

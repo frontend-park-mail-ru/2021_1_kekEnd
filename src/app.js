@@ -12,6 +12,7 @@ import MoviesListController from './public/js/pages/moviesList/moviesListControl
 import './public/js/pages/popup/popup';
 import './public/scss/compound.scss';
 import {userMeta} from './public/js/utils/userMeta';
+import FeedController from './public/js/pages/feed/feedController';
 
 
 if ('serviceWorker' in navigator) {
@@ -40,6 +41,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     globalRouter.register(PATHS.movie, new MovieController(application).view);
     globalRouter.register(PATHS.actor, new ActorController(application).view);
     globalRouter.register(PATHS.settings, new SettingsController(application).view);
+    globalRouter.register(PATHS.feed, new FeedController(application).view);
 
     globalRouter.start();
 });
