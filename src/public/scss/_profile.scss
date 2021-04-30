@@ -62,6 +62,11 @@
     font-weight: 600;
   }
 
+  &__follow-checkbox {
+    position: absolute;
+    visibility: hidden;
+  }
+
   &__follow-button {
     background-color: $accent-color;
     padding: 8px;

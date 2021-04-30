@@ -20,6 +20,9 @@ export default class ProfileView extends BaseView {
         super(parent, Handlebars.templates['profile.hbs']);
 
         globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
+        globalEventBus.on(busEvents.FOLLOW_STATUS, this.proceedFollow.bind(this));
+
+        this.followClickedCallback = this.followClicked.bind(this);
     }
 
     /**
@@ -34,6 +37,7 @@ export default class ProfileView extends BaseView {
      * @param {Object} data - данные профиля
      */
     setProfileData(data) {
+        this.username = data.username;
         super.render(data);
 
         this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
@@ -71,6 +75,8 @@ export default class ProfileView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
+        document.getElementById('follow-button').addEventListener('click', this.followClickedCallback);
+
         this.navbarRightComponent.setEventListeners();
         this.favoriteMoviesCarousel.setEventListeners();
         this.favoriteActorsCarousel.setEventListeners();
@@ -87,5 +93,32 @@ export default class ProfileView extends BaseView {
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();
         this.playlistTabs.removeEventListeners();
+    }
+
+    /**
+     * Обработка нажатия на "Подписаться"
+     */
+    followClicked() {
+        const checkbox = document.getElementById('follow');
+        globalEventBus.emit(busEvents.FOLLOW_CLICKED, this.username, !checkbox.checked);
+    }
+
+    /**
+     * Обработка результата подписки/отписки
+     * @param {boolean} status - статус запроса
+     * @param {boolean} isFollowing - это было подписка или отписка
+     */
+    proceedFollow(status, isFollowing) {
+        if (status) {
+            const button = document.getElementById('follow-button');
+            const followersText = document.getElementById('followers-number');
+            if (isFollowing) {
+                button.textContent = 'Отписаться';
+                followersText.textContent = parseInt(followersText.textContent) + 1 + '';
+                return;
+            }
+            button.textContent = 'Подписаться';
+            followersText.textContent = parseInt(followersText.textContent) - 1 + '';
+        }
     }
 }

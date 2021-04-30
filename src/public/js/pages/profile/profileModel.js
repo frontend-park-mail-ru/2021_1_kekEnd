@@ -16,6 +16,7 @@ export default class ProfileModel {
      */
     constructor() {
         globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
+        globalEventBus.on(busEvents.FOLLOW_CLICKED, this.followUser.bind(this));
     }
 
     /**
@@ -117,5 +118,16 @@ export default class ProfileModel {
                     globalRouter.pushState(PATHS.login);
                 }
             });
+    }
+
+    /**
+     * Подписка на пользователя
+     * @param {string} username - имя пользователя
+     * @param {boolean} isFollowing - подписка или отписка
+     */
+    followUser(username, isFollowing) {
+        // TODO: api request
+        const status = true;
+        globalEventBus.emit(busEvents.FOLLOW_STATUS, status, isFollowing);
     }
 }

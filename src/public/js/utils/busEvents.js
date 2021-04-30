@@ -43,4 +43,6 @@ export const busEvents = {
     CREATE_PLAYLIST: 'create playlist',
     ADD_TO_PLAYLIST: 'add movie to playlist',
     REMOVE_FROM_PLAYLIST: 'remove movie from playlist',
+    FOLLOW_CLICKED: 'follow clicked',
+    FOLLOW_STATUS: 'follow status',
 };
