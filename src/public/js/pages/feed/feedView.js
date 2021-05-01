@@ -2,6 +2,8 @@ import BaseView from '../baseView';
 import './feed.tmpl';
 import {globalEventBus} from '../../utils/eventbus';
 import {busEvents} from '../../utils/busEvents';
+import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from '../../utils/userMeta';
 
 /**
  * Представление страницы "Лента"
@@ -37,6 +39,10 @@ export default class FeedView extends BaseView {
      */
     setFeedData(data) {
         super.render(data);
+
+        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarRightComponent.render();
     }
 
     /**
@@ -44,6 +50,7 @@ export default class FeedView extends BaseView {
      */
     setEventListeners() {
         console.log('setting listeners');
+        this.navbarRightComponent.setEventListeners();
     }
 
     /**
@@ -51,5 +58,6 @@ export default class FeedView extends BaseView {
      */
     removeEventListeners() {
         console.log('removing listeners');
+        this.navbarRightComponent.removeEventListeners();
     }
 }

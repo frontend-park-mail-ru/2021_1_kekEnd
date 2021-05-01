@@ -17,7 +17,33 @@ export default class FeedModel {
      */
     getFeed() {
         globalEventBus.emit(busEvents.SET_FEED, {
-
+            feed: [
+                {
+                    id: 1,
+                    itemType: 'review',
+                    username: 'sampleuser',
+                    avatar: 'http://89.208.198.186:8080/avatars/default.jpeg',
+                    review: {
+                        author: 'sampleuser',
+                        content: '121',
+                        id: '2',
+                        movie_id: '26',
+                        review_type: 'positive',
+                        title: '213',
+                    },
+                },
+                {
+                    id: 2,
+                    itemType: 'rating',
+                    username: 'sampleuser',
+                    avatar: 'http://89.208.198.186:8080/avatars/default.jpeg',
+                    rating: {
+                        movie_title: 'Матрица',
+                        movie_id: '26',
+                        score: 10,
+                    },
+                },
+            ],
         });
     }
 }

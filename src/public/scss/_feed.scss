@@ -1,0 +1,40 @@
+.main__feed-card {
+  width: 50%;
+  padding: 24px;
+  margin: 24px auto;
+  background-color: $white-color;
+  color: $primary-text-color;
+  border-radius: $l-border-radius;
+  box-shadow: 0 0 20px $transparent-black;
+}
+
+.feed-card {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 16px;
+    border-bottom: 1px solid $whitish;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__content {
+    height: 70%;
+  }
+
+  &__username {
+    cursor: pointer;
+  }
+
+  &__avatar-container {
+    height: 50px;
+  }
+
+  &__avatar {
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

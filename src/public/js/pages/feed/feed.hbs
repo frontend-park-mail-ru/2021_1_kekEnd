@@ -1,3 +1,26 @@
+{{> navbar }}
+
 <div class="main">
-    Лента
+    {{#each feed}}
+        <div class="main__feed-card">
+            <div class="feed-card__header">
+                <div class="feed-card__avatar-container">
+                    <img class="feed-card__avatar" src="{{avatar}}" alt="">
+                </div>
+                <h4 class="feed-card__username">{{username}}</h4>
+                <h5 class="feed-card__action">
+                    {{#if (eq itemType 'review')}}написал рецензию{{/if}}
+                    {{#if (eq itemType 'rating')}}поставил оценку{{/if}}
+                </h5>
+            </div>
+            <div class="feed-card__content">
+                {{#if (eq itemType 'review')}}
+                    здесь будет рецензия
+                {{/if}}
+                {{#if (eq itemType 'rating')}}
+                    здесь будет оценка
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
 </div>
