@@ -1,7 +1,7 @@
 'use strict';
 
-import {PATHS} from './paths.js';
-import {findAscendingTag} from './findAscendingTag.js';
+import {PATHS} from './paths';
+import {findAscendingTag} from './findAscendingTag';
 
 /**
  * Роутер

@@ -1,5 +1,5 @@
-import MovieModel from './movieModel.js';
-import MovieView from './movieView.js';
+import MovieModel from './movieModel';
+import MovieView from './movieView';
 
 
 /**

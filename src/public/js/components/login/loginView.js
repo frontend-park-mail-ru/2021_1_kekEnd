@@ -1,13 +1,13 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import BaseView from '../baseView.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import {getFormValues} from '../../utils/formDataWork.js';
-import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
-import {setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages.js';
-import {busEvents} from '../../utils/busEvents.js';
-import './login.tmpl.js';
+import {globalEventBus} from '../../utils/eventbus';
+import BaseView from '../baseView';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import {getFormValues} from '../../utils/formDataWork';
+import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
+import {setListenersForHidingValidationError} from '../../utils/setValidationResult';
+import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages';
+import {busEvents} from '../../utils/busEvents';
+import './login.tmpl';
 
 /**
  * Представление страницы логина

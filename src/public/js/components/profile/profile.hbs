@@ -32,36 +32,66 @@
 
     <h3 class="main__section-name">Любимые фильмы</h3>
 
-    <div class="main__slider">
-        {{#each favourite_movies}}
-            <div class="slider__card">
-                <a href="/movie/{{ inc @index}}"><img src="{{this}}"></a>
-            </div>
-        {{/each}}
+    <div class="main__slider-wrapper">
+        <div class="main__slider">
+            {{#each favourite_movies}}
+                <div class="slider__card">
+                    <a href="/movie/{{ inc @index}}"><img src="{{this}}"></a>
+                </div>
+            {{/each}}
+        </div>
+        <div class="main__arrows">
+            <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_left carousel-arrows__arrow_hidden">
+                <i class="fa fa-arrow-left fa-2x"></i>
+            </button>
+            <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_right">
+                <i class="fa fa-arrow-right fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <h3 class="main__section-name">Любимые актеры</h3>
 
-    <div class="main__slider">
-        {{#each favourite_actors}}
-            <div class="slider__card">
-                <a href="/actor/{{ inc @index}}"><img src="{{this}}"></a>
-            </div>
-        {{/each}}
+    <div class="main__slider-wrapper">
+        <div class="main__slider">
+            {{#each favourite_actors}}
+                <div class="slider__card">
+                    <a href="/actor/{{this.id}}"><img src="{{this.poster}}"></a>
+                </div>
+            {{/each}}
+        </div>
+        <div class="main__arrows">
+            <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_left carousel-arrows__arrow_hidden">
+                <i class="fa fa-arrow-left fa-2x"></i>
+            </button>
+            <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_right">
+                <i class="fa fa-arrow-right fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     {{#if reviews}}
         <h3 class="main__section-name">Рецензии</h3>
 
-        <div class="main__slider">
-            {{#each reviews}}
-                <div class="slider__review-card">
-                    <div class="review-card__content review_background_{{this.review_type}}">
-                        <p class="content__title">{{this.title}}</p>
-                        <p class="content__text">{{this.content}}</p>
+        <div class="main__slider-wrapper">
+            <div class="main__slider">
+                {{#each reviews}}
+                    <div class="slider__review-card">
+                        <div class="review-card__content review_background_{{this.review_type}}">
+                            <p class="content__title">{{this.title}}</p>
+                            <p class="content__text">{{this.content}}</p>
+                        </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            </div>
+            <div class="main__arrows">
+                <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_left carousel-arrows__arrow_hidden">
+                    <i class="fa fa-arrow-left fa-3x"></i>
+                </button>
+                <button class="fa-button carousel-arrows__arrow carousel-arrows__arrow_right">
+                    <i class="fa fa-arrow-right fa-3x"></i>
+                </button>
+            </div>
         </div>
     {{/if}}
 </div>

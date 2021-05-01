@@ -1,5 +1,5 @@
-import LoginModel from './loginModel.js';
-import LoginView from './loginView.js';
+import LoginModel from './loginModel';
+import LoginView from './loginView';
 
 
 /**

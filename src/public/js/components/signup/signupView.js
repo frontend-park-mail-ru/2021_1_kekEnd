@@ -1,14 +1,14 @@
-import BaseView from '../baseView.js';
-import {globalEventBus} from '../../utils/eventbus.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import {getFormValues} from '../../utils/formDataWork.js';
-import Validator from '../../utils/validation.js';
-import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult.js';
-import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes.js';
-import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages.js';
-import {busEvents} from '../../utils/busEvents.js';
-import './signup.tmpl.js';
+import BaseView from '../baseView';
+import {globalEventBus} from '../../utils/eventbus';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import {getFormValues} from '../../utils/formDataWork';
+import Validator from '../../utils/validation';
+import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult';
+import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
+import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages';
+import {busEvents} from '../../utils/busEvents';
+import './signup.tmpl';
 
 
 /**

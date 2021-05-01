@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa');
 
 * {
   margin: 0;
@@ -13,9 +14,8 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 12px;
-  background-color: $primary-color;
-  color: $white-text-color;
-  font-family: Tahoma, sans-serif;
+  background-color: $header-background;
+  font-family: "Comfortaa", serif;
 
   &__section {
     display: flex;
@@ -30,13 +30,17 @@ body {
   &__item a {
     display: block;
     padding: 12px 16px;
-    color: $white-text-color;
+    color: $secondary-text-color;
     text-decoration: none;
   }
 
   &__item:hover {
     background-color: $accent-color;
     border-radius: $xs-border-radius;
+
+    a {
+      color: $white-color;
+    }
   }
 
   &__logo {
@@ -54,13 +58,13 @@ body {
   position: absolute;
   width: 100%;
   min-height: 100%;
-  background-image: linear-gradient(20deg, $dark-primary-color 10%, $light-primary-color 100%);
+  background-color: $main-background;
   color: $primary-text-color;
 
   &__page-title {
     text-align: center;
     font-size: 32px;
-    color: $white-color;
+    color: $primary-text-color;
     margin: 32px 0 60px 0;
   }
 
