@@ -1,5 +1,5 @@
-import SignupModel from './signupModel.js';
-import SignupView from './signupView.js';
+import SignupModel from './signupModel';
+import SignupView from './signupView';
 
 
 /**

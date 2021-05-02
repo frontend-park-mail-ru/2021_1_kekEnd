@@ -1,36 +1,4 @@
-<div class="header">
-    <div class="header__section">
-        <div class="header__item header__logo">
-            <a href="/">КиноПоиск</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Фильмы</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Актеры</a>
-        </div>
-        <div class="header__item header__button">
-            <a href="/">Поиск</a>
-        </div>
-    </div>
-    <div class="header__section">
-        {{#if isAuthorized}}
-            <div class="header__item header__button">
-                <a href="/me">Профиль</a>
-            </div>
-            <div class="header__item header__button">
-                <a href="/logout" id="logout-button">Выйти</a>
-            </div>
-        {{else}}
-            <div class="header__item header__button">
-                <a href="/login">Войти</a>
-            </div>
-            <div class="header__item header__button">
-                <a href="/signup">Регистрация</a>
-            </div>
-        {{/if}}
-    </div>
-</div>
+{{> navbar}}
 
 <div class="main">
     <div class="main__actor-content">
@@ -61,24 +29,23 @@
                         <div class="info-row__info-title">Страна</div>
                         <div class="info-row__info-value">{{origin}}</div>
                     </div>
+
                     <div class="actor-info__info-row">
-                        <div class="info-row__info-title">Жанры</div>
-                        {{#each genres}}
-                            <a href="" class="info-row__info-link">{{this}}</a>
-                            {{#unless @last}}<span>&nbsp;</span>{{/unless}}
-                        {{/each}}
+                        <div class="info-row__info-title">Профессия</div>
+                        <div class="info-row__info-value">{{profession}}</div>
                     </div>
+
                     <div class="actor-info__info-row">
                         <div class="info-row__info-title">Всего фильмов</div>
                         <p class="info-row__info-value">{{movies_count}}</p>
                     </div>
-                    <div class="actor-info__info-row">
-                        <div class="info-row__info-title">Средний рейтинг фильмов</div>
-                        <p class="info-row__info-value">{{movies_rating}}</p>
-                    </div>
+<!--                    <div class="actor-info__info-row">-->
+<!--                        <div class="info-row__info-title">Средний рейтинг фильмов</div>-->
+<!--                        <p class="info-row__info-value">{{movies_rating}}</p>-->
+<!--                    </div>-->
 
                     <div class="actor-info__biography">
-                        <h2 class="actor-content__header">Биография</h2>
+                        <h2 class="actor-content__header">Факты</h2>
                         <div class="biography__text-container">
                             <p class="biography__text">{{biography}}</p>
                         </div>
@@ -91,7 +58,7 @@
                     <div class="actor-movies__movies-list">
                         {{#each movies}}
                             <div class="movies-list__movies-item">
-                                <a class="movies-item__title info-row__info-link" href="{{this.url}}">{{this.title}}</a>
+                                <a class="movies-item__title info-row__info-link" href="/movie/{{this.id}}">{{this.title}}</a>
                                 <p class="movies-item__rating">Рейтинг: {{this.rating}}</p>
                             </div>
                         {{/each}}

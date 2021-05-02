@@ -6,7 +6,7 @@
         <div class="content-container__movie-container">
             <div class="movie-container__background-trailer">
                 <div class="background-trailer__img center"
-                     style="background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(28, 37, 65, 255)), url('{{banner}}');"></div>
+                     style="background-image: url('{{banner}}');"></div>
             </div>
 
             <div class="movie-container__movie-flex">
@@ -140,7 +140,7 @@
                         <h3 class="main-roles__header">В главных ролях</h3>
                         <ul class="main-roles__actors-list">
                             {{#each actors}}
-                                <li><a class="actors-list__item">{{this}}</a></li>
+                                <li><a href='/actor/{{this.id}}' class="actors-list__item">{{this.name}}</a></li>
                             {{/each}}
                         </ul>
                     </div>
@@ -154,26 +154,31 @@
             {{#if wantsToEditReview}}
                 <div class="main__content-container">
                     <div class="content-container__write-review" id="user-review-container">
-                        <h3 class="write-review__your-review write-review__your-review_color_white">Редактирование рецензии</h3>
+                        <h3 class="write-review__your-review">Редактирование рецензии</h3>
                         <div class="write-review__review-form-container">
                             <form id="review" class="review-form-container__review-form">
-                                <select name="review_type" class="review-form__select-review-type" id="select-type">
-                                    <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
-                                            value="positive">Положительная
-                                    </option>
-                                    <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
-                                            value="neutral">Нейтральная
-                                    </option>
-                                    <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
-                                            value="negative">Отрицательная
-                                    </option>
-                                </select>
-                                <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                       placeholder="Заголовок" value="{{userReview.title}}">
-                                <textarea name="content" class="form__input-field review-form__input-review-content"
-                                          placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                <div class="review-form-container__grid">
+                                    <div>
+                                        <input name="title" type="text" class="form__input-field review-form__input-review-title"
+                                               placeholder="Заголовок" value="{{userReview.title}}">
+                                        <textarea name="content" class="form__input-field review-form__input-review-content"
+                                                  placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                    </div>
+                                    <select name="review_type" class="review-form__select-review-type" id="select-type">
+                                        <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
+                                                value="positive">Положительная
+                                        </option>
+                                        <option {{#if (eq userReview.review_type "neutral")}}selected{{/if}}
+                                                value="neutral">Нейтральная
+                                        </option>
+                                        <option {{#if (eq userReview.review_type "negative")}}selected{{/if}}
+                                                value="negative">Отрицательная
+                                        </option>
+                                    </select>
+                                </div>
                                 <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
-                                <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
+                                <button type="submit" id="review-button"
+                                        class="form__submit-button form__submit-review">Отправить</button>
                             </form>
                         </div>
                     </div>
@@ -200,21 +205,26 @@
         {{else}}
             <div class="main__content-container">
                 <div class="content-container__write-review" id="user-review-container">
-                    <h3 class="write-review__your-review write-review__your-review_color_white">Напишите рецензию</h3>
+                    <h3 class="write-review__your-review">Напишите рецензию</h3>
                     <div class="write-review__review-form-container">
                         <form id="review" class="review-form-container__review-form">
-                            <select name="review_type" class="review-form__select-review-type" id="select-type">
-                                <option selected disabled>Тип рецензии</option>
-                                <option value="positive">Положительная</option>
-                                <option value="neutral">Нейтральная</option>
-                                <option value="negative">Отрицательная</option>
-                            </select>
-                            <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                   placeholder="Заголовок">
-                            <textarea name="content" class="form__input-field review-form__input-review-content"
-                                      placeholder="Ваши впечатления о фильме"></textarea>
+                            <div class="review-form-container__grid">
+                                <div>
+                                    <input name="title" type="text" class="form__input-field review-form__input-review-title"
+                                           placeholder="Заголовок">
+                                    <textarea name="content" class="form__input-field review-form__input-review-content"
+                                              placeholder="Ваши впечатления о фильме"></textarea>
+                                </div>
+                                <select name="review_type" class="review-form__select-review-type" id="select-type">
+                                    <option selected disabled>Тип рецензии</option>
+                                    <option value="positive">Положительная</option>
+                                    <option value="neutral">Нейтральная</option>
+                                    <option value="negative">Отрицательная</option>
+                                </select>
+                            </div>
                             <p class="form__validation-hint form__send-form-hint" id="validation-hint-review"><em></em></p>
-                            <button type="submit" id="review-button" class="form__submit-button">Отправить</button>
+                            <button type="submit" id="review-button"
+                                    class="form__submit-button form__submit-review">Отправить</button>
                         </form>
                     </div>
                 </div>
@@ -231,8 +241,8 @@
             {{else}}
             <div class="main__content-container">
             {{/if}}
-            <div class="content-container__review-content">
-                <h3 class="review-content__your-review">Рецензия {{this.author}}</h3>
+            <div class="content-container__review-content review_background_{{this.review_type}}">
+                <h3 class="write-review__your-review">Рецензия {{this.author}}</h3>
                 <div class="review-content__review-body">
                     <p class="review-body__title">{{this.title}}</p>
                     <p class="review-body__content">{{this.content}}</p>

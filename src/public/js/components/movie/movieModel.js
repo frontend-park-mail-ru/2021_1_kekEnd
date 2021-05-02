@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from '../../utils/api.js';
-import {CREATED, OK_CODE} from '../../utils/codes.js';
-import {objectsMatch} from '../../utils/objectsMatch.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {API} from '../../utils/api';
+import {CREATED, OK_CODE} from '../../utils/codes';
+import {objectsMatch} from '../../utils/objectsMatch';
+import {busEvents} from '../../utils/busEvents';
 
 
 /**

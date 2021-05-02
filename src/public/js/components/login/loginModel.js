@@ -1,9 +1,9 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from '../../utils/api.js';
-import {busEvents} from '../../utils/busEvents.js';
-import {OK_CODE} from '../../utils/codes.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {API} from '../../utils/api';
+import {busEvents} from '../../utils/busEvents';
+import {OK_CODE} from '../../utils/codes';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
 
 
 /**

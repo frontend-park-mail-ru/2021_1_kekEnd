@@ -1,5 +1,5 @@
-import ProfileModel from './profileModel.js';
-import ProfileView from './profileView.js';
+import ProfileModel from './profileModel';
+import ProfileView from './profileView';
 
 
 /**

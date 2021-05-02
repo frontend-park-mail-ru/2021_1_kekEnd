@@ -3,27 +3,6 @@
   &__profile-card {
     margin-top: 50px;
   }
-
-  &__section-name {
-    display: inline-block;
-    font-size: 24px;
-    color: $white-color;
-    padding-left: 50px;
-    margin: 32px 0;
-  }
-
-  &__slider {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto;
-    scroll-behavior: smooth;
-    gap: 16px;
-    padding: 0 50px;
-  }
-
-  &__slider::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .profile-card {
@@ -119,31 +98,6 @@
   &__value {
     font-size: 18px;
     font-weight: 400;
-  }
-}
-
-.slider__card {
-  flex: 0 0 auto;
-  width: 110px;
-  height: 180px;
-  margin: 12px 0;
-  border: 4px solid $transparent_white;
-  border-radius: $m-border-radius;
-  box-shadow: 0 0 12px $transparent-black;
-
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: $s-border-radius;
-  }
-
-  &:first-child {
-    margin-left: auto;
-  }
-
-  &:last-child {
-    margin-right: auto;
   }
 }
 

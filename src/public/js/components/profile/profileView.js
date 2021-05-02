@@ -1,9 +1,10 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {globalRouter} from '../../utils/router.js';
-import {PATHS} from '../../utils/paths.js';
-import BaseView from '../baseView.js';
-import './profile.tmpl.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {globalRouter} from '../../utils/router';
+import {PATHS} from '../../utils/paths';
+import BaseView from '../baseView';
+import './profile.tmpl';
+import {busEvents} from '../../utils/busEvents';
+import {scrollCarousel} from '../../utils/carousel';
 
 
 /**
@@ -22,6 +23,9 @@ export default class ProfileView extends BaseView {
         globalEventBus.on(busEvents.LOGOUT_STATUS, this.processLogout.bind(this));
 
         this.logoutClickedCallback = this.logoutClicked.bind(this);
+        this.carouselScrolledCallback = this.carouselScrolled.bind(this);
+        this.leftArrowClickedCallback = this.leftArrowClicked.bind(this);
+        this.rightArrowClickedCallback = this.rightArrowClicked.bind(this);
     }
 
     /**
@@ -43,6 +47,19 @@ export default class ProfileView extends BaseView {
      */
     setEventListeners() {
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+
+        [...document.getElementsByClassName('main__slider')]
+            .forEach((element) => {
+                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+                if (element.offsetWidth === element.scrollWidth) {
+                    // все элементы целиком вмещаются, стрелки прокрутки не нужны
+                    rightArrow.classList.add('carousel-arrows__arrow_hidden');
+                }
+                element.addEventListener('scroll', this.carouselScrolledCallback);
+                leftArrow.addEventListener('click', this.leftArrowClickedCallback);
+                rightArrow.addEventListener('click', this.rightArrowClickedCallback);
+            });
     }
 
     /**
@@ -50,6 +67,15 @@ export default class ProfileView extends BaseView {
      */
     removeEventListeners() {
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+
+        [...document.getElementsByClassName('main__slider')]
+            .forEach((element) => {
+                const leftArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+                const rightArrow = element.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+                element.removeEventListener('scroll', this.carouselScrolledCallback);
+                leftArrow.removeEventListener('click', this.leftArrowClickedCallback);
+                rightArrow.removeEventListener('click', this.rightArrowClickedCallback);
+            });
     }
 
     /**
@@ -76,5 +102,34 @@ export default class ProfileView extends BaseView {
         if (status) {
             globalRouter.pushState(PATHS.login);
         }
+    }
+
+    /**
+     * Обработка нажатия на стрелку "назад" в карусели
+     * @param {Object} event - событие клика
+     */
+    leftArrowClicked = (event) => {
+        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
+        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + 50, behavior: 'smooth'});
+    }
+
+    /**
+     * Обработка нажатия на стрелку "вперед" в карусели
+     * @param {Object} event - событие клика
+     */
+    rightArrowClicked = (event) => {
+        const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
+        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - 50, behavior: 'smooth'});
+    }
+
+    /**
+     * Обработка скролла в карусели
+     * @param {Object} event - событие скролла
+     */
+    carouselScrolled = (event) => {
+        const carousel = event.target;
+        const leftArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_left')[0];
+        const rightArrow = carousel.parentElement.getElementsByClassName('carousel-arrows__arrow_right')[0];
+        scrollCarousel(carousel, leftArrow, rightArrow);
     }
 }

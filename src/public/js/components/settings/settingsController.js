@@ -1,5 +1,5 @@
-import SettingsModel from './settingsModel.js';
-import SettingsView from './settingsView.js';
+import SettingsModel from './settingsModel';
+import SettingsView from './settingsView';
 
 
 /**

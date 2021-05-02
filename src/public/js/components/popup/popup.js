@@ -1,6 +1,6 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {busEvents} from '../../utils/busEvents.js';
-import './popup.tmpl.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {busEvents} from '../../utils/busEvents';
+import './popup.tmpl';
 
 
 /**

@@ -1,5 +1,5 @@
-import MainModel from './mainModel.js';
-import MainView from './mainView.js';
+import MainModel from './mainModel';
+import MainView from './mainView';
 
 /**
  * Контроллер главной страницы

@@ -1,6 +1,6 @@
-import {globalEventBus} from './eventbus.js';
-import {CONNECTION_ERROR} from './errorMessages.js';
-import {busEvents} from './busEvents.js';
+import {globalEventBus} from './eventbus';
+import {CONNECTION_ERROR} from './errorMessages';
+import {busEvents} from './busEvents';
 
 
 /**
@@ -232,6 +232,15 @@ class Api {
      */
     getMoviesByGenres(genres, page=1) {
         return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=genre&filter=${genres.join('+')}&page=${page}`);
+    }
+
+    /**
+     * Получить информацию об актере
+     * @param {number} id - id актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getActorData(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}`);
     }
 
     /**

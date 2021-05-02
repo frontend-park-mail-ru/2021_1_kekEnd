@@ -1,16 +1,22 @@
 {{> navbar}}
 
+
 <div class="main">
     <div class="form-box">
-        {{> top_login_signup}}
+        <div class="form-box__button-box">
+            <div id="button-box__current-button" class="button-box__button-wrap"></div>
+            <button type="button" class="button-box__toggle-button button-box__button_text_white"
+                    id="login-button">Войти</button>
+            <a href="/signup">
+                <button type="button" class="button-box__toggle-button" id="signup-button">Регистрация</button>
+            </a>
+        </div>
 
-        <form id="login" class="login-form input-group">
-            <input name="username" type="text" class="input-field" placeholder="Имя пользователя">
-            <input name="password" type="password" class="input-field" placeholder="Пароль">
-            <input name="remember-me" id="remember-checkbox" type="checkbox" class="checkbox">
-            <label for="remember-checkbox" class="checkbox-label">Запомнить меня</label>
-            <p class="validation-hint send-form-hint" id="validation-hint-login"><em></em></p>
-            <button type="submit" id="login-submit" class="submit-button">Вход</button>
+        <form id="login" class="form-box__form form-box__input-group">
+            <input name="username" type="text" class="form__input-field" placeholder="Имя пользователя">
+            <input name="password" type="password" class="form__input-field" placeholder="Пароль">
+            <p class="form__validation-hint form__send-form-hint" id="validation-hint-login"><em></em></p>
+            <button type="submit" id="login-submit" class="form__submit-button">Вход</button>
         </form>
     </div>
 </div>

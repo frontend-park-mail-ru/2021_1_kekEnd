@@ -1,5 +1,5 @@
-import ActorModel from './actorModel.js';
-import ActorView from './actorView.js';
+import ActorModel from './actorModel';
+import ActorView from './actorView';
 
 
 /**

@@ -1,7 +1,7 @@
-import {globalEventBus} from '../../utils/eventbus.js';
-import {API} from '../../utils/api.js';
-import {OK_CODE} from '../../utils/codes.js';
-import {busEvents} from '../../utils/busEvents.js';
+import {globalEventBus} from '../../utils/eventbus';
+import {API} from '../../utils/api';
+import {OK_CODE} from '../../utils/codes';
+import {busEvents} from '../../utils/busEvents';
 
 
 /**
@@ -27,7 +27,7 @@ export default class MainModel {
                 globalEventBus.emit(busEvents.SET_MAIN_PAGE_DATA, {
                     'isAuthorized': userResp.status === OK_CODE,
                     'best_movies': bestMoviesResp.data.movies,
-                    'available_genres': genresResp.data,
+                    'available_genres': genresResp.data.sort(),
                 });
             });
     }
