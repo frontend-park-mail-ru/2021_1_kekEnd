@@ -18,9 +18,10 @@ export default class ActorView extends BaseView {
         super(parent, Handlebars.templates['actor.hbs']);
 
         this.setActorDataCallback = this.setActorDataCallback.bind(this);
-        this.addToFavoritesCallback = this.addToFavoritesCallback.bind(this);
+        this.likeActorCallback = this.likeActor.bind(this);
 
-        globalEventBus.on(busEvents.SET_ACTOR_DATA, this.setActorDataCallback);
+        globalEventBus.on(busEvents.SET_ACTOR_DATA, this.setActorDataCallback.bind(this));
+        globalEventBus.on(busEvents.LIKE_ACTOR_STATUS, this.processLikeActor.bind(this));
     }
 
     /**
@@ -56,7 +57,7 @@ export default class ActorView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('actor-button-like').addEventListener('click', this.addToFavoritesCallback);
+        document.getElementById('actor-button-like')?.addEventListener('click', this.likeActorCallback);
 
         this.navbarRightComponent.setEventListeners();
     }
@@ -65,16 +66,29 @@ export default class ActorView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('actor-button-like').removeEventListener('click', this.addToFavoritesCallback);
+        document.getElementById('actor-button-like')?.removeEventListener('click', this.likeActorCallback);
 
         this.navbarRightComponent.removeEventListeners();
     }
 
     /**
      * Обработчик нажатия на кнопку добавления актера в избранное
+     * @param {Object} event - событие нажатия на кнопку
      */
-    addToFavoritesCallback() {
-        globalEventBus.emit(busEvents.LIKE_ACTOR);
+    likeActor(event) {
+        const actorId = event.target.getAttribute('data-actor-id');
+        globalEventBus.emit(busEvents.LIKE_ACTOR, actorId);
+    }
+
+    /**
+     * Отобразить результат лайка актера
+     * @param {boolean} status - успешность лайка
+     */
+    processLikeActor(status) {
+        if (status) {
+            // TODO: добавить или удалить
+            document.getElementById('actor-button-like').textContent = 'Убрать из избранного';
+        }
     }
 }
 

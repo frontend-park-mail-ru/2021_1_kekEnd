@@ -2,6 +2,11 @@
 
 <div class="main">
     <h3 class="main__page-title">Последние действия</h3>
+    {{#unless feed}}
+        <div class="main__feed-empty">
+            Лента пуста
+        </div>
+    {{/unless}}
     {{#each feed}}
         <div class="main__feed-card">
             <div class="feed-card__header">

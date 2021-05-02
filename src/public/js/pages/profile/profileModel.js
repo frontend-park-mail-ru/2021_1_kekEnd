@@ -51,20 +51,6 @@ export default class ProfileModel {
                     poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
                 },
             ],
-            favorite_actors: [
-                {
-                    id: 61,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/20287.jpg',
-                },
-                {
-                    id: 26,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/373.jpg',
-                },
-                {
-                    id: 91,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/actor_posters/kp/6264.jpg',
-                },
-            ],
             playlists: [
                 {
                     id: 1,

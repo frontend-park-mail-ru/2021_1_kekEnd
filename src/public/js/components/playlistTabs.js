@@ -49,6 +49,7 @@ export class PlaylistTabs extends Component {
             .addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
+        // TODO: добавить
     }
 
     /**

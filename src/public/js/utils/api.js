@@ -244,6 +244,15 @@ class Api {
     }
 
     /**
+     * Добавить актера в "Избранное"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    likeActor(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}/like`, 'POST');
+    }
+
+    /**
      * Создать новую пользовательскую подборку фильмов
      */
     createUserPlaylist() {

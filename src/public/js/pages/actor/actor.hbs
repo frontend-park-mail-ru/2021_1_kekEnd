@@ -6,9 +6,11 @@
             <div class="flex-container__left">
                 <div class="flex-container__left-inner">
                     <img class="left-inner__actor-avatar-img" src="{{avatar}}">
-                    <button id="actor-button-like" class="left-inner__actor-button-like">
-                        В избранное
-                    </button>
+                    {{#if (getAuthStatus)}}
+                        <button id="actor-button-like" class="left-inner__actor-button-like" data-actor-id="{{id}}">
+                            В избранное
+                        </button>
+                    {{/if}}
                 </div>
             </div>
 
