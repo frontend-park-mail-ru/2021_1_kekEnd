@@ -14,6 +14,7 @@ export default class MoviesListModel {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
         globalEventBus.on(busEvents.GET_USER_PLAYLISTS, this.getUserPlaylists.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
     }
 
     /**
@@ -44,6 +45,16 @@ export default class MoviesListModel {
                 });
             });
     }
+
+    /**
+     * Отметить фильм как "просмотренный"
+     * @param {number} movieId - идентификатор фильма
+     */
+    watchMovie(movieId) {
+        API.watchMovie(movieId).then(() => {});
+    }
+
+    // TODO: unwatch movie
 
     /**
      * Получить плейлисты пользователя

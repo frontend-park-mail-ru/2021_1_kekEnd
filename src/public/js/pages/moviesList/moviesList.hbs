@@ -41,8 +41,13 @@
                     {{/if}}
                     {{#if (getAuthStatus)}}
                         <div class="right__bottom-buttons">
-                            <input class="buttons__input-watched buttons__movie-card-input-watched"
-                                   id="watched-button-{{this.id}}" type="checkbox" name="watched" data-id="{{this.id}}">
+                            {{#if this.is_watched}}
+                                <input class="buttons__input-watched buttons__movie-card-input-watched" checked
+                                       id="watched-button-{{this.id}}" type="checkbox" name="watched" data-id="{{this.id}}">
+                            {{else}}
+                                <input class="buttons__input-watched buttons__movie-card-input-watched"
+                                       id="watched-button-{{this.id}}" type="checkbox" name="watched" data-id="{{this.id}}">
+                            {{/if}}
                             <label class="buttons__label-watched" for="watched-button-{{this.id}}"></label>
                             <input class="buttons__input-playlist buttons__movie-card-input-playlist"
                                    id="playlist-button-{{this.id}}" type="checkbox" name="playlist" data-id="{{this.id}}">

@@ -110,6 +110,15 @@ class Api {
     }
 
     /**
+     * Отметить фильм просмотренным
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    watchMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${movieId}/watch`, 'POST');
+    }
+
+    /**
      * Получить все рецензии к фильму
      * @param {number} id - id фильма
      * @param {number} page - страница с рецензиями

@@ -37,6 +37,7 @@ export const busEvents = {
     GET_ACTOR_DATA: 'get actor data',
     SET_ACTOR_DATA: 'set actor data',
     LIKE_ACTOR: 'add actor to favorites',
+    UNLIKE_ACTOR: 'remove actor from favorites',
     LIKE_ACTOR_STATUS: 'like actor status',
     SHOW_POPUP: 'show popup',
     GET_USER_PLAYLISTS: 'get user playlists',
@@ -48,4 +49,6 @@ export const busEvents = {
     FOLLOW_STATUS: 'follow status',
     GET_FEED: 'get feed',
     SET_FEED: 'set feed',
+    WATCH_MOVIE: 'watch movie',
+    UNWATCH_MOVIE: 'unwatch movie',
 };
