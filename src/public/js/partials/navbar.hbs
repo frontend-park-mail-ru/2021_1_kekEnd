@@ -13,4 +13,21 @@
             <a href="/">Поиск</a>
         </div>
     </div>
+    <div class="header__section">
+        {{#if authorized}}
+            <div class="header__item header__button">
+                <a href="/me">Профиль</a>
+            </div>
+            <div class="header__item header__button">
+                <a id="logout-button">Выйти</a>
+            </div>
+        {{else}}
+            <div class="header__item header__button">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="header__item header__button">
+                <a href="/signup">Регистрация</a>
+            </div>
+        {{/if}}
+    </div>
 </div>

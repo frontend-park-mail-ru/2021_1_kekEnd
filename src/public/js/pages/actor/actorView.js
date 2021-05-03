@@ -2,7 +2,7 @@ import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
 import {busEvents} from 'utils/busEvents';
 import './actor.tmpl';
-import {NavbarRight} from 'components/navbarRight';
+import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 
 /**
@@ -38,9 +38,9 @@ export default class ActorView extends BaseView {
     setActorDataCallback(data) {
         super.render(data);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
@@ -58,7 +58,7 @@ export default class ActorView extends BaseView {
     setEventListeners() {
         document.getElementById('actor-button-like').addEventListener('click', this.addToFavoritesCallback);
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
     }
 
     /**
@@ -67,7 +67,7 @@ export default class ActorView extends BaseView {
     removeEventListeners() {
         document.getElementById('actor-button-like').removeEventListener('click', this.addToFavoritesCallback);
 
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
     }
 
     /**

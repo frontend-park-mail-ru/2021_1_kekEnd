@@ -1,7 +1,7 @@
 import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
 import {busEvents} from 'utils/busEvents';
-import {NavbarRight} from 'components/navbarRight';
+import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 import {Carousel} from 'components/carousel';
 import './profile.tmpl';
@@ -35,9 +35,9 @@ export default class ProfileView extends BaseView {
     setProfileData(data) {
         super.render(data);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.favoriteMoviesCarousel = new Carousel(document.getElementById('favorite-movies-carousel'),
             {'itemsType': 'movies', 'items': data.favorite_movies});
@@ -65,7 +65,7 @@ export default class ProfileView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
         this.favoriteMoviesCarousel.setEventListeners();
         this.favoriteActorsCarousel.setEventListeners();
         this.reviewsCarousel.setEventListeners();
@@ -75,7 +75,7 @@ export default class ProfileView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
         this.favoriteMoviesCarousel.removeEventListeners();
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();

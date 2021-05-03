@@ -10,7 +10,7 @@ import {ALREADY_EXISTS, INCORRECT_DATA} from 'utils/errorMessages';
 import {busEvents} from 'utils/busEvents';
 import './signup.tmpl';
 import {userMeta} from 'utils/userMeta';
-import {NavbarRight} from 'components/navbarRight';
+import {Navbar} from 'components/navbar';
 
 
 /**
@@ -47,8 +47,8 @@ export default class SignupView extends BaseView {
     setSignupPage() {
         super.render();
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'), {'authorized': false});
-        this.navbarRightComponent.render();
+        this.navbarComponent = new Navbar(document.getElementById('navbar'), {'authorized': false});
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
