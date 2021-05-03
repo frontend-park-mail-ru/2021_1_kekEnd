@@ -1,0 +1,107 @@
+import {globalEventBus} from 'utils/eventbus';
+import BaseView from '../baseView';
+import {busEvents} from 'utils/busEvents';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
+import './moviesList.tmpl';
+
+/**
+ * Представление страницы списка фильмов
+ */
+export default class MoviesListView extends BaseView {
+    /**
+     * Конструктор
+     * @param {Element} parent - элемент для рендера
+     */
+    constructor(parent) {
+        // eslint-disable-next-line no-undef
+        super(parent, Handlebars.templates['moviesList.hbs']);
+
+        globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
+
+        this.watchedClickedCallback = this.watchedClicked.bind(this);
+        this.playlistClickedCallback = this.playlistClicked.bind(this);
+    }
+
+    /**
+     * Открытие нужной страницы в зависимости от параметров
+     * @param {Object} params - параметры страницы
+     */
+    render(params) {
+        const [category, page, query] = params.split('/');
+        switch (category) {
+        case 'best':
+            globalEventBus.emit(busEvents.GET_BEST_MOVIES_PAGE, page);
+            break;
+        case 'genre':
+            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, query.slice('?filter='.length).split('+'), page);
+            break;
+        }
+    }
+
+    /**
+     * "Деструктор" страницы
+     */
+    hide() {
+        super.hide(this);
+    }
+
+    /**
+     * Запуск рендера и подписки на события
+     * @param {Object} data - данные о списке фильмов
+     */
+    setMovies(data) {
+        super.render(data);
+
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
+            {'authorized': userMeta.getAuthorized()});
+        this.navbarComponent.render();
+
+        this.setEventListeners();
+    }
+
+    /**
+     * Установка колбеков
+     */
+    setEventListeners() {
+        [...document.getElementsByClassName('buttons__input-watched')]
+            .forEach((element) => element.addEventListener('click', this.watchedClickedCallback));
+        [...document.getElementsByClassName('buttons__input-playlist')]
+            .forEach((element) => element.addEventListener('click', this.playlistClickedCallback));
+
+        this.navbarComponent.setEventListeners();
+    }
+
+    /**
+     * Удаление колбеков
+     */
+    removeEventListeners() {
+        [...document.getElementsByClassName('buttons__input-watched')]
+            .forEach((element) => element.removeEventListener('click', this.watchedClickedCallback));
+        [...document.getElementsByClassName('buttons__input-playlist')]
+            .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
+
+        this.navbarComponent.removeEventListeners();
+    }
+
+    /**
+     * Обработчик нажатия на кнопку "Просмотрено"
+     * @param {Object} event - событие нажатия
+     */
+    watchedClicked(event) {
+        // TODO: api request
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`watched movie ${movieId}`);
+    }
+
+    /**
+     * Обработчик нажатия на кнопку "Лайк"
+     * @param {Object} event - событие нажатия
+     */
+    playlistClicked(event) {
+        // TODO: api request
+        const movieId = event.target.getAttribute('data-id');
+        console.log(`add to playlist movie ${movieId}`);
+    }
+}
+

@@ -12,6 +12,8 @@ export class Router {
      */
     constructor() {
         this.routes = new Map();
+        this._currentPath = '';
+        this._currentParameters = '';
     }
 
     /**
@@ -95,6 +97,24 @@ export class Router {
         this.currentView?.hide();
         this.currentView = this.routes.get(path);
         this.currentView.render(parameters);
+        this._currentPath = path;
+        this._currentParameters = parameters;
+    }
+
+    /**
+     * Получить текущий путь
+     * @return {string} - текуший путь
+     */
+    get currentPath() {
+        return this._currentPath;
+    }
+
+    /**
+     * Получить текущие параметры страницы
+     * @return {string} - текущие параметры
+     */
+    get currentParameters() {
+        return this._currentParameters;
     }
 
     /**

@@ -167,11 +167,18 @@
   margin-right: auto;
 }
 
-.inner__img_position_left {
-  width: 90%;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+.inner {
+
+  &__img_position_left {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__trailer-container {
+    height: 200px;
+  }
 }
 
 .movie-flex-right__main-roles {

@@ -1,14 +1,10 @@
 export const busEvents = {
-    CHECK_AUTH_REDIRECT_LOGIN: 'check auth before login',
     LOAD_LOGIN_PAGE: 'load login page',
     LOGIN_CLICKED: 'login clicked',
     LOGIN_STATUS: 'login status',
-    CHECK_AUTH_REDIRECT_SIGNUP: 'check auth before signup',
     LOAD_SIGNUP_PAGE: 'load signup page',
     SIGNUP_CLICKED: 'signup clicked',
     SIGNUP_STATUS: 'signup status',
-    LOGOUT_CLICKED: 'logout clicked',
-    LOGOUT_STATUS: 'logout status',
     GET_PROFILE_DATA: 'get profile data',
     SET_PROFILE_DATA: 'set profile data',
     GET_SETTINGS_DATA: 'get settings data',
@@ -38,5 +34,8 @@ export const busEvents = {
     GET_MOVIES_BY_GENRES_PREVIEW: 'get genres movies preview',
     SET_MOVIES_BY_GENRES_PREVIEW: 'set genres movies preview',
     SET_MOVIES_PAGE: 'set movies page',
+    GET_ACTOR_DATA: 'get actor data',
+    SET_ACTOR_DATA: 'set actor data',
+    LIKE_ACTOR: 'add actor to favorites',
     SHOW_POPUP: 'show popup',
 };
