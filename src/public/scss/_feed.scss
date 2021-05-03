@@ -1,11 +1,11 @@
 .main__feed-card {
   width: 50%;
-  padding: 24px;
   margin: 24px auto;
   background-color: $white-color;
   color: $primary-text-color;
   border-radius: $l-border-radius;
   box-shadow: 0 0 20px $transparent-black;
+  overflow: hidden;
 }
 
 .feed-card {
@@ -16,12 +16,7 @@
     font-size: 18px;
     gap: 16px;
     border-bottom: 1px solid $whitish;
-    padding-bottom: 12px;
-    margin-bottom: 12px;
-  }
-
-  &__content {
-    height: 70%;
+    padding: 12px 24px;
   }
 
   &__username {
@@ -36,5 +31,30 @@
     height: 100%;
     border-radius: 50%;
     cursor: pointer;
+  }
+
+  &__movie-rating {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    color: $white-color;
+    margin: 12px auto 0 auto;
+    font-size: 24px;
+  }
+
+  &__movie-rating-text {
+    padding: 16px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  &__movie-rating-link {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $primary-text-color;
   }
 }

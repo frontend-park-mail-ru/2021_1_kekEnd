@@ -21,10 +21,22 @@
             </div>
             <div class="feed-card__content">
                 {{#if (eq itemType 'review')}}
-                    здесь будет рецензия
+                    <div class="content-container__review-content review_background_{{review.review_type}}">
+                        <div class="your-review__review-body">
+                            <p class="review-body__title">{{review.title}}</p>
+                            <p class="review-body__content">{{review.content}}</p>
+                        </div>
+                    </div>
                 {{/if}}
                 {{#if (eq itemType 'rating')}}
-                    здесь будет оценка
+                    {{#if (gte rating.score 7)}}<h2 class="feed-card__movie-rating positive-rating">{{rating.score}}</h2>
+                    {{else}}
+                        {{#if (gte rating.score 4)}}<h2 class="feed-card__movie-rating neutral-rating">{{rating.score}}</h2>
+                        {{else}}<h2 class="feed-card__movie-rating negative-rating">{{rating.score}}</h2>{{/if}}
+                    {{/if}}
+                    <h5 class="feed-card__movie-rating-text">фильму
+                        <a href="/movie/{{rating.movie_id}}" class="feed-card__movie-rating-link">"{{rating.movie_title}}"</a>
+                    </h5>
                 {{/if}}
             </div>
         </div>

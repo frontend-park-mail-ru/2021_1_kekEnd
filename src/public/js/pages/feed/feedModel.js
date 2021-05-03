@@ -39,7 +39,7 @@ export default class FeedModel {
                     avatar: 'http://89.208.198.186:8080/avatars/default.jpeg',
                     rating: {
                         movie_title: 'Матрица',
-                        movie_id: '26',
+                        movie_id: '2',
                         score: 10,
                     },
                 },
