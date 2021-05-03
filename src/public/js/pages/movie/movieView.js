@@ -29,6 +29,7 @@ export default class MovieView extends BaseView {
         globalEventBus.on(busEvents.SET_REVIEWS_PAGE, this.setReviewsPage.bind(this));
         globalEventBus.on(busEvents.RATING_UPLOADED, this.displayNewRating.bind(this));
         globalEventBus.on(busEvents.RATING_DELETED, this.removeRating.bind(this));
+        globalEventBus.on(busEvents.SET_PLAYLIST_DATA_MOVIE, this.displayPlaylists.bind(this));
 
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
@@ -61,7 +62,6 @@ export default class MovieView extends BaseView {
         this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
-
 
         this.setEventListeners();
     }
@@ -269,32 +269,22 @@ export default class MovieView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
-        // TODO: убрать дублирование
-        // TODO: api request
-        const movieId = event.target.getAttribute('data-id');
-        console.log(`add to playlist movie ${movieId}`);
+        this.currentPlaylistWidget?.hide();
+        this.currentPlaylistWidget = null;
         if (event.target.checked) {
-            // TODO: получить информацию о плейлистах с бекенда
-            const playlistsData = {
-                movieId: movieId,
-                userPlaylists: [
-                    {
-                        id: 1,
-                        playlistName: 'Любимые фильмы',
-                        isAdded: true,
-                    },
-                    {
-                        id: 2,
-                        playlistName: 'Кино на вечер',
-                        isAdded: false,
-                    },
-                ],
-            };
-            const widget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${movieId}`),
-                playlistsData);
-            widget.render();
-        } else {
-            document.getElementById(`add-to-playlist-${movieId}`).innerHTML = '';
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIE);
         }
+    }
+
+    /**
+     * Отобразить виджет со списком плейлистов
+     * @param {Object} playlistsData - информация о плейлистах
+     */
+    displayPlaylists(playlistsData) {
+        playlistsData.movieId = this.data.id;
+        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.data.id}`),
+            playlistsData);
+        this.currentPlaylistWidget.render();
+        this.currentPlaylistWidget.setEventListeners();
     }
 }

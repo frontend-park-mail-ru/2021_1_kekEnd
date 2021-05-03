@@ -244,80 +244,121 @@ class Api {
     }
 
     /**
-     * Создать новую пользовательскую подборку фильмов
+     * Получить плейлисты пользоватя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    createUserPlaylist() {
-
+    getPlaylists() {
+        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
+        // TODO: backend
+        return Promise.resolve({
+            data: {
+                playlists: [
+                    {
+                        id: 1,
+                        playlistName: 'Любимые фильмы',
+                        isAdded: true,
+                    },
+                    {
+                        id: 2,
+                        playlistName: 'Кино на вечер',
+                        isAdded: false,
+                    },
+                ],
+            },
+            status: 200,
+        });
     }
 
     /**
-     * Удалить пользовательскую подборку фильмов
+     * Получить плейлисты пользователя вместе с их фильмами
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    deleteUserPlaylist() {
-
+    getPlaylistsWithMovies() {
+        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
+        // TODO: backend
+        return Promise.resolve({
+            data: {
+                playlists: [
+                    {
+                        id: 1,
+                        playlistName: 'Любимые фильмы',
+                        movies: [
+                            {
+                                id: 1,
+                                title: 'Матрица',
+                            },
+                            {
+                                id: 2,
+                                title: 'Король Лев',
+                            },
+                        ],
+                    },
+                    {
+                        id: 2,
+                        playlistName: 'Кино на вечер',
+                        movies: [
+                            {
+                                id: 3,
+                                title: 'Душа',
+                            },
+                            {
+                                id: 4,
+                                title: 'Тайна Коко',
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        playlistName: 'Пустой',
+                    },
+                ],
+            },
+            status: 200,
+        });
     }
 
     /**
-     * Получить подборки фильмов пользователся
+     * Создать новый плейлист
+     * @param {string} name - название плейлиста
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    getUsersPlaylist() {
-
+    createPlaylist(name) {
+        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
+        // TODO: backend
+        return Promise.resolve({
+            data: {},
+            status: 200,
+        });
     }
 
     /**
-     * Добавить фильм в какую-либо пользовательскую подборку
+     * Добавить фильм в плейлист
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    addMovieToPlaylist() {
-
+    addMovieToPlaylist(playlistId, movieId) {
+        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
+        // TODO: backend
+        return Promise.resolve({
+            data: {},
+            status: 200,
+        });
     }
 
     /**
-     * Удалить фильм из пользовательской подборки
+     * Удалить фильм из плейлиста
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    removeMovieFromPlaylist() {
-
-    }
-
-    /**
-     * Получить любимые фильмы пользователя
-     */
-    getBestUsersMovies() {
-
-    }
-
-    /**
-     * Добавить фильм в список любимых фильмов пользователя
-     */
-    addMovieToBestUsersMovies() {
-
-    }
-
-    /**
-     * Получить любимых актеров пользователя
-     */
-    getBestUsersActors() {
-
-    }
-
-    /**
-     * Добавить актера в список любимых актеров пользователя
-     */
-    addActorToBestUsersActors() {
-
-    }
-
-    /**
-     * Добавить лайк
-     */
-    addLike() {
-
-    }
-
-    /**
-     * Удалить лайк
-     */
-    deleteLike() {
-
+    deleteMovieFromPlaylist(playlistId, movieId) {
+        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
+        // TODO: backend
+        return Promise.resolve({
+            data: {},
+            status: 200,
+        });
     }
 }
 

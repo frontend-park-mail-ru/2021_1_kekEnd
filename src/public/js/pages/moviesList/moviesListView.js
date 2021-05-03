@@ -19,7 +19,7 @@ export default class MoviesListView extends BaseView {
         super(parent, Handlebars.templates['moviesList.hbs']);
 
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
-        globalEventBus.on(busEvents.SET_USER_PLAYLISTS, this.displayPlaylists.bind(this));
+        globalEventBus.on(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, this.displayPlaylists.bind(this));
 
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
@@ -102,23 +102,21 @@ export default class MoviesListView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
-        const movieId = event.target.getAttribute('data-id');
-
+        this.movieId = event.target.getAttribute('data-id');
         this.currentPlaylistWidget?.hide();
-        this.currentPlaylistWidget = null;
-
         if (event.target.checked) {
-            globalEventBus.emit(busEvents.GET_USER_PLAYLISTS, movieId);
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST);
         }
     }
 
     /**
      * Отобразить виджет со списком плейлистов
-     * @param {Object} data - информация о плейлистах
+     * @param {Object} playlistsData - информация о плейлистах
      */
-    displayPlaylists(data) {
-        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${data.movieId}`),
-            data);
+    displayPlaylists(playlistsData) {
+        playlistsData.movieId = this.movieId;
+        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.movieId}`),
+            playlistsData);
         this.currentPlaylistWidget.render();
         this.currentPlaylistWidget.setEventListeners();
     }

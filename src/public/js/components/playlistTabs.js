@@ -1,6 +1,8 @@
 import {Component} from './component';
 import '../partials/playlistTabs.tmpl';
 import '../partials/playlistTab.tmpl';
+import {OK_CODE} from 'utils/codes';
+import {API} from 'utils/api';
 
 /**
  * Компонент "Плейлист"
@@ -49,6 +51,10 @@ export class PlaylistTabs extends Component {
             .addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
+        // если была нажата кнопка "Создать плейлист"
+        if (document.getElementById('submit-create-playlist')) {
+            this.removeCreationForm();
+        }
     }
 
     /**
@@ -76,16 +82,27 @@ export class PlaylistTabs extends Component {
     }
 
     /**
-     * Отобразить созданный плейлист в списке
+     * Отправка запроса на создание плейлиста
      */
     createPlaylist() {
-        const tabs = document.getElementById('tabs');
         const playlistName = document.getElementById('input-create-playlist').value;
-        tabs.insertAdjacentHTML('beforeend', this.renderNewTabHBS({
-            id: tabs.childElementCount + 1,
-            playlistName: playlistName,
-        }));
-        this.removeCreationForm();
+        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === OK_CODE, playlistName));
+    }
+
+    /**
+     * Отображение результата создания плейлиста
+     * @param {boolean} status - успешность запроса
+     * @param {string} playlistName - имя созданного плейлиста
+     */
+    processCreate(status, playlistName) {
+        if (status) {
+            const tabs = document.getElementById('tabs');
+            tabs.insertAdjacentHTML('beforeend', this.renderNewTabHBS({
+                id: tabs.childElementCount + 1,
+                playlistName: playlistName,
+            }));
+            this.removeCreationForm();
+        }
     }
 
     /**
@@ -96,8 +113,19 @@ export class PlaylistTabs extends Component {
         event.preventDefault();
         event.stopPropagation();
         const button = event.target.parentElement;
+        const playlistId = button.getAttribute('data-playlist-id');
         const movieId = button.getAttribute('data-movie-id');
-        console.log(`delete movie ${movieId}`);
-        button.closest('.tab__content-link').remove();
+        API.deleteMovieFromPlaylist(playlistId, movieId).then((res) => this.processDeletion(
+            res.status === OK_CODE, button.closest('.tab__content-link'),
+        ));
+    }
+
+    /**
+     * Отображение результата удаления фильма
+     * @param {boolean} status - статус запроса
+     * @param {Object} row - строка, которую нужно убрать из DOM
+     */
+    processDeletion(status, row) {
+        row.remove();
     }
 }
