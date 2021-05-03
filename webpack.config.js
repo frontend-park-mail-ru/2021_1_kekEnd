@@ -38,4 +38,11 @@ module.exports = {
             filename: 'style.css',
         }),
     ],
+    resolve: {
+        alias: {
+            utils: path.resolve(__dirname, 'src/public/js/utils'),
+            components: path.resolve(__dirname, 'src/public/js/components'),
+            partials: path.resolve(__dirname, 'src/public/js/partials'),
+        },
+    },
 };

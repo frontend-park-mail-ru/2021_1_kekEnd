@@ -1,15 +1,15 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {getFormValues} from '../../utils/formDataWork';
-import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
-import {setListenersForHidingValidationError} from '../../utils/setValidationResult';
-import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {getFormValues} from 'utils/formDataWork';
+import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from 'utils/codes';
+import {setListenersForHidingValidationError} from 'utils/setValidationResult';
+import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 import './login.tmpl';
-import {userMeta} from '../../utils/userMeta';
-import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from 'utils/userMeta';
+import {Navbar} from 'components/navbar';
 
 /**
  * Представление страницы логина
@@ -34,9 +34,9 @@ export default class LoginView extends BaseView {
     render() {
         if (userMeta.getAuthorized()) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            this.setLoginPage();
+            return;
         }
+        this.setLoginPage();
     }
 
     /**
@@ -45,8 +45,8 @@ export default class LoginView extends BaseView {
     setLoginPage() {
         super.render();
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'), {'authorized': false});
-        this.navbarRightComponent.render();
+        this.navbarComponent = new Navbar(document.getElementById('navbar'), {'authorized': false});
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
@@ -89,13 +89,13 @@ export default class LoginView extends BaseView {
     processLoginAttempt(status) {
         if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            const errors = {
-                [BAD_REQUEST]: INCORRECT_DATA,
-                [UNAUTHORIZED]: INCORRECT_LOGIN,
-                [INTERNAL_SERVER_ERROR]: SERVER_ERROR,
-            };
-            document.getElementById('validation-hint-login').innerText = errors[status];
+            return;
         }
+        const errors = {
+            [BAD_REQUEST]: INCORRECT_DATA,
+            [UNAUTHORIZED]: INCORRECT_LOGIN,
+            [INTERNAL_SERVER_ERROR]: SERVER_ERROR,
+        };
+        document.getElementById('validation-hint-login').innerText = errors[status];
     }
 }

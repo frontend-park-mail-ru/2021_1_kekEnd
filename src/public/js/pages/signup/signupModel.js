@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {busEvents} from '../../utils/busEvents';
-import {userMeta} from '../../utils/userMeta';
-import {CREATED} from '../../utils/codes';
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {busEvents} from 'utils/busEvents';
+import {userMeta} from 'utils/userMeta';
+import {CREATED} from 'utils/codes';
 
 /**
  *  Модель страницы регистрации

@@ -1,10 +1,10 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {busEvents} from '../../utils/busEvents';
+import {busEvents} from 'utils/busEvents';
 import './main.tmpl';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
-import {Carousel} from '../../components/carousel';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
+import {Carousel} from 'components/carousel';
 
 /**
  * Представление главной страницы
@@ -47,9 +47,9 @@ export default class MainView extends BaseView {
         this.data = data;
         super.render(this.data);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.bestMoviesCarousel = new Carousel(document.getElementById('best-movies-carousel'),
             {'itemsType': 'movies', 'items': {...this.data.best_movies}});
@@ -87,7 +87,7 @@ export default class MainView extends BaseView {
                 element.addEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
         this.bestMoviesCarousel.setEventListeners();
         this.genreMoviesCarousel.setEventListeners();
     }
@@ -108,7 +108,7 @@ export default class MainView extends BaseView {
                 element.removeEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
         this.bestMoviesCarousel.removeEventListeners();
         this.genreMoviesCarousel.removeEventListeners();
     }

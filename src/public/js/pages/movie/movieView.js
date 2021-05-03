@@ -1,13 +1,13 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {getFormValues} from '../../utils/formDataWork';
-import Validator from '../../utils/validation';
-import {setValidationHint} from '../../utils/setValidationResult';
-import {UPLOAD_ERROR} from '../../utils/errorMessages';
-import {scrollToTargetAdjusted} from '../../utils/scrollToTarget';
-import {busEvents} from '../../utils/busEvents';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {getFormValues} from 'utils/formDataWork';
+import Validator from 'utils/validation';
+import {setValidationHint} from 'utils/setValidationResult';
+import {UPLOAD_ERROR} from 'utils/errorMessages';
+import {scrollToTargetAdjusted} from 'utils/scrollToTarget';
+import {busEvents} from 'utils/busEvents';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
 import './movie.tmpl';
 import {AddToPlaylistWidget} from '../../components/addToPlaylist';
 
@@ -58,9 +58,9 @@ export default class MovieView extends BaseView {
 
         this.setUserRating();
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
 
         this.setEventListeners();
@@ -94,7 +94,7 @@ export default class MovieView extends BaseView {
             button.addEventListener('click', this.paginationButtonClickedCallback);
         });
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
     }
 
     /**
@@ -116,7 +116,7 @@ export default class MovieView extends BaseView {
             button.removeEventListener('click', this.paginationButtonClickedCallback);
         });
 
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
     }
 
     /**
