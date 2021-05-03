@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {CREATED, OK_CODE} from '../../utils/codes';
-import {objectsMatch} from '../../utils/objectsMatch';
-import {busEvents} from '../../utils/busEvents';
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {CREATED, OK_CODE} from 'utils/codes';
+import {objectsMatch} from 'utils/objectsMatch';
+import {busEvents} from 'utils/busEvents';
 
 
 /**

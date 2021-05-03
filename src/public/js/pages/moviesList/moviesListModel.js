@@ -1,6 +1,6 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {busEvents} from '../../utils/busEvents';
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {busEvents} from 'utils/busEvents';
 
 
 /**

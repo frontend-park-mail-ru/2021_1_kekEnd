@@ -1,13 +1,13 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {getFormValues} from '../../utils/formDataWork';
-import Validator from '../../utils/validation';
-import {setValidationHint} from '../../utils/setValidationResult';
-import {UPLOAD_ERROR} from '../../utils/errorMessages';
-import {scrollToTargetAdjusted} from '../../utils/scrollToTarget';
-import {busEvents} from '../../utils/busEvents';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {getFormValues} from 'utils/formDataWork';
+import Validator from 'utils/validation';
+import {setValidationHint} from 'utils/setValidationResult';
+import {UPLOAD_ERROR} from 'utils/errorMessages';
+import {scrollToTargetAdjusted} from 'utils/scrollToTarget';
+import {busEvents} from 'utils/busEvents';
+import {NavbarRight} from 'components/navbarRight';
+import {userMeta} from 'utils/userMeta';
 import './movie.tmpl';
 
 /**

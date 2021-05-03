@@ -1,15 +1,15 @@
-import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult';
-import {globalEventBus} from '../../utils/eventbus';
+import {setValidationResult, setListenersForHidingValidationError} from 'utils/setValidationResult';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import Validator from '../../utils/validation';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {OK_CODE} from '../../utils/codes';
-import {PASSWORDS_MISMATCH} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
+import Validator from 'utils/validation';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {OK_CODE} from 'utils/codes';
+import {PASSWORDS_MISMATCH} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 import './settings.tmpl';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {NavbarRight} from 'components/navbarRight';
+import {userMeta} from 'utils/userMeta';
 
 
 /**

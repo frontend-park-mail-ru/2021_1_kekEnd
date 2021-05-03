@@ -1,16 +1,16 @@
 import BaseView from '../baseView';
-import {globalEventBus} from '../../utils/eventbus';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {getFormValues} from '../../utils/formDataWork';
-import Validator from '../../utils/validation';
-import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult';
-import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
-import {ALREADY_EXISTS, INCORRECT_DATA} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
+import {globalEventBus} from 'utils/eventbus';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {getFormValues} from 'utils/formDataWork';
+import Validator from 'utils/validation';
+import {setValidationResult, setListenersForHidingValidationError} from 'utils/setValidationResult';
+import {BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR} from 'utils/codes';
+import {ALREADY_EXISTS, INCORRECT_DATA} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 import './signup.tmpl';
-import {userMeta} from '../../utils/userMeta';
-import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from 'utils/userMeta';
+import {NavbarRight} from 'components/navbarRight';
 
 
 /**

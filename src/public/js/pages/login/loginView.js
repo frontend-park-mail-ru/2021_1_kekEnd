@@ -1,15 +1,15 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {getFormValues} from '../../utils/formDataWork';
-import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from '../../utils/codes';
-import {setListenersForHidingValidationError} from '../../utils/setValidationResult';
-import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {getFormValues} from 'utils/formDataWork';
+import {OK_CODE, BAD_REQUEST, UNAUTHORIZED, INTERNAL_SERVER_ERROR} from 'utils/codes';
+import {setListenersForHidingValidationError} from 'utils/setValidationResult';
+import {INCORRECT_DATA, INCORRECT_LOGIN, SERVER_ERROR} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 import './login.tmpl';
-import {userMeta} from '../../utils/userMeta';
-import {NavbarRight} from '../../components/navbarRight';
+import {userMeta} from 'utils/userMeta';
+import {NavbarRight} from 'components/navbarRight';
 
 /**
  * Представление страницы логина

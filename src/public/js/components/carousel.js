@@ -1,5 +1,5 @@
 import {Component} from './component';
-import '../partials/carousel.tmpl';
+import 'partials/carousel.tmpl';
 
 const CAROUSEL_SCROLL_OFFSET = 50;
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { EventBus } from '../../src/public/js/utils/eventbus.js'
+import { EventBus } from 'utils/eventbus.js'
 
 QUnit.module('EventBus test', function () {
 

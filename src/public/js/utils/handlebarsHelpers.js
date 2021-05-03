@@ -1,5 +1,5 @@
-import '../partials/navbar.tmpl';
-import '../partials/loginIcons.tmpl';
+import 'partials/navbar.tmpl';
+import 'partials/loginIcons.tmpl';
 import {userMeta} from './userMeta';
 
 export const registerHandlebarsHelpers = () => {

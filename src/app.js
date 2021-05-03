@@ -1,17 +1,17 @@
-import {PATHS} from './public/js/utils/paths';
-import {globalRouter} from './public/js/utils/router';
+import {PATHS} from 'utils/paths';
+import {globalRouter} from 'utils/router';
 import ProfileController from './public/js/pages/profile/profileController';
 import LoginController from './public/js/pages/login/loginController';
 import SignupController from './public/js/pages/signup/signupController';
 import MovieController from './public/js/pages/movie/movieController';
 import ActorController from './public/js/pages/actor/actorController';
 import SettingsController from './public/js/pages/settings/settingsController';
-import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers';
+import {registerHandlebarsHelpers} from 'utils/handlebarsHelpers';
 import MainController from './public/js/pages/main/mainController';
 import MoviesListController from './public/js/pages/moviesList/moviesListController';
 import './public/js/pages/popup/popup';
 import './public/scss/compound.scss';
-import {userMeta} from './public/js/utils/userMeta';
+import {userMeta} from 'utils/userMeta';
 
 
 if ('serviceWorker' in navigator) {

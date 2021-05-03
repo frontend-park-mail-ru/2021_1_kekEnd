@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {busEvents} from '../../utils/busEvents';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {busEvents} from 'utils/busEvents';
+import {NavbarRight} from 'components/navbarRight';
+import {userMeta} from 'utils/userMeta';
 import './moviesList.tmpl';
 
 /**
