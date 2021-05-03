@@ -34,9 +34,9 @@ export default class LoginView extends BaseView {
     render() {
         if (userMeta.getAuthorized()) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            this.setLoginPage();
+            return;
         }
+        this.setLoginPage();
     }
 
     /**
@@ -89,13 +89,13 @@ export default class LoginView extends BaseView {
     processLoginAttempt(status) {
         if (status === OK_CODE) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            const errors = {
-                [BAD_REQUEST]: INCORRECT_DATA,
-                [UNAUTHORIZED]: INCORRECT_LOGIN,
-                [INTERNAL_SERVER_ERROR]: SERVER_ERROR,
-            };
-            document.getElementById('validation-hint-login').innerText = errors[status];
+            return;
         }
+        const errors = {
+            [BAD_REQUEST]: INCORRECT_DATA,
+            [UNAUTHORIZED]: INCORRECT_LOGIN,
+            [INTERNAL_SERVER_ERROR]: SERVER_ERROR,
+        };
+        document.getElementById('validation-hint-login').innerText = errors[status];
     }
 }

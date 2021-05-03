@@ -36,9 +36,9 @@ export default class SignupView extends BaseView {
     render() {
         if (userMeta.getAuthorized()) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            this.setSignupPage();
+            return;
         }
+        this.setSignupPage();
     }
 
     /**
@@ -119,12 +119,12 @@ export default class SignupView extends BaseView {
     processSignupAttempt(status) {
         if (status === CREATED) {
             globalRouter.pushState(PATHS.profile);
-        } else {
-            const errors = {
-                [BAD_REQUEST]: INCORRECT_DATA,
-                [INTERNAL_SERVER_ERROR]: ALREADY_EXISTS,
-            };
-            document.getElementById('validation-hint-signup').innerText = errors[status];
+            return;
         }
+        const errors = {
+            [BAD_REQUEST]: INCORRECT_DATA,
+            [INTERNAL_SERVER_ERROR]: ALREADY_EXISTS,
+        };
+        document.getElementById('validation-hint-signup').innerText = errors[status];
     }
 }

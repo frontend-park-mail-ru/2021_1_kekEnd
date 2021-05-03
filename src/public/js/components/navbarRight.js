@@ -63,13 +63,13 @@ export class NavbarRight extends Component {
         }
         userMeta.setAuthorized(false);
 
-        const currentPath = globalRouter.getCurrentPath();
+        const currentPath = globalRouter.currentPath;
         if (currentPath === PATHS.profile || currentPath === PATHS.settings) {
             // если пользователь находился в профиле или настройках, надо выкинуть его на главную
             globalRouter.pushState(PATHS.main);
         } else {
             // если пользователь находился на обычных страницах, перерендерить ее
-            globalRouter.handlePath(currentPath, globalRouter.getCurrentParams());
+            globalRouter.handlePath(currentPath, globalRouter.currentParameters);
         }
     }
 }

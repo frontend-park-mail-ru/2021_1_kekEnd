@@ -1,6 +1,8 @@
 import {Component} from './component';
 import '../partials/carousel.tmpl';
 
+const CAROUSEL_SCROLL_OFFSET = 50;
+
 /**
  * Компонент "Карусель с горизонтальным скроллом"
  */
@@ -76,7 +78,8 @@ export class Carousel extends Component {
      */
     leftArrowClicked(event) {
         const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + 50, behavior: 'smooth'});
+        carousel.scroll({left: carousel.scrollLeft - carousel.offsetWidth + CAROUSEL_SCROLL_OFFSET,
+            behavior: 'smooth'});
     }
 
     /**
@@ -85,7 +88,8 @@ export class Carousel extends Component {
      */
     rightArrowClicked(event) {
         const carousel = event.target.closest('.main__slider-wrapper').firstElementChild;
-        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - 50, behavior: 'smooth'});
+        carousel.scroll({left: carousel.scrollLeft + carousel.offsetWidth - CAROUSEL_SCROLL_OFFSET,
+            behavior: 'smooth'});
     }
 
     /**

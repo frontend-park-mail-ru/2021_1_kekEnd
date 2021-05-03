@@ -29,13 +29,13 @@ export default class MoviesListView extends BaseView {
      */
     render(params) {
         const [category, page, query] = params.split('/');
-        if (category === 'best') {
+        switch (category) {
+        case 'best':
             globalEventBus.emit(busEvents.GET_BEST_MOVIES_PAGE, page);
-            return;
-        }
-        if (category === 'genre') {
-            const genres = query.slice('?filter='.length).split('+');
-            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres, page);
+            break;
+        case 'genre':
+            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, query.slice('?filter='.length).split('+'), page);
+            break;
         }
     }
 
