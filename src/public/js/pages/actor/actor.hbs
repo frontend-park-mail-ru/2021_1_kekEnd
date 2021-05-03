@@ -8,7 +8,11 @@
                     <img class="left-inner__actor-avatar-img" src="{{avatar}}">
                     {{#if (getAuthStatus)}}
                         <button id="actor-button-like" class="left-inner__actor-button-like" data-actor-id="{{id}}">
-                            В избранное
+                            {{#if is_liked}}
+                                Убрать из избранного
+                            {{else}}
+                                В избранное
+                            {{/if}}
                         </button>
                     {{/if}}
                 </div>

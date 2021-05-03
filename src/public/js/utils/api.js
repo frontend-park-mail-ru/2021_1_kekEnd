@@ -119,6 +119,15 @@ class Api {
     }
 
     /**
+     * Убрать отметку "фильм просмотрен"
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unwatchMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${movieId}/watch`, 'DELETE');
+    }
+
+    /**
      * Получить все рецензии к фильму
      * @param {number} id - id фильма
      * @param {number} page - страница с рецензиями
@@ -259,6 +268,15 @@ class Api {
      */
     likeActor(id) {
         return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}/like`, 'POST');
+    }
+
+    /**
+     * Убрать актера из "Избранного"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unlikeActor(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}/like`, 'DELETE');
     }
 
     /**

@@ -14,6 +14,7 @@ export default class ActorModel {
     constructor() {
         globalEventBus.on(busEvents.GET_ACTOR_DATA, this.getActorData.bind(this));
         globalEventBus.on(busEvents.LIKE_ACTOR, this.likeActor.bind(this));
+        globalEventBus.on(busEvents.UNLIKE_ACTOR, this.unlikeActor.bind(this));
     }
 
     /**
@@ -33,6 +34,17 @@ export default class ActorModel {
      */
     likeActor(actorID) {
         API.likeActor(actorID)
+            .then((res) => {
+                globalEventBus.emit(busEvents.LIKE_ACTOR_STATUS, res.status === OK_CODE);
+            });
+    }
+
+    /**
+     * Убрать актера из избранного
+     * @param {number} actorID - идентификатор актера
+     */
+    unlikeActor(actorID) {
+        API.unlikeActor(actorID)
             .then((res) => {
                 globalEventBus.emit(busEvents.LIKE_ACTOR_STATUS, res.status === OK_CODE);
             });

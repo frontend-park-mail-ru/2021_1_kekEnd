@@ -39,6 +39,8 @@ export default class ActorView extends BaseView {
     setActorDataCallback(data) {
         super.render(data);
 
+        this.isLiked = data.is_liked;
+
         this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
             {'authorized': userMeta.getAuthorized()});
         this.navbarRightComponent.render();
@@ -77,6 +79,10 @@ export default class ActorView extends BaseView {
      */
     likeActor(event) {
         const actorId = event.target.getAttribute('data-actor-id');
+        if (this.isLiked) {
+            globalEventBus.emit(busEvents.UNLIKE_ACTOR, actorId);
+            return;
+        }
         globalEventBus.emit(busEvents.LIKE_ACTOR, actorId);
     }
 
@@ -86,8 +92,12 @@ export default class ActorView extends BaseView {
      */
     processLikeActor(status) {
         if (status) {
-            // TODO: добавить или удалить
-            document.getElementById('actor-button-like').textContent = 'Убрать из избранного';
+            this.isLiked = !this.isLiked;
+            if (this.isLiked) {
+                document.getElementById('actor-button-like').textContent = 'Убрать из избранного';
+                return;
+            }
+            document.getElementById('actor-button-like').textContent = 'В избранное';
         }
     }
 }

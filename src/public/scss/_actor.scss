@@ -51,6 +51,12 @@
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background: linear-gradient(to right, $button-gradient-first-hover, $button-gradient-second-hover);
+    }
   }
 }
 
