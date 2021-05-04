@@ -1,7 +1,6 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {busEvents} from '../../utils/busEvents';
-
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {busEvents} from 'utils/busEvents';
 
 /**
  * Модель страницы списка фильмов
@@ -13,9 +12,9 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
-        globalEventBus.on(busEvents.GET_USER_PLAYLISTS, this.getUserPlaylists.bind(this));
         globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
         globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylists.bind(this));
     }
 
     /**
@@ -65,25 +64,9 @@ export default class MoviesListModel {
 
     /**
      * Получить плейлисты пользователя
-     * @param {number} movieId - id текущего фильма
      */
-    getUserPlaylists(movieId) {
-        // TODO: API request
-        globalEventBus.emit(busEvents.SET_USER_PLAYLISTS, {
-            movieId: movieId,
-            userPlaylists: [
-                {
-                    id: 1,
-                    playlistName: 'Любимые фильмы',
-                    isAdded: true,
-                },
-                {
-                    id: 2,
-                    playlistName: 'Кино на вечер',
-                    isAdded: false,
-                },
-            ],
-        });
+    getPlaylists() {
+        API.getPlaylists().then((res) => globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, res.data));
     }
 }
 

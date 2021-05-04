@@ -1,9 +1,9 @@
 import BaseView from '../baseView';
 import './feed.tmpl';
-import {globalEventBus} from '../../utils/eventbus';
-import {busEvents} from '../../utils/busEvents';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {globalEventBus} from 'utils/eventbus';
+import {busEvents} from 'utils/busEvents';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
 
 /**
  * Представление страницы "Лента"
@@ -40,24 +40,22 @@ export default class FeedView extends BaseView {
     setFeedData(data) {
         super.render(data);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
     }
 
     /**
      * Установка колбеков
      */
     setEventListeners() {
-        console.log('setting listeners');
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
     }
 
     /**
      * Удаление колбеков
      */
     removeEventListeners() {
-        console.log('removing listeners');
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
     }
 }

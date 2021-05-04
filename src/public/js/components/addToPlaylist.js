@@ -1,6 +1,8 @@
 import {Component} from './component';
 import '../partials/addToPlaylistWidget.tmpl';
 import '../partials/playlistRow.tmpl';
+import {API} from 'utils/api';
+import {OK_CODE} from 'utils/codes';
 
 /**
  * Компонент "Добавить в плейлист"
@@ -49,6 +51,10 @@ export class AddToPlaylistWidget extends Component {
             .removeEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('add-to-playlist-widget__checkbox')]
             .forEach((el) => el.removeEventListener('click', this.checkboxClickedCallback));
+        // если была нажата кнопка "Создать плейлист"
+        if (document.getElementById('submit-create-playlist')) {
+            this.removeCreationForm();
+        }
     }
 
     /**
@@ -81,6 +87,15 @@ export class AddToPlaylistWidget extends Component {
      */
     createPlaylist(event) {
         const playlistName = event.target.parentElement.previousElementSibling.value;
+        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === OK_CODE, playlistName));
+    }
+
+    /**
+     * Отображение результата создания плейлиста
+     * @param {boolean} status - успешность запроса
+     * @param {string} playlistName - имя созданного плейлиста
+     */
+    processCreate(status, playlistName) {
         const playlists = document.getElementById('playlists-list');
         const newId = playlists.childElementCount + 1;
         playlists.insertAdjacentHTML('beforeend', this.renderPlaylistRowHBS({
@@ -101,13 +116,12 @@ export class AddToPlaylistWidget extends Component {
     checkboxClicked(event) {
         const checkbox = event.target;
         const label = checkbox.previousElementSibling;
-        // const playlistId = label.getAttribute('data-playlist-id');
-        const playlistName = label.textContent.trim();
+        const playlistId = label.getAttribute('data-playlist-id');
         const movieId = checkbox.getAttribute('data-movie-id');
         if (checkbox.checked) {
-            console.log(`adding ${movieId} to playlist ${playlistName}`);
+            API.addMovieToPlaylist(playlistId, movieId);
         } else {
-            console.log(`deleting ${movieId} from playlist ${playlistName}`);
+            API.deleteMovieFromPlaylist(playlistId, movieId);
         }
     }
 }

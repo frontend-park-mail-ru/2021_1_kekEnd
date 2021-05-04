@@ -1,5 +1,5 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {busEvents} from '../../utils/busEvents';
+import {globalEventBus} from 'utils/eventbus';
+import {busEvents} from 'utils/busEvents';
 import './popup.tmpl';
 
 

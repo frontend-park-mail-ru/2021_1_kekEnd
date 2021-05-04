@@ -1,15 +1,15 @@
 import {Component} from './component';
-import {globalRouter} from '../utils/router';
-import {PATHS} from '../utils/paths';
-import '../partials/navbarRight.tmpl';
-import {API} from '../utils/api';
-import {OK_CODE} from '../utils/codes';
-import {userMeta} from '../utils/userMeta';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {API} from 'utils/api';
+import {OK_CODE} from 'utils/codes';
+import {userMeta} from 'utils/userMeta';
+import 'partials/navbar.tmpl';
 
 /**
  * Компонента "Кнопка 'Выход'"
  */
-export class NavbarRight extends Component {
+export class Navbar extends Component {
     /**
      * Конструктор кнопки
      * @param {Object} parent - родитель кнопки
@@ -18,7 +18,7 @@ export class NavbarRight extends Component {
     constructor(parent, state) {
         super(parent, state);
         // eslint-disable-next-line no-undef
-        this.renderHBS = Handlebars.templates['navbarRight.hbs'];
+        this.renderHBS = Handlebars.templates['navbar.hbs'];
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -63,13 +63,13 @@ export class NavbarRight extends Component {
         }
         userMeta.setAuthorized(false);
 
-        const currentPath = globalRouter.getCurrentPath();
+        const currentPath = globalRouter.currentPath;
         if (currentPath === PATHS.profile || currentPath === PATHS.settings) {
             // если пользователь находился в профиле или настройках, надо выкинуть его на главную
             globalRouter.pushState(PATHS.main);
         } else {
             // если пользователь находился на обычных страницах, перерендерить ее
-            globalRouter.handlePath(currentPath, globalRouter.getCurrentParams());
+            globalRouter.handlePath(currentPath, globalRouter.currentParameters);
         }
     }
 }

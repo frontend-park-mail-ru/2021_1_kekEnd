@@ -1,10 +1,10 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {busEvents} from '../../utils/busEvents';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {busEvents} from 'utils/busEvents';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
+import {AddToPlaylistWidget} from 'components/addToPlaylist';
 import './moviesList.tmpl';
-import {AddToPlaylistWidget} from '../../components/addToPlaylist';
 
 /**
  * Представление страницы списка фильмов
@@ -19,7 +19,7 @@ export default class MoviesListView extends BaseView {
         super(parent, Handlebars.templates['moviesList.hbs']);
 
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
-        globalEventBus.on(busEvents.SET_USER_PLAYLISTS, this.displayPlaylists.bind(this));
+        globalEventBus.on(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, this.displayPlaylists.bind(this));
 
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
@@ -31,13 +31,13 @@ export default class MoviesListView extends BaseView {
      */
     render(params) {
         const [category, page, query] = params.split('/');
-        if (category === 'best') {
+        switch (category) {
+        case 'best':
             globalEventBus.emit(busEvents.GET_BEST_MOVIES_PAGE, page);
-            return;
-        }
-        if (category === 'genre') {
-            const genres = query.slice('?filter='.length).split('+');
-            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, genres, page);
+            break;
+        case 'genre':
+            globalEventBus.emit(busEvents.GET_GENRE_MOVIES_PAGE, query.slice('?filter='.length).split('+'), page);
+            break;
         }
     }
 
@@ -55,9 +55,9 @@ export default class MoviesListView extends BaseView {
     setMovies(data) {
         super.render(data);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
@@ -71,7 +71,7 @@ export default class MoviesListView extends BaseView {
         [...document.getElementsByClassName('buttons__input-playlist')]
             .forEach((element) => element.addEventListener('click', this.playlistClickedCallback));
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
     }
 
     /**
@@ -83,7 +83,7 @@ export default class MoviesListView extends BaseView {
         [...document.getElementsByClassName('buttons__input-playlist')]
             .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
 
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
         this.currentPlaylistWidget?.hide();
     }
 
@@ -106,23 +106,21 @@ export default class MoviesListView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
-        const movieId = event.target.getAttribute('data-id');
-
+        this.movieId = event.target.getAttribute('data-id');
         this.currentPlaylistWidget?.hide();
-        this.currentPlaylistWidget = null;
-
         if (event.target.checked) {
-            globalEventBus.emit(busEvents.GET_USER_PLAYLISTS, movieId);
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST);
         }
     }
 
     /**
      * Отобразить виджет со списком плейлистов
-     * @param {Object} data - информация о плейлистах
+     * @param {Object} playlistsData - информация о плейлистах
      */
-    displayPlaylists(data) {
-        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${data.movieId}`),
-            data);
+    displayPlaylists(playlistsData) {
+        playlistsData.movieId = this.movieId;
+        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.movieId}`),
+            playlistsData);
         this.currentPlaylistWidget.render();
         this.currentPlaylistWidget.setEventListeners();
     }

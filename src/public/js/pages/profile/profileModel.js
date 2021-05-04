@@ -1,11 +1,10 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {OK_CODE} from '../../utils/codes';
-import {AUTH_ERROR} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
-
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {OK_CODE} from 'utils/codes';
+import {AUTH_ERROR} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 
 /**
  *  Модель страницы профиля
@@ -23,7 +22,6 @@ export default class ProfileModel {
      * Получение данных профиля
      */
     getProfileData() {
-        // TODO: implement on backend
         const additionalData = {
             favorite_movies: [
                 {
@@ -51,52 +49,19 @@ export default class ProfileModel {
                     poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
                 },
             ],
-            playlists: [
-                {
-                    id: 1,
-                    playlistName: 'Любимые фильмы',
-                    movies: [
-                        {
-                            id: 1,
-                            title: 'Матрица',
-                        },
-                        {
-                            id: 2,
-                            title: 'Король Лев',
-                        },
-                    ],
-                },
-                {
-                    id: 2,
-                    playlistName: 'Кино на вечер',
-                    movies: [
-                        {
-                            id: 3,
-                            title: 'Душа',
-                        },
-                        {
-                            id: 4,
-                            title: 'Тайна Коко',
-                        },
-                    ],
-                },
-                {
-                    id: 3,
-                    playlistName: 'Пустой',
-                },
-            ],
         };
 
-        Promise.all([API.getUser(), API.getUserReviews()])
+        Promise.all([API.getUser(), API.getUserReviews(), API.getPlaylistsWithMovies()])
             .then((responses) => {
                 if (responses.some((resp) => resp.status !== OK_CODE)) {
                     throw new Error(AUTH_ERROR);
                 }
-                const [userData, reviews] = responses.map((resp) => resp.data);
+                const [userData, reviews, playlists] = responses.map((resp) => resp.data);
                 globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
                     ...userData,
                     ...additionalData,
                     'reviews': reviews,
+                    'playlists': playlists.playlists,
                 });
             })
             .catch((err) => {

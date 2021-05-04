@@ -1,15 +1,15 @@
-import {setValidationResult, setListenersForHidingValidationError} from '../../utils/setValidationResult';
-import {globalEventBus} from '../../utils/eventbus';
+import {setValidationResult, setListenersForHidingValidationError} from 'utils/setValidationResult';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import Validator from '../../utils/validation';
-import {globalRouter} from '../../utils/router';
-import {PATHS} from '../../utils/paths';
-import {OK_CODE} from '../../utils/codes';
-import {PASSWORDS_MISMATCH} from '../../utils/errorMessages';
-import {busEvents} from '../../utils/busEvents';
+import Validator from 'utils/validation';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
+import {OK_CODE} from 'utils/codes';
+import {PASSWORDS_MISMATCH} from 'utils/errorMessages';
+import {busEvents} from 'utils/busEvents';
 import './settings.tmpl';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
 
 
 /**
@@ -50,9 +50,9 @@ export default class SettingsView extends BaseView {
         this.settings = data;
         super.render(this.settings);
 
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
@@ -71,7 +71,7 @@ export default class SettingsView extends BaseView {
         document.getElementById('settings-save-button').addEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').addEventListener('click', this.uploadAvatarClickedCallback);
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
 
         this.setPhotoPreviewListener();
 
@@ -118,7 +118,7 @@ export default class SettingsView extends BaseView {
     removeEventListeners() {
         document.getElementById('settings-save-button').removeEventListener('click', this.saveClickedCallback);
         document.getElementById('avatar-upload-button').removeEventListener('click', this.uploadAvatarClickedCallback);
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
     }
 
     /**

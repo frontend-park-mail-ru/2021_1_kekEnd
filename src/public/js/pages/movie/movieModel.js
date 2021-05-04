@@ -1,8 +1,8 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {CREATED, OK_CODE} from '../../utils/codes';
-import {objectsMatch} from '../../utils/objectsMatch';
-import {busEvents} from '../../utils/busEvents';
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {CREATED, OK_CODE} from 'utils/codes';
+import {objectsMatch} from 'utils/objectsMatch';
+import {busEvents} from 'utils/busEvents';
 
 
 /**
@@ -21,6 +21,7 @@ export default class MovieModel {
         globalEventBus.on(busEvents.EDIT_RATING, this.editRating.bind(this));
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
+        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylists.bind(this));
     }
 
     /**
@@ -125,5 +126,12 @@ export default class MovieModel {
             .then((res) => {
                 globalEventBus.emit(busEvents.RATING_DELETED, res.status === OK_CODE);
             });
+    }
+
+    /**
+     * Получить плейлисты пользователя
+     */
+    getPlaylists() {
+        API.getPlaylists().then((res) => globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIE, res.data));
     }
 }

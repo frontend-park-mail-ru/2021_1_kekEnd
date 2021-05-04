@@ -1,9 +1,9 @@
-import {globalEventBus} from '../../utils/eventbus';
+import {globalEventBus} from 'utils/eventbus';
 import BaseView from '../baseView';
-import {busEvents} from '../../utils/busEvents';
+import {busEvents} from 'utils/busEvents';
 import './actor.tmpl';
-import {NavbarRight} from '../../components/navbarRight';
-import {userMeta} from '../../utils/userMeta';
+import {Navbar} from 'components/navbar';
+import {userMeta} from 'utils/userMeta';
 
 /**
  * Представление страницы актера
@@ -40,10 +40,9 @@ export default class ActorView extends BaseView {
         super.render(data);
 
         this.isLiked = data.is_liked;
-
-        this.navbarRightComponent = new NavbarRight(document.getElementById('header'),
+        this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
-        this.navbarRightComponent.render();
+        this.navbarComponent.render();
 
         this.setEventListeners();
     }
@@ -61,7 +60,7 @@ export default class ActorView extends BaseView {
     setEventListeners() {
         document.getElementById('actor-button-like')?.addEventListener('click', this.likeActorCallback);
 
-        this.navbarRightComponent.setEventListeners();
+        this.navbarComponent.setEventListeners();
     }
 
     /**
@@ -70,7 +69,7 @@ export default class ActorView extends BaseView {
     removeEventListeners() {
         document.getElementById('actor-button-like')?.removeEventListener('click', this.likeActorCallback);
 
-        this.navbarRightComponent.removeEventListeners();
+        this.navbarComponent.removeEventListeners();
     }
 
     /**

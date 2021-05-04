@@ -1,8 +1,7 @@
-import {globalEventBus} from '../../utils/eventbus';
-import {API} from '../../utils/api';
-import {busEvents} from '../../utils/busEvents';
-import {OK_CODE} from '../../utils/codes';
-
+import {globalEventBus} from 'utils/eventbus';
+import {API} from 'utils/api';
+import {busEvents} from 'utils/busEvents';
+import {OK_CODE} from 'utils/codes';
 
 /**
  *  Модель страницы актера
