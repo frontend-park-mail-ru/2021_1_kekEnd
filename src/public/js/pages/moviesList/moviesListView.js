@@ -104,6 +104,7 @@ export default class MoviesListView extends BaseView {
     playlistClicked(event) {
         this.movieId = event.target.getAttribute('data-id');
         this.currentPlaylistWidget?.hide();
+        this.currentPlaylistWidget = null;
         if (event.target.checked) {
             globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST);
         }
