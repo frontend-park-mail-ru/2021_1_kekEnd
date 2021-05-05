@@ -18,9 +18,8 @@ export default class FeedModel {
      */
     getFeed() {
         API.getFeed().then((res) => {
-            const [reviews, ratings] = res.data;
             globalEventBus.emit(busEvents.SET_FEED, {
-                'feed': [...reviews, ...ratings],
+                'feed': [...res.data.recent_reviews, ...res.data.recent_ratings],
             });
         });
     }
