@@ -3,6 +3,10 @@
   &__profile-card {
     margin-top: 50px;
   }
+
+  &__accordion {
+    padding-bottom: 20px;
+  }
 }
 
 .profile-card {
@@ -261,6 +265,7 @@
     position: absolute;
     visibility: hidden;
     opacity: 0;
+    top: 0;
   }
 
   &__input {

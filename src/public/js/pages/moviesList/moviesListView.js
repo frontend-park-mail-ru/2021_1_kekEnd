@@ -45,6 +45,7 @@ export default class MoviesListView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
+        this.currentPlaylistWidget = null;
         super.hide(this);
     }
 
@@ -108,17 +109,21 @@ export default class MoviesListView extends BaseView {
     playlistClicked(event) {
         this.movieId = event.target.getAttribute('data-id');
         this.currentPlaylistWidget?.hide();
+        this.currentPlaylistWidget = null;
         if (event.target.checked) {
-            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST);
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.movieId);
         }
     }
 
     /**
      * Отобразить виджет со списком плейлистов
-     * @param {Object} playlistsData - информация о плейлистах
+     * @param {Object} playlists - информация о плейлистах
      */
-    displayPlaylists(playlistsData) {
-        playlistsData.movieId = this.movieId;
+    displayPlaylists(playlists) {
+        const playlistsData = {
+            'playlists': playlists,
+            'movieId': this.movieId,
+        };
         this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.movieId}`),
             playlistsData);
         this.currentPlaylistWidget.render();

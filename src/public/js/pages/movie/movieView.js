@@ -9,7 +9,7 @@ import {busEvents} from 'utils/busEvents';
 import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 import './movie.tmpl';
-import {AddToPlaylistWidget} from '../../components/addToPlaylist';
+import {AddToPlaylistWidget} from 'components/addToPlaylist';
 
 /**
  * Представление страницы фильма
@@ -70,6 +70,7 @@ export default class MovieView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
+        this.currentPlaylistWidget = null;
         super.hide(this);
     }
 
@@ -117,6 +118,7 @@ export default class MovieView extends BaseView {
         });
 
         this.navbarComponent.removeEventListeners();
+        this.currentPlaylistWidget?.hide();
     }
 
     /**
@@ -259,9 +261,13 @@ export default class MovieView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     watchedClicked(event) {
-        // TODO: api request
-        const movieId = event.target.getAttribute('data-id');
-        console.log(`watched movie ${movieId}`);
+        const checkbox = event.target;
+        const movieId = checkbox.getAttribute('data-id');
+        if (checkbox.checked) {
+            globalEventBus.emit(busEvents.WATCH_MOVIE, movieId);
+            return;
+        }
+        globalEventBus.emit(busEvents.UNWATCH_MOVIE, movieId);
     }
 
     /**
@@ -272,16 +278,19 @@ export default class MovieView extends BaseView {
         this.currentPlaylistWidget?.hide();
         this.currentPlaylistWidget = null;
         if (event.target.checked) {
-            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIE);
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIE, this.data.id);
         }
     }
 
     /**
      * Отобразить виджет со списком плейлистов
-     * @param {Object} playlistsData - информация о плейлистах
+     * @param {Object} playlists - информация о плейлистах
      */
-    displayPlaylists(playlistsData) {
-        playlistsData.movieId = this.data.id;
+    displayPlaylists(playlists) {
+        const playlistsData = {
+            'playlists': playlists,
+            'movieId': this.movieId,
+        };
         this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.data.id}`),
             playlistsData);
         this.currentPlaylistWidget.render();

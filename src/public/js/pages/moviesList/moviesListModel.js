@@ -14,7 +14,7 @@ export default class MoviesListModel {
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
         globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
         globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
-        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylists.bind(this));
+        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylistsForMovie.bind(this));
     }
 
     /**
@@ -55,7 +55,7 @@ export default class MoviesListModel {
     }
 
     /**
-     * Отметить фильм как "просмотренный"
+     * Удалить отметку фильма как "просмотренный"
      * @param {number} movieId - идентификатор фильма
      */
     unwatchMovie(movieId) {
@@ -63,10 +63,12 @@ export default class MoviesListModel {
     }
 
     /**
-     * Получить плейлисты пользователя
+     * Получить плейлисты пользователя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
      */
-    getPlaylists() {
-        API.getPlaylists().then((res) => globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, res.data));
+    getPlaylistsForMovie(movieId) {
+        API.getPlaylistsForMovie(movieId).then((res) =>
+            globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, res.data));
     }
 }
 
