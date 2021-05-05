@@ -10,6 +10,17 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.app {
+  display: grid;
+  grid-template-areas:
+      "navbar navbar navbar"
+      "main main main";
+}
+
+.navbar {
+  grid-area: navbar;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -55,11 +66,12 @@ body {
 }
 
 .main {
-  position: absolute;
-  width: 100%;
-  min-height: 100%;
-  background-color: $main-background;
-  color: $primary-text-color;
+  grid-area: main;
+  // // position: absolute;
+  // width: 100%;
+  // min-height: 100%;
+  // background-color: $main-background;
+  // color: $primary-text-color;
 
   &__page-title {
     text-align: center;
