@@ -250,24 +250,6 @@ class Api {
      */
     getPlaylistsForMovie(movieId) {
         return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${movieId}`);
-        // // TODO: backend
-        // return Promise.resolve({
-        //     data: {
-        //         playlists: [
-        //             {
-        //                 id: 1,
-        //                 playlistName: 'Любимые фильмы',
-        //                 isAdded: true,
-        //             },
-        //             {
-        //                 id: 2,
-        //                 playlistName: 'Кино на вечер',
-        //                 isAdded: false,
-        //             },
-        //         ],
-        //     },
-        //     status: 200,
-        // });
     }
 
     /**
@@ -276,46 +258,6 @@ class Api {
      */
     getPlaylists() {
         return this.asyncRequest(`http://${this.host}:${this.port}/playlists`);
-        // // TODO: backend
-        // return Promise.resolve({
-        //     data: {
-        //         playlists: [
-        //             {
-        //                 id: 1,
-        //                 playlistName: 'Любимые фильмы',
-        //                 movies: [
-        //                     {
-        //                         id: 1,
-        //                         title: 'Матрица',
-        //                     },
-        //                     {
-        //                         id: 2,
-        //                         title: 'Король Лев',
-        //                     },
-        //                 ],
-        //             },
-        //             {
-        //                 id: 2,
-        //                 playlistName: 'Кино на вечер',
-        //                 movies: [
-        //                     {
-        //                         id: 3,
-        //                         title: 'Душа',
-        //                     },
-        //                     {
-        //                         id: 4,
-        //                         title: 'Тайна Коко',
-        //                     },
-        //                 ],
-        //             },
-        //             {
-        //                 id: 3,
-        //                 playlistName: 'Пустой',
-        //             },
-        //         ],
-        //     },
-        //     status: 200,
-        // });
     }
 
     /**
@@ -329,11 +271,6 @@ class Api {
             'playlist_name': name,
             'is_shared': isShared,
         }));
-        // // TODO: backend
-        // return Promise.resolve({
-        //     data: {},
-        //     status: 200,
-        // });
     }
 
     /**
@@ -347,11 +284,6 @@ class Api {
             JSON.stringify({
                 'movie_id': movieId,
             }));
-        // // TODO: backend
-        // return Promise.resolve({
-        //     data: {},
-        //     status: 200,
-        // });
     }
 
     /**
@@ -365,11 +297,6 @@ class Api {
             JSON.stringify({
                 'movie_id': movieId,
             }));
-        // // TODO: backend
-        // return Promise.resolve({
-        //     data: {},
-        //     status: 200,
-        // });
     }
 }
 
