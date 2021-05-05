@@ -345,6 +345,33 @@ class Api {
                 'movie_id': movieId,
             }));
     }
+
+    /**
+     * Подписаться на пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    followUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}`, 'POST');
+    }
+
+    /**
+     * Отписаться от пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unfollowUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}`, 'DELETE');
+    }
+
+    /**
+     * Проверить, подписан ля текущий пользователь на данного пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    checkSubscription(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}/check`);
+    }
 }
 
 export const API = new Api();

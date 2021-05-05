@@ -5,6 +5,7 @@ import {PATHS} from 'utils/paths';
 import {OK_CODE} from 'utils/codes';
 import {AUTH_ERROR} from 'utils/errorMessages';
 import {busEvents} from 'utils/busEvents';
+import {userMeta} from 'utils/userMeta';
 
 /**
  *  Модель страницы профиля
@@ -58,12 +59,22 @@ export default class ProfileModel {
                     throw new Error(AUTH_ERROR);
                 }
                 const [userData, reviews, playlists] = responses.map((resp) => resp.data);
-                globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
+                return {
                     ...userData,
                     ...additionalData,
                     'reviews': reviews,
                     'playlists': playlists,
-                });
+                };
+            })
+            .then((userData) => {
+                if (userMeta.getAuthorized() && username !== userMeta.getUsername()) {
+                    API.checkSubscription(username).then((res) => {
+                        userData.is_subscribed = res.data;
+                        globalEventBus.emit(busEvents.SET_PROFILE_DATA, userData);
+                    });
+                } else {
+                    globalEventBus.emit(busEvents.SET_PROFILE_DATA, userData);
+                }
             })
             .catch((err) => {
                 if (err.message === AUTH_ERROR) {
@@ -78,8 +89,12 @@ export default class ProfileModel {
      * @param {boolean} isFollowing - подписка или отписка
      */
     followUser(username, isFollowing) {
-        // TODO: api request
-        const status = true;
-        globalEventBus.emit(busEvents.FOLLOW_STATUS, status, isFollowing);
+        if (isFollowing) {
+            API.followUser(username).then((res) =>
+                globalEventBus.emit(busEvents.FOLLOW_STATUS, res.status === OK_CODE, isFollowing));
+            return;
+        }
+        API.unfollowUser(username).then((res) =>
+            globalEventBus.emit(busEvents.FOLLOW_STATUS, res.status === OK_CODE, isFollowing));
     }
 }

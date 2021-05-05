@@ -13,8 +13,13 @@
                         <p id="user-full-name" class="head__user-name">{{username}}</p>
                         {{#if (getAuthStatus)}}
                             {{#if (notEq username (getUsername))}}
-                                <input type="checkbox" id="follow" class="head__follow-checkbox">
-                                <label for="follow" id="follow-button" class="head__follow-button">Подписаться</label>
+                                {{#if is_subscribed}}
+                                    <input type="checkbox" id="follow" class="head__follow-checkbox" checked>
+                                    <label for="follow" id="follow-button" class="head__follow-button">Отписаться</label>
+                                {{else}}
+                                    <input type="checkbox" id="follow" class="head__follow-checkbox">
+                                    <label for="follow" id="follow-button" class="head__follow-button">Подписаться</label>
+                                {{/if}}
                             {{/if}}
                         {{/if}}
                     </div>
