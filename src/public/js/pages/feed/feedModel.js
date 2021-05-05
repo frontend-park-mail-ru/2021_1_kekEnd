@@ -1,5 +1,6 @@
 import {globalEventBus} from 'utils/eventbus';
 import {busEvents} from 'utils/busEvents';
+import {API} from 'utils/api';
 
 /**
  *  Модель страницы "Лента"
@@ -16,8 +17,8 @@ export default class FeedModel {
      * Получение ленты пользователя
      */
     getFeed() {
-        globalEventBus.emit(busEvents.SET_FEED, {
-            feed: [
+        /*
+        feed: [
                 {
                     id: 1,
                     itemType: 'review',
@@ -44,6 +45,7 @@ export default class FeedModel {
                     },
                 },
             ],
-        });
+         */
+        API.getFeed().then((res) => globalEventBus.emit(busEvents.SET_FEED, res.data));
     }
 }

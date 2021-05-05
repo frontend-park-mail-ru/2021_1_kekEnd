@@ -28,7 +28,7 @@ export default class SettingsModel {
                 if (res.status === OK_CODE) {
                     globalEventBus.emit('set settings data', res.data);
                 } else {
-                    globalRouter.pushState(PATHS.login);
+                    globalRouter.activate(PATHS.login);
                 }
             });
     }

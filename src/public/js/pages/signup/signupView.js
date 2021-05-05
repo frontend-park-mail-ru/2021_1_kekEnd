@@ -35,7 +35,7 @@ export default class SignupView extends BaseView {
      */
     render() {
         if (userMeta.getAuthorized()) {
-            globalRouter.pushState(PATHS.user + '/' + userMeta.getUsername());
+            globalRouter.activate(`${PATHS.user}/${userMeta.getUsername()}`);
             return;
         }
         this.setSignupPage();
@@ -118,7 +118,7 @@ export default class SignupView extends BaseView {
      */
     processSignupAttempt(status) {
         if (status === CREATED) {
-            globalRouter.pushState(PATHS.user + '/' + userMeta.getUsername());
+            globalRouter.activate(`${PATHS.user}/${userMeta.getUsername()}`);
             return;
         }
         const errors = {

@@ -63,7 +63,7 @@
     <h3 class="main__section-name">Плейлисты</h3>
     {{#unless playlists}}
         <div class="main__message-empty">
-            <p class="message-empty__text">
+            <p id="no-playlists-message" class="message-empty__text">
                 {{#if (eq username (getUsername))}}
                     Создайте свой первый плейлист!
                 {{else}}

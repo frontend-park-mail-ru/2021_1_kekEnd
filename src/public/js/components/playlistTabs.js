@@ -101,6 +101,7 @@ export class PlaylistTabs extends Component {
                 id: tabs.childElementCount + 1,
                 playlist_name: playlistName,
             }));
+            document.getElementById('no-playlists-message')?.remove();
             this.removeCreationForm();
         }
     }

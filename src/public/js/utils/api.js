@@ -372,6 +372,14 @@ class Api {
     checkSubscription(username) {
         return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}/check`);
     }
+
+    /**
+     * Получить ленту текущего пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getFeed() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/feed`);
+    }
 }
 
 export const API = new Api();

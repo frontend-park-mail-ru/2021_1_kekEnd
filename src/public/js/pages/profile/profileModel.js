@@ -78,7 +78,7 @@ export default class ProfileModel {
             })
             .catch((err) => {
                 if (err.message === AUTH_ERROR) {
-                    globalRouter.pushState(PATHS.login);
+                    globalRouter.activate(PATHS.login);
                 }
             });
     }

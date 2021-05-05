@@ -15,12 +15,12 @@
                 </div>
                 <h4 class="feed-card__username">{{username}}</h4>
                 <h5 class="feed-card__action">
-                    {{#if (eq itemType 'review')}}написал рецензию{{/if}}
-                    {{#if (eq itemType 'rating')}}поставил оценку{{/if}}
+                    {{#if (eq item_type 'review')}}написал рецензию{{/if}}
+                    {{#if (eq item_type 'rating')}}поставил оценку{{/if}}
                 </h5>
             </div>
             <div class="feed-card__content">
-                {{#if (eq itemType 'review')}}
+                {{#if (eq item_type 'review')}}
                     <div class="content-container__review-content review_background_{{review.review_type}}">
                         <div class="your-review__review-body">
                             <p class="review-body__title">{{review.title}}</p>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 {{/if}}
-                {{#if (eq itemType 'rating')}}
+                {{#if (eq item_type 'rating')}}
                     {{#if (gte rating.score 7)}}<h2 class="feed-card__movie-rating positive-rating">{{rating.score}}</h2>
                     {{else}}
                         {{#if (gte rating.score 4)}}<h2 class="feed-card__movie-rating neutral-rating">{{rating.score}}</h2>
