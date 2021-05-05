@@ -1,7 +1,7 @@
 import {Component} from './component';
 import '../partials/playlistTabs.tmpl';
 import '../partials/playlistTab.tmpl';
-import {OK_CODE} from 'utils/codes';
+import {CREATED, OK_CODE} from 'utils/codes';
 import {API} from 'utils/api';
 
 /**
@@ -86,7 +86,7 @@ export class PlaylistTabs extends Component {
      */
     createPlaylist() {
         const playlistName = document.getElementById('input-create-playlist').value;
-        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === OK_CODE, playlistName));
+        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === CREATED, playlistName));
     }
 
     /**
@@ -99,7 +99,7 @@ export class PlaylistTabs extends Component {
             const tabs = document.getElementById('tabs');
             tabs.insertAdjacentHTML('beforeend', this.renderNewTabHBS({
                 id: tabs.childElementCount + 1,
-                playlistName: playlistName,
+                playlist_name: playlistName,
             }));
             this.removeCreationForm();
         }

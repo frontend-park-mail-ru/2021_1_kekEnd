@@ -244,91 +244,96 @@ class Api {
     }
 
     /**
-     * Получить плейлисты пользоватя
+     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getPlaylists() {
-        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
-        // TODO: backend
-        return Promise.resolve({
-            data: {
-                playlists: [
-                    {
-                        id: 1,
-                        playlistName: 'Любимые фильмы',
-                        isAdded: true,
-                    },
-                    {
-                        id: 2,
-                        playlistName: 'Кино на вечер',
-                        isAdded: false,
-                    },
-                ],
-            },
-            status: 200,
-        });
+    getPlaylistsForMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${movieId}`);
+        // // TODO: backend
+        // return Promise.resolve({
+        //     data: {
+        //         playlists: [
+        //             {
+        //                 id: 1,
+        //                 playlistName: 'Любимые фильмы',
+        //                 isAdded: true,
+        //             },
+        //             {
+        //                 id: 2,
+        //                 playlistName: 'Кино на вечер',
+        //                 isAdded: false,
+        //             },
+        //         ],
+        //     },
+        //     status: 200,
+        // });
     }
 
     /**
      * Получить плейлисты пользователя вместе с их фильмами
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getPlaylistsWithMovies() {
-        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
-        // TODO: backend
-        return Promise.resolve({
-            data: {
-                playlists: [
-                    {
-                        id: 1,
-                        playlistName: 'Любимые фильмы',
-                        movies: [
-                            {
-                                id: 1,
-                                title: 'Матрица',
-                            },
-                            {
-                                id: 2,
-                                title: 'Король Лев',
-                            },
-                        ],
-                    },
-                    {
-                        id: 2,
-                        playlistName: 'Кино на вечер',
-                        movies: [
-                            {
-                                id: 3,
-                                title: 'Душа',
-                            },
-                            {
-                                id: 4,
-                                title: 'Тайна Коко',
-                            },
-                        ],
-                    },
-                    {
-                        id: 3,
-                        playlistName: 'Пустой',
-                    },
-                ],
-            },
-            status: 200,
-        });
+    getPlaylists() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`);
+        // // TODO: backend
+        // return Promise.resolve({
+        //     data: {
+        //         playlists: [
+        //             {
+        //                 id: 1,
+        //                 playlistName: 'Любимые фильмы',
+        //                 movies: [
+        //                     {
+        //                         id: 1,
+        //                         title: 'Матрица',
+        //                     },
+        //                     {
+        //                         id: 2,
+        //                         title: 'Король Лев',
+        //                     },
+        //                 ],
+        //             },
+        //             {
+        //                 id: 2,
+        //                 playlistName: 'Кино на вечер',
+        //                 movies: [
+        //                     {
+        //                         id: 3,
+        //                         title: 'Душа',
+        //                     },
+        //                     {
+        //                         id: 4,
+        //                         title: 'Тайна Коко',
+        //                     },
+        //                 ],
+        //             },
+        //             {
+        //                 id: 3,
+        //                 playlistName: 'Пустой',
+        //             },
+        //         ],
+        //     },
+        //     status: 200,
+        // });
     }
 
     /**
      * Создать новый плейлист
      * @param {string} name - название плейлиста
+     * @param {boolean} isShared - можно ли приглашать людей в плейлист
      * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    createPlaylist(name) {
-        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
-        // TODO: backend
-        return Promise.resolve({
-            data: {},
-            status: 200,
-        });
+    createPlaylist(name, isShared=false) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`, 'POST', JSON.stringify({
+            'playlist_name': name,
+            'is_shared': isShared,
+        }));
+        // // TODO: backend
+        // return Promise.resolve({
+        //     data: {},
+        //     status: 200,
+        // });
     }
 
     /**
@@ -338,12 +343,15 @@ class Api {
      * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
     addMovieToPlaylist(playlistId, movieId) {
-        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
-        // TODO: backend
-        return Promise.resolve({
-            data: {},
-            status: 200,
-        });
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${playlistId}/movie`, 'POST',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
+        // // TODO: backend
+        // return Promise.resolve({
+        //     data: {},
+        //     status: 200,
+        // });
     }
 
     /**
@@ -353,12 +361,15 @@ class Api {
      * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
     deleteMovieFromPlaylist(playlistId, movieId) {
-        // return this.asyncRequest(`http://${this.host}:${this.port}/...);
-        // TODO: backend
-        return Promise.resolve({
-            data: {},
-            status: 200,
-        });
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${playlistId}/movie`, 'DELETE',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
+        // // TODO: backend
+        // return Promise.resolve({
+        //     data: {},
+        //     status: 200,
+        // });
     }
 }
 

@@ -65,7 +65,7 @@ export default class ProfileModel {
             ],
         };
 
-        Promise.all([API.getUser(), API.getUserReviews(), API.getPlaylistsWithMovies()])
+        Promise.all([API.getUser(), API.getUserReviews(), API.getPlaylists()])
             .then((responses) => {
                 if (responses.some((resp) => resp.status !== OK_CODE)) {
                     throw new Error(AUTH_ERROR);
@@ -75,7 +75,7 @@ export default class ProfileModel {
                     ...userData,
                     ...additionalData,
                     'reviews': reviews,
-                    'playlists': playlists.playlists,
+                    'playlists': playlists,
                 });
             })
             .catch((err) => {

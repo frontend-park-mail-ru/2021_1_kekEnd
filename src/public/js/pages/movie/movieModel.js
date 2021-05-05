@@ -21,7 +21,7 @@ export default class MovieModel {
         globalEventBus.on(busEvents.EDIT_RATING, this.editRating.bind(this));
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
-        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylists.bind(this));
+        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
     }
 
     /**
@@ -129,9 +129,11 @@ export default class MovieModel {
     }
 
     /**
-     * Получить плейлисты пользователя
+     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
      */
-    getPlaylists() {
-        API.getPlaylists().then((res) => globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIE, res.data));
+    getPlaylistsForMovie(movieId) {
+        API.getPlaylistsForMovie(movieId).then((res) =>
+            globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIE, res.data));
     }
 }

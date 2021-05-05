@@ -37,10 +37,16 @@
         <h3 class="main__section-name">Любимые актеры</h3>
         <div id='favorite-actors-carousel' class="main__slider-wrapper"></div>
     {{/if}}
-    {{#if playlists}}
-        <h3 class="main__section-name">Плейлисты</h3>
-        <div id="accordion-container"></div>
-    {{/if}}
+    <h3 class="main__section-name">Плейлисты</h3>
+    {{#unless playlists}}
+        <div class="main__message-empty">
+            <p class="message-empty__text">
+                Создайте свой первый плейлист!
+            </p>
+        </div>
+    {{/unless}}
+    <div id="accordion-container"></div>
+
     {{#if reviews}}
         <h3 class="main__section-name">Рецензии</h3>
         <div id='reviews-carousel' class="main__slider-wrapper"></div>

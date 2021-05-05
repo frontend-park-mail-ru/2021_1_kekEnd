@@ -2,7 +2,7 @@ import {Component} from './component';
 import '../partials/addToPlaylistWidget.tmpl';
 import '../partials/playlistRow.tmpl';
 import {API} from 'utils/api';
-import {OK_CODE} from 'utils/codes';
+import {CREATED} from 'utils/codes';
 
 /**
  * Компонент "Добавить в плейлист"
@@ -87,7 +87,7 @@ export class AddToPlaylistWidget extends Component {
      */
     createPlaylist(event) {
         const playlistName = event.target.parentElement.previousElementSibling.value;
-        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === OK_CODE, playlistName));
+        API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === CREATED, playlistName));
     }
 
     /**
@@ -119,9 +119,9 @@ export class AddToPlaylistWidget extends Component {
         const playlistId = label.getAttribute('data-playlist-id');
         const movieId = checkbox.getAttribute('data-movie-id');
         if (checkbox.checked) {
-            API.addMovieToPlaylist(playlistId, movieId);
+            API.addMovieToPlaylist(playlistId, movieId).then(() => {});
         } else {
-            API.deleteMovieFromPlaylist(playlistId, movieId);
+            API.deleteMovieFromPlaylist(playlistId, movieId).then(() => {});
         }
     }
 }
