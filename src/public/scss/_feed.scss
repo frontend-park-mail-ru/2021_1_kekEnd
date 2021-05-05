@@ -1,11 +1,20 @@
-.main__feed-card {
-  width: 50%;
-  margin: 24px auto;
-  background-color: $white-color;
-  color: $primary-text-color;
-  border-radius: $l-border-radius;
-  box-shadow: 0 0 20px $transparent-black;
-  overflow: hidden;
+.main {
+  &__feed-card {
+    width: 50%;
+    margin: 24px auto;
+    background-color: $white-color;
+    color: $primary-text-color;
+    border-radius: $l-border-radius;
+    box-shadow: 0 0 20px $transparent-black;
+    overflow: hidden;
+  }
+
+  &__feed-empty {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 
 .feed-card {
@@ -21,6 +30,11 @@
 
   &__username {
     cursor: pointer;
+  }
+
+  &__user-link {
+    color: $primary-text-color;
+    text-decoration: none;
   }
 
   &__avatar-container {
