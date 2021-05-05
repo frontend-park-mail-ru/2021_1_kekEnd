@@ -6,6 +6,6 @@ export const PATHS = {
     movie: '/movie',
     actor: '/actor',
     settings: '/settings',
-    profile: '/me',
+    user: '/user',
     main: '/',
 };

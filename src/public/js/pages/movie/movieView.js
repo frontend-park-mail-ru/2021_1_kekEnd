@@ -289,7 +289,7 @@ export default class MovieView extends BaseView {
     displayPlaylists(playlists) {
         const playlistsData = {
             'playlists': playlists,
-            'movieId': this.movieId,
+            'movieId': this.data.id,
         };
         this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.data.id}`),
             playlistsData);

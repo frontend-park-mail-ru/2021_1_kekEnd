@@ -20,8 +20,9 @@ export default class ProfileModel {
 
     /**
      * Получение данных профиля
+     * @param {string} username - имя пользователя
      */
-    getProfileData() {
+    getProfileData(username) {
         const additionalData = {
             favorite_movies: [
                 {
@@ -51,7 +52,7 @@ export default class ProfileModel {
             ],
         };
 
-        Promise.all([API.getUser(), API.getUserReviews(), API.getPlaylists()])
+        Promise.all([API.getUser(username), API.getUserReviews(username), API.getPlaylists(username)])
             .then((responses) => {
                 if (responses.some((resp) => resp.status !== OK_CODE)) {
                     throw new Error(AUTH_ERROR);

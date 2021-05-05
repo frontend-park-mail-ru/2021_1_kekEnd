@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     globalRouter.register(PATHS.main, new MainController(application).view);
     globalRouter.register(PATHS.movies, new MoviesListController(application).view);
-    globalRouter.register(PATHS.profile, new ProfileController(application).view);
+    globalRouter.register(PATHS.user, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
     globalRouter.register(PATHS.signup, new SignupController(application).view);
     globalRouter.register(PATHS.movie, new MovieController(application).view);

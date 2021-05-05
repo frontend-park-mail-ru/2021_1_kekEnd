@@ -38,7 +38,7 @@ export class PlaylistTabs extends Component {
      */
     setEventListeners() {
         document.getElementById('create-playlist-button')
-            .addEventListener('click', this.createPlaylistClickedCallback);
+            ?.addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.addEventListener('click', this.deleteMovieClickedCallback));
     }
@@ -48,7 +48,7 @@ export class PlaylistTabs extends Component {
      */
     removeEventListeners() {
         document.getElementById('create-playlist-button')
-            .addEventListener('click', this.createPlaylistClickedCallback);
+            ?.addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
         // если была нажата кнопка "Создать плейлист"

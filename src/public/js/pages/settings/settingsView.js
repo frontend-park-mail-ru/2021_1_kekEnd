@@ -246,7 +246,7 @@ export default class SettingsView extends BaseView {
      */
     displayServerResponse(status) {
         if (status === OK_CODE) {
-            globalRouter.pushState(PATHS.profile);
+            globalRouter.pushState(PATHS.user + '/' + userMeta.getUsername());
         } else {
             document.getElementById('settings-server-response').innerHTML = status;
         }

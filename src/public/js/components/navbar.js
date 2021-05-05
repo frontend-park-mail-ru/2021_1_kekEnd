@@ -62,9 +62,10 @@ export class Navbar extends Component {
             return;
         }
         userMeta.setAuthorized(false);
+        userMeta.setUsername(null);
 
         const currentPath = globalRouter.currentPath;
-        if (currentPath === PATHS.profile || currentPath === PATHS.settings) {
+        if (currentPath === PATHS.user || currentPath === PATHS.settings) {
             // если пользователь находился в профиле или настройках, надо выкинуть его на главную
             globalRouter.pushState(PATHS.main);
         } else {

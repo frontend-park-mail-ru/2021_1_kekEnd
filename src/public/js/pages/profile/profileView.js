@@ -27,9 +27,10 @@ export default class ProfileView extends BaseView {
 
     /**
      * Запуск рендера
+     * @param {string} username - имя пользователя
      */
-    render() {
-        globalEventBus.emit(busEvents.GET_PROFILE_DATA);
+    render(username) {
+        globalEventBus.emit(busEvents.GET_PROFILE_DATA, username);
     }
 
     /**
@@ -44,9 +45,9 @@ export default class ProfileView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
 
-        this.favoriteMoviesCarousel = new Carousel(document.getElementById('favorite-movies-carousel'),
-            {'itemsType': 'movies', 'items': data.favorite_movies});
-        this.favoriteMoviesCarousel.render();
+        // this.favoriteMoviesCarousel = new Carousel(document.getElementById('favorite-movies-carousel'),
+        //     {'itemsType': 'movies', 'items': data.favorite_movies});
+        // this.favoriteMoviesCarousel.render();
 
         this.favoriteActorsCarousel = new Carousel(document.getElementById('favorite-actors-carousel'),
             {'itemsType': 'actors', 'items': data.favorite_actors});
@@ -58,6 +59,7 @@ export default class ProfileView extends BaseView {
 
         this.playlistTabs = new PlaylistTabs(document.getElementById('accordion-container'), {
             playlists: data.playlists,
+            username: this.username,
         });
         this.playlistTabs.render();
 
@@ -75,9 +77,9 @@ export default class ProfileView extends BaseView {
      * Установка колбеков
      */
     setEventListeners() {
-        document.getElementById('follow-button').addEventListener('click', this.followClickedCallback);
+        document.getElementById('follow-button')?.addEventListener('click', this.followClickedCallback);
         this.navbarComponent.setEventListeners();
-        this.favoriteMoviesCarousel.setEventListeners();
+        // this.favoriteMoviesCarousel.setEventListeners();
         this.favoriteActorsCarousel.setEventListeners();
         this.reviewsCarousel.setEventListeners();
         this.playlistTabs.setEventListeners();
@@ -87,9 +89,9 @@ export default class ProfileView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('follow-button').removeEventListener('click', this.followClickedCallback);
+        document.getElementById('follow-button')?.removeEventListener('click', this.followClickedCallback);
         this.navbarComponent.removeEventListeners();
-        this.favoriteMoviesCarousel.removeEventListeners();
+        // this.favoriteMoviesCarousel.removeEventListeners();
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();
         this.playlistTabs.removeEventListeners();

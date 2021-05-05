@@ -73,9 +73,18 @@ class Api {
 
     /**
      * Получить информацию пользователя
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUser() {
+    getUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/user/${username}`);
+    }
+
+    /**
+     * Получить информацию пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getCurrentUser() {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`);
     }
 
@@ -148,10 +157,11 @@ class Api {
 
     /**
      * Получение всех рецензий пользователя
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUserReviews() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`);
+    getUserReviews(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/user/${username}/reviews`);
     }
 
     /**
@@ -285,15 +295,16 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getPlaylistsForMovie(movieId) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${movieId}`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/movies/${movieId}`);
     }
 
     /**
      * Получить плейлисты пользователя вместе с их фильмами
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getPlaylists() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`);
+    getPlaylists(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/users/${username}`);
     }
 
     /**
