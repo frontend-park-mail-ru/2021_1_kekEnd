@@ -56,6 +56,10 @@
     text-align: center;
   }
 
+  &__user-link {
+    color: $primary-text-color;
+  }
+
   &__review-form-container {
     margin: auto;
     width: 80%;
