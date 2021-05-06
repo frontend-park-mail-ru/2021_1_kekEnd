@@ -4,6 +4,7 @@ import {globalRouter} from 'utils/router';
 import {PATHS} from 'utils/paths';
 import {OK_CODE} from 'utils/codes';
 import {busEvents} from 'utils/busEvents';
+import {userMeta} from 'utils/userMeta';
 
 
 /**
@@ -23,7 +24,7 @@ export default class SettingsModel {
      * Получение данных для страницы настроек
      */
     getSettingsData() {
-        API.getUser()
+        API.getUser(userMeta.getUsername())
             .then((res) => {
                 if (res.status === OK_CODE) {
                     globalEventBus.emit('set settings data', res.data);
