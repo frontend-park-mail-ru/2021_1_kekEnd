@@ -227,6 +227,11 @@
     font-size: 20px;
     margin-left: 12px;
   }
+
+  &__main-page-link {
+    color: $secondary-text-color;
+    text-decoration: underline;
+  }
 }
 
 .create-playlist-button {

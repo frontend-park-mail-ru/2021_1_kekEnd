@@ -102,6 +102,7 @@ export class PlaylistTabs extends Component {
                 playlist_name: playlistName,
             }));
             document.getElementById('no-playlists-message')?.remove();
+            document.getElementById('input-create-playlist').value = '';
             this.removeCreationForm();
         }
     }
