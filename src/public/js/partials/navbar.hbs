@@ -3,9 +3,11 @@
         <div class="header__item header__logo">
             <a href="/">КиноПоиск</a>
         </div>
-        <div class="header__item header__button">
-            <a href="/feed">Лента</a>
-        </div>
+        {{#if authorized}}
+            <div class="header__item header__button">
+                <a href="/feed">Лента</a>
+            </div>
+        {{/if}}
         <div class="header__item header__button">
             <a href="/">Поиск</a>
         </div>
