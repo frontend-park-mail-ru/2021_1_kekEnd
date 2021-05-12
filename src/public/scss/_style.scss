@@ -52,6 +52,44 @@ body {
   &__button {
     cursor: pointer;
   }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 8px;
+    margin: auto;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid $secondary-text-color;
+    border-radius: 40px;
+  }
+
+  &__search-input {
+    font-size: 18px;
+    background: none;
+    color: $primary-text-color;
+    border: none;
+    appearance: none;
+    outline: none;
+    margin-left: 12px;
+
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
+
+  &__search-button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    margin-right: 8px;
+
+    i {
+      color: $secondary-text-color;
+      font-size: 1.5em;
+    }
+  }
 }
 
 .main {
