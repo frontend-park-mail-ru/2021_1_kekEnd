@@ -13,6 +13,7 @@ import './public/js/pages/popup/popup';
 import './public/scss/compound.scss';
 import FeedController from './public/js/pages/feed/feedController';
 import {userMeta} from 'utils/userMeta';
+import SearchController from './public/js/pages/search/searchController';
 
 
 if ('serviceWorker' in navigator) {
@@ -42,6 +43,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     globalRouter.register(PATHS.actor, new ActorController(application).view);
     globalRouter.register(PATHS.settings, new SettingsController(application).view);
     globalRouter.register(PATHS.feed, new FeedController(application).view);
+    globalRouter.register(PATHS.search, new SearchController(application).view);
 
     globalRouter.start();
 });

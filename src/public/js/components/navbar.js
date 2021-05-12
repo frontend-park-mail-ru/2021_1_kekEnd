@@ -19,6 +19,7 @@ export class Navbar extends Component {
         super(parent, state);
         // eslint-disable-next-line no-undef
         this.renderHBS = Handlebars.templates['navbar.hbs'];
+        this.searchClickedCallback = this.searchClicked.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
     }
 
@@ -34,6 +35,7 @@ export class Navbar extends Component {
      * Установить листенеры компоненту
      */
     setEventListeners() {
+        document.getElementById('search-button').addEventListener('click', this.searchClickedCallback);
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
     }
 
@@ -41,7 +43,16 @@ export class Navbar extends Component {
      * Убрать листенеры компонента
      */
     removeEventListeners() {
+        document.getElementById('search-button').removeEventListener('click', this.searchClickedCallback);
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+    }
+
+    /**
+     * Обработка нажатия на "Поиск"
+     */
+    searchClicked() {
+        const searchQuery = document.getElementById('search-input').value;
+        globalRouter.activate(`${PATHS.search}?q=${searchQuery}`);
     }
 
     /**
