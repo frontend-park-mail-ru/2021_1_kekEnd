@@ -1,7 +1,7 @@
 <div id="navbar"></div>
 
 <div class="main">
-    <h3 class="main__page-title">Результаты по запросу <span class="main__search-query">"{{query}}"</span></h3>
+    <h3 class="main__page-title">Результаты по запросу <span class="main__search-query">"{{decodeURI query}}"</span></h3>
 
     {{#unless search_results}}
         <div class="main__main-empty">
