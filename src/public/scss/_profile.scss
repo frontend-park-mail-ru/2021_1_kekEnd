@@ -3,6 +3,10 @@
   &__profile-card {
     margin-top: 50px;
   }
+
+  &__accordion {
+    padding-bottom: 20px;
+  }
 }
 
 .profile-card {
@@ -140,5 +144,136 @@
   &__text {
     margin-top: 8px;
     font-size: 16px;
+  }
+}
+
+.accordion__tab {
+  width: 50%;
+  border: 1px solid $divider-color;
+  border-radius: 4px;
+  background-color: $white-color;
+  color: $primary-text-color;
+  margin: 0 auto 12px auto;
+}
+
+.tab {
+
+  &__input, &__content-container {
+    display: none;
+  }
+
+  &__title {
+    padding: 12px;
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+
+    &::after {
+      content: "+";
+      float: right;
+    }
+  }
+
+  &__content-row {
+    padding: 12px 20px;
+
+    &:hover {
+      background-color: $whitish;
+    }
+  }
+
+  &__content-link {
+    text-decoration: none;
+    color: $primary-text-color;
+  }
+
+  :checked + &__title {
+    background-color: $accent-color;
+    border-radius: 4px 4px 0 0;
+    color: $white-color;
+
+    &::after {
+      content: "—";
+    }
+  }
+
+  :checked ~ &__content-container {
+    display: block;
+  }
+
+  &__delete-button {
+    font-size: 20px;
+    margin-left: 12px;
+  }
+}
+
+.create-playlist-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto;
+
+  &_size_l {
+    font-size: 18px;
+    i {
+      color: $accent-color;
+      font-size: 24px;
+    }
+  }
+
+  &_size_s {
+    font-size: 14px;
+    margin-top: 8px;
+    i {
+      color: $accent-color;
+      font-size: 20px;
+    }
+  }
+}
+
+.create-playlist-container {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 12px auto;
+  opacity: 1;
+  transition: opacity 0.5s;
+
+  &_hidden {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+  }
+
+  &__input {
+    color: $primary-text-color;
+    border: 1px solid $divider-color;
+    outline: none;
+
+    &_size_l {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: $m-border-radius;
+    }
+
+    &_size_s {
+      padding: 8px;
+      font-size: 12px;
+      border-radius: $s-border-radius;
+    }
+  }
+
+  &__button {
+    color: $accent-color;
+
+    &_size_l {
+      font-size: 24px;
+    }
+
+    &_size_s {
+      font-size: 20px;
+    }
   }
 }

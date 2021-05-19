@@ -1,13 +1,13 @@
 import {Component} from './component';
-import '../partials/addToPlaylistWidget.tmpl';
-import '../partials/playlistRow.tmpl';
+import '../partials/playlistTabs.tmpl';
+import '../partials/playlistTab.tmpl';
+import {CREATED, OK_CODE} from 'utils/codes';
 import {API} from 'utils/api';
-import {CREATED} from 'utils/codes';
 
 /**
- * Компонент "Добавить в плейлист"
+ * Компонент "Плейлист"
  */
-export class AddToPlaylistWidget extends Component {
+export class PlaylistTabs extends Component {
     /**
      * Конструктор компонента
      * @param {Object} parent - родитель компонента
@@ -16,13 +16,13 @@ export class AddToPlaylistWidget extends Component {
     constructor(parent, state) {
         super(parent, state);
         // eslint-disable-next-line no-undef
-        this.renderHBS = Handlebars.templates['addToPlaylistWidget.hbs'];
+        this.renderHBS = Handlebars.templates['playlistTabs.hbs'];
         // eslint-disable-next-line no-undef
-        this.renderPlaylistRowHBS = Handlebars.templates['playlistRow.hbs'];
+        this.renderNewTabHBS = Handlebars.templates['playlistTab.hbs'];
         this.createPlaylistClickedCallback = this.createPlaylistClicked.bind(this);
         this.createPlaylistCallback = this.createPlaylist.bind(this);
         this.removeCreationCallback = this.removeCreationForm.bind(this);
-        this.checkboxClickedCallback = this.checkboxClicked.bind(this);
+        this.deleteMovieClickedCallback = this.deleteMovieClicked.bind(this);
     }
 
     /**
@@ -39,8 +39,8 @@ export class AddToPlaylistWidget extends Component {
     setEventListeners() {
         document.getElementById('create-playlist-button')
             .addEventListener('click', this.createPlaylistClickedCallback);
-        [...document.getElementsByClassName('add-to-playlist-widget__checkbox')]
-            .forEach((el) => el.addEventListener('click', this.checkboxClickedCallback));
+        [...document.getElementsByClassName('tab__delete-button')]
+            .forEach((el) => el.addEventListener('click', this.deleteMovieClickedCallback));
     }
 
     /**
@@ -48,9 +48,9 @@ export class AddToPlaylistWidget extends Component {
      */
     removeEventListeners() {
         document.getElementById('create-playlist-button')
-            .removeEventListener('click', this.createPlaylistClickedCallback);
-        [...document.getElementsByClassName('add-to-playlist-widget__checkbox')]
-            .forEach((el) => el.removeEventListener('click', this.checkboxClickedCallback));
+            .addEventListener('click', this.createPlaylistClickedCallback);
+        [...document.getElementsByClassName('tab__delete-button')]
+            .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
         // если была нажата кнопка "Создать плейлист"
         if (document.getElementById('submit-create-playlist')) {
             this.removeCreationForm();
@@ -82,11 +82,10 @@ export class AddToPlaylistWidget extends Component {
     }
 
     /**
-     * Отобразить созданный плейлист в списке
-     * @param {Object} event - событие нажатия
+     * Отправка запроса на создание плейлиста
      */
-    createPlaylist(event) {
-        const playlistName = event.target.parentElement.previousElementSibling.value;
+    createPlaylist() {
+        const playlistName = document.getElementById('input-create-playlist').value;
         API.createPlaylist(playlistName).then((res) => this.processCreate(res.status === CREATED, playlistName));
     }
 
@@ -96,32 +95,37 @@ export class AddToPlaylistWidget extends Component {
      * @param {string} playlistName - имя созданного плейлиста
      */
     processCreate(status, playlistName) {
-        const playlists = document.getElementById('playlists-list');
-        const newId = playlists.childElementCount + 1;
-        playlists.insertAdjacentHTML('beforeend', this.renderPlaylistRowHBS({
-            id: newId,
-            playlistName: playlistName,
-            isAdded: false,
-            movieId: this.state.movieId,
-        }));
-        const newCheckbox = document.getElementById(`checkbox-${newId}`);
-        newCheckbox.addEventListener('click', this.checkboxClickedCallback);
-        this.removeCreationForm();
+        if (status) {
+            const tabs = document.getElementById('tabs');
+            tabs.insertAdjacentHTML('beforeend', this.renderNewTabHBS({
+                id: tabs.childElementCount + 1,
+                playlist_name: playlistName,
+            }));
+            this.removeCreationForm();
+        }
     }
 
     /**
-     * Обработка нажатия на checkbox плейлиста
-     * @param {Object} event - событие нажатия на checkbox
+     * Обработка нажатия на кнопку удаления фильма из плейлиста
+     * @param {Object} event - событие нажатия на кнопку
      */
-    checkboxClicked(event) {
-        const checkbox = event.target;
-        const label = checkbox.previousElementSibling;
-        const playlistId = label.getAttribute('data-playlist-id');
-        const movieId = checkbox.getAttribute('data-movie-id');
-        if (checkbox.checked) {
-            API.addMovieToPlaylist(playlistId, movieId).then(() => {});
-        } else {
-            API.deleteMovieFromPlaylist(playlistId, movieId).then(() => {});
-        }
+    deleteMovieClicked(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const button = event.target.parentElement;
+        const playlistId = button.getAttribute('data-playlist-id');
+        const movieId = button.getAttribute('data-movie-id');
+        API.deleteMovieFromPlaylist(playlistId, movieId).then((res) => this.processDeletion(
+            res.status === OK_CODE, button.closest('.tab__content-link'),
+        ));
+    }
+
+    /**
+     * Отображение результата удаления фильма
+     * @param {boolean} status - статус запроса
+     * @param {Object} row - строка, которую нужно убрать из DOM
+     */
+    processDeletion(status, row) {
+        row.remove();
     }
 }

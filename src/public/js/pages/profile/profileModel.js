@@ -22,7 +22,6 @@ export default class ProfileModel {
      * Получение данных профиля
      */
     getProfileData() {
-        // this data is not yet on backend but we need to show some pictures
         const additionalData = {
             favorite_movies: [
                 {
@@ -66,16 +65,17 @@ export default class ProfileModel {
             ],
         };
 
-        Promise.all([API.getUser(), API.getUserReviews()])
+        Promise.all([API.getUser(), API.getUserReviews(), API.getPlaylists()])
             .then((responses) => {
                 if (responses.some((resp) => resp.status !== OK_CODE)) {
                     throw new Error(AUTH_ERROR);
                 }
-                const [userData, reviews] = responses.map((resp) => resp.data);
+                const [userData, reviews, playlists] = responses.map((resp) => resp.data);
                 globalEventBus.emit(busEvents.SET_PROFILE_DATA, {
                     ...userData,
                     ...additionalData,
                     'reviews': reviews,
+                    'playlists': playlists,
                 });
             })
             .catch((err) => {

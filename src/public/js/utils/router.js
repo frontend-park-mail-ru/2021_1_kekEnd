@@ -83,6 +83,8 @@ export class Router {
         }
         if (newPath !== location.pathname) {
             history.pushState(state, document.title, newPath);
+            // если переходим на новую страницу, прокрутим страницу наверх
+            this.scrollToTop();
         }
 
         this.handlePath(path, parameters);
@@ -97,6 +99,7 @@ export class Router {
         this.currentView?.hide();
         this.currentView = this.routes.get(path);
         this.currentView.render(parameters);
+        this.scrollToTop();
         this._currentPath = path;
         this._currentParameters = parameters;
     }
@@ -115,6 +118,13 @@ export class Router {
      */
     get currentParameters() {
         return this._currentParameters;
+    }
+
+    /**
+     * После перехода на другой путь, прокрутим положение в документе до начала страницы
+     */
+    scrollToTop() {
+        window.scrollTo(0, 0);
     }
 
     /**

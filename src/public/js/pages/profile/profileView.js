@@ -4,6 +4,7 @@ import {busEvents} from 'utils/busEvents';
 import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 import {Carousel} from 'components/carousel';
+import {PlaylistTabs} from 'components/playlistTabs';
 import './profile.tmpl';
 
 /**
@@ -51,6 +52,11 @@ export default class ProfileView extends BaseView {
             {'itemsType': 'reviews', 'items': data.reviews});
         this.reviewsCarousel.render();
 
+        this.playlistTabs = new PlaylistTabs(document.getElementById('accordion-container'), {
+            playlists: data.playlists,
+        });
+        this.playlistTabs.render();
+
         this.setEventListeners();
     }
 
@@ -69,6 +75,7 @@ export default class ProfileView extends BaseView {
         this.favoriteMoviesCarousel.setEventListeners();
         this.favoriteActorsCarousel.setEventListeners();
         this.reviewsCarousel.setEventListeners();
+        this.playlistTabs.setEventListeners();
     }
 
     /**
@@ -79,5 +86,6 @@ export default class ProfileView extends BaseView {
         this.favoriteMoviesCarousel.removeEventListeners();
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();
+        this.playlistTabs.removeEventListeners();
     }
 }

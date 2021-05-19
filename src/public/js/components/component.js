@@ -20,6 +20,14 @@ export class Component {
     }
 
     /**
+     * Скрыть компонент
+     */
+    hide() {
+        this.removeEventListeners();
+        this.parent.innerHTML = '';
+    }
+
+    /**
      * HTML-код компонента
      */
     tmpl() {

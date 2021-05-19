@@ -244,80 +244,59 @@ class Api {
     }
 
     /**
-     * Получить любимые фильмы пользователя
+     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getBestUsersMovies() {
-
+    getPlaylistsForMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${movieId}`);
     }
 
     /**
-     * Добавить фильм в список любимых фильмов пользователя
+     * Получить плейлисты пользователя вместе с их фильмами
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    addMovieToBestUsersMovies() {
-
+    getPlaylists() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`);
     }
 
     /**
-     * Получить любимых актеров пользователя
+     * Создать новый плейлист
+     * @param {string} name - название плейлиста
+     * @param {boolean} isShared - можно ли приглашать людей в плейлист
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    getBestUsersActors() {
-
+    createPlaylist(name, isShared=false) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`, 'POST', JSON.stringify({
+            'playlist_name': name,
+            'is_shared': isShared,
+        }));
     }
 
     /**
-     * Добавить актера в список любимых актеров пользователя
+     * Добавить фильм в плейлист
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    addActorToBestUsersActors() {
-
+    addMovieToPlaylist(playlistId, movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${playlistId}/movie`, 'POST',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
     }
 
     /**
-     * Создать новую пользовательскую подборку фильмов
+     * Удалить фильм из плейлиста
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    createUserPlaylist() {
-
-    }
-
-    /**
-     * Удалить пользовательскую подборку фильмов
-     */
-    deleteUserPlaylist() {
-
-    }
-
-    /**
-     * Получить подборки фильмов пользователся
-     */
-    getUsersPlaylist() {
-
-    }
-
-    /**
-     * Добавить фильм в какую-либо пользовательскую подборку
-     */
-    addMovieToPlaylist() {
-
-    }
-
-    /**
-     * Удалить фильм из пользовательской подборки
-     */
-    removeMovieFromPlaylist() {
-
-    }
-
-    /**
-     * Добавить лайк
-     */
-    addLike() {
-
-    }
-
-    /**
-     * Удалить лайк
-     */
-    deleteLike() {
-
+    deleteMovieFromPlaylist(playlistId, movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${playlistId}/movie`, 'DELETE',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
     }
 }
 

@@ -3,6 +3,7 @@ import BaseView from '../baseView';
 import {busEvents} from 'utils/busEvents';
 import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
+import {AddToPlaylistWidget} from 'components/addToPlaylist';
 import './moviesList.tmpl';
 
 /**
@@ -18,6 +19,7 @@ export default class MoviesListView extends BaseView {
         super(parent, Handlebars.templates['moviesList.hbs']);
 
         globalEventBus.on(busEvents.SET_MOVIES_PAGE, this.setMovies.bind(this));
+        globalEventBus.on(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, this.displayPlaylists.bind(this));
 
         this.watchedClickedCallback = this.watchedClicked.bind(this);
         this.playlistClickedCallback = this.playlistClicked.bind(this);
@@ -43,6 +45,7 @@ export default class MoviesListView extends BaseView {
      * "Деструктор" страницы
      */
     hide() {
+        this.currentPlaylistWidget = null;
         super.hide(this);
     }
 
@@ -82,6 +85,7 @@ export default class MoviesListView extends BaseView {
             .forEach((element) => element.removeEventListener('click', this.playlistClickedCallback));
 
         this.navbarComponent.removeEventListeners();
+        this.currentPlaylistWidget?.hide();
     }
 
     /**
@@ -95,13 +99,31 @@ export default class MoviesListView extends BaseView {
     }
 
     /**
-     * Обработчик нажатия на кнопку "Лайк"
+     * Обработчик нажатия на кнопку "Добавить в плейлист"
      * @param {Object} event - событие нажатия
      */
     playlistClicked(event) {
-        // TODO: api request
-        const movieId = event.target.getAttribute('data-id');
-        console.log(`add to playlist movie ${movieId}`);
+        this.movieId = event.target.getAttribute('data-id');
+        this.currentPlaylistWidget?.hide();
+        this.currentPlaylistWidget = null;
+        if (event.target.checked) {
+            globalEventBus.emit(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.movieId);
+        }
+    }
+
+    /**
+     * Отобразить виджет со списком плейлистов
+     * @param {Object} playlists - информация о плейлистах
+     */
+    displayPlaylists(playlists) {
+        const playlistsData = {
+            'playlists': playlists,
+            'movieId': this.movieId,
+        };
+        this.currentPlaylistWidget = new AddToPlaylistWidget(document.getElementById(`add-to-playlist-${this.movieId}`),
+            playlistsData);
+        this.currentPlaylistWidget.render();
+        this.currentPlaylistWidget.setEventListeners();
     }
 }
 

@@ -47,6 +47,7 @@
                             <input class="buttons__input-playlist buttons__movie-card-input-playlist"
                                    id="playlist-button-{{this.id}}" type="checkbox" name="playlist" data-id="{{this.id}}">
                             <label class="buttons__label-playlist" for="playlist-button-{{this.id}}"></label>
+                            <div class="buttons__add-to-playlist-container" id="add-to-playlist-{{this.id}}"></div>
                         </div>
                     {{/if}}
                 </div>
@@ -54,7 +55,6 @@
         {{/each}}
     </div>
 
-    <!-- parametrize -->
     {{#if (notEq pages_number 1)}}
         {{#pagination current_page pages_number}}
             <div class="main__pagination-wrapper">

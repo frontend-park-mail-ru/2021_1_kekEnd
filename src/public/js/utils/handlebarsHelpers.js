@@ -24,6 +24,10 @@ export const registerHandlebarsHelpers = () => {
 
     // eslint-disable-next-line no-undef
     Handlebars.registerPartial('loginIcons', Handlebars.templates['loginIcons.hbs']);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('playlistTab', Handlebars.templates['playlistTab.hbs']);
+    // eslint-disable-next-line no-undef
+    Handlebars.registerPartial('playlistRow', Handlebars.templates['playlistRow.hbs']);
 };
 
 

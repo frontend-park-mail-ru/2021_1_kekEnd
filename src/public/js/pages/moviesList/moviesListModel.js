@@ -13,6 +13,7 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
+        globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylistsForMovie.bind(this));
     }
 
     /**
@@ -42,6 +43,15 @@ export default class MoviesListModel {
                     genres,
                 });
             });
+    }
+
+    /**
+     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
+     */
+    getPlaylistsForMovie(movieId) {
+        API.getPlaylistsForMovie(movieId).then((res) =>
+            globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIES_LIST, res.data));
     }
 }
 

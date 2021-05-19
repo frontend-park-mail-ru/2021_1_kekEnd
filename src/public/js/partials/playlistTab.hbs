@@ -1,0 +1,21 @@
+<div class="accordion__tab">
+    <input class="tab__input" type="checkbox" id="tab-{{id}}" name="tab-group">
+    <label class="tab__title" for="tab-{{id}}">{{playlist_name}}</label>
+    <div class="tab__content-container">
+        {{#if movies}}
+            {{#each movies}}
+                <a class="tab__content-link" href="/movie/{{id}}">
+                    <p class="tab__content-row">
+                        {{title}}
+                        <button class="fa-button tab__delete-button" id="delete-button-{{id}}"
+                                data-movie-id="{{id}}" data-playlist-id="{{../id}}">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </p>
+                </a>
+            {{/each}}
+        {{else}}
+            <p class="tab__content-row">Здесь пока нет фильмов</p>
+        {{/if}}
+    </div>
+</div>

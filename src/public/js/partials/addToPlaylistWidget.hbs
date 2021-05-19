@@ -1,0 +1,45 @@
+<div class="add-to-playlist-widget">
+    <h3 class="add-to-playlist-widget__title">Добавить в плейлист</h3>
+    {{#if playlists}}
+        <div id="playlists-list">
+            {{#each playlists}}
+                <div class="add-to-playlist-widget__playlist-row">
+                    <label class="add-to-playlist-widget__label" data-playlist-id="{{id}}" for="checkbox-{{id}}">
+                        {{playlist_name}}
+                    </label>
+                    {{#if is_added}}
+                        <input id="checkbox-{{id}}" class="add-to-playlist-widget__checkbox" type="checkbox"
+                               data-movie-id="{{../movieId}}" checked/>
+                    {{else}}
+                        <input id="checkbox-{{id}}" class="add-to-playlist-widget__checkbox" type="checkbox"
+                               data-movie-id="{{../movieId}}"/>
+                    {{/if}}
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="main__message-empty">
+            <p class="message-empty__text">
+                Создайте свой первый плейлист!
+            </p>
+        </div>
+    {{/if}}
+
+    <button id="create-playlist-button" class="fa-button create-playlist-button create-playlist-button_size_s">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        Создать плейлист
+    </button>
+    <div id="create-playlist-container" class="create-playlist-container create-playlist-container_hidden">
+        <input id="input-create-playlist" name="playlistName" type="text"
+               class="create-playlist-container__input create-playlist-container__input_size_s"
+               placeholder="Название плейлиста">
+        <button id="submit-create-playlist"
+                class="fa-button create-playlist-container__button create-playlist-container__button_size_s">
+            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+        </button>
+        <button id="cancel-create-playlist"
+                class="fa-button create-playlist-container__button create-playlist-container__button_size_s">
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

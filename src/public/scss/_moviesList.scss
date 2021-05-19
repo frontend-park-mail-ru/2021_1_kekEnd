@@ -169,4 +169,36 @@
   &__movie-card-input-playlist:not(:checked):hover ~ &__label-playlist:before {
     color: black;
   }
+
+  &__add-to-playlist-container {
+    // нужно, чтобы блок "Добавить в плейлист" расширялся вправо
+    direction: rtl;
+    display: inline-block;
+    text-align: center;
+  }
 }
+
+.add-to-playlist-widget {
+  position: absolute;
+  background-color: $white-color;
+  color: $primary-text-color;
+  font-family: "Open Sans", sans-serif;
+  padding: 12px;
+  box-shadow: 0 0 12px $transparent-black;
+  border-radius: $m-border-radius;
+  z-index: 1;
+  // "отменяем" direction: rtl родителя
+  direction: ltr;
+
+  &__title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__label {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+}
+
+
