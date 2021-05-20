@@ -2,11 +2,9 @@ import {Component} from './component';
 import {globalRouter} from 'utils/router';
 import {PATHS} from 'utils/paths';
 import {API} from 'utils/api';
-import {OK_CODE} from 'utils/codes';
+import {ENTER_KEYCODE, OK_CODE} from 'utils/codes';
 import {userMeta} from 'utils/userMeta';
 import 'partials/navbar.tmpl';
-
-const ENTER_KEYCODE = 13;
 
 /**
  * Компонента "Кнопка 'Выход'"
