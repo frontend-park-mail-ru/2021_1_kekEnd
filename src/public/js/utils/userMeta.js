@@ -1,9 +1,6 @@
 import {API} from './api';
 import {OK_CODE} from './codes';
 
-const AUTH_STATUS = 'auth status';
-const USERNAME = 'username';
-
 /**
  * Класс, предоставляющий служебную информацию о текущем пользователе
  */
@@ -12,8 +9,8 @@ class UserMeta {
      * Конструктор, изначально ставим статус "Не авторизован"
      */
     constructor() {
-        localStorage.setItem(AUTH_STATUS, 'false');
-        localStorage.setItem(USERNAME, null);
+        this.authStatus = false;
+        this.username = null;
     }
 
     /**
@@ -32,7 +29,7 @@ class UserMeta {
      * @return {boolean} - авторизован ли пользователь
      */
     getAuthorized() {
-        return localStorage.getItem(AUTH_STATUS) === 'true';
+        return this.authStatus;
     }
 
     /**
@@ -40,7 +37,7 @@ class UserMeta {
      * @param {boolean} authStatus - авторизован ли пользователь
      */
     setAuthorized(authStatus) {
-        localStorage.setItem(AUTH_STATUS, authStatus.toString());
+        this.authStatus = authStatus;
     }
 
     /**
@@ -48,7 +45,7 @@ class UserMeta {
      * @return {string} - имя пользователя
      */
     getUsername() {
-        return localStorage.getItem(USERNAME);
+        return this.username;
     }
 
     /**
@@ -56,7 +53,7 @@ class UserMeta {
      * @param {string|null} username - имя пользователя
      */
     setUsername(username) {
-        localStorage.setItem(USERNAME, username);
+        this.username = username;
     }
 }
 
