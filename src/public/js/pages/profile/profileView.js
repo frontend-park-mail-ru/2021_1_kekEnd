@@ -45,10 +45,6 @@ export default class ProfileView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
 
-        // this.favoriteMoviesCarousel = new Carousel(document.getElementById('favorite-movies-carousel'),
-        //     {'itemsType': 'movies', 'items': data.favorite_movies});
-        // this.favoriteMoviesCarousel.render();
-
         this.favoriteActorsCarousel = new Carousel(document.getElementById('favorite-actors-carousel'),
             {'itemsType': 'actors', 'items': data.favorite_actors});
         this.favoriteActorsCarousel.render();
@@ -79,7 +75,6 @@ export default class ProfileView extends BaseView {
     setEventListeners() {
         document.getElementById('follow-button')?.addEventListener('click', this.followClickedCallback);
         this.navbarComponent.setEventListeners();
-        // this.favoriteMoviesCarousel.setEventListeners();
         this.favoriteActorsCarousel.setEventListeners();
         this.reviewsCarousel.setEventListeners();
         this.playlistTabs.setEventListeners();
@@ -91,7 +86,6 @@ export default class ProfileView extends BaseView {
     removeEventListeners() {
         document.getElementById('follow-button')?.removeEventListener('click', this.followClickedCallback);
         this.navbarComponent.removeEventListeners();
-        // this.favoriteMoviesCarousel.removeEventListeners();
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();
         this.playlistTabs.removeEventListeners();
@@ -116,11 +110,11 @@ export default class ProfileView extends BaseView {
             const followersText = document.getElementById('followers-number');
             if (isFollowing) {
                 button.textContent = 'Отписаться';
-                followersText.textContent = parseInt(followersText.textContent) + 1 + '';
+                followersText.textContent = (parseInt(followersText.textContent) + 1).toString();
                 return;
             }
             button.textContent = 'Подписаться';
-            followersText.textContent = parseInt(followersText.textContent) - 1 + '';
+            followersText.textContent = (parseInt(followersText.textContent) - 1).toString();
         }
     }
 }

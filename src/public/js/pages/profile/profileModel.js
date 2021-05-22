@@ -16,7 +16,7 @@ export default class ProfileModel {
      */
     constructor() {
         globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
-        globalEventBus.on(busEvents.FOLLOW_CLICKED, this.followUser.bind(this));
+        globalEventBus.on(busEvents.FOLLOW_CLICKED, this.toggleFollowUser.bind(this));
     }
 
     /**
@@ -24,35 +24,6 @@ export default class ProfileModel {
      * @param {string} username - имя пользователя
      */
     getProfileData(username) {
-        const additionalData = {
-            favorite_movies: [
-                {
-                    id: 1,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/300.jpg',
-                },
-                {
-                    id: 2,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/301.jpg',
-                },
-                {
-                    id: 3,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/302.jpg',
-                },
-                {
-                    id: 4,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/303.jpg',
-                },
-                {
-                    id: 5,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/304.jpg',
-                },
-                {
-                    id: 6,
-                    poster: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/305.jpg',
-                },
-            ],
-        };
-
         Promise.all([API.getUser(username), API.getUserReviews(username), API.getPlaylists(username)])
             .then((responses) => {
                 if (responses.some((resp) => resp.status !== OK_CODE)) {
@@ -61,7 +32,6 @@ export default class ProfileModel {
                 const [userData, reviews, playlists] = responses.map((resp) => resp.data);
                 return {
                     ...userData,
-                    ...additionalData,
                     'reviews': reviews,
                     'playlists': playlists,
                 };
@@ -84,11 +54,11 @@ export default class ProfileModel {
     }
 
     /**
-     * Подписка на пользователя
+     * Подписка или отписка на пользователя
      * @param {string} username - имя пользователя
      * @param {boolean} isFollowing - подписка или отписка
      */
-    followUser(username, isFollowing) {
+    toggleFollowUser(username, isFollowing) {
         if (isFollowing) {
             API.followUser(username).then((res) =>
                 globalEventBus.emit(busEvents.FOLLOW_STATUS, res.status === OK_CODE, isFollowing));
