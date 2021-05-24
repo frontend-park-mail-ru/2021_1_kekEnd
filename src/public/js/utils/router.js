@@ -51,7 +51,7 @@ export class Router {
      * @param {string} query - query-параметры
      * @param {Object} event - событие, порожденное кликом
      */
-    activate(path, query, event=null) {
+    activate(path, query='', event=null) {
         if (path === null) {
             return;
         }

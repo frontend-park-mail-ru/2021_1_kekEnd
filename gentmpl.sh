@@ -1,6 +1,7 @@
 handlebars src/public/js/pages/main/main.hbs -f src/public/js/pages/main/main.tmpl.js
 handlebars src/public/js/pages/moviesList/moviesList.hbs -f src/public/js/pages/moviesList/moviesList.tmpl.js
 handlebars src/public/js/pages/profile/profile.hbs -f src/public/js/pages/profile/profile.tmpl.js
+handlebars src/public/js/pages/feed/feed.hbs -f src/public/js/pages/feed/feed.tmpl.js
 handlebars src/public/js/pages/movie/movie.hbs -f src/public/js/pages/movie/movie.tmpl.js
 handlebars src/public/js/pages/actor/actor.hbs -f src/public/js/pages/actor/actor.tmpl.js
 handlebars src/public/js/pages/settings/settings.hbs -f src/public/js/pages/settings/settings.tmpl.js

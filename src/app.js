@@ -11,6 +11,7 @@ import MainController from './public/js/pages/main/mainController';
 import MoviesListController from './public/js/pages/moviesList/moviesListController';
 import './public/js/pages/popup/popup';
 import './public/scss/compound.scss';
+import FeedController from './public/js/pages/feed/feedController';
 import {userMeta} from 'utils/userMeta';
 
 
@@ -34,12 +35,13 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     globalRouter.register(PATHS.main, new MainController(application).view);
     globalRouter.register(PATHS.movies, new MoviesListController(application).view);
-    globalRouter.register(PATHS.profile, new ProfileController(application).view);
+    globalRouter.register(PATHS.user, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
     globalRouter.register(PATHS.signup, new SignupController(application).view);
     globalRouter.register(PATHS.movie, new MovieController(application).view);
     globalRouter.register(PATHS.actor, new ActorController(application).view);
     globalRouter.register(PATHS.settings, new SettingsController(application).view);
+    globalRouter.register(PATHS.feed, new FeedController(application).view);
 
     globalRouter.start();
 });

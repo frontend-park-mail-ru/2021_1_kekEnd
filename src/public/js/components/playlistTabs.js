@@ -1,6 +1,6 @@
 import {Component} from './component';
-import '../partials/playlistTabs.tmpl';
-import '../partials/playlistTab.tmpl';
+import 'partials/playlistTabs.tmpl';
+import 'partials/playlistTab.tmpl';
 import {CREATED, OK_CODE} from 'utils/codes';
 import {API} from 'utils/api';
 
@@ -38,7 +38,7 @@ export class PlaylistTabs extends Component {
      */
     setEventListeners() {
         document.getElementById('create-playlist-button')
-            .addEventListener('click', this.createPlaylistClickedCallback);
+            ?.addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.addEventListener('click', this.deleteMovieClickedCallback));
     }
@@ -48,7 +48,7 @@ export class PlaylistTabs extends Component {
      */
     removeEventListeners() {
         document.getElementById('create-playlist-button')
-            .addEventListener('click', this.createPlaylistClickedCallback);
+            ?.addEventListener('click', this.createPlaylistClickedCallback);
         [...document.getElementsByClassName('tab__delete-button')]
             .forEach((el) => el.removeEventListener('click', this.deleteMovieClickedCallback));
         // если была нажата кнопка "Создать плейлист"
@@ -101,6 +101,8 @@ export class PlaylistTabs extends Component {
                 id: tabs.childElementCount + 1,
                 playlist_name: playlistName,
             }));
+            document.getElementById('no-playlists-message')?.remove();
+            document.getElementById('input-create-playlist').value = '';
             this.removeCreationForm();
         }
     }

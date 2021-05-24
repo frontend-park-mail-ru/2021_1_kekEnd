@@ -24,6 +24,7 @@ export default class LoginModel {
         API.login(userData)
             .then((res) => {
                 userMeta.setAuthorized(res.status === OK_CODE);
+                userMeta.setUsername(userData.username);
                 globalEventBus.emit(busEvents.LOGIN_STATUS, res.status);
             });
     }

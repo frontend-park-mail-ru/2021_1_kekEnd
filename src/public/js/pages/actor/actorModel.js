@@ -1,7 +1,7 @@
 import {globalEventBus} from 'utils/eventbus';
 import {API} from 'utils/api';
 import {busEvents} from 'utils/busEvents';
-
+import {OK_CODE} from 'utils/codes';
 
 /**
  *  Модель страницы актера
@@ -12,7 +12,8 @@ export default class ActorModel {
      */
     constructor() {
         globalEventBus.on(busEvents.GET_ACTOR_DATA, this.getActorData.bind(this));
-        globalEventBus.on(busEvents.LIKE_ACTOR, this.addActorToFavorites.bind(this));
+        globalEventBus.on(busEvents.LIKE_ACTOR, this.likeActor.bind(this));
+        globalEventBus.on(busEvents.UNLIKE_ACTOR, this.unlikeActor.bind(this));
     }
 
     /**
@@ -28,16 +29,24 @@ export default class ActorModel {
 
     /**
      * Добавить актера в избранное
+     * @param {number} actorID - идентификатор актера
      */
-    addActorToFavorites() {
-        // TODO: react to server response
-        console.log(`add to favorites: ${this.id}`);
-        /*
-        API.addActorToBestUsersActors(this.id)
+    likeActor(actorID) {
+        API.likeActor(actorID)
             .then((res) => {
-                globalEventBus.emit('added actor to favorites', res.data);
+                globalEventBus.emit(busEvents.LIKE_ACTOR_STATUS, res.status === OK_CODE);
             });
-        */
+    }
+
+    /**
+     * Убрать актера из избранного
+     * @param {number} actorID - идентификатор актера
+     */
+    unlikeActor(actorID) {
+        API.unlikeActor(actorID)
+            .then((res) => {
+                globalEventBus.emit(busEvents.LIKE_ACTOR_STATUS, res.status === OK_CODE);
+            });
     }
 }
 

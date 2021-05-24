@@ -22,6 +22,8 @@ export default class MovieModel {
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
+        globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
     }
 
     /**
@@ -135,5 +137,21 @@ export default class MovieModel {
     getPlaylistsForMovie(movieId) {
         API.getPlaylistsForMovie(movieId).then((res) =>
             globalEventBus.emit(busEvents.SET_PLAYLIST_DATA_MOVIE, res.data));
+    }
+
+    /**
+     * Отметить фильм как "просмотренный"
+     * @param {number} movieId - идентификатор фильма
+     */
+    watchMovie(movieId) {
+        API.watchMovie(movieId).then(() => {});
+    }
+
+    /**
+     * Удалить отметку фильма как "просмотренный"
+     * @param {number} movieId - идентификатор фильма
+     */
+    unwatchMovie(movieId) {
+        API.unwatchMovie(movieId).then(() => {});
     }
 }

@@ -100,12 +100,14 @@ export class AddToPlaylistWidget extends Component {
         const newId = playlists.childElementCount + 1;
         playlists.insertAdjacentHTML('beforeend', this.renderPlaylistRowHBS({
             id: newId,
-            playlistName: playlistName,
-            isAdded: false,
+            playlist_name: playlistName,
+            is_added: false,
             movieId: this.state.movieId,
         }));
         const newCheckbox = document.getElementById(`checkbox-${newId}`);
         newCheckbox.addEventListener('click', this.checkboxClickedCallback);
+        document.getElementById('no-playlists-message')?.remove();
+        document.getElementById('input-create-playlist').value = '';
         this.removeCreationForm();
     }
 

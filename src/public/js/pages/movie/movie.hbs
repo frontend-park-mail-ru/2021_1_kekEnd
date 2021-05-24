@@ -94,8 +94,13 @@
                 <div class="movie-flex__movie-flex-right">
                     {{#if (getAuthStatus)}}
                         <div class="movie-flex-right__buttons">
-                            <input class="buttons__input-watched buttons__movie-page-input-watched"
-                                   id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
+                            {{#if this.is_watched}}
+                                <input class="buttons__input-watched buttons__movie-card-input-watched" checked
+                                       id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
+                            {{else}}
+                                <input class="buttons__input-watched buttons__movie-card-input-watched"
+                                       id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
+                            {{/if}}
                             <label class="buttons__label-watched" for="watched-button"></label>
                             <input class="buttons__input-playlist buttons__movie-page-input-playlist"
                                    id="playlist-button" type="checkbox" name="playlist" data-id="{{id}}">
@@ -247,7 +252,7 @@
             <div class="main__content-container">
             {{/if}}
             <div class="content-container__review-content review_background_{{this.review_type}}">
-                <h3 class="write-review__your-review">Рецензия {{this.author}}</h3>
+                <h3 class="write-review__your-review">Рецензия <a class="write-review__user-link" href="/user/{{this.author}}">{{this.author}}</a></h3>
                 <div class="review-content__review-body">
                     <p class="review-body__title">{{this.title}}</p>
                     <p class="review-body__content">{{this.content}}</p>

@@ -33,7 +33,7 @@ export default class LoginView extends BaseView {
      */
     render() {
         if (userMeta.getAuthorized()) {
-            globalRouter.pushState(PATHS.profile);
+            globalRouter.activate(`${PATHS.user}/${userMeta.getUsername()}`);
             return;
         }
         this.setLoginPage();
@@ -88,7 +88,7 @@ export default class LoginView extends BaseView {
      */
     processLoginAttempt(status) {
         if (status === OK_CODE) {
-            globalRouter.pushState(PATHS.profile);
+            globalRouter.activate(`${PATHS.user}/${userMeta.getUsername()}`);
             return;
         }
         const errors = {

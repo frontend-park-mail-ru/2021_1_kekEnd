@@ -93,9 +93,13 @@ export default class MoviesListView extends BaseView {
      * @param {Object} event - событие нажатия
      */
     watchedClicked(event) {
-        // TODO: api request
-        const movieId = event.target.getAttribute('data-id');
-        console.log(`watched movie ${movieId}`);
+        const checkbox = event.target;
+        const movieId = checkbox.getAttribute('data-id');
+        if (checkbox.checked) {
+            globalEventBus.emit(busEvents.WATCH_MOVIE, movieId);
+            return;
+        }
+        globalEventBus.emit(busEvents.UNWATCH_MOVIE, movieId);
     }
 
     /**

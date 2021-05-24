@@ -23,6 +23,7 @@ export default class Model {
         API.signup(data)
             .then((res) => {
                 userMeta.setAuthorized(res.status === CREATED);
+                userMeta.setUsername(data.username);
                 globalEventBus.emit(busEvents.SIGNUP_STATUS, res.status);
             });
     }

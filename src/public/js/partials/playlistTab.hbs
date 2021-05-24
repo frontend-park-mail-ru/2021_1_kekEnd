@@ -7,15 +7,17 @@
                 <a class="tab__content-link" href="/movie/{{id}}">
                     <p class="tab__content-row">
                         {{title}}
-                        <button class="fa-button tab__delete-button" id="delete-button-{{id}}"
-                                data-movie-id="{{id}}" data-playlist-id="{{../id}}">
-                            <i class="fa fa-trash-o"></i>
-                        </button>
+                        {{#if (eq ../username (getUsername))}}
+                            <button class="fa-button tab__delete-button" id="delete-button-{{id}}"
+                                    data-movie-id="{{id}}" data-playlist-id="{{../id}}">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        {{/if}}
                     </p>
                 </a>
             {{/each}}
         {{else}}
-            <p class="tab__content-row">Здесь пока нет фильмов</p>
+            <p class="tab__content-row">Здесь пока нет фильмов. Загляните в наш <a href="/" class="tab__main-page-link">каталог</a>!</p>
         {{/if}}
     </div>
 </div>

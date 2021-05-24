@@ -1,8 +1,6 @@
 import {API} from './api';
 import {OK_CODE} from './codes';
 
-const AUTH_STATUS = 'auth status';
-
 /**
  * Класс, предоставляющий служебную информацию о текущем пользователе
  */
@@ -11,7 +9,8 @@ class UserMeta {
      * Конструктор, изначально ставим статус "Не авторизован"
      */
     constructor() {
-        localStorage.setItem(AUTH_STATUS, 'false');
+        this.authStatus = false;
+        this.username = null;
     }
 
     /**
@@ -19,7 +18,10 @@ class UserMeta {
      * @return {Promise<void>} - промис с действием "выставление статуса авторизации"
      */
     async initMeta() {
-        API.getUser().then((res) => this.setAuthorized(res.status === OK_CODE));
+        API.getCurrentUser().then((res) => {
+            this.setAuthorized(res.status === OK_CODE);
+            this.setUsername(res.data.username);
+        });
     }
 
     /**
@@ -27,7 +29,7 @@ class UserMeta {
      * @return {boolean} - авторизован ли пользователь
      */
     getAuthorized() {
-        return localStorage.getItem(AUTH_STATUS) === 'true';
+        return this.authStatus;
     }
 
     /**
@@ -35,7 +37,23 @@ class UserMeta {
      * @param {boolean} authStatus - авторизован ли пользователь
      */
     setAuthorized(authStatus) {
-        localStorage.setItem(AUTH_STATUS, authStatus.toString());
+        this.authStatus = authStatus;
+    }
+
+    /**
+     * Получаем идентификатор текущего пользователя
+     * @return {string} - имя пользователя
+     */
+    getUsername() {
+        return this.username;
+    }
+
+    /**
+     * Устанавливаем идентификатор текущего пользователя
+     * @param {string|null} username - имя пользователя
+     */
+    setUsername(username) {
+        this.username = username;
     }
 }
 

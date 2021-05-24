@@ -2,7 +2,6 @@ import {globalEventBus} from 'utils/eventbus';
 import {API} from 'utils/api';
 import {busEvents} from 'utils/busEvents';
 
-
 /**
  * Модель страницы списка фильмов
  */
@@ -13,6 +12,8 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
+        globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylistsForMovie.bind(this));
     }
 
@@ -46,7 +47,23 @@ export default class MoviesListModel {
     }
 
     /**
-     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * Отметить фильм как "просмотренный"
+     * @param {number} movieId - идентификатор фильма
+     */
+    watchMovie(movieId) {
+        API.watchMovie(movieId).then(() => {});
+    }
+
+    /**
+     * Удалить отметку фильма как "просмотренный"
+     * @param {number} movieId - идентификатор фильма
+     */
+    unwatchMovie(movieId) {
+        API.unwatchMovie(movieId).then(() => {});
+    }
+
+    /**
+     * Получить плейлисты пользователя с информацией о наличии фильма в каждом плейлисте
      * @param {number} movieId
      */
     getPlaylistsForMovie(movieId) {

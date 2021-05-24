@@ -1,0 +1,44 @@
+<div id="navbar"></div>
+
+<div class="main">
+    <h3 class="main__page-title">Последние действия</h3>
+    {{#unless feed}}
+        <div class="main__feed-empty">
+            Лента пуста
+        </div>
+    {{/unless}}
+    {{#each feed}}
+        <div class="main__feed-card">
+            <div class="feed-card__header">
+                <div class="feed-card__avatar-container">
+                    <a href="/user/{{username}}"><img class="feed-card__avatar" src="{{avatar}}" alt=""></a>
+                </div>
+                <h4 class="feed-card__username"><a class="feed-card__user-link" href="/user/{{username}}">{{username}}</a></h4>
+                <h5 class="feed-card__action">
+                    {{#if (eq item_type 'review')}}написал рецензию{{/if}}
+                    {{#if (eq item_type 'rating')}}поставил оценку{{/if}}
+                </h5>
+            </div>
+            <div class="feed-card__content">
+                {{#if (eq item_type 'review')}}
+                    <div class="content-container__review-content review_background_{{review.review_type}}">
+                        <div class="your-review__review-body">
+                            <p class="review-body__title">{{review.title}}</p>
+                            <p class="review-body__content">{{review.content}}</p>
+                        </div>
+                    </div>
+                {{/if}}
+                {{#if (eq item_type 'rating')}}
+                    {{#if (gte rating.score 7)}}<h2 class="feed-card__movie-rating positive-rating">{{rating.score}}</h2>
+                    {{else}}
+                        {{#if (gte rating.score 4)}}<h2 class="feed-card__movie-rating neutral-rating">{{rating.score}}</h2>
+                        {{else}}<h2 class="feed-card__movie-rating negative-rating">{{rating.score}}</h2>{{/if}}
+                    {{/if}}
+                    <h5 class="feed-card__movie-rating-text">фильму
+                        <a href="/movie/{{rating.movie_id}}" class="feed-card__movie-rating-link">"{{movie_title}}"</a>
+                    </h5>
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>

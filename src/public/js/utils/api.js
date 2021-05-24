@@ -73,9 +73,18 @@ class Api {
 
     /**
      * Получить информацию пользователя
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUser() {
+    getUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/user/${username}`);
+    }
+
+    /**
+     * Получить информацию пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getCurrentUser() {
         return this.asyncRequest(`http://${this.host}:${this.port}/users`);
     }
 
@@ -110,6 +119,24 @@ class Api {
     }
 
     /**
+     * Отметить фильм просмотренным
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    watchMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${movieId}/watch`, 'POST');
+    }
+
+    /**
+     * Убрать отметку "фильм просмотрен"
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unwatchMovie(movieId) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${movieId}/watch`, 'DELETE');
+    }
+
+    /**
      * Получить все рецензии к фильму
      * @param {number} id - id фильма
      * @param {number} page - страница с рецензиями
@@ -130,10 +157,11 @@ class Api {
 
     /**
      * Получение всех рецензий пользователя
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUserReviews() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`);
+    getUserReviews(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/user/${username}/reviews`);
     }
 
     /**
@@ -244,20 +272,39 @@ class Api {
     }
 
     /**
+     * Добавить актера в "Избранное"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    likeActor(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}/like`, 'POST');
+    }
+
+    /**
+     * Убрать актера из "Избранного"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unlikeActor(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/actors/${id}/like`, 'DELETE');
+    }
+
+    /**
      * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
      * @param {number} movieId
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getPlaylistsForMovie(movieId) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/${movieId}`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/movies/${movieId}`);
     }
 
     /**
      * Получить плейлисты пользователя вместе с их фильмами
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getPlaylists() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/playlists`);
+    getPlaylists(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/playlists/users/${username}`);
     }
 
     /**
@@ -297,6 +344,41 @@ class Api {
             JSON.stringify({
                 'movie_id': movieId,
             }));
+    }
+
+    /**
+     * Подписаться на пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    followUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}`, 'POST');
+    }
+
+    /**
+     * Отписаться от пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unfollowUser(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}`, 'DELETE');
+    }
+
+    /**
+     * Проверить, подписан ля текущий пользователь на данного пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    checkSubscription(username) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/subscriptions/${username}/check`);
+    }
+
+    /**
+     * Получить ленту текущего пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getFeed() {
+        return this.asyncRequest(`http://${this.host}:${this.port}/feed`);
     }
 }
 
