@@ -12,7 +12,7 @@ class Api {
      */
     constructor() {
         this.host = 'localhost';
-        this.port = '8080/api/v1';
+        this.port = '8085/api/v1';
     }
 
     /**
