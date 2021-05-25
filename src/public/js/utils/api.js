@@ -387,7 +387,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getSearchResults(query) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/search?q=${query}`);
+        return this.asyncRequest(`https://${this.host}:${this.port}/search?q=${query}`);
     }
 
     /**
@@ -396,7 +396,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getSimilarMovies(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/similar`);
+        return this.asyncRequest(`https://${this.host}:${this.port}/movies/${id}/similar`);
     }
 }
 
