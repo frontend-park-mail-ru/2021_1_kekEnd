@@ -59,6 +59,4 @@ export const busEvents = {
     UNWATCH_MOVIE_MOVIE_PAGE: 'unwatch movie on page',
     GET_SEARCH_RESULTS: 'get search results',
     SET_SEARCH_RESULTS: 'set search results',
-    GET_SIMILAR_MOVIES: 'get similar movies',
-    SET_SIMILAR_MOVIES: 'set similar movies',
 };

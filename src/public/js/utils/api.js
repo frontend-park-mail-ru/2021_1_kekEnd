@@ -396,7 +396,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getSimilarMovies(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movie/${id}/similar`);
+        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/similar`);
     }
 }
 

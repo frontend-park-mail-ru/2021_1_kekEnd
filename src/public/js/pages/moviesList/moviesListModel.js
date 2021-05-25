@@ -59,7 +59,6 @@ export default class MoviesListModel {
      * @param {number} movieId - идентификатор фильма
      */
     unwatchMovie(movieId) {
-        console.log('HERE 2');
         API.unwatchMovie(movieId).then(() => {});
     }
 

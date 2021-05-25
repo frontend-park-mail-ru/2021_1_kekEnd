@@ -10,6 +10,7 @@ import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 import './movie.tmpl';
 import {AddToPlaylistWidget} from 'components/addToPlaylist';
+import {Carousel} from 'components/carousel';
 
 /**
  * Представление страницы фильма
@@ -63,6 +64,10 @@ export default class MovieView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
 
+        this.similarMoviesCarousel = new Carousel(document.getElementById('similar-movies-carousel'),
+            {'itemsType': 'movies', 'items': {...this.data.similarMovies}});
+        this.similarMoviesCarousel.render();
+
         this.setEventListeners();
     }
 
@@ -96,6 +101,7 @@ export default class MovieView extends BaseView {
         });
 
         this.navbarComponent.setEventListeners();
+        this.similarMoviesCarousel.setEventListeners();
     }
 
     /**
@@ -118,6 +124,7 @@ export default class MovieView extends BaseView {
         });
 
         this.navbarComponent.removeEventListeners();
+        this.similarMoviesCarousel.removeEventListeners();
         this.currentPlaylistWidget?.hide();
     }
 
