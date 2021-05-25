@@ -11,8 +11,8 @@ class Api {
      * Конструктор
      */
     constructor() {
-        this.host = '89.208.198.186';
-        this.port = '8085/api/v1';
+        this.host = 'cinemedia.ru';
+        this.port = '443/api/v1';
     }
 
     /**
