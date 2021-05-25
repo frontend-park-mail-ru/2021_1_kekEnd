@@ -264,10 +264,10 @@ export default class MovieView extends BaseView {
         const checkbox = event.target;
         const movieId = checkbox.getAttribute('data-id');
         if (checkbox.checked) {
-            globalEventBus.emit(busEvents.WATCH_MOVIE, movieId);
+            globalEventBus.emit(busEvents.WATCH_MOVIE_MOVIE_PAGE, movieId);
             return;
         }
-        globalEventBus.emit(busEvents.UNWATCH_MOVIE, movieId);
+        globalEventBus.emit(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, movieId);
     }
 
     /**

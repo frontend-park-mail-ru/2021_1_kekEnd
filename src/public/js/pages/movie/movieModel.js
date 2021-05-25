@@ -22,8 +22,8 @@ export default class MovieModel {
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
-        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
-        globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE_MOVIE_PAGE, this.watchMovie.bind(this));
+        globalEventBus.on(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, this.unwatchMovie.bind(this));
     }
 
     /**
