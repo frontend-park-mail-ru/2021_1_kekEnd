@@ -389,6 +389,15 @@ class Api {
     getSearchResults(query) {
         return this.asyncRequest(`http://${this.host}:${this.port}/search?q=${query}`);
     }
+
+    /**
+     * Получить похожие фильмы
+     * @param {number} id - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getSimilarMovies(id) {
+        return this.asyncRequest(`http://${this.host}:${this.port}/movie/${id}/similar`);
+    }
 }
 
 export const API = new Api();

@@ -24,6 +24,7 @@ export default class MovieModel {
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
         globalEventBus.on(busEvents.WATCH_MOVIE_MOVIE_PAGE, this.watchMovie.bind(this));
         globalEventBus.on(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.GET_SIMILAR_MOVIES, this.getSimilarMovies.bind(this));
     }
 
     /**
@@ -153,5 +154,14 @@ export default class MovieModel {
      */
     unwatchMovie(movieId) {
         API.unwatchMovie(movieId).then(() => {});
+    }
+
+    /**
+     * Получить список похожих фильмов
+     * @param {number} movieId - идентификатор фильма
+     */
+    getSimilarMovies(movieId) {
+        API.getSimilarMovies(movieId).then((res) =>
+            globalEventBus.emit(busEvents.SET_SIMILAR_MOVIES, res.data));
     }
 }
