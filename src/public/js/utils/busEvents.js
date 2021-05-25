@@ -55,4 +55,6 @@ export const busEvents = {
     SET_FEED: 'set feed',
     WATCH_MOVIE: 'watch movie',
     UNWATCH_MOVIE: 'unwatch movie',
+    GET_SEARCH_RESULTS: 'get search results',
+    SET_SEARCH_RESULTS: 'set search results',
 };

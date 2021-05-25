@@ -7,5 +7,6 @@ export const PATHS = {
     actor: '/actor',
     settings: '/settings',
     user: '/user',
+    search: '/search',
     main: '/',
 };

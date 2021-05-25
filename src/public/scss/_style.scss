@@ -20,6 +20,10 @@ body {
   &__section {
     display: flex;
     align-items: center;
+
+    &_search {
+      width: 100%;
+    }
   }
 
   &__item {
@@ -51,6 +55,47 @@ body {
 
   &__button {
     cursor: pointer;
+  }
+
+  &__search {
+    width: 70%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    margin: auto;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid $secondary-text-color;
+    border-radius: 40px;
+  }
+
+  &__search-input {
+    width: 100%;
+    font-size: 18px;
+    background: none;
+    color: $primary-text-color;
+    border: none;
+    appearance: none;
+    outline: none;
+    margin-left: 12px;
+
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
+
+  &__search-button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    margin-right: 8px;
+
+    i {
+      color: $secondary-text-color;
+      font-size: 1.5em;
+    }
   }
 }
 
@@ -89,6 +134,13 @@ body {
         border-bottom-right-radius: 5px;
       }
     }
+  }
+
+  &__main-empty {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 
