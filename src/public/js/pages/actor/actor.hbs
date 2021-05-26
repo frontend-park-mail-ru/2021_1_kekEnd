@@ -2,9 +2,9 @@
 
 <div class="main">
     <div class="main__actor-content">
-        <div class="actor-content__flex-container">
-            <div class="flex-container__left">
-                <div class="flex-container__left-inner">
+        <div class="actor-content__grid-container">
+            <div class="grid-container__left">
+                <div class="grid-container__left-inner">
                     <img class="left-inner__actor-avatar-img" src="{{avatar}}">
                     {{#if (getAuthStatus)}}
                         <button id="actor-button-like" class="left-inner__actor-button-like" data-actor-id="{{id}}">
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="flex-container__center">
+            <div class="grid-container__center">
                 <h1 class="center__actor-name">
                     {{name}}
                 </h1>

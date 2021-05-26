@@ -12,11 +12,17 @@
   color: $primary-text-color;
 }
 
-.actor-content__flex-container {
-  display: flex;
+.actor-content__grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: 'actor-left actor-center';
 }
 
-.flex-container {
+.grid-container {
+
+  &__left {
+    grid-area: actor-left;
+  }
 
   &__left-inner {
     text-align: center;
@@ -24,10 +30,9 @@
   }
 
   &__center {
-    width: 80%;
+    grid-area: actor-center;
     display: inline-block;
-    margin-left: 50px;
-    padding-left: 50px;
+    margin-left: 12px;
     border-left: 1px solid $movie-separator-color;
   }
 }
@@ -115,5 +120,15 @@
   &__rating {
     font-size: 16px;
     color: $secondary-text-color;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .actor-content__grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+            'actor-left'
+            'actor-center';
   }
 }

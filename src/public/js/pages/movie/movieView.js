@@ -137,6 +137,11 @@ export default class MovieView extends BaseView {
         if (status) {
             this.data.reviewsData = reviewsData;
             super.render(this.data);
+
+            this.navbarComponent = new Navbar(document.getElementById('navbar'),
+                {'authorized': userMeta.getAuthorized()});
+            this.navbarComponent.render();
+
             this.setEventListeners();
             scrollToTargetAdjusted(document.getElementById('first-review'));
         }
