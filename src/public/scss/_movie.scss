@@ -53,17 +53,6 @@
   }
 }
 
-@media (max-width: 800px) {
-  .content-container__movie-container {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-            "backdrop"
-            "movie-left"
-            "movie-center"
-            "movie-right";
-  }
-}
-
 .your-review__edit-button {
   margin-left: 12px;
 }
@@ -384,5 +373,33 @@
   &__label-star:before {
     content: $star-code;
     font-family: "FontAwesome";
+  }
+}
+
+
+@media (max-width: 800px) {
+  .content-container__movie-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+            "backdrop"
+            "movie-left"
+            "movie-center"
+            "movie-right";
+  }
+
+  .main__content-container {
+    width: 100%;
+  }
+
+  .movie-info__info-row {
+    margin-left: 20px;
+  }
+
+  .movie-flex-center__title-box {
+    margin-left: 20px;
+  }
+
+  .movie-flex-center__meta_info {
+    margin-left: 20px;
   }
 }
