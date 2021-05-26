@@ -303,3 +303,15 @@
     }
   }
 }
+
+@media (max-width: 760px) {
+  .profile-card__container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card__container {
+    width: 90%;
+  }
+}

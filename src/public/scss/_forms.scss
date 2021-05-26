@@ -134,3 +134,9 @@
 .button-box__button_text_white {
   color: $white-color;
 }
+
+@media (max-width: 600px) {
+  .form-box {
+    width: 70%;
+  }
+}
