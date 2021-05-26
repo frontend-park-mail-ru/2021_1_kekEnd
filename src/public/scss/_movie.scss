@@ -32,7 +32,7 @@
     background-color: $movie-background-color;
     padding-bottom: 40px;
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-columns: 2fr 4fr 2fr;
     grid-template-areas:
             "backdrop backdrop backdrop"
             "movie-left movie-center movie-right";

@@ -111,3 +111,9 @@
     display: block;
   }
 }
+
+@media (max-width: 600px) {
+  .main__settings-box {
+    flex-direction: column;
+  }
+}
