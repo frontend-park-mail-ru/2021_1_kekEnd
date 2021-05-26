@@ -8,7 +8,6 @@
   &__content-container {
     width: 80%;
     margin: 20px auto 20px auto;
-    background-color: $white-color;
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.7);
     border-radius: $s-border-radius;
     overflow: hidden;
@@ -18,17 +17,50 @@
     width: 80%;
     margin: 40px auto 40px auto;
   }
+
+  &__movie-page-section-heading {
+    padding-top: 20px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
 .content-container {
 
-  &__movie-container, &__write-review {
+  &__movie-container {
+    background-color: $movie-background-color;
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-areas:
+            "backdrop backdrop backdrop"
+            "movie-left movie-center movie-right";
+  }
+
+  &__write-review {
     background-color: $movie-background-color;
     padding-bottom: 20px;
   }
 
   &__review-content {
     padding-bottom: 20px;
+  }
+
+  &__similar-movies {
+    background-color: $movie-background-color;
+    padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .content-container__movie-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+            "backdrop"
+            "movie-left"
+            "movie-center"
+            "movie-right";
   }
 }
 
@@ -46,20 +78,13 @@
 
 .write-review {
 
-  &__your-review {
-    padding: 40px 0 0 40px;
-    font-size: 24px;
-    text-align: center;
-
-    &_color_white {
-      color: $white-color;
-    }
+  &__user-link {
+    color: $primary-text-color;
   }
 
   &__review-form-container {
     margin: auto;
-    padding: 40px 0 40px 40px;
-    width: 600px;
+    width: 80%;
   }
 }
 
@@ -73,7 +98,6 @@
   &__input-review-title {
     font-size: 20px;
     font-weight: bold;
-    color: $white-color;
 
     &::placeholder {
       color: $secondary-text-color;
@@ -83,7 +107,6 @@
   &__input-review-content {
     font-size: 16px;
     height: 120px;
-    color: $white-color;
 
     &::placeholder {
       color: $secondary-text-color;
@@ -91,11 +114,22 @@
   }
 }
 
+.review-form-container__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.form__submit-review {
+  width: 50%;
+}
+
 .review-body {
 
   &__title {
-    margin: 20px 40px 0 40px;
-    padding-bottom: 20px;
+    margin: 0 40px;
+    padding: 20px 0;
     font-size: 20px;
     font-weight: bold;
     border-bottom: 1px solid;
@@ -121,43 +155,35 @@
 
 .movie-container {
 
-  &__movie-flex {
-    display: flex;
-  }
-
   &__background-trailer {
-    height: 270px;
+    grid-area: backdrop;
   }
 }
 
 .background-trailer__img {
-  height: 140%;
-  box-shadow: 0 0 30px 30px $movie-background-color inset;
+  height: 350px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.movie-flex {
+.movie-container {
 
-  &__movie-flex-left {
-    width: 30%;
-    display: inline-block;
-    align-content: center;
+  &__left {
+    grid-area: movie-left;
   }
 
-  &__movie-flex-center {
-    width: 50%;
-    display: inline-block;
-    border-left: 1px solid $movie-separator-color;
+  &__center {
+    border-left: 1px solid $whitish;
+    grid-area: movie-center;
   }
 
-  &__movie-flex-right {
-    width: 20%;
-    color: $white-color;
+  &__right {
+    color: $primary-text-color;
     margin-top: 20px;
     margin-right: 24px;
     text-align: right;
+    grid-area: movie-right;
   }
 }
 
@@ -167,11 +193,18 @@
   margin-right: auto;
 }
 
-.inner__img_position_left {
-  width: 90%;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+.inner {
+
+  &__img_position_left {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__trailer-container {
+    height: 200px;
+  }
 }
 
 .movie-flex-right__main-roles {
@@ -185,7 +218,7 @@
 .actors-list {
 
   &__item {
-    color: $white-color;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
 
@@ -201,19 +234,19 @@
   &__meta_info {
     font-size: 16px;
     line-height: 22px;
-    color: $white-color;
+    color: $primary-text-color;
     margin: 16px 0 24px 50px;
   }
 
   &__movie_info {
     text-align: left;
-    color: $movie-info-color;
   }
 
   &__title-box {
     margin-left: 50px;
     margin-top: 20px;
-    color: $white-color;
+    margin-bottom: 12px;
+    color: $primary-text-color;
   }
 }
 
@@ -250,7 +283,7 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid;
-  border-bottom-color: $movie-separator-color;
+  border-bottom-color: $whitish;
 }
 
 .info-row {
@@ -263,13 +296,13 @@
   }
 
   &__info-value {
-    color: white;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
   }
 
   &__info-link {
-    color: $white-color;
+    color: $primary-text-color;
     text-decoration: none;
     font-size: 14px;
 
@@ -301,7 +334,7 @@
   &__buttons {
     display: inline-flex;
     gap: 16px;
-    color: $white-color;
+    color: $primary-text-color;
     font-family: "FontAwesome";
     font-size: 24px;
     margin-right: 40px;
@@ -329,7 +362,7 @@
     float: right;
     padding: 4px;
     font-size: 14px;
-    color: $stars-color;
+    color: $primary-text-color;
     transition: all .2s;
   }
 

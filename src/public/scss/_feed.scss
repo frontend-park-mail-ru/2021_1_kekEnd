@@ -1,0 +1,67 @@
+.main {
+  &__feed-card {
+    width: 50%;
+    margin: 24px auto;
+    background-color: $white-color;
+    color: $primary-text-color;
+    border-radius: $l-border-radius;
+    box-shadow: 0 0 20px $transparent-black;
+    overflow: hidden;
+  }
+}
+
+.feed-card {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 16px;
+    border-bottom: 1px solid $whitish;
+    padding: 12px 24px;
+  }
+
+  &__username {
+    cursor: pointer;
+  }
+
+  &__user-link {
+    color: $primary-text-color;
+    text-decoration: none;
+  }
+
+  &__avatar-container {
+    height: 50px;
+  }
+
+  &__avatar {
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__movie-rating {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    color: $white-color;
+    margin: 12px auto 0 auto;
+    font-size: 24px;
+  }
+
+  &__movie-rating-text {
+    padding: 16px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  &__movie-rating-link {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $primary-text-color;
+  }
+}

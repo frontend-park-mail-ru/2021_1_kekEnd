@@ -1,10 +1,10 @@
 .main__movies-list-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .genres-list__genre {
-  color: $white-text-color;
+  color: $primary-text-color;
   font-size: 18px;
   text-decoration: none;
 }
@@ -144,7 +144,7 @@
 
 .buttons {
 
-  &__input-watched, &__input-like {
+  &__input-watched, &__input-playlist {
     display: none;
   }
 
@@ -153,8 +153,8 @@
     cursor: pointer;
   }
 
-  &__label-like:before {
-    content: $like-button-code;
+  &__label-playlist:before {
+    content: $plus-button-code;
     cursor: pointer;
   }
 
@@ -162,16 +162,43 @@
     color: $filled-watched-button-color;
   }
 
-  &__input-like:checked ~ &__label-like:before {
-    color: $button-gradient-first;
-    content: $filled-like-button-code;
-  }
-
   &__movie-card-input-watched:not(:checked):hover ~ &__label-watched:before {
     color: black;
   }
 
-  &__movie-card-input-like:not(:checked):hover ~ &__label-like:before {
+  &__movie-card-input-playlist:not(:checked):hover ~ &__label-playlist:before {
     color: black;
   }
+
+  &__add-to-playlist-container {
+    // нужно, чтобы блок "Добавить в плейлист" расширялся вправо
+    direction: rtl;
+    display: inline-block;
+    text-align: center;
+  }
 }
+
+.add-to-playlist-widget {
+  position: absolute;
+  background-color: $white-color;
+  color: $primary-text-color;
+  font-family: "Open Sans", sans-serif;
+  padding: 12px;
+  box-shadow: 0 0 12px $transparent-black;
+  border-radius: $m-border-radius;
+  z-index: 1;
+  // "отменяем" direction: rtl родителя
+  direction: ltr;
+
+  &__title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__label {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+}
+
+

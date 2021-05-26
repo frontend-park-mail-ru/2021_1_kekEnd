@@ -1,6 +1,6 @@
-import {globalEventBus} from './eventbus.js';
-import {CONNECTION_ERROR} from './errorMessages.js';
-import {busEvents} from './busEvents.js';
+import {globalEventBus} from './eventbus';
+import {CONNECTION_ERROR} from './errorMessages';
+import {busEvents} from './busEvents';
 
 
 /**
@@ -11,8 +11,13 @@ class Api {
      * Конструктор
      */
     constructor() {
-        this.host = 'localhost';
-        this.port = '8080';
+        // this.host = 'localhost';
+        // this.port = '8080/api/v1';
+        // this.url = 'http://localhost:8080/api/v1'
+
+        // this.host = 'cinemedia.ru';
+        // this.port = '443/api/v1';
+        this.url = 'https://cinemedia.ru/api/v1';
     }
 
     /**
@@ -51,7 +56,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     signup(userData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'POST', JSON.stringify(userData));
+        return this.asyncRequest(`${this.url}/users`, 'POST', JSON.stringify(userData));
     }
 
     /**
@@ -60,7 +65,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     login(userData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'POST', JSON.stringify(userData));
+        return this.asyncRequest(`${this.url}/sessions`, 'POST', JSON.stringify(userData));
     }
 
     /**
@@ -68,15 +73,24 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     logout() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/sessions`, 'DELETE');
+        return this.asyncRequest(`${this.url}/sessions`, 'DELETE');
+    }
+
+    /**
+     * Получить информацию пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getUser(username) {
+        return this.asyncRequest(`${this.url}/user/${username}`);
     }
 
     /**
      * Получить информацию пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUser() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`);
+    getCurrentUser() {
+        return this.asyncRequest(`${this.url}/users`);
     }
 
     /**
@@ -85,7 +99,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     editUser(newData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users`, 'PUT', JSON.stringify(newData));
+        return this.asyncRequest(`${this.url}/users`, 'PUT', JSON.stringify(newData));
     }
 
     /**
@@ -94,7 +108,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     uploadAvatar(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/avatar`, 'POST', formData,
+        return this.asyncRequest(`${this.url}/users/avatar`, 'POST', formData,
             {
                 'Content-Type': 'multipart/form-data',
             });
@@ -106,7 +120,25 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     getMovieData(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}`);
+        return this.asyncRequest(`${this.url}/movies/${id}`);
+    }
+
+    /**
+     * Отметить фильм просмотренным
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    watchMovie(movieId) {
+        return this.asyncRequest(`${this.url}/movies/${movieId}/watch`, 'POST');
+    }
+
+    /**
+     * Убрать отметку "фильм просмотрен"
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    unwatchMovie(movieId) {
+        return this.asyncRequest(`${this.url}/movies/${movieId}/watch`, 'DELETE');
     }
 
     /**
@@ -116,7 +148,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком рецензий к фильму
      */
     getMovieReviews(id, page=1) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies/${id}/reviews?page=${page}`);
+        return this.asyncRequest(`${this.url}/movies/${id}/reviews?page=${page}`);
     }
 
     /**
@@ -125,15 +157,16 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
     addReview(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`, 'POST', JSON.stringify(formData));
+        return this.asyncRequest(`${this.url}/users/reviews`, 'POST', JSON.stringify(formData));
     }
 
     /**
      * Получение всех рецензий пользователя
+     * @param {string} username - имя пользователя
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getUserReviews() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/reviews`);
+    getUserReviews(username) {
+        return this.asyncRequest(`${this.url}/user/${username}/reviews`);
     }
 
     /**
@@ -142,7 +175,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и объектом рецензии
      */
     getUserReviewForMovie(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`);
+        return this.asyncRequest(`${this.url}/users/movies/${id}/reviews`);
     }
 
     /**
@@ -151,7 +184,8 @@ class Api {
      * @return {Promise<{status: number}>} - промис со статусом запроса
      */
     editUserReviewForMovie(formData) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${formData.movie_id}/reviews`, 'PUT', JSON.stringify(formData));
+        return this.asyncRequest(`${this.url}/users/movies/${formData.movie_id}/reviews`, 'PUT',
+            JSON.stringify(formData));
     }
 
     /**
@@ -160,7 +194,7 @@ class Api {
      * @return {Promise<{status: number}>} - промис со статусом запроса
      */
     deleteUserReviewForMovie(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/users/movies/${id}/reviews`, 'DELETE');
+        return this.asyncRequest(`${this.url}/users/movies/${id}/reviews`, 'DELETE');
     }
 
     /**
@@ -170,7 +204,7 @@ class Api {
      * @return {Promise<{status: number}>} - промис со статусом запроса
      */
     addMovieRating(id, score) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'POST', JSON.stringify({
+        return this.asyncRequest(`${this.url}/ratings`, 'POST', JSON.stringify({
             'movie_id': id,
             'score': score,
         }));
@@ -182,7 +216,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и оценкой пользователя
      */
     getUserRatingForMovie(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`);
+        return this.asyncRequest(`${this.url}/ratings/${id}`);
     }
 
     /**
@@ -192,7 +226,7 @@ class Api {
      * @return {Promise<{status: number}>} - промис со статусом запроса
      */
     editUserRatingForMovie(id, newScore) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/ratings`, 'PUT', JSON.stringify({
+        return this.asyncRequest(`${this.url}/ratings`, 'PUT', JSON.stringify({
             'movie_id': id,
             'score': newScore,
         }));
@@ -204,7 +238,7 @@ class Api {
      * @return {Promise<{status: number}>} - промис со статусом запроса
      */
     deleteUserRatingForMovie(id) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/ratings/${id}`, 'DELETE');
+        return this.asyncRequest(`${this.url}/ratings/${id}`, 'DELETE');
     }
 
     /**
@@ -213,7 +247,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком фильмов
      */
     getBestMovies(page=1) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=best&page=${page}`);
+        return this.asyncRequest(`${this.url}/movies?category=best&page=${page}`);
     }
 
     /**
@@ -221,7 +255,7 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком жанров
      */
     getAllAvailableGenres() {
-        return this.asyncRequest(`http://${this.host}:${this.port}/genres`);
+        return this.asyncRequest(`${this.url}/genres`);
     }
 
     /**
@@ -231,84 +265,144 @@ class Api {
      * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и списком фильмов
      */
     getMoviesByGenres(genres, page=1) {
-        return this.asyncRequest(`http://${this.host}:${this.port}/movies?category=genre&filter=${genres.join('+')}&page=${page}`);
+        return this.asyncRequest(`${this.url}/movies?category=genre&filter=${genres.join('+')}&page=${page}`);
     }
 
     /**
-     * Получить любимые фильмы пользователя
+     * Получить информацию об актере
+     * @param {number} id - id актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getBestUsersMovies() {
-
+    getActorData(id) {
+        return this.asyncRequest(`${this.url}/actors/${id}`);
     }
 
     /**
-     * Добавить фильм в список любимых фильмов пользователя
+     * Добавить актера в "Избранное"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    addMovieToBestUsersMovies() {
-
+    likeActor(id) {
+        return this.asyncRequest(`${this.url}/actors/${id}/like`, 'POST');
     }
 
     /**
-     * Получить любимых актеров пользователя
+     * Убрать актера из "Избранного"
+     * @param {number} id - идентификатор актера
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    getBestUsersActors() {
-
+    unlikeActor(id) {
+        return this.asyncRequest(`${this.url}/actors/${id}/like`, 'DELETE');
     }
 
     /**
-     * Добавить актера в список любимых актеров пользователя
+     * Получить плейлисты пользоватя с информацией о наличии фильма в каждом плейлисте
+     * @param {number} movieId
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    addActorToBestUsersActors() {
-
+    getPlaylistsForMovie(movieId) {
+        return this.asyncRequest(`${this.url}/playlists/movies/${movieId}`);
     }
 
     /**
-     * Создать новую пользовательскую подборку фильмов
+     * Получить плейлисты пользователя вместе с их фильмами
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    createUserPlaylist() {
-
+    getPlaylists(username) {
+        return this.asyncRequest(`${this.url}/playlists/users/${username}`);
     }
 
     /**
-     * Удалить пользовательскую подборку фильмов
+     * Создать новый плейлист
+     * @param {string} name - название плейлиста
+     * @param {boolean} isShared - можно ли приглашать людей в плейлист
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    deleteUserPlaylist() {
-
+    createPlaylist(name, isShared=false) {
+        return this.asyncRequest(`${this.url}/playlists`, 'POST', JSON.stringify({
+            'playlist_name': name,
+            'is_shared': isShared,
+        }));
     }
 
     /**
-     * Получить подборки фильмов пользователся
+     * Добавить фильм в плейлист
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    getUsersPlaylist() {
-
+    addMovieToPlaylist(playlistId, movieId) {
+        return this.asyncRequest(`${this.url}/playlists/${playlistId}/movie`, 'POST',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
     }
 
     /**
-     * Добавить фильм в какую-либо пользовательскую подборку
+     * Удалить фильм из плейлиста
+     * @param {number} playlistId - идентификатор плейлиста
+     * @param {number} movieId - идентификатор фильма
+     * @return {Promise<{data: {}, status: number}>} - промис со статусом запроса и данными
      */
-    addMovieToPlaylist() {
-
+    deleteMovieFromPlaylist(playlistId, movieId) {
+        return this.asyncRequest(`${this.url}/playlists/${playlistId}/movie`, 'DELETE',
+            JSON.stringify({
+                'movie_id': movieId,
+            }));
     }
 
     /**
-     * Удалить фильм из пользовательской подборки
+     * Подписаться на пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    removeMovieFromPlaylist() {
-
+    followUser(username) {
+        return this.asyncRequest(`${this.url}/subscriptions/${username}`, 'POST');
     }
 
     /**
-     * Добавить лайк
+     * Отписаться от пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    addLike() {
-
+    unfollowUser(username) {
+        return this.asyncRequest(`${this.url}/subscriptions/${username}`, 'DELETE');
     }
 
     /**
-     * Удалить лайк
+     * Проверить, подписан ля текущий пользователь на данного пользователя
+     * @param {string} username - имя пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
      */
-    deleteLike() {
+    checkSubscription(username) {
+        return this.asyncRequest(`${this.url}/subscriptions/${username}/check`);
+    }
 
+    /**
+     * Получить ленту текущего пользователя
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getFeed() {
+        return this.asyncRequest(`${this.url}/feed`);
+    }
+
+    /**
+     * Получить результаты поиска
+     * @param {string} query - поисковой запрос
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getSearchResults(query) {
+        return this.asyncRequest(`${this.url}/search?q=${query}`);
+    }
+
+    /**
+     * Получить похожие фильмы
+     * @param {number} id - идентификатор фильма
+     * @return {Promise<{data: *, status: number}>} - промис со статусом запроса и данными
+     */
+    getSimilarMovies(id) {
+        return this.asyncRequest(`${this.url}/movies/${id}/similar`);
     }
 }
 

@@ -1,9 +1,14 @@
+$main-background: #e6eaf3;
+$header-background: #ffffff;
+$header-text-color: #ababad;
+$primary-text-color: #444444;
+
 $primary-color: #03A9F4;
 $light-primary-color: #B3E5FC;
 $dark-primary-color: #0288D1;
 $accent-color: #FF9800;
+$accent-color-light: #ffad33;
 $white-text-color: #FFF;
-$primary-text-color: #212121;
 $secondary-text-color: #757575;
 $divider-color: #BDBDBD;
 $grayish: #999;
@@ -14,16 +19,17 @@ $transparent-black: rgba(0, 0, 0, 0.5);
 $transparent_white: rgba(255, 255, 255, 0.8);
 $filled-watched-button-color: deepskyblue;
 $movie-info-color: floralwhite;
-$stars-color: aliceblue;
 $slider-box-shadow-color: rgba(0, 0, 0, 0.5);
 $white-color: white;
 
-$button-gradient-first: #FF105F;
-$button-gradient-second: #FF9900;
+$button-gradient-first: #f46b45;
+$button-gradient-second: #eea849;
+$button-gradient-first-hover: rgba(244, 107, 69, 0.7);
+$button-gradient-second-hover: rgba(238, 168, 73, 0.7);
 $box-shadow-color: #FF61241F;
 $social-shadow-color: #7F7F7F3D;
 
-$movie-background-color: #031D44;
+$movie-background-color: #fff;
 $positive-rating: #50C878;
 $neutral-rating: lightgrey;
 $negative-rating: #f36223;
@@ -44,6 +50,7 @@ $description-max-lines: 3;
 
 $watched-button-code: "\f06e";
 $like-button-code: "\f08a";
+$plus-button-code: "\f067";
 $filled-like-button-code: "\f004";
 $filled-star-code: "\f005";
 $star-code: "\f006";
@@ -51,6 +58,6 @@ $filled-star-color: #FE7;
 $max-star-color: #FD4;
 $max-star-shadow: #952;
 
-$popup-color: rgba(0,0,0,0.5);
+$popup-color: rgba(0, 0, 0, 0.5);
 $popup-content-color: #c5c5c5;
 $popup-box-shadow-color: #000;

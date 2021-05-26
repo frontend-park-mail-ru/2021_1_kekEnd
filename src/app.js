@@ -1,15 +1,19 @@
-import {PATHS} from './public/js/utils/paths.js';
-import {globalRouter} from './public/js/utils/router.js';
-import ProfileController from './public/js/components/profile/profileController.js';
-import LoginController from './public/js/components/login/loginController.js';
-import SignupController from './public/js/components/signup/signupController.js';
-import MovieController from './public/js/components/movie/movieController.js';
-import ActorController from './public/js/components/actor/actorController.js';
-import SettingsController from './public/js/components/settings/settingsController.js';
-import {registerHandlebarsHelpers} from './public/js/utils/handlebarsHelpers.js';
-import MainController from './public/js/components/main/mainController.js';
-import MoviesListController from './public/js/components/moviesList/moviesListController.js';
-import './public/js/components/popup/popup.js';
+import {PATHS} from 'utils/paths';
+import {globalRouter} from 'utils/router';
+import ProfileController from './public/js/pages/profile/profileController';
+import LoginController from './public/js/pages/login/loginController';
+import SignupController from './public/js/pages/signup/signupController';
+import MovieController from './public/js/pages/movie/movieController';
+import ActorController from './public/js/pages/actor/actorController';
+import SettingsController from './public/js/pages/settings/settingsController';
+import {registerHandlebarsHelpers} from 'utils/handlebarsHelpers';
+import MainController from './public/js/pages/main/mainController';
+import MoviesListController from './public/js/pages/moviesList/moviesListController';
+import './public/js/pages/popup/popup';
+import './public/scss/compound.scss';
+import FeedController from './public/js/pages/feed/feedController';
+import {userMeta} from 'utils/userMeta';
+import SearchController from './public/js/pages/search/searchController';
 
 
 if ('serviceWorker' in navigator) {
@@ -23,19 +27,23 @@ if ('serviceWorker' in navigator) {
 }
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const application = document.getElementById('app');
+
+    await userMeta.initMeta();
 
     registerHandlebarsHelpers();
 
     globalRouter.register(PATHS.main, new MainController(application).view);
     globalRouter.register(PATHS.movies, new MoviesListController(application).view);
-    globalRouter.register(PATHS.profile, new ProfileController(application).view);
+    globalRouter.register(PATHS.user, new ProfileController(application).view);
     globalRouter.register(PATHS.login, new LoginController(application).view);
     globalRouter.register(PATHS.signup, new SignupController(application).view);
     globalRouter.register(PATHS.movie, new MovieController(application).view);
     globalRouter.register(PATHS.actor, new ActorController(application).view);
     globalRouter.register(PATHS.settings, new SettingsController(application).view);
+    globalRouter.register(PATHS.feed, new FeedController(application).view);
+    globalRouter.register(PATHS.search, new SearchController(application).view);
 
     globalRouter.start();
 });

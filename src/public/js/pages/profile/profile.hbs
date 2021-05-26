@@ -1,0 +1,81 @@
+<div id="navbar"></div>
+
+<div class="main">
+    <div class="main__profile-card">
+        <div class="profile-card__container">
+            <div class="container__avatar-container">
+                <img class="avatar-container__avatar" src="{{avatar}}" alt="">
+            </div>
+
+            <div class="profile-card__content">
+                <div class="content__head">
+                    <div class="head__first-row">
+                        <p id="user-full-name" class="head__user-name">{{username}}</p>
+                        {{#if (getAuthStatus)}}
+                            {{#if (notEq username (getUsername))}}
+                                {{#if is_subscribed}}
+                                    <input type="checkbox" id="follow" class="head__follow-checkbox" checked>
+                                    <label for="follow" id="follow-button" class="head__follow-button">Отписаться</label>
+                                {{else}}
+                                    <input type="checkbox" id="follow" class="head__follow-checkbox">
+                                    <label for="follow" id="follow-button" class="head__follow-button">Подписаться</label>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                    <span id="user-email" class="head__user-email">{{email}}</span>
+                    {{#if (eq username (getUsername))}}
+                        <button id="button-profile-settings" class="head__settings-button">
+                            <a class="settings-button__settings-link" href="/settings">Настройки</a>
+                        </button>
+                    {{/if}}
+                </div>
+                <div class="content__stats-grid">
+                    <div class="stats__stats-item">
+                        <p class="stats-item__name">Посмотрел фильмов</p>
+                        <span id="movies-watched" class="stats-item__value">{{movies_watched}}</span>
+                    </div>
+                    <div class="stats__stats-item">
+                        <p class="stats-item__name">Рецензий</p>
+                        <span id="reviews-number" class="stats-item__value">{{reviews_number}}</span>
+                    </div>
+                    <div class="stats__stats-item">
+                        <p class="stats-item__name">Подписчиков</p>
+                        <span id="followers-number" class="stats-item__value">{{subscribers}}</span>
+                    </div>
+                    <div class="stats__stats-item">
+                        <p class="stats-item__name">Подписок</p>
+                        <span id="following-number" class="stats-item__value">{{subscriptions}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    {{#if favorite_movies}}-->
+<!--        <h3 class="main__section-name">Любимые фильмы</h3>-->
+<!--        <div id='favorite-movies-carousel' class="main__slider-wrapper"></div>-->
+<!--    {{/if}}-->
+    {{#if favorite_actors}}
+        <h3 class="main__section-name">Любимые актеры</h3>
+        <div id='favorite-actors-carousel' class="main__slider-wrapper"></div>
+    {{/if}}
+    <h3 class="main__section-name">Плейлисты</h3>
+    {{#unless playlists}}
+        <div class="main__message-empty">
+            <p id="no-playlists-message" class="message-empty__text">
+                {{#if (eq username (getUsername))}}
+                    Создайте свой первый плейлист!
+                {{else}}
+                    У этого пользователя еще нет плейлистов
+                {{/if}}
+            </p>
+        </div>
+    {{/unless}}
+    <div id="accordion-container"></div>
+
+    {{#if reviews}}
+        <h3 class="main__section-name">Рецензии</h3>
+        <div id='reviews-carousel' class="main__slider-wrapper"></div>
+    {{/if}}
+</div>
