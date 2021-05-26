@@ -9,151 +9,149 @@
                      style="background-image: url('{{banner}}');"></div>
             </div>
 
-            <div class="movie-container__movie-flex">
-                <div class="movie-flex__movie-flex-left">
-                    <div class="movie-flex-left__inner">
-                        <img class="inner__img_position_left" src="{{poster}}">
+            <div class="movie-container__left">
+                <div class="movie-flex-left__inner">
+                    <img class="inner__img_position_left" src="{{poster}}">
 
-                        <iframe class="inner__img_position_left inner__trailer-container" src="{{trailer_preview}}"
-                                title="YouTube player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+                    <iframe class="inner__img_position_left inner__trailer-container" src="{{trailer_preview}}"
+                            title="YouTube player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
                                 encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+                </div>
+            </div>
+            <div class="movie-container__center">
+                <div class="movie-flex-center__title-box">
+                    <h1 class="title-box__title">
+                        {{title}}
+                    </h1>
+                </div>
+                <div class="movie-flex-center__meta_info">
+                    <p>{{description}}</p>
+                </div>
+
+                <h2 class="movie-flex-center__title-box">О фильме</h2>
+
+                <div class="movie-flex-center__movie_info">
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Год производства</div>
+                        <a href="" class="info-row__info-link">{{production_year}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Страна</div>
+                        {{#each country}}
+                            <a href="" class="info-row__info-link">{{this}}</a>{{#unless @last}}, {{/unless}}
+                        {{/each}}
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Жанр</div>
+                        {{#each genre}}
+                            <a href="/movies/genre/1/?filter={{this}}" class="info-row__info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
+                        {{/each}}
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Слоган</div>
+                        <div class="info_value">«{{slogan}}»</div>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Режиссёр</div>
+                        <a href="" class="info-row__info-link">{{director}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Сценарист</div>
+                        <a href="" class="info-row__info-link">{{scriptwriter}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Продюсер</div>
+                        <a href="" class="info-row__info-link">{{producer}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Оператор</div>
+                        <a href="" class="info-row__info-link">{{operator}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Композитор</div>
+                        <a href="" class="info-row__info-link">{{composer}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Художник</div>
+                        <a href="" class="info-row__info-link">{{artist}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Монтаж</div>
+                        <a href="" class="info-row__info-link">{{montage}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Бюджет</div>
+                        <a href="" class="info-row__info-link">{{budget}}</a>
+                    </div>
+                    <div class="movie-info__info-row">
+                        <div class="info-row__info-title">Время</div>
+                        <div class="info_value">{{duration}}</div>
                     </div>
                 </div>
-                <div class="movie-flex__movie-flex-center">
-                    <div class="movie-flex-center__title-box">
-                        <h1 class="title-box__title">
-                            {{title}}
-                        </h1>
-                    </div>
-                    <div class="movie-flex-center__meta_info">
-                        <p>{{description}}</p>
-                    </div>
-
-                    <h2 class="movie-flex-center__title-box">О фильме</h2>
-
-                    <div class="movie-flex-center__movie_info">
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Год производства</div>
-                            <a href="" class="info-row__info-link">{{production_year}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Страна</div>
-                            {{#each country}}
-                                <a href="" class="info-row__info-link">{{this}}</a>{{#unless @last}}, {{/unless}}
-                            {{/each}}
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Жанр</div>
-                            {{#each genre}}
-                                <a href="/movies/genre/1/?filter={{this}}" class="info-row__info-link">{{this}}</a>{{#unless @last}}<span>, </span>{{/unless}}
-                            {{/each}}
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Слоган</div>
-                            <div class="info_value">«{{slogan}}»</div>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Режиссёр</div>
-                            <a href="" class="info-row__info-link">{{director}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Сценарист</div>
-                            <a href="" class="info-row__info-link">{{scriptwriter}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Продюсер</div>
-                            <a href="" class="info-row__info-link">{{producer}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Оператор</div>
-                            <a href="" class="info-row__info-link">{{operator}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Композитор</div>
-                            <a href="" class="info-row__info-link">{{composer}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Художник</div>
-                            <a href="" class="info-row__info-link">{{artist}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Монтаж</div>
-                            <a href="" class="info-row__info-link">{{montage}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Бюджет</div>
-                            <a href="" class="info-row__info-link">{{budget}}</a>
-                        </div>
-                        <div class="movie-info__info-row">
-                            <div class="info-row__info-title">Время</div>
-                            <div class="info_value">{{duration}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-flex__movie-flex-right">
-                    {{#if (getAuthStatus)}}
-                        <div class="movie-flex-right__buttons">
-                            {{#if this.is_watched}}
-                                <input class="buttons__input-watched buttons__movie-card-input-watched" checked
-                                       id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
-                            {{else}}
-                                <input class="buttons__input-watched buttons__movie-card-input-watched"
-                                       id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
-                            {{/if}}
-                            <label class="buttons__label-watched" for="watched-button"></label>
-                            <input class="buttons__input-playlist buttons__movie-page-input-playlist"
-                                   id="playlist-button" type="checkbox" name="playlist" data-id="{{id}}">
-                            <label class="buttons__label-playlist" for="playlist-button"></label>
-                        </div>
-                        <div class="buttons__add-to-playlist-container" id="add-to-playlist-{{id}}"></div>
-                    {{/if}}
-
-                    {{#if (gte rating 7)}}<h2 class="right__movie-rating positive-rating">{{rating}}</h2>
-                    {{else}}
-                        {{#if (gte rating 4)}}<h2 class="right__movie-rating neutral-rating">{{rating}}</h2>
-                        {{else}}<h2 class="right__movie-rating negative-rating">{{rating}}</h2>{{/if}}
-                    {{/if}}
-
-                    {{#if (getAuthStatus)}}
-                        {{#if userRating}}
-                            <h3 class="movie-flex-right__rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
-                            <p id="delete-rating" class="movie-flex-right__delete-rating">Удалить оценку</p>
+            </div>
+            <div class="movie-container__right">
+                {{#if (getAuthStatus)}}
+                    <div class="movie-flex-right__buttons">
+                        {{#if this.is_watched}}
+                            <input class="buttons__input-watched buttons__movie-card-input-watched" checked
+                                   id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
                         {{else}}
-                            <h3 class="movie-flex-right__rate-movie">Оцените фильм</h3>
+                            <input class="buttons__input-watched buttons__movie-card-input-watched"
+                                   id="watched-button" type="checkbox" name="watched" data-id="{{id}}">
                         {{/if}}
-                        <div class="movie-flex-right__rating-stars">
-                            <input class="rating-stars__input-star ratings-stars__max-star" id="star-10" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-10" data-rating="10"></label>
-                            <input class="rating-stars__input-star" id="star-9" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-9" data-rating="9"></label>
-                            <input class="rating-stars__input-star" id="star-8" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-8" data-rating="8"></label>
-                            <input class="rating-stars__input-star" id="star-7" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-7" data-rating="7"></label>
-                            <input class="rating-stars__input-star" id="star-6" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-6" data-rating="6"></label>
-                            <input class="rating-stars__input-star" id="star-5" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-5" data-rating="5"></label>
-                            <input class="rating-stars__input-star" id="star-4" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-4" data-rating="4"></label>
-                            <input class="rating-stars__input-star" id="star-3" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-3" data-rating="3"></label>
-                            <input class="rating-stars__input-star" id="star-2" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-2" data-rating="2"></label>
-                            <input class="rating-stars__input-star" id="star-1" type="radio" name="star"/>
-                            <label class="rating-stars__label-star" for="star-1" data-rating="1"></label>
-                        </div>
-                    {{/if}}
-
-                    <div class="movie-flex-right__main-roles">
-                        <h3 class="main-roles__header">В главных ролях</h3>
-                        <ul class="main-roles__actors-list">
-                            {{#each actors}}
-                                <li><a href='/actor/{{this.id}}' class="actors-list__item">{{this.name}}</a></li>
-                            {{/each}}
-                        </ul>
+                        <label class="buttons__label-watched" for="watched-button"></label>
+                        <input class="buttons__input-playlist buttons__movie-page-input-playlist"
+                               id="playlist-button" type="checkbox" name="playlist" data-id="{{id}}">
+                        <label class="buttons__label-playlist" for="playlist-button"></label>
                     </div>
+                    <div class="buttons__add-to-playlist-container" id="add-to-playlist-{{id}}"></div>
+                {{/if}}
+
+                {{#if (gte rating 7)}}<h2 class="right__movie-rating positive-rating">{{rating}}</h2>
+                {{else}}
+                    {{#if (gte rating 4)}}<h2 class="right__movie-rating neutral-rating">{{rating}}</h2>
+                    {{else}}<h2 class="right__movie-rating negative-rating">{{rating}}</h2>{{/if}}
+                {{/if}}
+
+                {{#if (getAuthStatus)}}
+                    {{#if userRating}}
+                        <h3 class="movie-flex-right__rate-movie">Ваша оценка: {{userRating.score}}/10</h3>
+                        <p id="delete-rating" class="movie-flex-right__delete-rating">Удалить оценку</p>
+                    {{else}}
+                        <h3 class="movie-flex-right__rate-movie">Оцените фильм</h3>
+                    {{/if}}
+                    <div class="movie-flex-right__rating-stars">
+                        <input class="rating-stars__input-star ratings-stars__max-star" id="star-10" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-10" data-rating="10"></label>
+                        <input class="rating-stars__input-star" id="star-9" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-9" data-rating="9"></label>
+                        <input class="rating-stars__input-star" id="star-8" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-8" data-rating="8"></label>
+                        <input class="rating-stars__input-star" id="star-7" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-7" data-rating="7"></label>
+                        <input class="rating-stars__input-star" id="star-6" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-6" data-rating="6"></label>
+                        <input class="rating-stars__input-star" id="star-5" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-5" data-rating="5"></label>
+                        <input class="rating-stars__input-star" id="star-4" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-4" data-rating="4"></label>
+                        <input class="rating-stars__input-star" id="star-3" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-3" data-rating="3"></label>
+                        <input class="rating-stars__input-star" id="star-2" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-2" data-rating="2"></label>
+                        <input class="rating-stars__input-star" id="star-1" type="radio" name="star"/>
+                        <label class="rating-stars__label-star" for="star-1" data-rating="1"></label>
+                    </div>
+                {{/if}}
+
+                <div class="movie-flex-right__main-roles">
+                    <h3 class="main-roles__header">В главных ролях</h3>
+                    <ul class="main-roles__actors-list">
+                        {{#each actors}}
+                            <li><a href='/actor/{{this.id}}' class="actors-list__item">{{this.name}}</a></li>
+                        {{/each}}
+                    </ul>
                 </div>
             </div>
         </div>

@@ -31,6 +31,11 @@
   &__movie-container {
     background-color: $movie-background-color;
     padding-bottom: 40px;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-areas:
+            "backdrop backdrop backdrop"
+            "movie-left movie-center movie-right";
   }
 
   &__write-review {
@@ -45,6 +50,17 @@
   &__similar-movies {
     background-color: $movie-background-color;
     padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .content-container__movie-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+            "backdrop"
+            "movie-left"
+            "movie-center"
+            "movie-right";
   }
 }
 
@@ -139,8 +155,8 @@
 
 .movie-container {
 
-  &__movie-flex {
-    display: flex;
+  &__background-trailer {
+    grid-area: backdrop;
   }
 }
 
@@ -151,23 +167,23 @@
   background-size: cover;
 }
 
-.movie-flex {
+.movie-container {
 
-  &__movie-flex-left {
-    width: 30%;
+  &__left {
+    grid-area: movie-left;
   }
 
-  &__movie-flex-center {
-    width: 50%;
+  &__center {
     border-left: 1px solid $whitish;
+    grid-area: movie-center;
   }
 
-  &__movie-flex-right {
-    width: 20%;
+  &__right {
     color: $primary-text-color;
     margin-top: 20px;
     margin-right: 24px;
     text-align: right;
+    grid-area: movie-right;
   }
 }
 
