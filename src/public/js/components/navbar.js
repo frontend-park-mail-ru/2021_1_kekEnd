@@ -67,10 +67,10 @@ export class Navbar extends Component {
     barsClicked() {
         const header = document.getElementById('header');
         if (header.className === 'header') {
-            header.className += ' responsive';
+            header.classList.add('responsive');
             return;
         }
-        header.className = 'header';
+        header.classList.remove('responsive');
     }
 
     /**
