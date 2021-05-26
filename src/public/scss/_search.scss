@@ -55,6 +55,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-right: 8px;
   }
 
   &__title {
@@ -72,4 +73,8 @@
   }
 }
 
-
+@media (max-width: 900px) {
+  .main__search-card {
+    width: 80%;
+  }
+}
