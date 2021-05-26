@@ -15,9 +15,9 @@ class Api {
         // this.port = '8080/api/v1';
         // this.url = 'http://localhost:8080/api/v1'
 
-        this.host = 'cinemedia.ru';
-        this.port = '443/api/v1';
-        this.url = 'https://cinemedia.ru:443/api/v1';
+        // this.host = 'cinemedia.ru';
+        // this.port = '443/api/v1';
+        this.url = 'https://cinemedia.ru/api/v1';
     }
 
     /**
