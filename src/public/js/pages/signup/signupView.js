@@ -65,6 +65,7 @@ export default class SignupView extends BaseView {
      */
     setEventListeners() {
         document.getElementById('signup').addEventListener('submit', this.formSubmittedCallback);
+        this.navbarComponent.setEventListeners();
         setListenersForHidingValidationError();
     }
 
@@ -73,6 +74,7 @@ export default class SignupView extends BaseView {
      */
     removeEventListeners() {
         document.getElementById('signup')?.removeEventListener('submit', this.formSubmittedCallback);
+        this.navbarComponent.removeEventListeners();
     }
 
     /**

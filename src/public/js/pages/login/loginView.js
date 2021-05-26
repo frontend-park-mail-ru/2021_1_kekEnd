@@ -63,6 +63,7 @@ export default class LoginView extends BaseView {
      */
     setEventListeners() {
         document.getElementById('login').addEventListener('submit', this.formSubmittedCallback);
+        this.navbarComponent.setEventListeners();
         setListenersForHidingValidationError();
     }
 
@@ -71,6 +72,7 @@ export default class LoginView extends BaseView {
      */
     removeEventListeners() {
         document.getElementById('login')?.removeEventListener('submit', this.formSubmittedCallback);
+        this.navbarComponent.removeEventListeners();
     }
 
     /**

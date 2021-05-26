@@ -19,6 +19,7 @@ export class Navbar extends Component {
         super(parent, state);
         // eslint-disable-next-line no-undef
         this.renderHBS = Handlebars.templates['navbar.hbs'];
+        this.barsClickedCallback = this.barsClicked.bind(this);
         this.searchClickedCallback = this.searchClicked.bind(this);
         this.enterPressedCallback = this.enterPressed.bind(this);
         this.logoutClickedCallback = this.logoutClicked.bind(this);
@@ -39,14 +40,17 @@ export class Navbar extends Component {
         document.getElementById('search-input').addEventListener('keyup', this.enterPressedCallback);
         document.getElementById('search-button').addEventListener('click', this.searchClickedCallback);
         document.getElementById('logout-button')?.addEventListener('click', this.logoutClickedCallback);
+        document.getElementById('bars-icon').addEventListener('click', this.barsClickedCallback);
     }
 
     /**
      * Убрать листенеры компонента
      */
     removeEventListeners() {
+        document.getElementById('search-input').removeEventListener('keyup', this.enterPressedCallback);
         document.getElementById('search-button').removeEventListener('click', this.searchClickedCallback);
         document.getElementById('logout-button')?.removeEventListener('click', this.logoutClickedCallback);
+        document.getElementById('bars-icon').removeEventListener('click', this.barsClickedCallback);
     }
 
     /**
@@ -55,6 +59,18 @@ export class Navbar extends Component {
     searchClicked() {
         const searchQuery = document.getElementById('search-input').value;
         globalRouter.activate(`${PATHS.search}?q=${searchQuery}`);
+    }
+
+    /**
+     * Обработка нажатия на Hamburger Menu
+     */
+    barsClicked() {
+        const header = document.getElementById('header');
+        if (header.className === 'header') {
+            header.className += ' responsive';
+            return;
+        }
+        header.className = 'header';
     }
 
     /**
