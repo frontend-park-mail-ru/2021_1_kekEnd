@@ -53,8 +53,10 @@ export const busEvents = {
     FOLLOW_STATUS: 'follow status',
     GET_FEED: 'get feed',
     SET_FEED: 'set feed',
-    WATCH_MOVIE: 'watch movie',
-    UNWATCH_MOVIE: 'unwatch movie',
+    WATCH_MOVIE_MOVIES_LIST: 'watch movie on movies list',
+    UNWATCH_MOVIE_MOVIES_LIST: 'unwatch movie on movies list',
+    WATCH_MOVIE_MOVIE_PAGE: 'watch movie on page',
+    UNWATCH_MOVIE_MOVIE_PAGE: 'unwatch movie on page',
     GET_SEARCH_RESULTS: 'get search results',
     SET_SEARCH_RESULTS: 'set search results',
 };

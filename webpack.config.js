@@ -30,7 +30,7 @@ module.exports = {
         publicPath: '/',
         contentBase: './src',
         hot: true,
-        port: 3000,
+        port: 4000,
         historyApiFallback: true,
     },
     plugins: [

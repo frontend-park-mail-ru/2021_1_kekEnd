@@ -17,6 +17,13 @@
     width: 80%;
     margin: 40px auto 40px auto;
   }
+
+  &__movie-page-section-heading {
+    padding-top: 20px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
 .content-container {
@@ -34,6 +41,11 @@
   &__review-content {
     padding-bottom: 20px;
   }
+
+  &__similar-movies {
+    background-color: $movie-background-color;
+    padding-bottom: 20px;
+  }
 }
 
 .your-review__edit-button {
@@ -49,12 +61,6 @@
 }
 
 .write-review {
-
-  &__your-review {
-    padding-top: 20px;
-    font-size: 24px;
-    text-align: center;
-  }
 
   &__user-link {
     color: $primary-text-color;

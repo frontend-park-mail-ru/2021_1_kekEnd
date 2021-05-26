@@ -159,12 +159,21 @@
         </div>
     </div>
 
+    {{#if similarMovies}}
+        <div class="main__content-container">
+            <div class="content-container__similar-movies">
+                <h3 class="main__movie-page-section-heading">Похожие фильмы</h3>
+                <div id="similar-movies-carousel" class="main__slider-wrapper"></div>
+            </div>
+        </div>
+    {{/if}}
+
     {{#if (getAuthStatus)}}
         {{#if userReview}}
             {{#if wantsToEditReview}}
                 <div class="main__content-container">
                     <div class="content-container__write-review" id="user-review-container">
-                        <h3 class="write-review__your-review">Редактирование рецензии</h3>
+                        <h3 class="main__movie-page-section-heading">Редактирование рецензии</h3>
                         <div class="write-review__review-form-container">
                             <form id="review" class="review-form-container__review-form">
                                 <div class="review-form-container__grid">
@@ -196,7 +205,7 @@
             {{else}}
                 <div class="main__content-container">
                     <div class="content-container__review-content review_background_{{userReview.review_type}}">
-                        <h3 class="write-review__your-review">
+                        <h3 class="main__movie-page-section-heading">
                             Ваша рецензия
                             <button class="fa-button your-review__edit-button" id="edit-button" data-movie-id="{{id}}">
                                 <i class="fa fa-pencil-square-o fa-2x"></i>
@@ -215,7 +224,7 @@
         {{else}}
             <div class="main__content-container">
                 <div class="content-container__write-review" id="user-review-container">
-                    <h3 class="write-review__your-review">Напишите рецензию</h3>
+                    <h3 class="main__movie-page-section-heading">Напишите рецензию</h3>
                     <div class="write-review__review-form-container">
                         <form id="review" class="review-form-container__review-form">
                             <div class="review-form-container__grid">
@@ -252,7 +261,7 @@
             <div class="main__content-container">
             {{/if}}
             <div class="content-container__review-content review_background_{{this.review_type}}">
-                <h3 class="write-review__your-review">Рецензия <a class="write-review__user-link" href="/user/{{this.author}}">{{this.author}}</a></h3>
+                <h3 class="main__movie-page-section-heading">Рецензия <a class="write-review__user-link" href="/user/{{this.author}}">{{this.author}}</a></h3>
                 <div class="review-content__review-body">
                     <p class="review-body__title">{{this.title}}</p>
                     <p class="review-body__content">{{this.content}}</p>

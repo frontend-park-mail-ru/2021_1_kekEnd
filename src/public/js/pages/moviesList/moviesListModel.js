@@ -12,8 +12,8 @@ export default class MoviesListModel {
     constructor() {
         globalEventBus.on(busEvents.GET_BEST_MOVIES_PAGE, this.getBestMovies.bind(this));
         globalEventBus.on(busEvents.GET_GENRE_MOVIES_PAGE, this.getGenreMovies.bind(this));
-        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
-        globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE_MOVIES_LIST, this.watchMovie.bind(this));
+        globalEventBus.on(busEvents.UNWATCH_MOVIE_MOVIES_LIST, this.unwatchMovie.bind(this));
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIES_LIST, this.getPlaylistsForMovie.bind(this));
     }
 

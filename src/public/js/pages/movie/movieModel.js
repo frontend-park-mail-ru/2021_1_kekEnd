@@ -22,8 +22,8 @@ export default class MovieModel {
         globalEventBus.on(busEvents.DELETE_RATING, this.deleteRating.bind(this));
         globalEventBus.on(busEvents.GET_REVIEWS_PAGE, this.getReviewsPage.bind(this));
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
-        globalEventBus.on(busEvents.WATCH_MOVIE, this.watchMovie.bind(this));
-        globalEventBus.on(busEvents.UNWATCH_MOVIE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.WATCH_MOVIE_MOVIE_PAGE, this.watchMovie.bind(this));
+        globalEventBus.on(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, this.unwatchMovie.bind(this));
     }
 
     /**
@@ -32,13 +32,14 @@ export default class MovieModel {
      */
     getMovieData(id) {
         Promise.all([API.getMovieData(id), API.getMovieReviews(id),
-            API.getUserReviewForMovie(id), API.getUserRatingForMovie(id)])
+            API.getUserReviewForMovie(id), API.getUserRatingForMovie(id), API.getSimilarMovies(id)])
             .then((responses) => {
-                const [movieDataResp, movieReviewsResp, userReviewResp, userRatingResp] = responses;
+                const [movieDataResp, movieReviewsResp, userReviewResp, userRatingResp, similarResp] = responses;
                 const movieData = {
                     ...movieDataResp.data,
                     'userReview': (userReviewResp.status === OK_CODE) ? (userReviewResp.data) : null,
                     'userRating': (userRatingResp.status === OK_CODE) ? (userRatingResp.data) : null,
+                    'similarMovies': (similarResp.status === OK_CODE) ? (similarResp.data) : null,
                 };
                 if (movieReviewsResp.status === OK_CODE) {
                     movieReviewsResp.data.reviews = movieReviewsResp.data.reviews?.filter((review) => {
@@ -153,5 +154,14 @@ export default class MovieModel {
      */
     unwatchMovie(movieId) {
         API.unwatchMovie(movieId).then(() => {});
+    }
+
+    /**
+     * Получить список похожих фильмов
+     * @param {number} movieId - идентификатор фильма
+     */
+    getSimilarMovies(movieId) {
+        API.getSimilarMovies(movieId).then((res) =>
+            globalEventBus.emit(busEvents.SET_SIMILAR_MOVIES, res.data));
     }
 }

@@ -10,6 +10,7 @@ import {Navbar} from 'components/navbar';
 import {userMeta} from 'utils/userMeta';
 import './movie.tmpl';
 import {AddToPlaylistWidget} from 'components/addToPlaylist';
+import {Carousel} from 'components/carousel';
 
 /**
  * Представление страницы фильма
@@ -63,6 +64,10 @@ export default class MovieView extends BaseView {
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
 
+        this.similarMoviesCarousel = new Carousel(document.getElementById('similar-movies-carousel'),
+            {'itemsType': 'movies', 'items': {...this.data.similarMovies}});
+        this.similarMoviesCarousel.render();
+
         this.setEventListeners();
     }
 
@@ -96,6 +101,7 @@ export default class MovieView extends BaseView {
         });
 
         this.navbarComponent.setEventListeners();
+        this.similarMoviesCarousel.setEventListeners();
     }
 
     /**
@@ -118,6 +124,7 @@ export default class MovieView extends BaseView {
         });
 
         this.navbarComponent.removeEventListeners();
+        this.similarMoviesCarousel.removeEventListeners();
         this.currentPlaylistWidget?.hide();
     }
 
@@ -264,10 +271,10 @@ export default class MovieView extends BaseView {
         const checkbox = event.target;
         const movieId = checkbox.getAttribute('data-id');
         if (checkbox.checked) {
-            globalEventBus.emit(busEvents.WATCH_MOVIE, movieId);
+            globalEventBus.emit(busEvents.WATCH_MOVIE_MOVIE_PAGE, movieId);
             return;
         }
-        globalEventBus.emit(busEvents.UNWATCH_MOVIE, movieId);
+        globalEventBus.emit(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, movieId);
     }
 
     /**
