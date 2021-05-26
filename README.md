@@ -10,7 +10,7 @@
 * [Рыбаков Дмитрий](https://github.com/bulletmys) - ментор по бекенду
 
 ### Деплой
-http://89.208.198.186:3000
+https://cinemedia.ru/
 
 ### Ссылка на репозиторий бекенда
 https://github.com/go-park-mail-ru/2021_1_kekEnd
