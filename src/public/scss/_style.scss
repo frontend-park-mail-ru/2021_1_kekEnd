@@ -16,6 +16,7 @@ body {
   padding: 12px;
   background-color: $header-background;
   font-family: "Comfortaa", serif;
+  //overflow: hidden;
 
   &__section {
     display: flex;
@@ -96,6 +97,39 @@ body {
       color: $secondary-text-color;
       font-size: 1.5em;
     }
+  }
+
+  &__bars-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .header .header__section:not(:first-child) {
+    display: none;
+  }
+
+  .header__bars-icon {
+    display: block;
+    position: absolute;
+    font-size: 24px;
+    color: $primary-text-color;
+    right: 0;
+    top: 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header.responsive {
+    display: block;
+    position: relative;
+  }
+
+  .header.responsive .header__section {
+    float: none;
+    display: block;
+    text-align: left;
   }
 }
 
