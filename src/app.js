@@ -15,16 +15,16 @@ import FeedController from './public/js/pages/feed/feedController';
 import {userMeta} from 'utils/userMeta';
 import SearchController from './public/js/pages/search/searchController';
 
-//
-// if ('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('sw.js', {scope: '/'})
-//         .then((registration) => {
-//             console.log('sw registration on scope:', registration.scope);
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//         });
-// }
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {scope: '/'})
+        .then((registration) => {
+            console.log('sw registration on scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
 
 
 window.addEventListener('DOMContentLoaded', async () => {
