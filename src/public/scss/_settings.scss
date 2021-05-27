@@ -57,8 +57,6 @@
 .settings-box {
 
   &__settings-inner {
-    width: 440px;
-    position: relative;
     margin: 5px;
     background-color: $white-color;
     padding: 32px;
@@ -77,25 +75,17 @@
     font-size: 24px;
   }
 
-  &__settings-table {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    margin: 0;
-  }
-
   &__save-button {
     margin-top: 24px;
   }
 }
 
 .settings-table__settings-row {
-  overflow: auto;
   display: flex;
   flex-direction: row;
-  width: 440px;
+  flex-wrap: wrap;
   min-height: 50px;
+  margin-top: 12px;
 }
 
 .settings-row {
@@ -107,7 +97,7 @@
   }
 
   &__right {
-    width: 240px;
+    width: fit-content;
     display: block;
   }
 }
