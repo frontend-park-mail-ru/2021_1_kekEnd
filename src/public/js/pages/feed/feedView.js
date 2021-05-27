@@ -43,6 +43,8 @@ export default class FeedView extends BaseView {
         this.navbarComponent = new Navbar(document.getElementById('navbar'),
             {'authorized': userMeta.getAuthorized()});
         this.navbarComponent.render();
+
+        this.setEventListeners();
     }
 
     /**

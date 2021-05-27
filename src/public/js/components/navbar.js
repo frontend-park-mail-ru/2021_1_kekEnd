@@ -57,7 +57,7 @@ export class Navbar extends Component {
      * Обработка нажатия на "Поиск"
      */
     searchClicked() {
-        const searchQuery = document.getElementById('search-input').value;
+        const searchQuery = document.getElementById('search-input').value.trim();
         globalRouter.activate(`${PATHS.search}?q=${searchQuery}`);
     }
 

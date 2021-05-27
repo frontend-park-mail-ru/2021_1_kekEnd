@@ -65,3 +65,7 @@
     color: $primary-text-color;
   }
 }
+
+@media (max-width: 600px) {
+  width: 90%;
+}
