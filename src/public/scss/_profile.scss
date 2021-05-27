@@ -58,6 +58,7 @@
   &__first-row {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     gap: 16px;
   }
 
@@ -314,10 +315,5 @@
 @media (max-width: 600px) {
   .profile-card__container {
     width: 90%;
-  }
-
-  .head__first-row {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
