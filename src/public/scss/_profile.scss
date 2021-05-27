@@ -132,7 +132,7 @@
 
   &__review-card {
     flex: 0 0 auto;
-    width: 200px;
+    max-width: 50%;
     margin: 12px 0;
     background-color: $white-color;
     box-shadow: 0 0 12px $slider-box-shadow-color;
@@ -309,5 +309,9 @@
 @media (max-width: 760px) {
   .profile-card__container {
     width: 90%;
+  }
+
+  .slider__review-card {
+    max-width: 90%;
   }
 }
