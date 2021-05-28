@@ -180,7 +180,7 @@
                                                placeholder="Заголовок (до 200 символов)" value="{{userReview.title}}"
                                                id="review-heading-input">
                                         <textarea name="content" class="form__input-field review-form__input-review-content"
-                                                  placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                                  id="review-text-input" placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
                                     </div>
                                     <select name="review_type" class="review-form__select-review-type" id="select-type">
                                         <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
@@ -231,7 +231,7 @@
                                     <input name="title" type="text" class="form__input-field review-form__input-review-title"
                                            placeholder="Заголовок (до 200 символов)" id="review-heading-input">
                                     <textarea name="content" class="form__input-field review-form__input-review-content"
-                                              placeholder="Ваши впечатления о фильме"></textarea>
+                                              id="review-text-input" placeholder="Ваши впечатления о фильме"></textarea>
                                 </div>
                                 <select name="review_type" class="review-form__select-review-type" id="select-type">
                                     <option selected disabled>Тип рецензии</option>
