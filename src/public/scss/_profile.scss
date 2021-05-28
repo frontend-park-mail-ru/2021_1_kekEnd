@@ -157,6 +157,26 @@
 
 .content {
 
+  &__movie-title {
+    font-size: 18px;
+    text-align: right;
+    margin-bottom: 12px;
+
+    a {
+      color: $secondary-text-color;
+    }
+
+    &::before {
+      content: "«";
+      color: $secondary-text-color;
+    }
+
+    &::after {
+      content: "»";
+      color: $secondary-text-color;
+    }
+  }
+
   &__title {
     font-size: 20px;
     font-weight: bold;
