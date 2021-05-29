@@ -15,6 +15,7 @@
         {{#each items}}
             <div class="slider__review-card">
                 <div class="review-card__content review_background_{{this.review_type}}">
+                    <p class="content__movie-title"><a href="/movie/{{this.movie_id}}">{{this.movie_title}}</a></p>
                     <p class="content__title">{{this.title}}</p>
                     <p class="content__text">{{this.content}}</p>
                 </div>

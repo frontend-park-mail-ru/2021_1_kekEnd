@@ -12,6 +12,9 @@ import './movie.tmpl';
 import {AddToPlaylistWidget} from 'components/addToPlaylist';
 import {Carousel} from 'components/carousel';
 
+const REVIEW_HEADING_MAX_LENGTH = 200;
+const REVIEW_TEXT_MAX_LENGTH = 5000;
+
 /**
  * Представление страницы фильма
  */
@@ -32,6 +35,8 @@ export default class MovieView extends BaseView {
         globalEventBus.on(busEvents.RATING_DELETED, this.removeRating.bind(this));
         globalEventBus.on(busEvents.SET_PLAYLIST_DATA_MOVIE, this.displayPlaylists.bind(this));
 
+        this.reviewHeadingInputCallback = this.reviewHeadingInput.bind(this);
+        this.reviewTextInputCallback = this.reviewTextInput.bind(this);
         this.reviewFormSubmittedCallback = this.reviewFormSubmitted.bind(this);
         this.editReviewClickedCallback = this.editReviewClicked.bind(this);
         this.deleteReviewClickedCallback = this.deleteReviewClicked.bind(this);
@@ -86,6 +91,8 @@ export default class MovieView extends BaseView {
         document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
         document.getElementById('playlist-button')?.addEventListener('click', this.playlistClickedCallback);
 
+        document.getElementById('review-heading-input')?.addEventListener('input', this.reviewHeadingInputCallback);
+        document.getElementById('review-text-input')?.addEventListener('input', this.reviewTextInputCallback);
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
@@ -111,6 +118,8 @@ export default class MovieView extends BaseView {
         document.getElementById('watched-button')?.removeEventListener('click', this.watchedClickedCallback);
         document.getElementById('playlist-button')?.removeEventListener('click', this.playlistClickedCallback);
 
+        document.getElementById('review-heading-input')?.removeEventListener('input', this.reviewHeadingInputCallback);
+        document.getElementById('review-text-input')?.removeEventListener('input', this.reviewTextInputCallback);
         document.getElementById('review')?.removeEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.removeEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.removeEventListener('click', this.deleteReviewClickedCallback);
@@ -208,6 +217,34 @@ export default class MovieView extends BaseView {
             this.data.userReview = null;
             this.setMovieData(this.data);
         }
+    }
+
+    /**
+     * Обработка ввода текста в заголовок рецензии
+     * @param {Object} event - объект события
+     */
+    reviewHeadingInput(event) {
+        if (event.target.value.length > REVIEW_HEADING_MAX_LENGTH) {
+            document.getElementById('validation-hint-review').innerText = 'Введите заголовок до 200 символов!';
+            document.getElementById('review-button').disabled = true;
+            return;
+        }
+        document.getElementById('review-button').disabled = false;
+        document.getElementById('validation-hint-review').innerText = '';
+    }
+
+    /**
+     * Обработка ввода текста рецензии
+     * @param {Object} event - объект события
+     */
+    reviewTextInput(event) {
+        if (event.target.value.length > REVIEW_TEXT_MAX_LENGTH) {
+            document.getElementById('validation-hint-review').innerText = 'Введите текст рецензии до 5000 символов!';
+            document.getElementById('review-button').disabled = true;
+            return;
+        }
+        document.getElementById('review-button').disabled = false;
+        document.getElementById('validation-hint-review').innerText = '';
     }
 
     /**

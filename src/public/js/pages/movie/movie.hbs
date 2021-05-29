@@ -34,12 +34,12 @@
                 <div class="movie-flex-center__movie_info">
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Год производства</div>
-                        <a href="" class="info-row__info-link">{{production_year}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{production_year}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Страна</div>
                         {{#each country}}
-                            <a href="" class="info-row__info-link">{{this}}</a>{{#unless @last}}, {{/unless}}
+                            <a href="javascript:void(0);" class="info-row__info-link">{{this}}</a>{{#unless @last}}, {{/unless}}
                         {{/each}}
                     </div>
                     <div class="movie-info__info-row">
@@ -54,35 +54,35 @@
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Режиссёр</div>
-                        <a href="" class="info-row__info-link">{{director}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{director}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Сценарист</div>
-                        <a href="" class="info-row__info-link">{{scriptwriter}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{scriptwriter}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Продюсер</div>
-                        <a href="" class="info-row__info-link">{{producer}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{producer}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Оператор</div>
-                        <a href="" class="info-row__info-link">{{operator}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{operator}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Композитор</div>
-                        <a href="" class="info-row__info-link">{{composer}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{composer}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Художник</div>
-                        <a href="" class="info-row__info-link">{{artist}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{artist}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Монтаж</div>
-                        <a href="" class="info-row__info-link">{{montage}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{montage}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Бюджет</div>
-                        <a href="" class="info-row__info-link">{{budget}}</a>
+                        <a href="javascript:void(0);" class="info-row__info-link">{{budget}}</a>
                     </div>
                     <div class="movie-info__info-row">
                         <div class="info-row__info-title">Время</div>
@@ -177,9 +177,10 @@
                                 <div class="review-form-container__grid">
                                     <div>
                                         <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                               placeholder="Заголовок" value="{{userReview.title}}">
+                                               placeholder="Заголовок (до 200 символов)" value="{{userReview.title}}"
+                                               id="review-heading-input">
                                         <textarea name="content" class="form__input-field review-form__input-review-content"
-                                                  placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
+                                                  id="review-text-input" placeholder="Ваши впечатления о фильме">{{userReview.content}}</textarea>
                                     </div>
                                     <select name="review_type" class="review-form__select-review-type" id="select-type">
                                         <option {{#if (eq userReview.review_type "positive")}}selected{{/if}}
@@ -228,9 +229,9 @@
                             <div class="review-form-container__grid">
                                 <div>
                                     <input name="title" type="text" class="form__input-field review-form__input-review-title"
-                                           placeholder="Заголовок">
+                                           placeholder="Заголовок (до 200 символов)" id="review-heading-input">
                                     <textarea name="content" class="form__input-field review-form__input-review-content"
-                                              placeholder="Ваши впечатления о фильме"></textarea>
+                                              id="review-text-input" placeholder="Ваши впечатления о фильме"></textarea>
                                 </div>
                                 <select name="review_type" class="review-form__select-review-type" id="select-type">
                                     <option selected disabled>Тип рецензии</option>

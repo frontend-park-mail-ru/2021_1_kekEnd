@@ -23,6 +23,7 @@ export default class MainView extends BaseView {
 
         this.searchMoviesByGenresCallback = this.searchMoviesByGenres.bind(this);
         this.searchMoviesByGenresPreviewCallback = this.searchMoviesByGenresPreview.bind(this);
+        this.selectGenresCallback = this.selectGenresListener.bind(this);
     }
 
     /**
@@ -83,7 +84,7 @@ export default class MainView extends BaseView {
 
         [...document.getElementsByClassName('genres-list__item-box')]
             .forEach((element) => {
-                element.addEventListener('click', this.selectGenresListener);
+                element.addEventListener('click', this.selectGenresCallback);
                 element.addEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
@@ -96,15 +97,12 @@ export default class MainView extends BaseView {
      * Удаление колбеков
      */
     removeEventListeners() {
-        document.getElementById('main-genre-get-preview')?.removeEventListener('click',
-            this.searchMoviesByGenresPreviewCallback);
-
         document.getElementById('main-genre-search-button')?.removeEventListener('click',
             this.searchMoviesByGenresCallback);
 
         [...document.getElementsByClassName('genres-list__item-box')]
             .forEach((element) => {
-                element.removeEventListener('click', this.selectGenresListener);
+                element.removeEventListener('click', this.selectGenresCallback);
                 element.removeEventListener('click', this.searchMoviesByGenresPreviewCallback);
             });
 
@@ -138,10 +136,16 @@ export default class MainView extends BaseView {
      * Логика клика на кнопку жанра
      * @param {Object} event - объект события
      */
-    selectGenresListener = (event) => {
+    selectGenresListener(event) {
         const button = event.target;
         if (button.classList.contains('genre-selected')) {
             button.classList.remove('genre-selected');
+
+            // если убрали последний жанр, прячем карусель
+            if (this.getSelectedGenres().length === 0) {
+                this.genreMoviesCarousel.hide();
+                document.getElementById('main-genre-search-button').remove();
+            }
         } else {
             button.classList.add('genre-selected');
         }
@@ -151,7 +155,7 @@ export default class MainView extends BaseView {
      * После ререндера отметить выбранные жанры
      * @param {string[]} genres - список выбранных жанров
      */
-    selectChosenGenres = (genres) => {
+    selectChosenGenres(genres) {
         [...document.getElementsByClassName('genres-list__item-box')]
             .forEach((genre) => {
                 if (genres.includes(genre.innerText)) {
@@ -164,7 +168,7 @@ export default class MainView extends BaseView {
      * Получение выбранных жанров
      * @return {(string|string|*)[]} - список выбранных пользователем жанров
      */
-    getSelectedGenres = () => {
+    getSelectedGenres() {
         return [...document.getElementsByClassName('genres-list__item-box')]
             .filter((element) => element.classList.contains('genre-selected'))
             .map((element) => element.innerText);

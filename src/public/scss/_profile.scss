@@ -58,6 +58,7 @@
   &__first-row {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     gap: 16px;
   }
 
@@ -72,6 +73,7 @@
   }
 
   &__follow-button {
+    width: fit-content;
     background-color: $accent-color;
     padding: 8px;
     border: none;
@@ -130,7 +132,7 @@
 
   &__review-card {
     flex: 0 0 auto;
-    width: 200px;
+    max-width: 50%;
     margin: 12px 0;
     background-color: $white-color;
     box-shadow: 0 0 12px $slider-box-shadow-color;
@@ -155,6 +157,26 @@
 
 .content {
 
+  &__movie-title {
+    font-size: 18px;
+    text-align: right;
+    margin-bottom: 12px;
+
+    a {
+      color: $secondary-text-color;
+    }
+
+    &::before {
+      content: "«";
+      color: $secondary-text-color;
+    }
+
+    &::after {
+      content: "»";
+      color: $secondary-text-color;
+    }
+  }
+
   &__title {
     font-size: 20px;
     font-weight: bold;
@@ -165,6 +187,8 @@
   &__text {
     margin-top: 8px;
     font-size: 16px;
+    overflow-wrap: break-word;
+    padding-right: 12px;
   }
 }
 
@@ -306,12 +330,10 @@
 
 @media (max-width: 760px) {
   .profile-card__container {
-    width: 70%;
-  }
-}
-
-@media (max-width: 600px) {
-  .profile-card__container {
     width: 90%;
+  }
+
+  .slider__review-card {
+    max-width: 90%;
   }
 }

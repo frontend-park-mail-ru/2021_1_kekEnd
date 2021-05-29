@@ -4,7 +4,7 @@ import BaseView from '../baseView';
 import Validator from 'utils/validation';
 import {globalRouter} from 'utils/router';
 import {PATHS} from 'utils/paths';
-import {OK_CODE} from 'utils/codes';
+import {OK_CODE, PAYLOAD_TOO_LARGE} from 'utils/codes';
 import {PASSWORDS_MISMATCH} from 'utils/errorMessages';
 import {busEvents} from 'utils/busEvents';
 import './settings.tmpl';
@@ -248,7 +248,7 @@ export default class SettingsView extends BaseView {
         if (status === OK_CODE) {
             globalRouter.activate(PATHS.user + '/' + userMeta.getUsername());
         } else {
-            document.getElementById('settings-server-response').innerHTML = status;
+            document.getElementById('settings-server-response').innerHTML = 'Ошибка сохранения настроек!';
         }
     }
 
@@ -257,10 +257,18 @@ export default class SettingsView extends BaseView {
      * @param {number} status - статус запроса
      */
     displayServerResponseAvatar(status) {
-        if (status === OK_CODE) {
+        let errorMessage = '';
+        switch (status) {
+        case OK_CODE:
             this.render();
-        } else {
-            document.getElementById('settings-avatar-errors').innerHTML = status;
+            return;
+        case PAYLOAD_TOO_LARGE:
+            errorMessage = 'Слишком большой размер картинки!';
+            break;
+        default:
+            errorMessage = 'Ошибка загрузки аватарки!';
+            break;
         }
+        document.getElementById('settings-avatar-errors').innerHTML = errorMessage;
     }
 }

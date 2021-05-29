@@ -65,3 +65,9 @@
     color: $primary-text-color;
   }
 }
+
+@media (max-width: 600px) {
+  .main__feed-card {
+    width: 90%;
+  }
+}

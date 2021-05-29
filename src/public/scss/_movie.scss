@@ -32,7 +32,7 @@
     background-color: $movie-background-color;
     padding-bottom: 40px;
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-columns: 2fr 4fr 2fr;
     grid-template-areas:
             "backdrop backdrop backdrop"
             "movie-left movie-center movie-right";
@@ -127,6 +127,8 @@
   &__content {
     margin: 20px 0 40px 40px;
     font-size: 16px;
+    overflow-wrap: break-word;
+    padding-right: 12px;
   }
 }
 
@@ -401,5 +403,9 @@
 
   .movie-flex-center__meta_info {
     margin-left: 20px;
+  }
+
+  .review-form-container__grid {
+    grid-template-columns: 1fr;
   }
 }
