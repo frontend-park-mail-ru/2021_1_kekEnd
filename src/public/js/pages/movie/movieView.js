@@ -12,6 +12,7 @@ import './movie.tmpl';
 import {AddToPlaylistWidget} from 'components/addToPlaylist';
 import {Carousel} from 'components/carousel';
 
+
 /**
  * Представление страницы фильма
  */
@@ -85,10 +86,11 @@ export default class MovieView extends BaseView {
     setEventListeners() {
         document.getElementById('watched-button')?.addEventListener('click', this.watchedClickedCallback);
         document.getElementById('playlist-button')?.addEventListener('click', this.playlistClickedCallback);
-
         document.getElementById('review')?.addEventListener('submit', this.reviewFormSubmittedCallback);
         document.getElementById('edit-button')?.addEventListener('click', this.editReviewClickedCallback);
         document.getElementById('delete-button')?.addEventListener('click', this.deleteReviewClickedCallback);
+        document.getElementById('delete-button-admin')?.addEventListener('click', this.deleteReviewClickedCallback);
+
 
         document.getElementById('delete-rating')?.addEventListener('click', this.deleteRatingClickedCallback);
 
@@ -205,6 +207,12 @@ export default class MovieView extends BaseView {
      */
     processReviewDeletion(status, movieID) {
         if (status) {
+            if (userMeta.getUsername() == 'admin1'){
+                this.data.reviewsData.reviews.shift();
+                this.setMovieData(this.data);
+                return;
+            }
+
             this.data.userReview = null;
             this.setMovieData(this.data);
         }
@@ -241,6 +249,12 @@ export default class MovieView extends BaseView {
      * Нажатие на кнопку удаления рецензии
      */
     deleteReviewClicked() {
+        if (userMeta.getUsername() == 'admin1'){
+            globalEventBus.emit(busEvents.DELETE_REVIEW_ADMIN, this.data.id,
+            document.getElementsByClassName('write-review__user-link')[0]?.innerText);
+            return;
+        }
+
         globalEventBus.emit(busEvents.DELETE_REVIEW, this.data.id);
     }
 

@@ -48,6 +48,13 @@
                         <span id="following-number" class="stats-item__value">{{subscriptions}}</span>
                     </div>
                 </div>
+                {{#if (getAuthStatus)}}
+                    {{#if (isAdmin)}}
+                        <button class="fa-button your-review__delete-button" id="delete-button-admin" data-username-login="{{username}}">
+                        <i class="fa fa-trash-o fa-2x"></i>
+                        </button>
+                    {{/if}}
+                {{/if}}
             </div>
         </div>
     </div>

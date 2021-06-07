@@ -17,6 +17,16 @@ export default class ProfileModel {
     constructor() {
         globalEventBus.on(busEvents.GET_PROFILE_DATA, this.getProfileData.bind(this));
         globalEventBus.on(busEvents.FOLLOW_CLICKED, this.toggleFollowUser.bind(this));
+        globalEventBus.on(busEvents.DELETE_USER, this.deleteUserButton.bind(this));
+
+    }
+
+    deleteUserButton(data) {
+
+        API.deleteUserAdmin(data)
+        .then((res) => {
+            globalEventBus.emit(busEvents.USER_DELETED, res.status === OK_CODE, data);
+        });
     }
 
     /**

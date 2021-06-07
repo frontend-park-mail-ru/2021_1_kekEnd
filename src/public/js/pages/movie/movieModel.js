@@ -24,6 +24,7 @@ export default class MovieModel {
         globalEventBus.on(busEvents.GET_PLAYLIST_DATA_MOVIE, this.getPlaylistsForMovie.bind(this));
         globalEventBus.on(busEvents.WATCH_MOVIE_MOVIE_PAGE, this.watchMovie.bind(this));
         globalEventBus.on(busEvents.UNWATCH_MOVIE_MOVIE_PAGE, this.unwatchMovie.bind(this));
+        globalEventBus.on(busEvents.DELETE_REVIEW_ADMIN, this.deleteReviewAdmin.bind(this));
     }
 
     /**
@@ -70,6 +71,13 @@ export default class MovieModel {
         API.editUserReviewForMovie(review)
             .then((res) => {
                 globalEventBus.emit(busEvents.REVIEW_UPLOADED, res.status === OK_CODE, review);
+            });
+    }
+    
+    deleteReviewAdmin(id, login) {
+        API.deleteReviewAdmin(id, login)
+            .then((res) => {
+                globalEventBus.emit(busEvents.REVIEW_DELETED, res.status === OK_CODE, id);
             });
     }
 

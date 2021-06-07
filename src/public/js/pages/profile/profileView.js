@@ -6,6 +6,8 @@ import {userMeta} from 'utils/userMeta';
 import {Carousel} from 'components/carousel';
 import {PlaylistTabs} from 'components/playlistTabs';
 import './profile.tmpl';
+import {globalRouter} from 'utils/router';
+import {PATHS} from 'utils/paths';
 
 /**
  * Представление страницы профиля
@@ -21,8 +23,11 @@ export default class ProfileView extends BaseView {
 
         globalEventBus.on(busEvents.SET_PROFILE_DATA, this.setProfileData.bind(this));
         globalEventBus.on(busEvents.FOLLOW_STATUS, this.proceedFollow.bind(this));
+        globalEventBus.on(busEvents.USER_DELETED, this.proceedDeleteUser.bind(this));
+
 
         this.followClickedCallback = this.followClicked.bind(this);
+        this.deleteUserClickedCallback = this.deleteUserClickedCallback.bind(this);
     }
 
     /**
@@ -31,6 +36,14 @@ export default class ProfileView extends BaseView {
      */
     render(username) {
         globalEventBus.emit(busEvents.GET_PROFILE_DATA, username);
+    }
+
+    deleteUserClickedCallback() {
+        globalEventBus.emit(busEvents.DELETE_USER, document.getElementById('user-full-name')?.innerHTML);
+    }
+
+    proceedDeleteUser() {
+        globalRouter.activate(PATHS.main);
     }
 
     /**
@@ -78,6 +91,7 @@ export default class ProfileView extends BaseView {
         this.favoriteActorsCarousel.setEventListeners();
         this.reviewsCarousel.setEventListeners();
         this.playlistTabs.setEventListeners();
+        document.getElementById('delete-button-admin')?.addEventListener('click', this.deleteUserClickedCallback);
     }
 
     /**
@@ -89,6 +103,18 @@ export default class ProfileView extends BaseView {
         this.favoriteActorsCarousel.removeEventListeners();
         this.reviewsCarousel.removeEventListeners();
         this.playlistTabs.removeEventListeners();
+    }
+
+    /**
+     * Нажатие на кнопку удаления рецензии
+     */
+     deleteReviewClicked() {
+        if (userMeta.getUsername() == 'admin1'){
+            globalEventBus.emit(busEvents.DELETE_REVIEW, document.getElementById('delete-button-admin')?.getAttribute('data-movie-id'));
+            return;
+        }
+
+        globalEventBus.emit(busEvents.DELETE_REVIEW, this.data.id);
     }
 
     /**
