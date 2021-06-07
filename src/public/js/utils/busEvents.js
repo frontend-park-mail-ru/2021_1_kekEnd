@@ -59,4 +59,7 @@ export const busEvents = {
     UNWATCH_MOVIE_MOVIE_PAGE: 'unwatch movie on page',
     GET_SEARCH_RESULTS: 'get search results',
     SET_SEARCH_RESULTS: 'set search results',
+    DELETE_USER: 'delete user',
+    USER_DELETED: 'user deleted',
+    DELETE_REVIEW_ADMIN: 'delete review admin',
 };

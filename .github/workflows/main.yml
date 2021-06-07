@@ -2,7 +2,7 @@ name: Simple Build
 
 on:
   push:
-    branches: [main, dev, mobile_fix]
+    branches: [main, dev, mobile_fix, deleteButton]
 
 jobs:
   build:

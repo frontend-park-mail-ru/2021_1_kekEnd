@@ -197,6 +197,14 @@ class Api {
         return this.asyncRequest(`${this.url}/users/movies/${id}/reviews`, 'DELETE');
     }
 
+    deleteReviewAdmin(id, login) {
+        return this.asyncRequest(`${this.url}/users/movies/${id}/reviews/${login}`, 'DELETE');
+    }
+
+    deleteUserAdmin(login) {
+        return this.asyncRequest(`${this.url}/users/admin/${login}`, 'DELETE');
+    }
+
     /**
      * Добавить оценку фильму
      * @param {number} id - идентификатор фильма

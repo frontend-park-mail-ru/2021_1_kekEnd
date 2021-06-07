@@ -22,13 +22,17 @@ export const registerHandlebarsHelpers = () => {
     Handlebars.registerHelper('getUsername', usernameHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerHelper('pagination', paginationHelper);
-
+    // eslint-disable-next-line no-undef
+    Handlebars.registerHelper('isAdmin', isAdminHelper);
     // eslint-disable-next-line no-undef
     Handlebars.registerPartial('playlistTab', Handlebars.templates['playlistTab.hbs']);
     // eslint-disable-next-line no-undef
     Handlebars.registerPartial('playlistRow', Handlebars.templates['playlistRow.hbs']);
 };
 
+const isAdminHelper = () => {
+    return userMeta.getUsername() === 'admin1';
+};
 
 const incHelper = (value) => {
     return parseInt(value) + 1;
